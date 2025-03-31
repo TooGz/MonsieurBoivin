@@ -3,10 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MonsieurBoivin.fr — Bientôt en ligne</title>
-  <link rel="icon" href="logo.jpg" type="image/png">
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="MonsieurBoivin.fr : le repaire d’un créatif bricoleur entre projets DIY, bidouilles du quotidien et aventures personnelles. Bientôt en ligne." />
+  <meta name="author" content="Monsieur Boivin" />
+  <title>MonsieurBoivin.fr — Le repaire d’un créatif & bricoleur</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MonsieurBoivin.fr — Bientôt en ligne" />
+  <meta property="og:description" content="Repaire d’un créatif et bricoleur, entre bidouilles du quotidien et projets DIY." />
+  <meta property="og:image" content="https://monsieurboivin.fr/logo.jpg" />
+  <meta property="og:url" content="https://monsieurboivin.fr" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MonsieurBoivin.fr — Bientôt en ligne" />
+  <meta name="twitter:description" content="Repaire d’un créatif bricoleur, entre projets DIY, bidouilles du quotidien et aventures." />
+  <meta name="twitter:image" content="https://monsieurboivin.fr/logo.jpg" />
+
+  <link rel="canonical" href="https://monsieurboivin.fr/" />
+  <link rel="icon" href="logo.jpg" type="image/png" />
+
   <style>
-    /* Fond animé */
     body {
       margin: 0;
       padding: 0;
@@ -14,14 +32,13 @@
       background-size: 400% 400%;
       animation: backgroundShift 15s ease infinite;
       color: #ffffff;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       text-align: center;
-      overflow: hidden;
     }
 
     @keyframes backgroundShift {
@@ -30,7 +47,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Animation fade-in + slide */
     .fade-in-up {
       opacity: 0;
       transform: translateY(30px);
@@ -48,10 +64,9 @@
       }
     }
 
-    /* Logo */
     img.logo {
-      width: 120px;
-      height: 120px;
+      width: 240px;
+      height: 240px;
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 2rem;
@@ -63,10 +78,11 @@
       margin-bottom: 1rem;
     }
 
-    p {
-      font-size: 1.2rem;
-      max-width: 500px;
-      margin-bottom: 2rem;
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      max-width: 600px;
+      margin: 0 auto 2rem;
       opacity: 0.85;
     }
 
@@ -76,77 +92,93 @@
       margin-bottom: 3rem;
     }
 
-    .socials a {
-      background-color: #ffffff;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+  .socials a {
+  background: #ffffff;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
 
-    .socials a:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
-    }
+.socials a:hover {
+  transform: scale(1.2) rotate(3deg);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+  filter: brightness(1.1);
+}
 
-    .socials svg {
-      width: 24px;
-      height: 24px;
-    }
+.socials a svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+}
 
-    .footer {
-      position: absolute;
-      bottom: 20px;
-      font-size: 0.9rem;
-      opacity: 0.6;
-    }
+  .socials a.instagram {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  }
+
+  .socials a.facebook {
+    background: #1877F2;
+  }
+
+  .socials a.pinterest {
+    background: #E60023;
+  }
+
+  .footer {
+    font-size: 0.85rem;
+    opacity: 0.5;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 1rem 0;
+  }
+
 
     @media (max-width: 600px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-      p {
-        font-size: 1rem;
-        padding: 0 1rem;
-      }
-      .socials svg {
-        width: 22px;
-        height: 22px;
-      }
+      h1 { font-size: 1.8rem; }
+      h2 { font-size: 1rem; padding: 0 1rem; }
     }
   </style>
 </head>
 <body>
-  <img src="logo.jpg" alt="Logo MonsieurBoivin" class="logo fade-in-up">
-  <h1 class="fade-in-up">🚧 MonsieurBoivin.fr 🚧</h1>
-  <p class="fade-in-up">Le repaire d’un créatif et bricoleur, entre bidouilles du quotidien, aventures et projets perso divers et variés ! Bientôt en ligne ...</p>
+  <header>
+    <img src="logo.jpg" alt="Logo de Monsieur Boivin" class="logo fade-in-up" />
+    <h1 class="fade-in-up">🚧 MonsieurBoivin.fr 🚧</h1>
+    <h2 class="fade-in-up">Le repaire d’un créatif bricoleur : bidouilles du quotidien, aventures DIY et projets perso variés. Bientôt en ligne !</h2>
+  </header>
 
-  <div class="socials fade-in-up">
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/toogz" target="_blank" aria-label="Instagram">
-      <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="instaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#f58529" />
-            <stop offset="50%" stop-color="#dd2a7b" />
-            <stop offset="100%" stop-color="#8134af" />
-          </linearGradient>
-        </defs>
-        <path fill="url(#instaGradient)" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9S287.7 141 224.1 141zm0 189.6c-41.3 0-74.7-33.4-74.7-74.7s33.4-74.7 74.7-74.7 74.7 33.4 74.7 74.7-33.4 74.7-74.7 74.7zm146.4-194.3c0 14.9-12.1 27-27 27s-27-12.1-27-27 12.1-27 27-27 27 12.1 27 27zm76.1 27.2c-1.7-35.7-9.9-67.3-36.2-93.5s-57.8-34.5-93.5-36.2c-36.8-2.1-147.2-2.1-184 0-35.7 1.7-67.3 9.9-93.5 36.2S1.7 111.3 0 147c-2.1 36.8-2.1 147.2 0 184 1.7 35.7 9.9 67.3 36.2 93.5s57.8 34.5 93.5 36.2c36.8 2.1 147.2 2.1 184 0 35.7-1.7 67.3-9.9 93.5-36.2s34.5-57.8 36.2-93.5c2.1-36.8 2.1-147.2 0-184zm-48.5 224.5c-7.8 19.5-22.9 34.6-42.4 42.4-29.4 11.7-99.2 9-132.1 9s-102.7 2.6-132.1-9c-19.5-7.8-34.6-22.9-42.4-42.4-11.7-29.4-9-99.2-9-132.1s-2.6-102.7 9-132.1c7.8-19.5 22.9-34.6 42.4-42.4 29.4-11.7 99.2-9 132.1-9s102.7-2.6 132.1 9c19.5 7.8 34.6 22.9 42.4 42.4 11.7 29.4 9 99.2 9 132.1s2.7 102.7-9 132.1z"/>
-      </svg>
-    </a>
+  <nav class="socials fade-in-up" aria-label="Réseaux sociaux">
+ <!-- Instagram -->
+  <a href="https://www.instagram.com/toogz" target="_blank" aria-label="Instagram" class="instagram">
+   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">
+    <path d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z"></path>
+</svg>
+  </a>
 
-    <!-- Facebook -->
-    <a href="https://www.facebook.com/MonsieurBoivin" target="_blank" aria-label="Facebook">
-      <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#1877F2" d="M279.14 288l14.22-92.66h-88.91V129.24c0-25.35 12.42-50.06 52.24-50.06H293V6.26S259.5 0 225.36 0c-73.11 0-121.1 44.38-121.1 124.72v70.62H22.89V288h81.36v224h100.17V288z"/>
-      </svg>
-    </a>
-  </div>
+  <!-- Facebook -->
+  <a href="https://www.facebook.com/MonsieurBoivin" target="_blank" aria-label="Facebook" class="facebook">
+    <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
+      <path d="M279.14 288l14.22-92.66h-88.91V129.24c0-25.35 12.42-50.06 52.24-50.06H293V6.26S259.5 0 225.36 0c-73.11 0-121.1 44.38-121.1 124.72v70.62H22.89V288h81.36v224h100.17V288z"/>
+    </svg>
+  </a>
 
-  <div class="footer">© 2025 MonsieurBoivin.fr</div>
+  <!-- Pinterest -->
+  <a href="https://www.pinterest.fr/MonsieurBoivin" target="_blank" aria-label="Pinterest" class="pinterest">
+    <svg viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">
+      <path d="M248 8C111 8 0 119 0 256c0 110 71.6 203.3 171.5 236.3-2.4-20.1-4.5-51 0.9-73.1 4.9-20.6 31.5-130.5 31.5-130.5s-8-16-8-39.6c0-37.1 21.5-64.9 48.2-64.9 22.7 0 33.6 17.1 33.6 37.5 0 22.8-14.5 57-21.9 88.6-6.2 26.2 13.2 47.5 39.1 47.5 47 0 78.6-60.3 78.6-131.7 0-54.4-36.6-95.1-103.1-95.1-75.1 0-121.5 56.2-121.5 118.9 0 21.6 6.3 36.8 16.2 48.5 4.5 5.4 5.1 7.5 3.5 13.6-1.2 4.5-4 15.3-5.2 19.6-1.7 6.3-6.9 8.6-12.8 6.2-35.8-14.6-52.6-53.8-52.6-97.9 0-72.6 61.2-159.8 182.7-159.8 97.7 0 161.8 70.7 161.8 146.6 0 100.5-55.9 175.5-138.5 175.5-27.7 0-53.7-14.9-62.6-31.7l-17 64.7c-6.2 23.2-23.1 52.2-34.5 69.9C202 502.6 224.5 504 248 504c137 0 248-111 248-248S385 8 248 8z"/>
+    </svg>
+  </a>
+  </nav>
+
+  <footer class="footer">
+    &copy; 2025 <strong>MonsieurBoivin.fr</strong> — Tous droits réservés.
+  </footer>
 </body>
 </html>
+
+
