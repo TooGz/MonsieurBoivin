@@ -1,0 +1,18 @@
+{{/* Shortcode simple vidéo autoplay/loop
+     Usage :
+       {{< video src="medias/teaser.mp4" >}}
+       ou {{< video src="medias/teaser.webm" >}}
+*/}}
+
+{{ $src := .Get "src" }}
+
+<video 
+  autoplay 
+  loop 
+  muted 
+  playsinline 
+  preload="auto"
+  style="width:100%;height:auto;display:block;border-radius:12px;object-fit:cover;">
+  <source src="{{ $src }}" type="video/{{ path.Ext $src | strings.TrimPrefix "." }}">
+  Votre navigateur ne supporte pas la vidéo HTML5.
+</video>

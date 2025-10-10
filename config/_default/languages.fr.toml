@@ -1,0 +1,25 @@
+languageCode = "fr"
+languageName = "Français"
+weight = 1
+title = "MonsieurBoivin.fr"
+
+[params]
+  displayName = "Français"
+  isoCode = "fr"
+  rtl = false
+  dateFormat = "2 January 2006"
+  logo = "img/MonsieurBoivin.png"
+  description = "A powerful, lightweight theme for Hugo."
+
+[params.author]
+  name = "Monsieur Boivin"
+  email = ""
+  image = "img/MonsieurBoivin.png"
+  headline = "Bienvenue chez moi !"
+  bio = "Mon bric à brack sur le net"
+  links = [
+    { instagram = "https://instagram.com/toogz" },
+    { tiktok = "https://tiktok.com/monsieurboivin" },
+    { pinterest = "https://fr.pinterest.com/MonsieurBoivin/_saved/" }
+  
+  ]
