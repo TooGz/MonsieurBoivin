@@ -18,7 +18,7 @@ buildFuture = false
 
 enableEmoji = true
 
-#googleAnalytics = ""
+googleAnalytics = "GTM-N2N65PZV"
 
 [pagination]
   pagerSize = 9
