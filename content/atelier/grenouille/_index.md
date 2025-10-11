@@ -45,7 +45,8 @@ Plans, bois, assemblages, astuces, finitions...
 
 
 2. [Vue d’ensemble du projet](./vue-ensemble)
-3. [Conception & Construction du jeu](./conception-bois)
+3. Conception & Construction du jeu
+
 ---
 
 ## Électronique et intelligence du jeu

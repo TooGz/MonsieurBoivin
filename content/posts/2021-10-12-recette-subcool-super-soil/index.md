@@ -70,7 +70,6 @@ Ce processus permet de **déclencher la vie microbienne**, activer les champigno
 ## 🌺 Pour quelles cultures ?
 
 ### Idéal pour :
-- **Cannabis (intérieur/extérieur)**
 - **Tomates, poivrons, aubergines, courges, piments**
 - **Plantes vivaces gourmandes** : rhubarbe, artichaut, etc.
 
