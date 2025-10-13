@@ -24,7 +24,7 @@ Après avoir posé les bases dans l’[introduction du projet](../introduction),
 la **vue d’ensemble** de la *Grenouille 3.0*.
 
 ---
-![](./grenouille-eclate-2.png)
+![](./grenouille-eclate-2.png "Plan 3D de la première version")
 
 ## 2.1. Dimensions globales et ergonomie
 
@@ -78,65 +78,62 @@ En facade, 4 etages de rampes récuperent tous les palets tombés dans le platea
 ## 2.3. Vision d’ensemble et modélisation 3D
 
 Avant de sortir la scie, j’ai modélisé tout le projet sur **SketchUp**.  
-La vue éclatée permet de comprendre la logique générale : comment chaque pièce s’emboîte, comment les palets circulent et où tout se connecte.
+La vue éclatée permet de comprendre la logique générale : comment chaque pièce s’emboîte.
 
 ![](./grenouille-eclate-1.png)
 
-### 🖼️ Vue éclatée
+### Vue éclatée
 - Numérotation des pièces principales  
-- Repérage du flux des palets (de la grenouille au bac)  
 - Visualisation claire des volumes et des proportions  
 
 Un travail de préparation indispensable avant d’attaquer la découpe.  
 👉 Ça permet d’anticiper les assemblages, les passages de câbles et les points d’accès sans perdre de temps à l’atelier.
 
-### 🪚 Fabrication artisanale
+### Fabrication artisanale
 Pas besoin d’une CNC industrielle.  
-Une **scie plongeante**, une **défonceuse**, une **ponceuse orbitale** et un peu de méthode suffisent.  
-L’idée, c’est de garder un projet **accessible**, que tu sois artisan confirmé ou simple bricoleur du dimanche (motivés bienvenus).
+Une **scie sous table**, une **défonceuse**, une **ponceuse orbitale** et un peu de méthode suffisent.  
+L’idée, c’est de garder un projet **accessible** et réalisable avec les outils dont je dispose.
 
 ---
 
-## ⚡ 2.4. Intégration électronique et électrique
+## 2.4. Intégration électronique et électrique
 
-C’est là que la magie opère ✨  
+C’est là que la magie opère.
 La *Grenouille 3.0*, c’est un pont entre le **bois traditionnel** et la **tech moderne**.  
 L’électronique ne vient pas "en plus" : elle est prévue dès la conception.
 
-### 🔋 Alimentation et sécurité
+### Alimentation et sécurité
 - Alimentation principale en **12 V**, propre et stable.  
 - Conversion en **5 V** pour les LEDs, capteurs et l’ESP32.  
 - Circuit protégé par un **fusible** et un **interrupteur général** accessible via la trappe arrière.
 
-### 🎯 Détection des palets
+### Détection des palets
 Chaque trou et arche est équipé d’un **capteur piézoélectrique**, connecté à un **MCP3008**.  
 - Les signaux sont analysés par un **ESP32**.  
-- Les scores sont envoyés en temps réel (local ou via Wi-Fi).  
+- Les scores sont affichés en temps réel.  
 - Aucune pièce visible, tout est intégré discrètement sous le plateau.
 
-### 💡 Éclairage et feedback visuel
+### Éclairage et feedback visuel
 Les **LEDs adressables WS2812B** ajoutent une vraie dimension visuelle :  
-- Effets lumineux dynamiques à chaque point marqué 🎆  
+- Effets lumineux dynamiques à chaque point marqué. 
 - Modes “démo” ou “ambiance” selon le contexte  
 - Intégration dans des **profilés silicone plats encastrés** pour un rendu propre et homogène.
 
-### 🧠 Le cerveau du jeu
+### Le cerveau du jeu
 Le **ESP32-S3** gère tout : détection, animations, communication.  
 - Connectivité **Wi-Fi / Bluetooth** intégrée.  
 - Compatible avec un **panneau HUB75** pour l’affichage des scores.  
 - Prêt à accueillir une **carte son** pour les sons d’ambiance ou les effets flipper-style 🎵.
 
-### 🔌 Câblage et modularité
+### Câblage et modularité
 L’ensemble est pensé pour durer :  
 - Connecteurs **JST détachables** pour un remplacement facile.  
 - Câblage propre dans des **goulottes internes**.  
 - Chaque module (LED, capteur, carte) peut être remplacé sans tout démonter.  
 
-En résumé : c’est **propre, logique, et évolutif**.
-
 ---
 
-## 🔄 En résumé
+## En résumé
 
 Cette vue d’ensemble, c’est la **carte du projet Grenouille 3.0**.  
 Elle permet de comprendre la logique complète — bois, électronique et ergonomie — avant de lancer la fabrication.
@@ -144,10 +141,8 @@ Elle permet de comprendre la logique complète — bois, électronique et ergono
 Les prochaines étapes plongeront dans le concret :
 - Le **choix des essences de bois**
 - Les **assemblages et découpes**
-- Et plus tard, la **mise en place du proto électronique** 🧠⚙️
+- Et plus tard, la **mise en place du proto électronique**
 
 ➡️ **Prochain chapitre :** [Conception bois et outillage](../03-conception-bois/) — on passe enfin à la sciure !
 
 ---
-
-> 🪵 *Une bonne grenouille commence toujours par de bonnes proportions… mais une grenouille moderne, elle, commence aussi par un bon câblage.*
