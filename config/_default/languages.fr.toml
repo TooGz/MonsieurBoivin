@@ -9,7 +9,7 @@ title = "MonsieurBoivin.fr"
   rtl = false
   dateFormat = "2 January 2006"
   logo = "img/MonsieurBoivin.webp"
-  description = "A powerful, lightweight theme for Hugo."
+  description = "Mon petit bordel sur le net !"
 
 [params.author]
   name = "Monsieur Boivin"
