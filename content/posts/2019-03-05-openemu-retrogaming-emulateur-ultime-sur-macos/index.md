@@ -72,10 +72,10 @@ Pour ma part, jouant exclusivement aux consoles de Big N, j'utilise le **Wii U P
 Si vous cherchiez un moyen simple et sympa de rejouer a vos anciens jeux et que vous êtes sur **OS X** je ne pourrais que vous recommander de vous pencher sur [OpenEmu][lnk-1].
 
 
-[img-1]:  http://freakyfresh.fr/wp/wp-content/uploads/2014/09/Nintendo-NES-Library.jpg            "Nintendo (NES) Library"
-[img-2]:  http://freakyfresh.fr/wp/wp-content/uploads/2014/09/Coverflow-Recently-Added.jpg        "OpenEmu Coverflow"
-[img-3]:  http://freakyfresh.fr/wp/wp-content/uploads/2014/09/Gameboy-Controller-Preferences.jpg  "OpenEmu - Gameboy Controller Preferences"
-[img-4]:  http://freakyfresh.fr/wp/wp-content/uploads/2014/09/Popout-Gameplay-Window.jpg          "Popout Gameplay Window"
+[img-1]:  ./img/Nintendo-NES-Library.png            "Nintendo (NES) Library"
+[img-2]:  ./img/Recently-Added.png        "OpenEmu Coverflow"
+[img-3]:  ./img/Gameboy-Controller-Preferences.png  "OpenEmu - Gameboy Controller Preferences"
+[img-4]:  ./img/Popout-Gameplay-Window.png          "Popout Gameplay Window"
 
 [lnk-1]:  http://openemu.org        "Site officiel d'OpenEmu"
 [lnk-2]:  https://twitter.com/Mucx  "Twitter de David McLeod - @Mucx"

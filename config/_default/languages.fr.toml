@@ -8,7 +8,7 @@ title = "MonsieurBoivin.fr"
   isoCode = "fr"
   rtl = false
   dateFormat = "2 January 2006"
-  logo = "img/MonsieurBoivin.png"
+  logo = "img/MonsieurBoivin.webp"
   description = "A powerful, lightweight theme for Hugo."
 
 [params.author]
