@@ -5,11 +5,11 @@ updated: 2025-04-01
 author: "Guillaume"
 slug: "photos-de-concert-conseils"
 categories:
-  - Photographie
+  - Photo
 tags:
-  - photo
+  - conseil
   - concert
-  - photographie
+
 image: "img/photos-concert.jpg"
 description: "Comment réussir ses photos de concert malgré la lumière chaotique ? Voici 5 conseils concrets pour capturer l’énergie de la scène, même avec du matériel limité."
 ---

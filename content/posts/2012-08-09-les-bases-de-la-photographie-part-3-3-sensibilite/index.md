@@ -4,7 +4,7 @@ date: 2012-08-09
 updated: 2025-10-10
 slug: "bases-photo-sensibilite"
 categories:
-  - Photographie
+  - Photo
 tags:
   - tutoriel
   - sensibilité ISO

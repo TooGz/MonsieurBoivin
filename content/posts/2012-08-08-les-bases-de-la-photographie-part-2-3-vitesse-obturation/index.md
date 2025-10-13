@@ -4,7 +4,7 @@ date: 2012-08-08
 updated: 2025-10-10
 slug: "bases-photo-vitesse-obturation"
 categories:
-  - Photographie
+  - Photo
 tags:
   - exposition
   - vitesse d’obturation
