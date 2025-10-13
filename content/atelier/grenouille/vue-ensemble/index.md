@@ -127,7 +127,7 @@ Le **ESP32-S3** gère tout : détection, animations, communication.
 
 ### Câblage et modularité
 L’ensemble est pensé pour durer :  
-- Connecteurs **JST détachables** pour un remplacement facile.  
+- Connecteurs **détachables** pour un remplacement facile.  
 - Câblage propre dans des **goulottes internes**.  
 - Chaque module (LED, capteur, carte) peut être remplacé sans tout démonter.  
 
