@@ -4,16 +4,14 @@ date: 2012-08-01
 updated: 2025-10-10
 slug: "bases-photo-ouverture"
 categories:
-  - Photographie
+  - Photo
 tags:
-  - photo
   - ouverture
   - exposition
   - bokeh
   - profondeur de champ
 series: ["Les bases de la photo"]
 series_order: 1
-
 description: "Qu’est-ce que l’ouverture en photographie ? Comment agit-elle sur la luminosité et la profondeur de champ ? Découvre les bases pour comprendre et maîtriser l’un des trois piliers de l’exposition."
 ---
 

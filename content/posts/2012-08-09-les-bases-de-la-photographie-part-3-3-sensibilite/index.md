@@ -6,15 +6,12 @@ slug: "bases-photo-sensibilite"
 categories:
   - Photographie
 tags:
-  - photo
   - tutoriel
   - sensibilité ISO
   - exposition
   - bruit numérique
 series: ["Les bases de la photo"]
 series_order: 3
-
-image: "img/cover.jpg"
 description: "Troisième partie des bases de la photographie : comprendre la sensibilité ISO, son influence sur la lumière et le bruit numérique, et comment bien l’utiliser."
 ---
 

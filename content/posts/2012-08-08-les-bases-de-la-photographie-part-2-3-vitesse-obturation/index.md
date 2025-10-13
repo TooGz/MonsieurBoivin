@@ -6,15 +6,12 @@ slug: "bases-photo-vitesse-obturation"
 categories:
   - Photographie
 tags:
-  - photo
   - exposition
   - vitesse d’obturation
   - flou de mouvement
   - tutoriel
 series: ["Les bases de la photo"]
 series_order: 2
-
-image: "img/cover.jpg"
 description: "Deuxième partie des bases de la photographie : comprendre la vitesse d’obturation et son impact sur la lumière, le mouvement et la netteté de vos photos."
 ---
 
