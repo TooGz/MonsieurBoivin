@@ -4,7 +4,7 @@ date: 2012-09-23
 updated: 2025-10-10
 slug: "profondeur-de-champ-et-bokeh"
 categories:
-  - Photographie
+  - Photo
 series: ["Les bases de la photo"]
 series_order: 4
 tags:
