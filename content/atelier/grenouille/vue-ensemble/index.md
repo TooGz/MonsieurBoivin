@@ -143,6 +143,6 @@ Les prochaines étapes plongeront dans le concret :
 - Les **assemblages et découpes**
 - Et plus tard, la **mise en place du proto électronique**
 
-➡️ **Prochain chapitre :** [Conception bois et outillage](../03-conception-bois/) — on passe enfin à la sciure !
+➡️ **Prochain chapitre :** [Conception bois et outillage](../conception-bois/) — on passe enfin à la sciure !
 
 ---

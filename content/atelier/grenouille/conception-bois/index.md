@@ -1,5 +1,5 @@
 ---
-title: "[Grenouille 3.0] - Conception"
+title: "[Grenouille 3.0] - Conception bois - Étude, matériaux et fabrication"
 description: "Redonner vie au jeu de la grenouille : un projet entre tradition, artisanat et technologie moderne."
 date: 2025-10-06
 author: "Monsieur Boivin"
@@ -17,8 +17,6 @@ Cette **introduction** pose donc les **bases du projet**, les **objectifs techni
 
 ---
 
-# 🪵 3. Conception bois — Étude, matériaux et fabrication
-
 Avant d’entrer dans la partie “électronique”, il fallait d’abord poser une base solide : **le bois**.  
 C’est le cœur du projet, celui qui donne son âme à la grenouille.  
 Cette section détaille tout le travail autour de la conception artisanale : des plans à la finition finale.
@@ -31,7 +29,7 @@ Je voulais un **jeu fidèle à l’esprit traditionnel**, mais avec une touche m
 Le but : trouver **l’équilibre parfait entre esthétique, solidité et jouabilité**.
 
 - Proportions testées sur ma première version 'standard' de la Grenouille.  
-- Les plans ont été dessinés sous **SketchUp**, pour garder une approche accessible et modifiable par tous.  
+- Les plans ont été dessinés sous **SketchUp**.
 
 ---
 

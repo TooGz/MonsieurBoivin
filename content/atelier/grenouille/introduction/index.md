@@ -8,9 +8,6 @@ categories: ["Atelier de Michel"]
 series: ["Grenouille 3.0"]
 series_order: 1
 ---
-
-> “Entre artisanat et innovation, je voulais créer un jeu qui ait une âme, du poids, et une lumière.”
-
 {{< lead >}}
 Avant de sortir les outils, il fallait d’abord poser le projet à plat.  
 Réfléchir à ce que je voulais faire, et à la façon d’y arriver.  
