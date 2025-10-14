@@ -8,6 +8,7 @@ tags: ["Jeu de la Grenouille","Artisanat","Menuiserie","Collage","DIY"]
 categories: ["Atelier de Michel"]
 series: ["Journal Grenouille"]
 series_order: 3
+draft: true
 ---
 
 Aujourd’hui, je passe à la **réalisation des tenons et mortaises** avec une défonceuse équipée d'une **fraise de 12 mm**. Les mortaises seront donc **toutes à 12 mm**, et les tenons ajustés en conséquence. 
