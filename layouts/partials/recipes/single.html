@@ -1,0 +1,162 @@
+{{/* layouts/partials/recipes/single.html */}}
+{{ $p := . }}
+
+<section class="flex flex-col max-w-full mt-0 lg:flex-row">
+  {{/* TOC si activé */}}
+  {{ $enableToc := site.Params.article.showTableOfContents | default false }}
+  {{ $enableToc = $p.Params.showTableOfContents | default $enableToc }}
+  {{ $showToc := and $enableToc (in $p.TableOfContents "<ul") }}
+  {{ $topClass := cond (hasPrefix site.Params.header.layout "fixed") "lg:top-[140px]" "lg:top-10" }}
+
+  {{ if $showToc }}
+    <aside class="order-first lg:ml-auto px-0 lg:order-last lg:ps-8">
+      <div class="toc ps-5 print:hidden lg:sticky {{ $topClass }}">
+        {{ partial "toc.html" $p }}
+      </div>
+    </aside>
+  {{ end }}
+
+  <div class="min-w-0 min-h-0 max-w-fit">
+
+
+    {{/* Image hero : featured.* prioritaire */}}
+    {{ $img := "" }}
+    {{ with $p.Resources.GetMatch "featured.*" }}
+      {{ $img = ((.Fill "1200x800 center") | images.Quality 82).RelPermalink }}
+    {{ else }}
+      {{ $img = (
+        $p.Params.featured |
+        default $p.Params.image |
+        default (index $p.Params.cover "image") |
+        default "img/recipe-default.jpg"
+      ) | relURL }}
+    {{ end }}
+    
+    <!-- Description -->
+    {{ if .Params.description }}
+    <section class="recette-single__section">
+      <p class="recette-single__description">{{ .Params.description }}</p>
+    </section>
+    {{ end }}
+
+    <!-- Bloc infos -->
+    <div class="recette-single__overview">
+      <section class="recette-single__section">
+        <ul class="recette-single__info-list">
+          <li class="recette-single__info-item">{{ default "Non précisé" .Params.total_time }}</li>
+          <li class="recette-single__info-item">{{ default "Non précisé" .Params.cook_time }}</li>
+          <li class="recette-single__info-item">{{ default "Non précisé" .Params.rest_time }}</li>
+          <li class="recette-single__info-item">{{ default "Non précisé" .Params.servings }}</li>
+          <li class="recette-single__info-item">{{ default "Non précisé" .Params.difficulty }}</li>
+        </ul>
+      </section>
+
+      <!-- Températures internes -->
+      {{ if .Params.internal_temps }}
+      <section class="recette-single__section">
+        <h2 class="recette-single__subtitle">Températures internes</h2>
+        <ul>
+          {{ range .Params.internal_temps }}
+          <li><strong>{{ .name }}</strong> : {{ .temperature }} <em>({{ .note }})</em></li>
+          {{ end }}
+        </ul>
+      </section>
+
+      <!-- Matériel -->
+      {{ if .Params.equipment }}
+      <section class="recette-single__section">
+        <h2 class="recette-single__subtitle">Matériel nécessaire</h2>
+        <ul>
+          {{ range .Params.equipment }}
+          <li>{{ . }}</li>
+          {{ end }}
+        </ul>
+      </section>
+      {{ end }}
+
+      {{ end }}
+    </div><!-- recette-single__overview -->
+
+
+
+    <!-- Ingrédients -->
+    <section class="recette-single__section">
+      <h2 class="recette-single__subtitle">Ingrédients</h2>
+      <div class="recette-single__ingredients">
+        {{ range .Params.ingredients }}
+        <h3 class="recette-single__ingredient-title">{{ .plat }}</h3>
+        <ul>
+          {{ range .items }}
+          <li>
+            {{ if .unit }}
+            {{ .quantity }} {{ .unit }}{{ if or (in (lower .name) "huile") (in (slice "a" "e" "i" "o" "u" "y") (substr (lower .name) 0 1)) }} d'{{ else }} de {{ end }}
+            {{ else }}
+            {{ .quantity }}
+            {{ end }}<strong> {{ title .name }}</strong>
+          </li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </div>
+    </section>
+
+    <!-- Mise en place -->
+    {{ if .Params.mise_en_place }}
+    <section class="recette-single__section">
+      <h2 class="recette-single__subtitle">Mise en place</h2>
+      <ol>
+        {{ range .Params.mise_en_place }}
+        <li>{{ . }}</li>
+        {{ end }}
+      </ol>
+    </section>
+    {{ end }}
+
+    <!-- Préparation -->
+    {{ if .Params.preparation }}
+    <section class="recette-single__section">
+      <h2 class="recette-single__subtitle">Préparation</h2>
+      <ol class="recette-single__steps">
+        {{ range .Params.preparation }}
+        <li class="recette-single__step">{{ . }}</li>
+        {{ end }}
+      </ol>
+    </section>
+    {{ end }}
+
+    <!-- Cuisson -->
+    {{ if .Params.cooking }}
+    <section class="recette-single__section">
+      <h2 class="recette-single__subtitle">Cuisson</h2>
+      <p><strong>Type :</strong> {{ .Params.cooking.method }}</p>
+      <p><strong>Température :</strong> {{ .Params.cooking.temp }}</p>
+      {{ if .Params.cooking.airflow }}
+      <ul class="recette-single__airflow">
+        <li>Ventilation haute : {{ .Params.cooking.airflow.top_vent }}</li>
+        <li>Ventilation basse : {{ .Params.cooking.airflow.bottom_vent }}</li>
+      </ul>
+      {{ end }}
+      <ol class="recette-single__steps">
+        {{ range .Params.cooking.steps }}
+        <li class="recette-single__step">{{ . }}</li>
+        {{ end }}
+      </ol>
+    </section>
+    {{ end }}
+
+    <!-- Service -->
+    {{ if .Params.serving }}
+    <section class="recette-single__section">
+      <h2 class="recette-single__subtitle">Service</h2>
+      <ul>
+        {{ range .Params.serving }}
+        <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+
+    {{ partial "sharing-links.html" $p }}
+    {{ partial "related.html" $p }}
+  </div>
+</section>
