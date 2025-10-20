@@ -5,8 +5,8 @@ slug: "cassoulet-kamado"
 layout: "recette-single"
 type: "recette-single"
 date: 2025-02-28
-categories: ["Plat principal", "Viande", "Légumes"]
-tags: ["cassoulet", "kamado", "cuisson indirecte", "fumage", "grillade"]
+categories: ["🔥 Kamado & Cuissons feu"]
+tags: ["kamado", "cuisson indirecte", "fumage", "grillade"]
 cooking_tech: ["cuisson indirecte", "fumage", "grill"]
 difficulty: "Moyen"
 servings: "6"

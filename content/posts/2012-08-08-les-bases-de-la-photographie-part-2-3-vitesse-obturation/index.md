@@ -1,7 +1,7 @@
 ---
 title: "Les bases de la photographie [PART 2/3] : la vitesse d’obturation"
 date: 2012-08-08
-updated: 2025-10-10
+updated: 2025-10-20
 slug: "bases-photo-vitesse-obturation"
 categories:
   - Photo
@@ -18,19 +18,16 @@ description: "Deuxième partie des bases de la photographie : comprendre la vite
 Salut à tous ! 👋  
 Comme promis, voici la **deuxième partie** des bases de la photo.  
 
-Je suis parti quelques jours à Orléans décompresser un peu, et ça a été l’occasion de faire un petit **drive-by en camping-car sur les bords de Loire**.  
-Ambiance tranquille, et surtout : essais de **light painting** avec fusées scintillantes et feux d’artifice 🎆 — à creuser, le rendu est vraiment sympa !
-
-Mais revenons à nos moutons : aujourd’hui, on parle de **vitesse d’obturation**.
+Aujourd’hui, on parle de **vitesse d’obturation**.
 
 ---
 
 ##  Définition
 
 Wikipédia, à toi 👇  
-> En photographie, la vitesse d’obturation (appelée aussi *temps de pose* ou *durée d’exposition*) désigne l’intervalle de temps pendant lequel l’obturateur de l’appareil photo laisse passer la lumière — et donc la durée d’exposition du capteur ou de la pellicule.
+> En photographie, la **vitesse d’obturation** (appelée aussi *temps de pose* ou *durée d’exposition*) désigne l’intervalle de temps pendant lequel l’obturateur de l’appareil photo laisse passer la lumière — et donc la durée d’exposition du capteur ou de la pellicule.
 
-Contrairement à l’ouverture (vue dans la [**première partie**](../bases-photo-ouverture/)), la vitesse d’obturation est plus simple à comprendre.  
+Contrairement à l’**ouverture** (vue dans la [**première partie**][ouverture]), la vitesse d’obturation est plus simple à comprendre.  
 Elle est exprimée en **secondes** ou **fractions de seconde** :  
 `1/2500s`, `1/50s`, `1s`…  
 
@@ -77,8 +74,8 @@ Mais garde cette règle en tête pour assurer la netteté “à tous les coups�
 
 La vitesse d’obturation est l’un des trois **piliers de l’exposition**, avec :
 
-1. **[L’ouverture](../bases-photo-ouverture/)** — qui contrôle la quantité de lumière et la profondeur de champ.  
-2. **La sensibilité ISO** — que nous verrons dans la [troisième partie](../bases-photo-sensibilite/).
+1. **[L’ouverture][ouverture]** — qui contrôle la quantité de lumière et la profondeur de champ.  
+2. **La sensibilité ISO** — que nous verrons dans la [troisième partie][sensibilité].
 
 👉 En combinant ces trois paramètres, tu maîtriseras complètement **la lumière, le mouvement et le rendu artistique** de tes photos.
 
@@ -92,3 +89,7 @@ Teste différents réglages :
 
 👉 Le secret, c’est d’expérimenter !  
 C’est en jouant avec ces paramètres que tu comprendras instinctivement comment la **vitesse d’obturation** sculpte le temps… et donne vie à tes images.
+
+
+[sensibilité]: ../bases-photo-sensibilite
+[ouverture]: ../bases-photo-ouverture

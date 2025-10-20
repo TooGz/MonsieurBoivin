@@ -30,9 +30,8 @@
 #   été, printemps, automne, hiver, Noël, Pâques, été-2025
 
 title: "Cookies Boivin Family Edition"
-description: "La recette des cookies Boivin Family Edition finement optimisée depuis de nombreuses années..."
+description: "La recette des fameux cookies de la famille Boivin !"
 slug: "cookies-boivin-family-edition"
-layout: "recette-single"
 date: 2025-02-28
 categories: ["🍰 Desserts & Goûter"]
 tags: ["four","rapide","famille","enfants"]
@@ -40,8 +39,8 @@ difficulty: "Facile"
 servings: "6"
 prep_time: "15 min"
 cook_time: "10 min"
-rest_time: ""
 total_time: "25 min"
+ShowToc: true
 
 ingredients:
   - plat: "Cookies"
@@ -94,7 +93,4 @@ cooking:
 
 serving:
   - "Possibilité d'ajouter une noix de pécan sur chaque cookie avant la cuisson"
-seo:
-  meta_title: "Recette Cassoulet au Kamado Big Green Egg - Cuisson Indirecte"
-  meta_description: "Préparez un délicieux cassoulet au Kamado Big Green Egg, une version légère mais savoureuse du plat traditionnel avec des haricots, viande confite et fumée."
 ---

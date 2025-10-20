@@ -16,6 +16,11 @@
   weight = 5
 
 [[main]]
+  name = "La Cuisine"
+  pageRef = "recettes"
+  weight = 5
+
+[[main]]
   name = "L'Atelier de Michel"
   pageRef = "atelier"
   weight = 10

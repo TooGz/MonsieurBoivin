@@ -33,7 +33,7 @@ La plupart des appareils couvrent une plage de **100 à 6400 ISO** (voire plus s
 - Mais plus on augmente aussi le **bruit numérique** (grain) et la **perte de définition**
 
 C’est donc, encore une fois, une **histoire de compromis** :  
-monter en ISO permet de conserver une **[vitesse d’obturation](../bases-photo-vitesse-obturation/)** correcte même en faible lumière,  
+monter en ISO permet de conserver une **[vitesse d’obturation][obturation]** correcte même en faible lumière,  
 mais cela dégrade légèrement la qualité de l’image.
 
 ---
@@ -55,8 +55,8 @@ En résumé :
 Souviens-toi : la photo repose sur trois paramètres qui interagissent en permanence,  
 le fameux **triangle d’exposition** :
 
-1. **[L’ouverture](../bases-photo-ouverture/)** → contrôle la quantité de lumière et la **profondeur de champ**  
-2. **[La vitesse d’obturation](../bases-photo-vitesse-obturation/)** → gère le **mouvement** et la **durée d’exposition**  
+1. **[L’ouverture][ouverture]** → contrôle la quantité de lumière et la **profondeur de champ**  
+2. **[La vitesse d’obturation][obturation]** → gère le **mouvement** et la **durée d’exposition**  
 3. **La sensibilité ISO** → ajuste la **réactivité du capteur à la lumière**
 
 Augmenter l’un nécessite souvent de compenser avec les deux autres.  
@@ -99,11 +99,11 @@ Cette hiérarchie t’aidera à garder des images nettes et détaillées sans ex
 
 Tu maîtrises désormais les **trois piliers** de la photographie :  
 
-1. **[L’ouverture](../bases-photo-ouverture/)** → lumière & profondeur de champ  
-2. **[La vitesse d’obturation](../bases-photo-vitesse-obturation/)** → mouvement & netteté  
+1. **[L’ouverture][ouverture]** → lumière & profondeur de champ  
+2. **[La vitesse d’obturation][obturation]** → mouvement & netteté  
 3. **La sensibilité ISO** → équilibre lumière & qualité d’image  
 
-Et pour prolonger ta compréhension du flou d’arrière-plan, découvre aussi mon article sur la **[profondeur de champ et le bokeh](../profondeur-de-champ-et-bokeh/)** 🎨  
+Et pour prolonger ta compréhension du flou d’arrière-plan, découvre aussi mon article sur la **[profondeur de champ et le bokeh][bokeh]** 🎨  
 
 ---
 
@@ -114,3 +114,10 @@ Passe ton boîtier en **mode manuel (M)** et amuse-toi à combiner ouverture, vi
 Observe comment chaque réglage influence ton rendu, ta lumière, et l’ambiance générale de ta photo.
 
 C’est maintenant **toi** qui décides de ton image - pas ton appareil 😉
+
+
+[sensibilité]: ../bases-photo-sensibilite
+[ouverture]: ../bases-photo-ouverture
+[obturation]: ../bases-photo-vitesse-obturation
+[sensibilité]: ../bases-photo-sensibilite
+[bokeh]: ../profondeur-de-champ-et-bokeh

@@ -1,7 +1,8 @@
 {{/* layouts/partials/recipes/single.html */}}
 {{ $p := . }}
 
-<section class="flex flex-col max-w-full mt-0 lg:flex-row">
+
+  <section class="max-w-full mt-6 prose dark:prose-invert">
   {{/* TOC si activé */}}
   {{ $enableToc := site.Params.article.showTableOfContents | default false }}
   {{ $enableToc = $p.Params.showTableOfContents | default $enableToc }}
@@ -81,7 +82,7 @@
 
     <!-- Ingrédients -->
     <section class="recette-single__section">
-      <h2 class="recette-single__subtitle">Ingrédients</h2>
+      <h2>Ingrédients</h2>
       <div class="recette-single__ingredients">
         {{ range .Params.ingredients }}
         <h3 class="recette-single__ingredient-title">{{ .plat }}</h3>

@@ -29,6 +29,8 @@ Cela signifie que seule une fine zone de ton image sera nette — le reste sera 
 
 👉 Le chiffre du “f” est un peu trompeur : plus il est petit, plus l’ouverture est grande.
 
+Voi l'article dédié sur l'**[ouverture][ouverture]**
+
 **Exemples**
 
 ![flou](./img/flou.jpg "f/1.4 1/13s ISO 100")
@@ -98,5 +100,17 @@ C’est en expérimentant que tu comprendras vraiment la magie de la **profondeu
 ## Pour aller plus loin
 
 Tu veux aller encore plus loin ?  
-Essaie de jouer sur la **focale** : un téléobjectif (ex. 85mm ou 135mm) accentue naturellement le flou d’arrière-plan, même à ouverture moyenne.  
+Essaie de jouer sur la **focale** : un téléobjectif (ex. 85mm ou 135mm) accentue naturellement le flou d’arrière-plan, même à ouverture moyenne.
+
+N'hésite pas aussi a jeter un oeil sur ma série d'articles sur **[les bases de la photo][serie-photo]** !
+
 Et surtout : amuse-toi, c’est comme ça qu’on progresse !
+
+
+
+[sensibilité]: ../bases-photo-sensibilite
+[ouverture]: ../bases-photo-ouverture
+[obturation]: ../bases-photo-vitesse-obturation
+[sensibilité]: ../bases-photo-sensibilite
+[bokeh]: ../profondeur-de-champ-et-bokeh
+[serie-photo]: /series/les-bases-de-la-photo

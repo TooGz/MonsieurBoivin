@@ -32,8 +32,8 @@ Un cliché bien exposé est une image qui capture **le maximum d’informations 
 Ces trois paramètres sont liés entre eux, et chacun influence différemment le rendu final :
 
 1. **L’ouverture** (celle qu’on étudie ici)  
-2. La **[vitesse d’obturation](../vitesse-dobturation/)**  
-3. La **[sensibilité ISO](../sensibilite/)**  
+2. La **[vitesse d’obturation][obturation]**  
+3. La **[sensibilité ISO][sensibilité]**  
 
 Pour que ce soit digeste, chaque notion fait l’objet d’un article de cette série.
 
@@ -43,11 +43,14 @@ Pour que ce soit digeste, chaque notion fait l’objet d’un article de cette s
 
 > L’ouverture relative (ou simplement “ouverture”) désigne le rapport entre la **distance focale** d’un objectif et le **diamètre de sa pupille d’entrée**.
 
-C’est ce que dit Wikipédia.  
+C’est ce que dit **Wikipédia**.
+
 En pratique, l’ouverture correspond à **la taille d’ouverture du diaphragme** - c’est-à-dire la quantité de lumière que laisse passer ton objectif.
 
 Prenons un exemple simple :  
+
 Un objectif de **50 mm f/1.4** signifie que son diaphragme peut s’ouvrir jusqu’à **environ 35 mm** (50 ÷ 1.4).  
+
 Une grande ouverture = beaucoup de lumière sur le capteur.
 
 👉 L’ouverture est un **rapport**, donc :  
@@ -69,7 +72,7 @@ En résumé :
 
 ![](./img/example-ouverture.jpg)
 
- Pour aller plus loin, découvre mon article dédié au [**bokeh et à la profondeur de champ**](../profondeur-de-champ-et-bokeh/) : tu comprendras comment obtenir un flou d’arrière-plan maîtrisé et artistique.
+ Pour aller plus loin, découvre mon article dédié au [**bokeh et à la profondeur de champ**][bokeh] : tu comprendras comment obtenir un flou d’arrière-plan maîtrisé et artistique.
 
 ---
 
@@ -94,7 +97,7 @@ En résumé :
 
 ## À retenir
 
-Pour bien maîtriser l’ouverture, souviens-toi :
+Pour bien maîtriser l’**ouverture**, souviens-toi :
 
 - 🔆 **Plus l’ouverture est grande (f/1.4, f/2.8)** → plus de lumière, moins de netteté globale  
 - 🌙 **Plus l’ouverture est petite (f/11, f/16)** → moins de lumière, plus de netteté dans la profondeur  
@@ -105,5 +108,10 @@ Pour bien maîtriser l’ouverture, souviens-toi :
 ## Et ensuite ?
 
 Tu comprends maintenant comment l’ouverture agit sur la **lumière** et la **profondeur de champ**.  
-Dans le prochain article, on parlera de la **[vitesse d’obturation](../vitesse-dobturation/)** - le deuxième pilier du triangle d’exposition.  
+Dans le prochain article, on parlera de la **[vitesse d’obturation][obturation]** - le deuxième pilier du triangle d’exposition.  
 C’est elle qui détermine la **durée** pendant laquelle ton capteur reçoit la lumière… et donc, le **mouvement** dans tes photos !
+
+
+[obturation]: ../bases-photo-vitesse-obturation
+[sensibilité]: ../bases-photo-sensibilite
+[bokeh]: ../profondeur-de-champ-et-bokeh
