@@ -21,7 +21,7 @@ Cette **introduction** pose les **bases du projet**, les **objectifs techniques*
 
 ![](grenouille.jpg)
 
-Le **jeu de la grenouille**, c’est un de ces objets qu’on croise souvent sans trop y penser dans une guinguette, un vieux café ou une fête de village.  
+Le **[jeu de la grenouille][grenouille]**, c’est un de ces objets qu’on croise souvent sans trop y penser dans une guinguette, un vieux café ou une fête de village.  
 
 L’idée de ce projet est née de là : **garder l’âme du jeu**, mais le repenser à ma manière.  
 Lui donner une touche **plus moderne, plus arcade, plus vivante**, sans trahir ce qu’il est.
@@ -76,8 +76,12 @@ Je voulais une vision claire de chaque étape, du premier trait de scie jusqu’
 Cette **Grenouille 3.0**, c’est un mélange de technique et de savoir-faire qui m’intéresse particulièrement.  
 L’idée, c’est de faire un objet qu’on peut **fabriquer soi-même**, mais qui ait **le niveau de finition d’un vrai jeu d’artisan**.
 
-➡️ **Prochaine étape :** direction la [vue d’ensemble du projet](./vue-ensemble) pour découvrir comment tout s’imbrique, du bois à l’électronique.
+➡️ **Prochaine étape :** direction la [vue d’ensemble du projet][vue-ensemble] pour découvrir comment tout s’imbrique, du bois à l’électronique.
 
 ---
 
 > 🐸 *Le jeu de la grenouille, né dans les foires françaises du XIXᵉ siècle ([source](https://fr.wikipedia.org/wiki/Jeu_de_la_grenouille)), continue de traverser les générations. Aujourd’hui, c’est à notre tour de le faire évoluer sans le dénaturer.*
+
+
+[vue-ensemble]: ../vue-ensemble
+[grenouille]: ../

@@ -20,7 +20,7 @@ series: ["Grenouille 3.0"]
 series_order: 2
 ---
 
-Après avoir posé les bases dans l’[introduction du projet](../introduction), on entre maintenant dans le vif du sujet : 
+Après avoir posé les bases dans l’[introduction du projet][introduction], on entre maintenant dans le vif du sujet : 
 la **vue d’ensemble** de la *Grenouille 3.0*.
 
 ---
@@ -28,28 +28,27 @@ la **vue d’ensemble** de la *Grenouille 3.0*.
 
 ## 2.1. Dimensions globales et ergonomie
 
-L’objectif était simple : rester fidèle au **format traditionnel du jeu de la grenouille**,  
-mais avec une touche de **confort, de stabilité et de présence** en plus.  
+L’objectif était simple : rester fidèle au **format traditionnel du jeu de la grenouille**.  
 Parce qu’un beau jeu, c’est bien, mais un jeu agréable à utiliser — et qui en impose — c’est encore mieux.
 
-Je travaille ici avec des **sections de bois importantes**, volontairement au-dessus des standards.  
+Je travaille ici avec des **sections de bois importantes**.  
 Pas que pour faire joli, mais aussi pour la **solidité**, la **longévité**.
 Un jeu comme celui-là, c’est fait pour durer.
 
 ### Cotes de référence
 Les modèles anciens varient beaucoup, mais on retrouve à peu près ces proportions idéales :
 - **Hauteur totale :** entre 90 et 95 cm  
-- **Largeur :** environ 50 cm  
+- **Largeur :** environ 40 cm  
 - **Profondeur :** entre 80 et 85 cm  
 
 Ces dimensions offrent un bon équilibre entre **jouabilité** (hauteur de lancer) et **stabilité** (base large).  
-Adapté aux enfants, aux adultes et même aux concours de palets entre copains 🍻.
+Adapté aux enfants, aux adultes et même aux concours de palets entre copains.
 
 ---
 
 ## 2.2. Composants structurels principaux
 
-La Grenouille 3.0 repose sur une **architecture simple, robuste et évolutive**.  
+La **Grenouille 3.0** repose sur une **architecture simple et robuste**.  
 Chaque élément a été pensé pour être **fabriqué facilement** avec un outillage classique.
 
 ### Le plateau supérieur  
@@ -69,6 +68,7 @@ En facade, 4 etages de rampes récuperent tous les palets tombés dans le platea
 - Guidage via cloisons entre les rampes pour éviter les rebonds.
 
 ### Box "Electronique"
+- Contrelplaqué 10mm
 - Accès via une porte à l'arriere.  
 - Fermeture a clé.
 - Ecran
@@ -90,8 +90,7 @@ Un travail de préparation indispensable avant d’attaquer la découpe.
 👉 Ça permet d’anticiper les assemblages, les passages de câbles et les points d’accès sans perdre de temps à l’atelier.
 
 ### Fabrication artisanale
-Pas besoin d’une CNC industrielle.  
-Une **scie sous table**, une **défonceuse**, une **ponceuse orbitale** et un peu de méthode suffisent.  
+Une **scie sous table**, une **défonceuse**, une **ponceuse orbitale** quelques **ciseaux a bois** et un peu de méthode suffisent.  
 L’idée, c’est de garder un projet **accessible** et réalisable avec les outils dont je dispose.
 
 ---
@@ -143,6 +142,9 @@ Les prochaines étapes plongeront dans le concret :
 - Les **assemblages et découpes**
 - Et plus tard, la **mise en place du proto électronique**
 
-➡️ **Prochain chapitre :** [Conception bois et outillage](../conception-bois/) — on passe enfin à la sciure !
+➡️ **Prochain chapitre :** [Conception bois et outillage][conception] — on passe enfin à la pratique !
 
 ---
+
+[introduction]: ../introduction
+[conception]: ../conception-bois
