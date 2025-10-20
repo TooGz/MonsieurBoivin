@@ -19,7 +19,7 @@ title = "MonsieurBoivin.fr"
   bio = "Mon petit bordel sur le net"
   links = [
     { instagram = "https://instagram.com/toogz" },
-    { tiktok = "https://tiktok.com/monsieurboivin" },
+    #{ tiktok = "https://www.tiktok.com/@monsieur.boivin" },
     { pinterest = "https://fr.pinterest.com/MonsieurBoivin/_saved/" }
   
   ]
