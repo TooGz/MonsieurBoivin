@@ -13,7 +13,7 @@ ShowBreadCrumbs: false
 Découvrez une petite perle de logiciel retrogaming sur Mac: **OpenEmu**
 <!--more-->
 
-# Retour en force du rétrogaming
+## Retour en force du rétrogaming
 
 Je ne sais pas pour vous, mais pour ma part, ces derniers temps, je suis a fond sur le rétrogaming. Rejouer aux jeux qui ont bercés mon enfance est un vrai plaisir, décuplé par la simplicité d'**OpenEmu**.
 
@@ -31,7 +31,7 @@ La version stable de l'émulateur comprends déjà un bon nombre d'émulateurs:
   * TurboGraphx-16
   * Virtual Boy
 
-# OpenEmu: la simplicité comme philosophie
+## OpenEmu: la simplicité comme philosophie
 
 Vous trouverez sur [OpenEmu.org][lnk-1] le logiciel qui est disponible pour **OS X** seulement.
 
@@ -45,7 +45,7 @@ Au niveau des options, c'est la même chose, tout ou presque est géré en inter
 
 Si **OpenEmu** n'est disponible que pour les accrocs du rétrogaming possédant un Mac, c'est qu'il utilise largement les technologies d'**OS X**. La présentation *Coverflow* des jeux l'illustre clairement. Un portage Windows ou Linux n'est pas a l'ordre du jour selon *[David McLeod][lnk-2]*, L'homme à l'origine du projet (accessoirement Directeur du design de **Twitch**).
 
-# A fond les manettes !
+## A fond les manettes !
 
 ![OpenEmu - Gameboy Controller Preferences][img-3]
 
