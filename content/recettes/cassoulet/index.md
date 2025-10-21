@@ -6,7 +6,7 @@ layout: "recette-single"
 type: "recette-single"
 date: 2025-02-28
 categories: ["🔥 Kamado & Cuissons feu"]
-tags: ["kamado", "cuisson indirecte", "fumage", "grillade"]
+tags: ["kamado", "cassoulet", "cuisson indirecte", "fumage", "poulet", "hiver"]
 cooking_tech: ["cuisson indirecte", "fumage", "grill"]
 difficulty: "Moyen"
 servings: "6"

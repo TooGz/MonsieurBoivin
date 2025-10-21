@@ -1,40 +1,10 @@
 ---
-# 🍽️ CATEGORIES DISPONIBLES :
-# 🥗 Entrées & Apéros
-# 🍝 Plats & Accompagnements
-# 🍰 Desserts & Goûter
-# 🔥 Kamado & Cuissons feu
-# 🧂 Sauces, Pâtes & Marinades
-
-# ------------------------------------------------------------------------------
-
-# 🏷️ TAGS RECOMMANDÉS :
-
-# 🔥 Type de cuisson / Matériel
-#   four, poêle, plancha, kamado, cocotte, vapeur, mixeur, grill
-
-# 🧂 Ingrédient principal
-#   poulet, bœuf, porc, poisson, saumon, thon, œuf, chocolat,
-#   banane, légumes, courgette, pomme, tomate, fromage
-
-# ⏱️ Temps & difficulté
-#   rapide, facile, express, 15min, long, week-end, préparation-avance
-
-# 🌿 Style / régime
-#   végétarien, végétalien, healthy, comfort-food, classique, traditionnel, fait-maison
-
-# 🎉 Contexte / ambiance
-#   famille, enfants, amis, fêtes, repas-du-soir, apéro, brunch, dîner
-
-# 🌦️ Saison / occasion
-#   été, printemps, automne, hiver, Noël, Pâques, été-2025
-
 title: "Cookies Boivin Family Edition"
 description: "La recette des fameux cookies de la famille Boivin !"
 slug: "cookies-boivin-family-edition"
 date: 2025-02-28
 categories: ["🍰 Desserts & Goûter"]
-tags: ["four","rapide","famille","enfants"]
+tags: ["cookies", "four", "rapide", "facile", "famille", "enfants"]
 difficulty: "Facile"
 servings: "6"
 prep_time: "15 min"

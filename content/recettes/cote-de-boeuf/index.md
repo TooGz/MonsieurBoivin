@@ -4,8 +4,8 @@ description: "Une côte de bœuf juteuse, parfaitement saisie sur le Kamado Big 
 slug: "cote-de-boeuf-kamado"
 layout: "recette-single"
 date: 2025-02-28
-categories: ["Viande", "Grillade"]
-tags: ["boeuf", "grillade", "kamado", "bbq"]
+categories: ["🔥 Kamado & Cuissons feu"]
+tags: ["bœuf", "côte de bœuf", "kamado", "grill", "week-end", "facile"]
 difficulty: "Intermédiaire"
 servings: 2
 prep_time: "15 min"

@@ -4,8 +4,8 @@ description: "Une vinaigrette maison rapide, équilibrée et savoureuse, parfait
 slug: "vinaigrette-tupperware"
 layout: "recette-single"
 date: 2025-02-28
-categories: ["Salé"]
-tags: ["vinaigrette", "sauce", "classique", "salade", "rapide"]
+categories: ["🧂 Sauces, Pâtes & Marinades"]
+tags: ["vinaigrette", "sauce", "rapide", "facile", "classique", "fait-maison"]
 difficulty: "Facile"
 servings: "1 pot (environ 500 mL)"
 prep_time: "5 min"
