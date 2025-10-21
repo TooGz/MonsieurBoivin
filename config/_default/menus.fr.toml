@@ -18,12 +18,12 @@
 [[main]]
   name = "La Cuisine"
   pageRef = "recettes"
-  weight = 5
+  weight = 10
 
 [[main]]
   name = "L'Atelier de Michel"
   pageRef = "atelier"
-  weight = 10
+  weight = 15
 
 # [[main]]
 #   identifier = "instagram"
