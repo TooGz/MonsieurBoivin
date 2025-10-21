@@ -8,7 +8,7 @@ title = "MonsieurBoivin.fr"
   isoCode = "fr"
   rtl = false
   dateFormat = "2 January 2006"
-  logo = "img/MonsieurBoivin.webp"
+  logo = "img/MonsieurBoivin.png"
   description = "Mon petit bordel sur le net !"
 
 [params.author]
