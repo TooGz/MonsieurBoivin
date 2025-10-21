@@ -107,6 +107,9 @@ Impact : 250–400
 → seuil optimal ≈ 100–120
 ```
 
+Je reviendrai là-dessus dans un prochain article, une fois les composants reçus et les premiers tests réalisés.
+
+
 ---
 
 ## Points clés retenus
