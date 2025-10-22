@@ -1,6 +1,7 @@
 ---
 title: "Capteurs Piézo et Détection de Vibrations"
 description: "Étude et recherches sur l’utilisation des capteurs piézoélectriques pour la détection de choc et de vibration. Recherches, schéma de câblage, composants, filtrage et test sur ESP32 + MCP3008."
+author: "Monsieur Boivin"
 slug: "capteurs-piezo-detection-vibration"
 date: 2025-10-21
 categories: ["Électronique"]
