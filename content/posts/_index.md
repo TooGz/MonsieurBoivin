@@ -2,9 +2,9 @@
 title: "Articles"
 description: "Découvrez tous les articles publiés sur MonsieurBoivin.fr : artisanat, électronique, photo, DIY, menuiserie, et bien plus."
 cascade:
-  showDate: false
-  showAuthor: false
-  invertPagination: false
+  showDate: true
+  showAuthor: true
+  invertPagination: true
 ---
 
 {{< lead >}}

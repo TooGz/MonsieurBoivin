@@ -8,11 +8,13 @@ draft: false
 # Navigation & tri (section list)
 weight: 0
 # Si ton thème le supporte (Stack/Blowfish), affiche la liste en ordre chronologique
-invertPagination: false
-
+cascade:
+  showDate: true
+  showAuthor: true
+  invertPagination: true
 # Affichage (section)
 ShowToc: false
-showDate: false
+showDate: true
 showAuthor: true
 showReadingTime: false
 showTaxonomies: false

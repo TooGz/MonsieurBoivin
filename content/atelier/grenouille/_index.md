@@ -14,7 +14,7 @@ tags: [
 series: ["Grenouille 3.0"]
 series_order: 0
 cascade:
-  showDate: false
+  showDate: true
   showAuthor: true
   invertPagination: true
 ---
