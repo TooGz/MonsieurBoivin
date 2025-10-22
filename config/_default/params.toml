@@ -13,7 +13,7 @@ enableA11y = false
 enableSearch = true
 enableCodeCopy = true
 
-replyByEmail = false
+replyByEmail = true
 
 mainSections = ["posts"]
 # robots = ""

@@ -13,13 +13,13 @@ title = "MonsieurBoivin.fr"
 
 [params.author]
   name = "Monsieur Boivin"
-  email = ""
+  email = "contact@monsieurboivin.fr"
   image = "img/MonsieurBoivin.png"
   headline = "Bienvenue chez moi !"
   bio = "Mon petit bordel sur le net"
   links = [
     { instagram = "https://instagram.com/toogz" },
     #{ tiktok = "https://www.tiktok.com/@monsieur.boivin" },
-    { pinterest = "https://fr.pinterest.com/MonsieurBoivin/_saved/" }
+    { pinterest = "https://fr.pinterest.com/MonsieurBoivin/_saved/"}
   
   ]
