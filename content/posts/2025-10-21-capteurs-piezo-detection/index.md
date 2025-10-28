@@ -130,6 +130,10 @@ Je reviendrai là-dessus dans un prochain article, une fois les composants reçu
 
 ## Ressources et documentation
 
+{{< youtube sqHJ9tDC9IM >}}
+{{< youtube N831F3qVw-4 >}}
+{{< youtube egLA0GgF3xw >}}
+
 - [Adafruit MCP3008 Library](https://github.com/adafruit/Adafruit_MCP3008)
 - [MCP3008 Datasheet](https://cdn-shop.adafruit.com/datasheets/MCP3008.pdf)
 - [Effet Piézoélectrique – Wikipédia](https://fr.wikipedia.org/wiki/Électrostriction)  
