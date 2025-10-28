@@ -41,16 +41,7 @@
     {{ end }}
 
     <!-- Bloc infos -->
-    <div class="recette-single__overview">
-      <section class="recette-single__section">
-        <ul class="recette-single__info-list">
-          <li class="recette-single__info-item">{{ default "Non précisé" .Params.total_time }}</li>
-          <li class="recette-single__info-item">{{ default "Non précisé" .Params.cook_time }}</li>
-          <li class="recette-single__info-item">{{ default "Non précisé" .Params.rest_time }}</li>
-          <li class="recette-single__info-item">{{ default "Non précisé" .Params.servings }}</li>
-          <li class="recette-single__info-item">{{ default "Non précisé" .Params.difficulty }}</li>
-        </ul>
-      </section>
+    {{ partial "recipes/info-box.html" . }}
 
       <!-- Températures internes -->
       {{ if .Params.internal_temps }}
