@@ -1,0 +1,29 @@
+/* Pleine largeur uniquement quand une galerie Blowfish est présente */
+.max-w-prose {
+  max-width: 100% !important; /* écrase max-w-prose */
+}
+
+/* LANDING */
+
+.landing {
+  &__container { max-width: 1040px; margin: 0 auto; padding: 1.5rem; }
+  &__hero { padding: 4rem 0 2rem; text-align: center; }
+  &__title { font-size: clamp(2rem, 5vw, 3rem); margin: .5rem 0; }
+  &__subtitle { opacity: .8; max-width: 70ch; margin: 0 auto 1.5rem; }
+  &__cta { display:flex; gap: .75rem; justify-content:center; flex-wrap:wrap; }
+  &__logos { display:flex; gap:1.5rem; justify-content:center; align-items:center; opacity:.8; margin-top:1rem; flex-wrap:wrap; }
+  &__section { padding: 3rem 0; }
+  &__grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:1rem; }
+  &__pricing { display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
+}
+.btn { display:inline-block; padding:.8rem 1.1rem; border-radius:.6rem; text-decoration:none; border:1px solid currentColor; }
+.btn--primary { color: #fff; background: var(--color-primary, #0ea5e9); border-color: transparent; }
+.btn--ghost { background: transparent; }
+.card { border: 1px solid var(--color-border, rgba(125,125,125,.2)); border-radius: .8rem; padding: 1rem; background: var(--card-bg, rgba(255,255,255,.02)); }
+.feature__icon { font-size:1.6rem; }
+.pricing--highlighted { border-color: var(--color-primary, #0ea5e9); box-shadow: 0 0 0 2px color-mix(in oklab, var(--color-primary, #0ea5e9) 30%, transparent); }
+.faq__item { border:1px solid var(--color-border, rgba(125,125,125,.2)); border-radius:.6rem; padding:.75rem 1rem; margin:.5rem 0; }
+.form label { display:block; margin:.5rem 0; }
+.form input, .form textarea { width:100%; padding:.6rem .7rem; border-radius:.5rem; border:1px solid var(--color-border, rgba(125,125,125,.25)); }
+.form__note { font-size:.9rem; opacity:.8; }
+.eyebrow { text-transform:uppercase; letter-spacing:.08em; font-size:.8rem; opacity:.8; }

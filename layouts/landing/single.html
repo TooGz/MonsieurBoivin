@@ -1,0 +1,165 @@
+{{ define "main" }}
+{{/* Masque header/footer si ton thème les inclut via baseof */}}
+<style>
+  /* fallback si thème ajoute header/footer par défaut */
+  header.site-header, footer.site-footer { display:none; }
+</style>
+
+<article class="landing">
+  {{/* HERO */}}
+  <section class="landing__hero">
+    <div class="landing__container">
+      {{ with .Params.hero }}
+        {{ if .eyebrow }}<p class="eyebrow">{{ .eyebrow }}</p>{{ end }}
+        <h1 class="landing__title">{{ .heading | default .Page.Title }}</h1>
+        {{ if .subheading }}<p class="landing__subtitle">{{ .subheading }}</p>{{ end }}
+        <div class="landing__cta">
+          {{ if .primary_cta_text }}<a class="btn btn--primary" href="{{ .primary_cta_href }}" data-cta="primary">{{ .primary_cta_text }}</a>{{ end }}
+          {{ if .secondary_cta_text }}<a class="btn btn--ghost" href="{{ .secondary_cta_href }}" data-cta="secondary">{{ .secondary_cta_text }}</a>{{ end }}
+        </div>
+      {{ end }}
+      {{/* Logos de confiance */}}
+      {{ with .Params.social_proof.logos }}
+      <div class="landing__logos">
+        {{ range . }}<img loading="lazy" src="{{ . }}" alt="Mention/Logo">{{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </section>
+
+  {{/* FEATURES */}}
+  {{ with .Params.features }}
+  <section id="features" class="landing__section">
+    <div class="landing__container landing__grid">
+      {{ range . }}
+      <div class="card feature">
+        <div class="feature__icon">{{ .icon | safeHTML }}</div>
+        <h3 class="feature__title">{{ .title }}</h3>
+        <p class="feature__text">{{ .text }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* VIDEO (option) via ancre #video -> ajoute un shortcode vidéo si besoin) */}}
+  {{ if .Params.video }}
+  <section id="video" class="landing__section">
+    <div class="landing__container landing__video">
+      {{ partial "responsive-video.html" (dict "src" .Params.video) }}
+    </div>
+  </section>
+
+  {{ end }}
+
+  {{/* PRICING */}}
+  {{ with .Params.pricing }}
+  <section id="pricing" class="landing__section">
+    <div class="landing__container">
+      <h2>{{ .title | default "Tarifs" }}</h2>
+      <div class="landing__pricing">
+        {{ range .plans }}
+        <div class="card pricing{{ if .highlighted }} pricing--highlighted{{ end }}">
+          <h3 class="pricing__name">{{ .name }}</h3>
+          <div class="pricing__value">
+            <span class="pricing__price">{{ .price }}</span><span class="pricing__period">{{ .period }}</span>
+          </div>
+          <ul class="pricing__features">
+            {{ range .features }}<li>{{ . }}</li>{{ end }}
+          </ul>
+          <a class="btn btn--primary" href="{{ .cta_href }}" data-cta="pricing">{{ .cta_text }}</a>
+        </div>
+        {{ end }}
+      </div>
+      {{ if .note }}<p class="pricing__note">{{ .note }}</p>{{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* TESTIMONIALS */}}
+  {{ with .Params.testimonials }}
+  <section id="testimonials" class="landing__section">
+    <div class="landing__container landing__grid">
+      {{ range . }}
+      <figure class="card testimonial">
+        <blockquote>“{{ .quote }}”</blockquote>
+        <figcaption>— {{ .name }}, {{ .role }}</figcaption>
+      </figure>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* FAQ */}}
+  {{ with .Params.faq }}
+  <section id="faq" class="landing__section">
+    <div class="landing__container">
+      <h2>FAQ</h2>
+      <div class="faq">
+        {{ range . }}
+        <details class="faq__item">
+          <summary class="faq__q">{{ .q }}</summary>
+          <div class="faq__a">{{ .a | markdownify }}</div>
+        </details>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* FORMULAIRE (Netlify / Formspree / Custom) */}}
+  <section id="cta" class="landing__section">
+    <div class="landing__container">
+      <h2>Parle-moi de ton besoin</h2>
+      {{ $form := .Params.form }}
+      {{ if and $form (eq $form.provider "netlify") }}
+        <form name="{{ $form.id }}" method="POST" data-netlify="true" class="form">
+          <input type="hidden" name="form-name" value="{{ $form.id }}">
+          <label>Prénom <input name="name" required></label>
+          <label>Email <input type="email" name="email" required></label>
+          <label>Message <textarea name="message" rows="4" required></textarea></label>
+          <button class="btn btn--primary" type="submit">Envoyer</button>
+        </form>
+        <p class="form__note">{{ $form.success_message }}</p>
+      {{ else if and $form (eq $form.provider "formspree") }}
+        <form action="https://formspree.io/f/{{ $form.id }}" method="POST" class="form">
+          <label>Prénom <input name="name" required></label>
+          <label>Email <input type="email" name="email" required></label>
+          <label>Message <textarea name="message" rows="4" required></textarea></label>
+          <button class="btn btn--primary" type="submit">Envoyer</button>
+        </form>
+      {{ else }}
+        {{/* Hook custom */}}
+        {{ partial "forms/custom.html" . }}
+      {{ end }}
+    </div>
+  </section>
+
+  {{/* JSON-LD basique (Product/Offer) */}}
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Product",
+    "name": {{ .Title | jsonify }},
+    "description": {{ .Params.description | default .Summary | plainify | jsonify }},
+    "brand": {{ site.Title | jsonify }},
+    "offers": {
+      "@type":"AggregateOffer",
+      "priceCurrency":"EUR",
+      "lowPrice": {{ (index .Params.pricing.plans 0).price | replace "€" "" | jsonify }},
+      "offerCount": {{ len .Params.pricing.plans }}
+    }
+  }
+  </script>
+
+</article>
+
+{{/* GA4: évènements CTA (si gtag déjà chargé via ton thème) */}}
+<script>
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[data-cta],button[data-cta]');
+    if (!a) return;
+    if (window.gtag) gtag('event','click_cta',{label:a.getAttribute('data-cta'),href:a.getAttribute('href')});
+  });
+</script>
+{{ end }}
