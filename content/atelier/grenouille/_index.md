@@ -51,12 +51,13 @@ Plans, bois, assemblages, astuces, finitions...
 
 ## Électronique et intelligence du jeu
 
-Capteurs, câblage, LEDs, Ecran, firmware...  
+Capteurs, câblage, LEDs, Ecran, firmware...
 
-4. Intégration de l’électronique  
-5. Schéma & câblage  
-6. Firmware & logique du jeu  
-7. Fonctionnalités Avancées  
+4. [Étude des besoins hardware](./etude-hardware)
+5. Intégration de l’électronique  
+6. Schéma & câblage  
+7. Firmware & logique du jeu  
+8. Fonctionnalités Avancées  
 
 ---
 
@@ -64,16 +65,16 @@ Capteurs, câblage, LEDs, Ecran, firmware...
 
 Finitions, Tests, Calibration, Evolutions...
 
-08. Interface & Expérience de jeu  
-09. Finitions & Design Final  
-10. Tests, calibration & dépannage  
-11. Evolutions  
+09. Interface & Expérience de jeu  
+10. Finitions & Design Final  
+11. Tests, calibration & dépannage  
+12. Evolutions  
 
 ---
 
 ## Annexes
 
-12. Ressources & crédits  
-13. Annexes
+13. Ressources & crédits  
+14. Annexes
 
 ---
