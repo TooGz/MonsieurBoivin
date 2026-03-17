@@ -1,9 +1,11 @@
 {{/* layouts/partials/recipes/single.html */}}
 {{ $p := . }}
 
+<section class="max-w-full mt-6 prose dark:prose-invert">
 
-  <section class="max-w-full mt-6 prose dark:prose-invert">
-  {{/* TOC si activé */}}
+  {{/* =========================
+      TOC
+  ========================== */}}
   {{ $enableToc := site.Params.article.showTableOfContents | default false }}
   {{ $enableToc = $p.Params.showTableOfContents | default $enableToc }}
   {{ $showToc := and $enableToc (in $p.TableOfContents "<ul") }}
@@ -19,136 +21,337 @@
 
   <div class="min-w-0 min-h-0 max-w-fit">
 
-
-    {{/* Image hero : featured.* prioritaire */}}
+    {{/* =========================
+        IMAGE HERO
+    ========================== */}}
     {{ $img := "" }}
     {{ with $p.Resources.GetMatch "featured.*" }}
       {{ $img = ((.Fill "1200x800 center") | images.Quality 82).RelPermalink }}
     {{ else }}
-      {{ $img = (
-        $p.Params.featured |
-        default $p.Params.image |
-        default (index $p.Params.cover "image") |
-        default "img/recipe-default.jpg"
-      ) | relURL }}
-    {{ end }}
-    
-    <!-- Description -->
-    {{ if .Params.description }}
-    <section class="recette-single__section">
-      <p class="recette-single__description">{{ .Params.description }}</p>
-    </section>
+      {{ $fallbackImg := ($p.Params.featured | default $p.Params.image | default (index $p.Params.cover "image") | default "") }}
+      {{ if and $fallbackImg (ne (trim $fallbackImg " ") "") }}
+        {{ $img = $fallbackImg | relURL }}
+      {{ end }}
     {{ end }}
 
-    <!-- Bloc infos -->
-    {{ partial "recipes/info-box.html" . }}
-
-      <!-- Températures internes -->
-      {{ if .Params.internal_temps }}
-      <section class="recette-single__section">
-        <h2 class="recette-single__subtitle">Températures internes</h2>
-        <ul>
-          {{ range .Params.internal_temps }}
-          <li><strong>{{ .name }}</strong> : {{ .temperature }} <em>({{ .note }})</em></li>
-          {{ end }}
-        </ul>
-      </section>
-
-      <!-- Matériel -->
-      {{ if .Params.equipment }}
-      <section class="recette-single__section">
-        <h2 class="recette-single__subtitle">Matériel nécessaire</h2>
-        <ul>
-          {{ range .Params.equipment }}
-          <li>{{ . }}</li>
-          {{ end }}
-        </ul>
-      </section>
-      {{ end }}
-
-      {{ end }}
-    </div><!-- recette-single__overview -->
-
-
-
-    <!-- Ingrédients -->
-    <section class="recette-single__section">
-      <h2>Ingrédients</h2>
-      <div class="recette-single__ingredients">
-        {{ range .Params.ingredients }}
-        <h3 class="recette-single__ingredient-title">{{ .plat }}</h3>
-        <ul>
-          {{ range .items }}
-          <li>
-            {{ if .unit }}
-            {{ .quantity }} {{ .unit }}{{ if or (in (lower .name) "huile") (in (slice "a" "e" "i" "o" "u" "y") (substr (lower .name) 0 1)) }} d'{{ else }} de {{ end }}
-            {{ else }}
-            {{ .quantity }}
-            {{ end }}<strong> {{ title .name }}</strong>
-          </li>
-          {{ end }}
-        </ul>
-        {{ end }}
+    {{ if and $img (ne (trim $img " ") "") }}
+      <div class="recette-single__hero">
+        <img src="{{ $img }}" alt="{{ $p.Title }}" loading="lazy" />
       </div>
-    </section>
-
-    <!-- Mise en place -->
-    {{ if .Params.mise_en_place }}
-    <section class="recette-single__section">
-      <h2 class="recette-single__subtitle">Mise en place</h2>
-      <ol>
-        {{ range .Params.mise_en_place }}
-        <li>{{ . }}</li>
-        {{ end }}
-      </ol>
-    </section>
     {{ end }}
 
-    <!-- Préparation -->
-    {{ if .Params.preparation }}
-    <section class="recette-single__section">
-      <h2 class="recette-single__subtitle">Préparation</h2>
-      <ol class="recette-single__steps">
-        {{ range .Params.preparation }}
-        <li class="recette-single__step">{{ . }}</li>
-        {{ end }}
-      </ol>
-    </section>
-    {{ end }}
-
-    <!-- Cuisson -->
-    {{ if .Params.cooking }}
-    <section class="recette-single__section">
-      <h2 class="recette-single__subtitle">Cuisson</h2>
-      <p><strong>Type :</strong> {{ .Params.cooking.method }}</p>
-      <p><strong>Température :</strong> {{ .Params.cooking.temp }}</p>
-      {{ if .Params.cooking.airflow }}
-      <ul class="recette-single__airflow">
-        <li>Ventilation haute : {{ .Params.cooking.airflow.top_vent }}</li>
-        <li>Ventilation basse : {{ .Params.cooking.airflow.bottom_vent }}</li>
-      </ul>
+    {{/* =========================
+        DESCRIPTION
+    ========================== */}}
+    {{ with $p.Params.description }}
+      {{ if ne (trim . " ") "" }}
+        <section class="recette-single__section">
+          <p class="recette-single__description">{{ . }}</p>
+        </section>
       {{ end }}
-      <ol class="recette-single__steps">
-        {{ range .Params.cooking.steps }}
-        <li class="recette-single__step">{{ . }}</li>
-        {{ end }}
-      </ol>
-    </section>
     {{ end }}
 
-    <!-- Service -->
-    {{ if .Params.serving }}
-    <section class="recette-single__section">
-      <h2 class="recette-single__subtitle">Service</h2>
-      <ul>
-        {{ range .Params.serving }}
-        <li>{{ . }}</li>
+    {{/* =========================
+        INFOS
+    ========================== */}}
+    {{ partial "recipes/info-box.html" $p }}
+
+    {{/* =========================
+        TEMPÉRATURES INTERNES
+    ========================== */}}
+    {{ with $p.Params.internal_temps }}
+      {{ $hasInternalTemps := false }}
+      {{ range . }}
+        {{ if or .name .temperature .note }}
+          {{ $hasInternalTemps = true }}
         {{ end }}
-      </ul>
-    </section>
+      {{ end }}
+
+      {{ if $hasInternalTemps }}
+        <section class="recette-single__section">
+          <h2 class="recette-single__subtitle">Températures internes</h2>
+          <ul>
+            {{ range . }}
+              {{ $name := .name | default "" }}
+              {{ $temp := .temperature | default "" }}
+              {{ $note := .note | default "" }}
+              {{ if or $name $temp $note }}
+                <li>
+                  {{ if $name }}<strong>{{ $name }}</strong>{{ end }}
+                  {{ if and $name $temp }} : {{ end }}
+                  {{ if $temp }}{{ $temp }}{{ end }}
+                  {{ if $note }} <em>({{ $note }})</em>{{ end }}
+                </li>
+              {{ end }}
+            {{ end }}
+          </ul>
+        </section>
+      {{ end }}
     {{ end }}
 
+    {{/* =========================
+        MATÉRIEL
+    ========================== */}}
+    {{ with $p.Params.equipment }}
+      {{ $hasEquipment := false }}
+      {{ range . }}
+        {{ if and . (ne (trim . " ") "") }}
+          {{ $hasEquipment = true }}
+        {{ end }}
+      {{ end }}
+
+      {{ if $hasEquipment }}
+        <section class="recette-single__section">
+          <h2 class="recette-single__subtitle">Matériel nécessaire</h2>
+          <ul>
+            {{ range . }}
+              {{ if and . (ne (trim . " ") "") }}
+                <li>{{ . }}</li>
+              {{ end }}
+            {{ end }}
+          </ul>
+        </section>
+      {{ end }}
+    {{ end }}
+
+    {{/* =========================
+        INGRÉDIENTS
+    ========================== */}}
+    {{ with $p.Params.ingredients }}
+      {{ $hasIngredients := false }}
+      {{ range . }}
+        {{ range .items }}
+          {{ if and .name (ne (trim .name " ") "") }}
+            {{ $hasIngredients = true }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+      {{ if $hasIngredients }}
+        <section class="recette-single__section">
+          <h2>Ingrédients</h2>
+          <div class="recette-single__ingredients">
+            {{ range . }}
+              {{ $groupTitle := .plat | default "" }}
+              {{ $hasGroupItems := false }}
+
+              {{ range .items }}
+                {{ if and .name (ne (trim .name " ") "") }}
+                  {{ $hasGroupItems = true }}
+                {{ end }}
+              {{ end }}
+
+              {{ if $hasGroupItems }}
+                {{ if and $groupTitle (ne (trim $groupTitle " ") "") }}
+                  <h3 class="recette-single__ingredient-title">{{ $groupTitle }}</h3>
+                {{ end }}
+
+                <ul>
+                  {{ range .items }}
+                    {{ $name := .name | default "" }}
+                    {{ $quantity := .quantity | default "" }}
+                    {{ $unit := .unit | default "" }}
+
+                    {{ if and $name (ne (trim $name " ") "") }}
+                      <li>
+                        {{ if and $quantity (ne (printf "%v" $quantity) "") }}
+                          <strong>{{ $quantity }}</strong>
+                        {{ end }}
+
+                        {{ if and $unit (ne (trim $unit " ") "") }}
+                          {{ if and $quantity (ne (printf "%v" $quantity) "") }} {{ end }}
+                          <strong>{{ $unit }}</strong>
+                        {{ end }}
+
+                        {{ if or
+                          (and $quantity (ne (printf "%v" $quantity) ""))
+                          (and $unit (ne (trim $unit " ") ""))
+                        }}
+                          {{ if or
+                            (in (lower $name) "huile")
+                            (in (slice "a" "e" "i" "o" "u" "y") (substr (lower $name) 0 1))
+                          }}
+                            d'
+                          {{ else }}
+                            de
+                          {{ end }}
+                        {{ end }}
+
+                        <strong>{{ title $name }}</strong>
+                      </li>
+                    {{ end }}
+                  {{ end }}
+                </ul>
+              {{ end }}
+            {{ end }}
+          </div>
+        </section>
+      {{ end }}
+    {{ end }}
+
+    {{/* =========================
+        MISE EN PLACE
+    ========================== */}}
+    {{ with $p.Params.mise_en_place }}
+      {{ $hasMiseEnPlace := false }}
+      {{ range . }}
+        {{ if and . (ne (trim . " ") "") }}
+          {{ $hasMiseEnPlace = true }}
+        {{ end }}
+      {{ end }}
+
+      {{ if $hasMiseEnPlace }}
+        <section class="recette-single__section">
+          <h2 class="recette-single__subtitle">Mise en place</h2>
+          <ol>
+            {{ range . }}
+              {{ if and . (ne (trim . " ") "") }}
+                <li>{{ . }}</li>
+              {{ end }}
+            {{ end }}
+          </ol>
+        </section>
+      {{ end }}
+    {{ end }}
+
+    {{/* =========================
+        PRÉPARATION
+    ========================== */}}
+    {{ with $p.Params.preparation }}
+      {{ $hasPreparation := false }}
+      {{ range . }}
+        {{ if and . (ne (trim . " ") "") }}
+          {{ $hasPreparation = true }}
+        {{ end }}
+      {{ end }}
+
+      {{ if $hasPreparation }}
+        <section class="recette-single__section">
+          <h2 class="recette-single__subtitle">Préparation</h2>
+          <ol class="recette-single__steps">
+            {{ range . }}
+              {{ if and . (ne (trim . " ") "") }}
+                <li class="recette-single__step">{{ . }}</li>
+              {{ end }}
+            {{ end }}
+          </ol>
+        </section>
+      {{ end }}
+    {{ end }}
+
+    {{/* =========================
+        CUISSON
+    ========================== */}}
+    {{ with $p.Params.cooking }}
+      {{ $method := .method | default "" }}
+      {{ $temp := .temp | default "" }}
+
+      {{ $topVent := "" }}
+      {{ $bottomVent := "" }}
+      {{ with .airflow }}
+        {{ $topVent = .top_vent | default "" }}
+        {{ $bottomVent = .bottom_vent | default "" }}
+      {{ end }}
+
+      {{ $hasCookingSteps := false }}
+      {{ with .steps }}
+        {{ range . }}
+          {{ if and . (ne (trim . " ") "") }}
+            {{ $hasCookingSteps = true }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+      {{ $hasCooking := or
+        (and $method (ne (trim $method " ") ""))
+        (and $temp (ne (trim $temp " ") ""))
+        (and $topVent (ne (trim $topVent " ") ""))
+        (and $bottomVent (ne (trim $bottomVent " ") ""))
+        $hasCookingSteps
+      }}
+
+      {{ if $hasCooking }}
+        <section class="recette-single__section">
+          <h2 class="recette-single__subtitle">Cuisson</h2>
+
+          {{ if and $method (ne (trim $method " ") "") }}
+            <p><strong>Type :</strong> {{ $method }}</p>
+          {{ end }}
+
+          {{ if and $temp (ne (trim $temp " ") "") }}
+            <p><strong>Température :</strong> {{ $temp }}</p>
+          {{ end }}
+
+          {{ if or
+            (and $topVent (ne (trim $topVent " ") ""))
+            (and $bottomVent (ne (trim $bottomVent " ") ""))
+          }}
+            <ul class="recette-single__airflow">
+              {{ if and $topVent (ne (trim $topVent " ") "") }}
+                <li>Ventilation haute : {{ $topVent }}</li>
+              {{ end }}
+              {{ if and $bottomVent (ne (trim $bottomVent " ") "") }}
+                <li>Ventilation basse : {{ $bottomVent }}</li>
+              {{ end }}
+            </ul>
+          {{ end }}
+
+          {{ with .steps }}
+            {{ if $hasCookingSteps }}
+              <ol class="recette-single__steps">
+                {{ range . }}
+                  {{ if and . (ne (trim . " ") "") }}
+                    <li class="recette-single__step">{{ . }}</li>
+                  {{ end }}
+                {{ end }}
+              </ol>
+            {{ end }}
+          {{ end }}
+        </section>
+      {{ end }}
+    {{ end }}
+
+    {{/* =========================
+        SERVICE
+    ========================== */}}
+    {{ with $p.Params.serving }}
+      {{ $hasServing := false }}
+      {{ range . }}
+        {{ if and . (ne (trim . " ") "") }}
+          {{ $hasServing = true }}
+        {{ end }}
+      {{ end }}
+
+      {{ if $hasServing }}
+        <section class="recette-single__section">
+          <h2 class="recette-single__subtitle">Service</h2>
+          <ul>
+            {{ range . }}
+              {{ if and . (ne (trim . " ") "") }}
+                <li>{{ . }}</li>
+              {{ end }}
+            {{ end }}
+          </ul>
+        </section>
+      {{ end }}
+    {{ end }}
+
+    {{/* =========================
+        CONTENU LIBRE DU FICHIER
+    ========================== */}}
+    {{ with $p.Content }}
+      {{ if ne (trim . " \n\r\t") "" }}
+        <section class="recette-single__section recette-single__content">
+          {{ . }}
+        </section>
+      {{ end }}
+    {{ end }}
+
+    {{/* =========================
+        PARTAGE + RELATED
+    ========================== */}}
     {{ partial "sharing-links.html" $p }}
     {{ partial "related.html" $p }}
+
   </div>
 </section>
