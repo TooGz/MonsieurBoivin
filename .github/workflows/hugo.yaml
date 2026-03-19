@@ -84,7 +84,6 @@ jobs:
             --minify \
             --panicOnWarning \
             --printPathWarnings \
-            --printUnusedTemplates \
             --baseURL "${{ steps.pages.outputs.base_url }}/" \
             --cacheDir "${{ runner.temp }}/hugo_cache"
       - name: Check internal links
