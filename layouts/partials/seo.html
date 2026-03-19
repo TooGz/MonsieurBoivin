@@ -5,7 +5,6 @@
 {{ with .Params.seo.meta_title }}
   {{ $metaTitle = . }}
 {{ else }}
-
   {{ $patterns := .Site.Params.seoPatterns }}
   {{ $title := .Title }}
   {{ $pattern := "" }}
@@ -24,7 +23,6 @@
   {{ else }}
     {{ $metaTitle = printf "%s | %s" $title $siteName }}
   {{ end }}
-
 {{ end }}
 
 <title>{{ $metaTitle }}</title>
@@ -34,23 +32,29 @@
 {{ with .Params.seo.meta_description }}
   {{ $metaDescription = . }}
 {{ else }}
+  {{ $descriptionPatterns := .Site.Params.seoDescriptions }}
 
   {{ if eq $section "recettes" }}
-    {{ $metaDescription = printf "Recette simple de %s : ingrédients, étapes détaillées et conseils pour réussir facilement." .Title }}
-
+    {{ with $descriptionPatterns.recettes }}
+      {{ $metaDescription = printf . $.Title }}
+    {{ end }}
   {{ else if eq $section "atelier" }}
-    {{ $metaDescription = printf "Projet %s détaillé étape par étape : conception, matériel et retour d’expérience." .Title }}
-
+    {{ with $descriptionPatterns.atelier }}
+      {{ $metaDescription = printf . $.Title }}
+    {{ end }}
   {{ else if eq $section "posts" }}
-    {{ $metaDescription = printf "%s expliqué simplement avec schéma et conseils pratiques." .Title }}
-
-  {{ else if .Description }}
-    {{ $metaDescription = .Description }}
-
-  {{ else }}
-    {{ $metaDescription = .Site.Params.description }}
+    {{ with $descriptionPatterns.posts }}
+      {{ $metaDescription = printf . $.Title }}
+    {{ end }}
   {{ end }}
 
+  {{ if not $metaDescription }}
+    {{ if .Description }}
+      {{ $metaDescription = .Description }}
+    {{ else }}
+      {{ $metaDescription = .Site.Params.description }}
+    {{ end }}
+  {{ end }}
 {{ end }}
 
 <meta name="description" content="{{ $metaDescription | plainify }}">
