@@ -159,12 +159,15 @@
          <div class="home-redesign__column-head">
            <h3>Les Recettes</h3>
            <a href="{{ "/recettes/" | relLangURL }}">Tout voir</a>
-         </div>
-         <div class="home-redesign__stack">
-           {{ range $featuredRecipes }}
-             </a>
-           {{ end }}
-         </div>
+        </div>
+        <div class="home-redesign__stack">
+          {{ range $featuredRecipes }}
+            <a class="home-redesign__mini-card" href="{{ .RelPermalink }}">
+              <strong>{{ .Title }}</strong>
+              {{ with .Description }}<span>{{ . }}</span>{{ end }}
+            </a>
+          {{ end }}
+        </div>
        </div>
  
        <div class="home-redesign__column">

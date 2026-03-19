@@ -69,8 +69,3 @@ googleAnalytics = "G-GPMJSYNKQK"
       name = 'fragmentrefs'
       type = 'fragments'
       weight = 10
-
-[params.seoPatterns]
-recettes_title = "%s – Recette facile & conseils"
-atelier_title = "%s – Projet DIY détaillé"
-tech_title = "%s – Guide clair & complet"
