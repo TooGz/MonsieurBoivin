@@ -82,8 +82,119 @@ jobs:
           hugo \
             --gc \
             --minify \
+            --panicOnWarning \
+            --printPathWarnings \
+            --printUnusedTemplates \
             --baseURL "${{ steps.pages.outputs.base_url }}/" \
             --cacheDir "${{ runner.temp }}/hugo_cache"
+      - name: Check internal links
+        env:
+          BASE_URL: ${{ steps.pages.outputs.base_url }}
+        run: |
+          node <<'EOF'
+          const fs = require("fs");
+          const path = require("path");
+
+          const publicDir = path.join(process.cwd(), "public");
+          const rawBaseUrl = process.env.BASE_URL || "/";
+          const basePath = new URL(rawBaseUrl, "https://example.com").pathname.replace(/\/$/, "");
+          const htmlFiles = [];
+          const brokenLinks = [];
+
+          function walk(dir) {
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+              const fullPath = path.join(dir, entry.name);
+              if (entry.isDirectory()) {
+                walk(fullPath);
+              } else if (entry.isFile() && entry.name.endsWith(".html")) {
+                htmlFiles.push(fullPath);
+              }
+            }
+          }
+
+          function normalizeTarget(rawTarget, currentFile) {
+            if (!rawTarget || rawTarget.startsWith("#")) return null;
+            if (/^(mailto:|tel:|data:|javascript:)/i.test(rawTarget)) return null;
+            if (/^https?:/i.test(rawTarget)) return null;
+            if (rawTarget.startsWith("//")) return null;
+
+            if (rawTarget.startsWith("/")) {
+              let sitePath = decodeURIComponent(rawTarget.split("#")[0].split("?")[0]);
+
+              if (basePath && sitePath.startsWith(`${basePath}/`)) {
+                sitePath = sitePath.slice(basePath.length);
+              } else if (basePath && sitePath === basePath) {
+                sitePath = "/";
+              }
+
+              return sitePath.replace(/^\/+/, "");
+            }
+
+            const currentUrl = new URL(`file://${currentFile.replace(/\\/g, "/")}`);
+            const resolved = new URL(rawTarget, currentUrl);
+
+            if (resolved.protocol !== "file:") return null;
+
+            let pathname = decodeURIComponent(resolved.pathname);
+            if (process.platform === "win32" && pathname.startsWith("/")) {
+              pathname = pathname.slice(1);
+            }
+
+            const relativePath = path.relative(publicDir, pathname);
+            if (relativePath.startsWith("..")) return `outside-public:${rawTarget}`;
+
+            return relativePath;
+          }
+
+          function targetExists(relativePath) {
+            const cleanPath = relativePath.split("#")[0].split("?")[0];
+            const fullPath = path.join(publicDir, cleanPath);
+
+            if (fs.existsSync(fullPath)) {
+              const stat = fs.statSync(fullPath);
+              if (stat.isDirectory()) {
+                return fs.existsSync(path.join(fullPath, "index.html"));
+              }
+              return true;
+            }
+
+            if (!path.extname(fullPath)) {
+              return fs.existsSync(path.join(fullPath, "index.html")) || fs.existsSync(`${fullPath}.html`);
+            }
+
+            return false;
+          }
+
+          walk(publicDir);
+
+          const linkPattern = /\b(?:href|src)=["']([^"'#][^"']*)["']/gi;
+
+          for (const htmlFile of htmlFiles) {
+            const html = fs.readFileSync(htmlFile, "utf8");
+            for (const match of html.matchAll(linkPattern)) {
+              const rawTarget = match[1].trim();
+              const normalized = normalizeTarget(rawTarget, htmlFile);
+
+              if (!normalized) continue;
+              if (normalized.startsWith("outside-public:") || !targetExists(normalized)) {
+                brokenLinks.push({
+                  file: path.relative(process.cwd(), htmlFile),
+                  target: rawTarget,
+                });
+              }
+            }
+          }
+
+          if (brokenLinks.length > 0) {
+            console.error("Broken internal links detected:");
+            for (const issue of brokenLinks) {
+              console.error(`- ${issue.file} -> ${issue.target}`);
+            }
+            process.exit(1);
+          }
+
+          console.log(`Checked ${htmlFiles.length} HTML files: no broken internal links found.`);
+          EOF
       - name: Cache save
         id: cache-save
         uses: actions/cache/save@v4
