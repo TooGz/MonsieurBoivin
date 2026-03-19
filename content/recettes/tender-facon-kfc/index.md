@@ -141,4 +141,4 @@ serving:
 seo:
 meta_title: "Tenders de Poulet Ultra Croustillants façon KFC - Recette Signature Boivin"
 meta_description: "Recette de tenders de poulet croustillants avec technique de double cuisson comme en restaurant. Résultat ultra juteux et croustillant garanti."
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
