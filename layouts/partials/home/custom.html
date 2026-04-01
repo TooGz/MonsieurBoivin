@@ -1,7 +1,7 @@
  {{ $featuredPosts := first 3 (where site.RegularPages "Section" "posts") }}
  {{ $featuredRecipes := first 3 (where site.RegularPages "Section" "recettes") }}
  {{ $featuredWorkshop := first 3 (where site.RegularPages "Section" "atelier") }}
- {{ $recentPages := first 8 site.RegularPages }}
+ {{ $recentPages := first 6 site.RegularPages }}
 {{ $starterContent := slice }}
 {{ with site.GetPage "/recettes/tender-facon-kfc" }}{{ $starterContent = $starterContent | append . }}{{ end }}
 {{ with site.GetPage "/posts/esp32-pinout" }}{{ $starterContent = $starterContent | append . }}{{ end }}
@@ -133,11 +133,11 @@
    </div>
  
    <section class="home-redesign__section">
-     <div class="home-redesign__section-heading">
+ <!--     <div class="home-redesign__section-heading">
        <div>
         <p class="home-redesign__eyebrow">Explorer par univers</p>
        </div>
-     </div>
+     </div> -->
  
      <div class="home-redesign__content-columns">
        <div class="home-redesign__column">
@@ -147,10 +147,7 @@
          </div>
          <div class="home-redesign__stack">
            {{ range $featuredPosts }}
-             <a class="home-redesign__mini-card" href="{{ .RelPermalink }}">
-               <strong>{{ .Title }}</strong>
-               {{ with .Description }}<span>{{ . }}</span>{{ end }}
-             </a>
+             {{ partial "home/mini-card.html" (dict "page" .) }}
            {{ end }}
          </div>
        </div>
@@ -162,10 +159,7 @@
         </div>
         <div class="home-redesign__stack">
           {{ range $featuredRecipes }}
-            <a class="home-redesign__mini-card" href="{{ .RelPermalink }}">
-              <strong>{{ .Title }}</strong>
-              {{ with .Description }}<span>{{ . }}</span>{{ end }}
-            </a>
+            {{ partial "home/mini-card.html" (dict "page" .) }}
           {{ end }}
         </div>
        </div>
@@ -177,10 +171,7 @@
          </div>
          <div class="home-redesign__stack">
            {{ range $featuredWorkshop }}
-             <a class="home-redesign__mini-card" href="{{ .RelPermalink }}">
-               <strong>{{ .Title }}</strong>
-               {{ with .Description }}<span>{{ . }}</span>{{ end }}
-             </a>
+             {{ partial "home/mini-card.html" (dict "page" .) }}
            {{ end }}
          </div>
        </div>
@@ -197,9 +188,7 @@
      <div class="home-redesign__recent-grid">
        {{ range $recentPages }}
          <article class="home-redesign__recent-card">
-           <p class="home-redesign__meta">{{ .Section | humanize }}</p>
-           <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-           {{ with .Description }}<p>{{ . }}</p>{{ end }}
+           {{ partial "home/mini-card.html" (dict "page" . "recent" true) }}
          </article>
        {{ end }}
      </div>

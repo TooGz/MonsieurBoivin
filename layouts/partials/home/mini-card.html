@@ -1,0 +1,51 @@
+{{ $page := .page }}
+{{ $disableImageOptimization := $page.Site.Params.disableImageOptimization | default false }}
+{{ $featured := false }}
+
+{{ if not ($page.Params.hideFeatureImage | default false) }}
+  {{ $images := $page.Resources.ByType "image" }}
+  {{ $featured = $images.GetMatch "*feature*" }}
+  {{ if not $featured }}{{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" }}{{ end }}
+  {{ if and (not $featured) (gt (len $images) 0) }}{{ $featured = index $images 0 }}{{ end }}
+
+  {{ if not $featured }}
+    {{ $paramImage := $page.Params.featured | default $page.Params.featureimage | default $page.Params.image | default (index $page.Params.cover "image") | default "" }}
+    {{ if $paramImage }}
+      {{ if or (strings.HasPrefix $paramImage "http:") (strings.HasPrefix $paramImage "https:") }}
+        {{ $featured = resources.GetRemote $paramImage }}
+      {{ else }}
+        {{ with $page.Resources.GetMatch $paramImage }}
+          {{ $featured = . }}
+        {{ else }}
+          {{ with resources.Get $paramImage }}
+            {{ $featured = . }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<a class="home-redesign__mini-card{{ if .recent }} home-redesign__mini-card--recent{{ end }}" href="{{ $page.RelPermalink }}">
+  {{ with $featured }}
+    {{ $img := . }}
+    {{ if and (not $disableImageOptimization) (ne .MediaType.SubType "svg") }}
+      {{ $img = .Fill "640x360 center" }}
+    {{ end }}
+    <div class="home-redesign__mini-card-media">
+      <img
+        class="home-redesign__mini-card-image"
+        src="{{ $img.RelPermalink }}"
+        alt="{{ $page.Params.image_alt | default (index $page.Params.cover "alt") | default $page.Title }}">
+    </div>
+  {{ end }}
+  <div class="home-redesign__mini-card-body">
+    {{ if .recent }}
+      <p class="home-redesign__meta">{{ $page.Section | humanize }}</p>
+      <h3>{{ $page.Title }}</h3>
+    {{ else }}
+      <strong>{{ $page.Title }}</strong>
+    {{ end }}
+    {{ with $page.Description }}<span>{{ . }}</span>{{ end }}
+  </div>
+</a>
