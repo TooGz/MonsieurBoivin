@@ -74,13 +74,12 @@ Teste les deux, et vois ce qui te met le plus à l’aise selon les situations.
 
 Tu veux un dernier conseil ? **Shoote beaucoup**. Ne te bride pas. Plus tu déclenches, plus tu multiplies les chances de capter le moment parfait. Et avec l’habitude, tu auras besoin de moins de photos pour en sortir une bonne.
 
-N'hésite pas aussi a jeter un oeil sur ma série d'articles sur **[les bases de la photo][serie-photo]** !
+N’hésite pas non plus à jeter un œil à ma série d’articles sur **[les bases de la photo][serie-photo]** !
 
 Surtout, amuse-toi. La photo de concert, c’est une affaire de technique, oui, mais aussi de **sensibilité et d’anticipation**. Rentre dans l’énergie du show, ressens le truc… et déclenche quand tu le sens.
 
-[sensibilité]: ../bases-photo-sensibilite
 [ouverture]: ../bases-photo-ouverture
 [obturation]: ../bases-photo-vitesse-obturation
 [sensibilité]: ../bases-photo-sensibilite
 [bokeh]: ../profondeur-de-champ-et-bokeh
-[serie-photo]: /series/les-bases-de-la-photo
+[serie-photo]: /series/les-bases-de-la-photo/

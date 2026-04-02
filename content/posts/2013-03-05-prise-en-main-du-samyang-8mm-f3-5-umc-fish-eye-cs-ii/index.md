@@ -1,19 +1,26 @@
 ---
-title: Prise en main du Samyang 8mm f/3.5 UMC Fish-Eye CS II
+title: "Prise en main du Samyang 8mm f/3.5 UMC Fish-Eye CS II"
+date: 2013-03-05
 authors: ["monsieur-boivin"]
+description: "Retour d’usage sur le Samyang 8mm fish-eye f/3.5 : prise en main, rendu, limites et premières impressions sur APS-C."
+categories:
+  - Photo
+tags:
+  - fish-eye
+  - objectif
+  - test matériel
 layout: post
 permalink: /prise-en-main-du-samyang-8mm-f3-5-umc-fish-eye-cs-ii/
+showTableOfContents: false
 draft: true
 
 ---
-Le **fish-eye** m’a toujours attiré et cela fait un moment que j’envisage l’achat d’un objectif méga-ultra-grand-angle ! C’est vrai que le rendu “œil de poisson” est particulier mais aussi très “délire”. Son usage spécifique rend cet **objectif** utile dans certaines circonstances et totalement inapproprié dans d’autre.
+Le **fish-eye** m’a toujours attiré et cela fait un moment que j’envisage l’achat d’un objectif méga-ultra-grand-angle ! C’est vrai que le rendu “œil de poisson” est particulier mais aussi très “délire”. Son usage spécifique rend cet **objectif** utile dans certaines circonstances et totalement inapproprié dans d’autres.
 
-En fait, il est parfait dans pour donner un style du genre “vidéo de skate”. Le **Fish-Eye** permet aussi des prises de vue bien fun. En effet la distorsion optique du **Fish-Eye** est assumé et il ne faut pas se priver de jouer avec !  
+En fait, il est parfait pour donner un style du genre “vidéo de skate”. Le **Fish-Eye** permet aussi des prises de vue bien fun. En effet, la distorsion optique du **Fish-Eye** est assumée et il ne faut pas se priver de jouer avec !  
 Dans certains cas il peut aussi faire des ravages en architecture.
 
-Trêves de bla bla et passons aux choses sérieuses avec la prise en main de ce **Fish-Eye** **Samyang**!  
-R  
-[photos de concert]: /portfolio “Photos de concert par TooGz”
+Trêve de bla-bla et passons aux choses sérieuses avec la prise en main de ce **Fish-Eye Samyang** !
 
 ## Informations techniques
 
@@ -31,12 +38,12 @@ Sensation renforcée par l’équipement qui se trouve dans la boîte. En effet,
 
 ## Utilisation
 
-L&rsquo;utilisation d&rsquo;un objectif comme le **Samyang** et ses 8mm de focale est très simple, et le fait qu&rsquo;il soit entièrement manuel n&rsquo;est pas un handicap. En effet, avec ce genre d&rsquo;**objectif**, vous caler l&rsquo;**ouverture** a f/8, mise au point a l&rsquo;infini et hop, tout est net. La bague de mise au point est de bonne facture mais est quasi inutile. La mise au point étant difficile a faire et comme vu avant quasi inutile.  
+L’utilisation d’un objectif comme le **Samyang** et ses 8 mm de focale est très simple, et le fait qu’il soit entièrement manuel n’est pas un handicap. En effet, avec ce genre d’**objectif**, vous calez l’**ouverture** à f/8, la mise au point à l’infini et hop, tout est net. La bague de mise au point est de bonne facture mais devient quasi inutile. La mise au point étant difficile à faire et, comme vu plus haut, presque superflue.  
 <img class="aligncenter size-medium wp-image-1994" alt="samyang_8mm_fisheye-10" src="http://freakyfresh.fr/wp/wp-content/uploads/2013/02/samyang_8mm_fisheye-10-623x934.jpg" width="623" height="934" />
 
 ## Conclusion
 
-Pour à peine plus de 300€ en neuf, on en a (vraiment) pour son argent. La piqué est très bon pour se genre d&rsquo;**objectif** jusque sur les bords qui sont normalement plus mous. Bref, si vous recherchez un **Fish-Eye** pour pas trop cher, foncez sans hésiter !
+Pour à peine plus de 300 € en neuf, on en a vraiment pour son argent. Le piqué est très bon pour ce genre d’**objectif**, jusque sur les bords qui sont normalement plus mous. Bref, si vous recherchez un **Fish-Eye** pour pas trop cher, foncez sans hésiter !
 
 ## Place aux photos
 

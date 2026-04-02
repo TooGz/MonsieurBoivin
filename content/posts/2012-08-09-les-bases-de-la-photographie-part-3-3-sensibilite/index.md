@@ -2,6 +2,7 @@
 title: "Les bases de la photographie [PART 3/3] : la sensibilité ISO"
 date: 2012-08-09
 updated: 2025-10-10
+authors: ["monsieur-boivin"]
 slug: "bases-photo-sensibilite"
 categories:
   - Photo
@@ -116,7 +117,6 @@ Observe comment chaque réglage influence ton rendu, ta lumière, et l’ambianc
 C’est maintenant **toi** qui décides de ton image - pas ton appareil 😉
 
 
-[sensibilité]: ../bases-photo-sensibilite
 [ouverture]: ../bases-photo-ouverture
 [obturation]: ../bases-photo-vitesse-obturation
 [sensibilité]: ../bases-photo-sensibilite

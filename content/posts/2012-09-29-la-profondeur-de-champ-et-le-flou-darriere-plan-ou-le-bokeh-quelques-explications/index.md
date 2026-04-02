@@ -2,6 +2,7 @@
 title: "Profondeur de champ et bokeh : comprendre (enfin) le flou d’arrière-plan"
 date: 2012-09-23
 updated: 2025-10-10
+authors: ["monsieur-boivin"]
 slug: "profondeur-de-champ-et-bokeh"
 categories:
   - Photo
@@ -29,7 +30,7 @@ Cela signifie que seule une fine zone de ton image sera nette — le reste sera 
 
 👉 Le chiffre du “f” est un peu trompeur : plus il est petit, plus l’ouverture est grande.
 
-Voi l'article dédié sur l'**[ouverture][ouverture]**
+Voir l’article dédié sur l’**[ouverture][ouverture]**.
 
 **Exemples**
 
@@ -102,15 +103,14 @@ C’est en expérimentant que tu comprendras vraiment la magie de la **profondeu
 Tu veux aller encore plus loin ?  
 Essaie de jouer sur la **focale** : un téléobjectif (ex. 85mm ou 135mm) accentue naturellement le flou d’arrière-plan, même à ouverture moyenne.
 
-N'hésite pas aussi a jeter un oeil sur ma série d'articles sur **[les bases de la photo][serie-photo]** !
+N’hésite pas non plus à jeter un œil à ma série d’articles sur **[les bases de la photo][serie-photo]** !
 
 Et surtout : amuse-toi, c’est comme ça qu’on progresse !
 
 
 
-[sensibilité]: ../bases-photo-sensibilite
 [ouverture]: ../bases-photo-ouverture
 [obturation]: ../bases-photo-vitesse-obturation
 [sensibilité]: ../bases-photo-sensibilite
 [bokeh]: ../profondeur-de-champ-et-bokeh
-[serie-photo]: /series/les-bases-de-la-photo
+[serie-photo]: /series/les-bases-de-la-photo/
