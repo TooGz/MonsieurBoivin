@@ -42,11 +42,11 @@
 {{ $disableImageOptimization := .Site.Params.disableImageOptimization | default false }}
 {{ $disableHeroImageFilter := .Site.Params.homepage.disableHeroImageFilter | default false }}
 
-<article class="max-w-full prose dark:prose-invert">
+<article class="home-redesign-hero max-w-full prose dark:prose-invert">
   <div class="relative">
     <div class="absolute inset-x-0 bottom-0 h-1/2"></div>
-    <div class="mx-auto max-w-7xl p-0">
-      <div class="relative shadow-xl sm:overflow-hidden rounded-2xl">
+    <div class="home-redesign__hero-wrap mx-auto p-0">
+      <div class="relative shadow-xl sm:overflow-hidden rounded-2xl home-redesign__hero-frame">
         <div class="absolute inset-0">
           {{ $homepageImage := "" }}
           {{ with .Site.Params.defaultBackgroundImage }}
@@ -72,60 +72,141 @@
             {{ end }}
           {{ end }}
         </div>
-        <div class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8 flex flex-col items-center justify-center text-center">
-          {{ with .Site.Params.Author.image }}
-            {{ $authorImage := "" }}
-            {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
-              {{ $authorImage = resources.GetRemote . }}
-            {{ else }}
-              {{ $authorImage = resources.Get . }}
-            {{ end }}
-            {{ if $authorImage }}
-              {{ if not $disableImageOptimization }}
-                {{ $authorImage = $authorImage.Fill (print "288x288 q" ( $.Site.Params.Author.imagequality | default "96" )) }}
-              {{ end }}
-              <img class="mb-2 rounded-full h-36 w-36" width="144" height="144" alt="{{ $.Site.Params.Author.name | default " Author" }}" src="{{ $authorImage.RelPermalink }}">
-            {{ end }}
-          {{ end }}
-          {{ if not $disableHeroImageFilter }}
-            <h1 class="mb-2 text-4xl font-extrabold text-neutral-200">
-              {{ .Site.Params.Author.name | default .Site.Title }}
-            </h1>
-            {{ with .Site.Params.Author.headline }}
-              <h2 class="mt-0 mb-0 text-xl text-neutral-300">
-                {{ . | markdownify }}
-              </h2>
-            {{ end }}
-          {{ else }}
-            <h1 class="mb-2 text-4xl font-extrabold text-neutral-800 dark:text-neutral-200">
-              {{ .Site.Params.Author.name | default .Site.Title }}
-            </h1>
-            {{ with .Site.Params.Author.headline }}
-              <h2 class="mt-0 mb-0 text-xl text-neutral-800 dark:text-neutral-300">
-                {{ . | markdownify }}
-              </h2>
-            {{ end }}
-          {{ end }}
-          <div class="mt-3 mb-4 text-2xl">
-            {{ with .Site.Params.Author.links }}
-              <div class="flex flex-wrap">
-                {{ range $links := . }}
-                  {{ range $name, $url := $links }}
-                    {{ if not $disableHeroImageFilter }}
-                      <a class="px-1 hover:text-primary-400 text-primary-300" href="{{ $url }}" target="_blank" aria-label="{{ $name | title }}" rel="me noopener noreferrer">{{ partial "icon.html" $name }}</a>
-                    {{ else }}
-                      <a class="px-1 hover:text-primary-400 text-primary-800 dark:text-primary-200" href="{{ $url }}" target="_blank" aria-label="{{ $name | title }}" rel="me noopener noreferrer">{{ partial "icon.html" $name }}</a>
-                    {{ end }}
+        <div class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-28 lg:px-8">
+          <div class="home-redesign__hero-shell">
+            <div class="home-redesign__hero-copy">
+              <div class="home-redesign__hero-tags" aria-hidden="true">
+                <span class="home-redesign__hero-tag">Cuisine maison</span>
+                <span class="home-redesign__hero-tag">DIY documente</span>
+                <span class="home-redesign__hero-tag">Notes utiles</span>
+              </div>
+
+              <p class="home-redesign__hero-kicker">Carnet vivant pour suivre ce qui se construit, se cuisine et se garde sous la main.</p>
+
+              {{ with .Site.Params.Author.image }}
+                {{ $authorImage := "" }}
+                {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
+                  {{ $authorImage = resources.GetRemote . }}
+                {{ else }}
+                  {{ $authorImage = resources.Get . }}
+                {{ end }}
+                {{ if $authorImage }}
+                  {{ if not $disableImageOptimization }}
+                    {{ $authorImage = $authorImage.Fill (print "288x288 q" ( $.Site.Params.Author.imagequality | default "96" )) }}
                   {{ end }}
+                  <img class="home-redesign__hero-avatar" width="144" height="144" alt="{{ $.Site.Params.Author.name | default " Author" }}" src="{{ $authorImage.RelPermalink }}">
+                {{ end }}
+              {{ end }}
+
+              {{ if not $disableHeroImageFilter }}
+                <h1 class="home-redesign__hero-title text-neutral-200">
+                  {{ .Site.Params.Author.name | default .Site.Title }}
+                </h1>
+                {{ with .Site.Params.Author.headline }}
+                  <h2 class="home-redesign__hero-subtitle text-neutral-300">
+                    {{ . | markdownify }}
+                  </h2>
+                {{ end }}
+              {{ else }}
+                <h1 class="home-redesign__hero-title text-neutral-800 dark:text-neutral-200">
+                  {{ .Site.Params.Author.name | default .Site.Title }}
+                </h1>
+                {{ with .Site.Params.Author.headline }}
+                  <h2 class="home-redesign__hero-subtitle text-neutral-800 dark:text-neutral-300">
+                    {{ . | markdownify }}
+                  </h2>
+                {{ end }}
+              {{ end }}
+
+              <div class="home-redesign__hero-social">
+                {{ with .Site.Params.Author.links }}
+                  <div class="home-redesign__hero-social-links">
+                    {{ range $links := . }}
+                      {{ range $name, $url := $links }}
+                        {{ if not $disableHeroImageFilter }}
+                          <a class="home-redesign__social-link text-primary-300" href="{{ $url }}" target="_blank" aria-label="{{ $name | title }}" rel="me noopener noreferrer">{{ partial "icon.html" $name }}</a>
+                        {{ else }}
+                          <a class="home-redesign__social-link text-primary-800 dark:text-primary-200" href="{{ $url }}" target="_blank" aria-label="{{ $name | title }}" rel="me noopener noreferrer">{{ partial "icon.html" $name }}</a>
+                        {{ end }}
+                      {{ end }}
+                    {{ end }}
+                  </div>
                 {{ end }}
               </div>
-            {{ end }}
-          </div>
-          <section class="prose prose-invert w-full">{{ .Content }}</section>
-          <div class="home-redesign__actions home-redesign__actions--hero">
-            <a class="home-redesign__button home-redesign__button--primary" href="{{ $projectLink }}">Suivre le projet en cours</a>
-            <a class="home-redesign__button" href="#en-ce-moment">Voir le tableau de bord</a>
-            <a class="home-redesign__button" href="#pour-commencer">Commencer ici</a>
+
+              <section class="home-redesign__hero-content prose prose-invert">{{ .Content }}</section>
+
+              <div class="home-redesign__hero-band" aria-label="Resume du site">
+                <article class="home-redesign__hero-stat">
+                  <p class="home-redesign__hero-stat-label">Notes</p>
+                  <p class="home-redesign__hero-stat-value">{{ len $posts }}</p>
+                </article>
+                <article class="home-redesign__hero-stat">
+                  <p class="home-redesign__hero-stat-label">Recettes</p>
+                  <p class="home-redesign__hero-stat-value">{{ len $recipes }}</p>
+                </article>
+                <article class="home-redesign__hero-stat">
+                  <p class="home-redesign__hero-stat-label">Atelier</p>
+                  <p class="home-redesign__hero-stat-value">{{ len $workshopPages }}</p>
+                </article>
+                <article class="home-redesign__hero-stat home-redesign__hero-stat--wide">
+                  <p class="home-redesign__hero-stat-label">Dernier mouvement</p>
+                  {{ with $latestPage }}
+                    <p class="home-redesign__hero-stat-value home-redesign__hero-stat-value--text">{{ .Title }}</p>
+                  {{ else }}
+                    <p class="home-redesign__hero-stat-value home-redesign__hero-stat-value--text">Nouvelle page bientot</p>
+                  {{ end }}
+                </article>
+              </div>
+
+              <div class="home-redesign__actions home-redesign__actions--hero">
+                <a class="home-redesign__button home-redesign__button--primary" href="{{ $projectLink }}">Suivre le projet en cours</a>
+                <a class="home-redesign__button" href="#en-ce-moment">Voir le tableau de bord</a>
+                <a class="home-redesign__button" href="#pour-commencer">Commencer ici</a>
+              </div>
+            </div>
+
+            <aside class="home-redesign__hero-rail">
+              <article class="home-redesign__hero-panel">
+                <p class="home-redesign__eyebrow">En ce moment</p>
+                {{ with $grenouille }}
+                  <h3>{{ .Title }}</h3>
+                  {{ with .Description }}<p>{{ . }}</p>{{ end }}
+                {{ else }}
+                  <h3>L'atelier en cours</h3>
+                  <p>Le projet principal du moment reste accessible depuis la section atelier.</p>
+                {{ end }}
+
+                <ul class="home-redesign__hero-list">
+                  {{ with $latestBuild }}
+                    <li>Derniere etape : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+                  {{ end }}
+                  <li>{{ $projectDocCount }} page{{ if ne $projectDocCount 1 }}s{{ end }} actives dans la doc projet{{ if gt (len $buildPages) 0 }}, plus {{ len $buildPages }} entree{{ if ne (len $buildPages) 1 }}s{{ end }} de build log{{ end }}.</li>
+                </ul>
+
+                <div class="home-redesign__hero-panel-actions">
+                  {{ with $grenouille }}
+                    <a class="home-redesign__button home-redesign__button--primary" href="{{ .RelPermalink }}">Ouvrir le projet</a>
+                  {{ end }}
+                </div>
+              </article>
+
+              <article class="home-redesign__hero-panel home-redesign__hero-panel--secondary">
+                <p class="home-redesign__eyebrow">Cadence du site</p>
+                {{ with $latestPage }}
+                  <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                  <p>{{ .Date | time.Format (.Site.Language.Params.dateFormat | default ":date_long") }}</p>
+                {{ else }}
+                  <h3>Le prochain ajout arrive</h3>
+                  <p>Le carnet continue de bouger entre atelier, cuisine et notes.</p>
+                {{ end }}
+
+                <div class="home-redesign__hero-pulse">
+                  <span class="home-redesign__hero-pulse-dot" aria-hidden="true"></span>
+                  <p>{{ len $allPages }} pages publiees a explorer.</p>
+                </div>
+              </article>
+            </aside>
           </div>
         </div>
       </div>
