@@ -137,18 +137,18 @@
               <section class="home-redesign__hero-content prose prose-invert">{{ .Content }}</section>
 
               <div class="home-redesign__hero-band" aria-label="Resume du site">
-                <article class="home-redesign__hero-stat">
+                <a class="home-redesign__hero-stat home-redesign__hero-stat--link" href="{{ "/posts/" | relLangURL }}" aria-label="Voir toutes les notes">
                   <p class="home-redesign__hero-stat-label">Notes</p>
                   <p class="home-redesign__hero-stat-value">{{ len $posts }}</p>
-                </article>
-                <article class="home-redesign__hero-stat">
+                </a>
+                <a class="home-redesign__hero-stat home-redesign__hero-stat--link" href="{{ "/recettes/" | relLangURL }}" aria-label="Voir toutes les recettes">
                   <p class="home-redesign__hero-stat-label">Recettes</p>
                   <p class="home-redesign__hero-stat-value">{{ len $recipes }}</p>
-                </article>
-                <article class="home-redesign__hero-stat">
+                </a>
+                <a class="home-redesign__hero-stat home-redesign__hero-stat--link" href="{{ "/atelier/" | relLangURL }}" aria-label="Voir tout l'atelier">
                   <p class="home-redesign__hero-stat-label">Atelier</p>
                   <p class="home-redesign__hero-stat-value">{{ len $workshopPages }}</p>
-                </article>
+                </a>
                 <article class="home-redesign__hero-stat home-redesign__hero-stat--wide">
                   <p class="home-redesign__hero-stat-label">Dernier mouvement</p>
                   {{ with $latestPage }}
