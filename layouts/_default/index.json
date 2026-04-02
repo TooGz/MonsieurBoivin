@@ -1,0 +1,40 @@
+{{- $index := slice -}}
+{{- $pages := slice .Site.Home -}}
+{{- $pages = $pages | append .Site.Sections -}}
+{{- $pages = $pages | append .Site.RegularPages -}}
+
+{{- range $pages -}}
+  {{- $sectionTitle := .Site.Title -}}
+  {{- if eq .Kind "home" -}}
+    {{- $sectionTitle = "Accueil" -}}
+  {{- else if .CurrentSection -}}
+    {{- $sectionTitle = .CurrentSection.Title -}}
+  {{- else if .Section -}}
+    {{- $sectionTitle = .Section | humanize -}}
+  {{- end -}}
+
+  {{- if .Date -}}
+    {{- $index = $index | append (dict
+      "date" (.Date | time.Format (.Site.Language.Params.dateFormat | default ":date_long"))
+      "title" (.Title | emojify | safeJS)
+      "section" ($sectionTitle | emojify | safeJS)
+      "summary" (.Summary | safeJS)
+      "content" (.Plain | safeJS)
+      "permalink" .RelPermalink
+      "externalUrl" .Params.externalUrl
+      "type" .Type
+    ) -}}
+  {{- else -}}
+    {{- $index = $index | append (dict
+      "title" (.Title | emojify | safeJS)
+      "section" ($sectionTitle | emojify | safeJS)
+      "summary" (.Summary | safeJS)
+      "content" (.Plain | safeJS)
+      "permalink" .RelPermalink
+      "externalUrl" .Params.externalUrl
+      "type" .Type
+    ) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $index | jsonify -}}

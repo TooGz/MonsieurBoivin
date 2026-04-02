@@ -7,7 +7,13 @@
       TOC
   ========================== */}}
   {{ $enableToc := site.Params.article.showTableOfContents | default false }}
-  {{ $enableToc = $p.Params.showTableOfContents | default $enableToc }}
+  {{ if isset $p.Params "showTableOfContents" }}
+    {{ $enableToc = index $p.Params "showTableOfContents" }}
+  {{ else if isset $p.Params "ShowToc" }}
+    {{ $enableToc = index $p.Params "ShowToc" }}
+  {{ else if isset $p.Params "showtoc" }}
+    {{ $enableToc = index $p.Params "showtoc" }}
+  {{ end }}
   {{ $showToc := and $enableToc (in $p.TableOfContents "<ul") }}
   {{ $topClass := cond (hasPrefix site.Params.header.layout "fixed") "lg:top-[140px]" "lg:top-10" }}
 

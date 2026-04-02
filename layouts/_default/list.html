@@ -1,6 +1,13 @@
 {{ define "main" }}
   {{ .Scratch.Set "scope" "list" }}
-  {{ $enableToc := .Params.showTableOfContents | default (site.Params.list.showTableOfContents | default false) }}
+  {{ $enableToc := site.Params.list.showTableOfContents | default false }}
+  {{ if isset .Params "showTableOfContents" }}
+    {{ $enableToc = index .Params "showTableOfContents" }}
+  {{ else if isset .Params "ShowToc" }}
+    {{ $enableToc = index .Params "ShowToc" }}
+  {{ else if isset .Params "showtoc" }}
+    {{ $enableToc = index .Params "showtoc" }}
+  {{ end }}
   {{ $showToc := and $enableToc (in .TableOfContents "<ul") }}
 
   {{/* Hero */}}
@@ -15,7 +22,15 @@
 
   {{/* Header */}}
   <header>
-    {{ if .Params.showBreadcrumbs | default (site.Params.list.showBreadcrumbs | default false) }}
+    {{ $showBreadcrumbs := site.Params.list.showBreadcrumbs | default false }}
+    {{ if isset .Params "showBreadcrumbs" }}
+      {{ $showBreadcrumbs = index .Params "showBreadcrumbs" }}
+    {{ else if isset .Params "ShowBreadCrumbs" }}
+      {{ $showBreadcrumbs = index .Params "ShowBreadCrumbs" }}
+    {{ else if isset .Params "showbreadcrumbs" }}
+      {{ $showBreadcrumbs = index .Params "showbreadcrumbs" }}
+    {{ end }}
+    {{ if $showBreadcrumbs }}
       {{ partial "breadcrumbs.html" . }}
     {{ end }}
     <h1 class="mt-5 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
