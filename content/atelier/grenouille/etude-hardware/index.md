@@ -6,7 +6,7 @@ slug: "etude-hardware"
 date: 2025-11-17
 categories: ["Grenouille 3.0", "Électronique", "Arcade"]
 tags: ["Grenouille", "ESP32-S3", "HUB75", "MCP3008", "DFPlayer", "LED", "Arcade", "Bois"]
-ShowToc: true
+showTableOfContents: true
 draft: false
 series: ["Grenouille 3.0"]
 series_order: 4
@@ -130,4 +130,3 @@ Je voulais une architecture hardware qui ne limite ni la créativité ni les év
 
 Avec cette base, je sais que je ne serai jamais bridé par le matériel.  
 La seule limite sera mon imagination.
-

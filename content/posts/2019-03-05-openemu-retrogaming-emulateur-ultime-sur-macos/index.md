@@ -6,8 +6,8 @@ categories: ["Gaming"]
 tags: ["Retrogaming", "MacOS", "Arcade"]
 
 image: "img/Retro-Logo-Grid.jpg"
-ShowToc: false
-ShowBreadCrumbs: false
+showTableOfContents: false
+showBreadcrumbs: false
 ---
 
 Découvrez une petite perle de logiciel retrogaming sur Mac: **OpenEmu**

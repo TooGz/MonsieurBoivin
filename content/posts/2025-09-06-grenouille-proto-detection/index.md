@@ -12,7 +12,7 @@ cover:
   alt: "Schéma de montage MCP3008 et capteurs piézo pour la Grenouille 3.0"
   caption: "Montage de test avec MCP3008 et 4 capteurs piézo"
 image: "img/cover.png"
-ShowToc: true
+showTableOfContents: true
 draft: true
 ---
 

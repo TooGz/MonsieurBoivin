@@ -6,7 +6,7 @@ slug: "capteurs-piezo-detection-vibration"
 date: 2025-10-21
 categories: ["Électronique"]
 tags: ["piezo", "détection", "vibration", "ESP32", "MCP3008", "prototypage"]
-ShowToc: true
+showTableOfContents: true
 draft: false
 ---
 

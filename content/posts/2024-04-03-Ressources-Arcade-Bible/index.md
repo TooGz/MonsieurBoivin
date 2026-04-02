@@ -6,7 +6,7 @@ date: 2024-04-03T10:51:58+02:00
 author: "Monsieur Boivin"
 tags: ["Ressources","Retrogaming","DIY"]
 categories: ["Arcade"]
-ShowToc: true
+showTableOfContents: true
 draft: true
 ---
 

@@ -8,7 +8,7 @@ draft: false
 # Navigation & tri (section list)
 weight: 0
 # Affichage (section)
-ShowToc: false
+showTableOfContents: false
 showDate: true
 showAuthor: true
 showReadingTime: false
@@ -24,7 +24,7 @@ cover:
   relative: true
 
 # Taxonomies principales
-categories: ["L’Atelier de Michel", "Grenouille"]
+categories: ["Atelier de Michel", "Grenouille"]
 tags:
   - Jeu de la grenouille
   - Artisanat
@@ -40,13 +40,13 @@ series_order: 0
 
 # Valeurs par défaut pour les pages enfants (J01, J02…)
 cascade:
-  ShowToc: true
+  showTableOfContents: true
   showDate: false
   showAuthor: true
   showReadingTime: false
   showTaxonomies: true
   draft: false
-  categories: ["L’Atelier de Michel", "Grenouille"]
+  categories: ["Atelier de Michel", "Grenouille"]
   tags: ["Grenouille 3.0", "Journal", "Build Log"]
   series: ["Journal Grenouille"]
 ---

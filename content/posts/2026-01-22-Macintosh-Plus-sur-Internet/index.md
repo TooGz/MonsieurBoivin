@@ -6,7 +6,7 @@ slug: "mac-plus-internet"
 date: 2026-01-26
 categories: ["Informatique", "Rétro-computing"]
 tags: ["Macintosh Plus", "Retro", "Internet", "Vintage", "ChatGPT", "BlueSCSI", "Pico W" ]
-ShowToc: true
+showTableOfContents: true
 draft: false
 ---
 

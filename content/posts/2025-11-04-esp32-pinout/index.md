@@ -7,7 +7,7 @@ slug: "esp32-pinout"
 date: 2025-11-03
 categories: ["Electronique"]
 tags: ["ESP32", "WROOM", "Pinout", "GPIO", "DevKit", "Arduino", "IoT"]
-ShowToc: true
+showTableOfContents: true
 draft: false
 
 seo:

@@ -10,7 +10,7 @@ servings: "6"
 prep_time: "15 min"
 cook_time: "10 min"
 total_time: "25 min"
-ShowToc: true
+showTableOfContents: true
 
 ingredients:
   - plat: "Cookies"

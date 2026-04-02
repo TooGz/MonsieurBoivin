@@ -13,7 +13,7 @@ tags: [
   "LED adressables",
   "Plans 3D"
 ]
-categories: ["L’Atelier de Michel"]
+categories: ["Atelier de Michel"]
 image: "img/cover-vue-ensemble.jpg"
 image_alt: "Vue 3D du jeu de la grenouille artisanale avec grenouille en fonte et plateau en bois massif"
 series: ["Grenouille 3.0"]

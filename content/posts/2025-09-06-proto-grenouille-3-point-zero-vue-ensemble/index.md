@@ -12,7 +12,7 @@ cover:
   alt: "Prototype de la Grenouille 3.0 avec ESP32 et LEDs"
   caption: "Premier prototype de la Grenouille 3.0"
 image: "img/cover.png"
-ShowToc: true
+showTableOfContents: true
 draft: true
 ---
 

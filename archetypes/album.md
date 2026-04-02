@@ -1,10 +1,11 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 description: ""
-slug: "{{ .Name }}"
 date: {{ .Date }}
+categories: ["Photos"]
+tags: []
 draft: true
-showTableOfContents: false
 ---
 
-Ecrire ici.
+{{< gallery >}}
+{{< /gallery >}}
