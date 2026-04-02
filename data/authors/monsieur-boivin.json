@@ -1,0 +1,8 @@
+{
+  "name": "Monsieur Boivin",
+  "image": "img/MonsieurBoivin.png",
+  "bio": "Je fais des trucs. Je les teste. Je te montre ce qui vaut le coup.",
+  "social": [
+    { "instagram": "https://instagram.com/toogz" }
+  ]
+}

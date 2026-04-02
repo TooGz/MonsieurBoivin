@@ -1,0 +1,25 @@
+{{ if .IsPage }}
+  {{ $metaAuthors := slice }}
+  {{ $siteAuthor := site.Params.Author.name | default "" }}
+  {{ if isset .Params "authors" }}
+    {{ range index .Params "authors" }}
+      {{ with index site.Data.authors . }}
+        {{ $metaAuthors = $metaAuthors | append (.name | default "") }}
+      {{ else }}
+        {{ $metaAuthors = $metaAuthors | append . }}
+      {{ end }}
+    {{ end }}
+  {{ else if isset .Params "author" }}
+    {{ $metaAuthors = slice (index .Params "author") }}
+  {{ end }}
+
+  {{ $metaAuthors = uniq $metaAuthors }}
+  {{ if and (eq (len $metaAuthors) 1) (eq (index $metaAuthors 0) $siteAuthor) }}
+    {{ $metaAuthors = slice }}
+  {{ end }}
+
+  {{ if gt (len $metaAuthors) 0 }}
+    <meta name="author" content="{{ delimit $metaAuthors ", " }}">
+    <meta property="article:author" content="{{ delimit $metaAuthors ", " }}">
+  {{ end }}
+{{ end }}

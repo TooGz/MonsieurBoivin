@@ -1,7 +1,7 @@
 ---
 title: "Ressources pour connecter un Macintosh de 1986 sur le Web"
 description: "Ressources, méthodes et outils pour connecter un Macintosh Plus (1986) à Internet en 2026 : émulation, matériel, réseaux et web rétro."
-author: "Monsieur Boivin"
+authors: ["monsieur-boivin"]
 slug: "mac-plus-internet"
 date: 2026-01-26
 categories: ["Informatique", "Rétro-computing"]

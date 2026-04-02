@@ -1,7 +1,7 @@
 ---
 title: "Capteurs Piézo et Détection de Vibrations"
 description: "Étude et recherches sur l’utilisation des capteurs piézoélectriques pour la détection de choc et de vibration. Recherches, schéma de câblage, composants, filtrage et test sur ESP32 + MCP3008."
-author: "Monsieur Boivin"
+authors: ["monsieur-boivin"]
 slug: "capteurs-piezo-detection-vibration"
 date: 2025-10-21
 categories: ["Électronique"]
@@ -12,7 +12,7 @@ draft: false
 
 ## Contexte du projet
 
-Dans le cadre du développement de la **[Grenouille 3.0](/../atelier/grenouille)**, je cherchais une méthode simple, fiable et économique pour **détecter un impact** (le lancer d’un palet dans un trou).  
+Dans le cadre du développement de la **[Grenouille 3.0]({{< relref "atelier/grenouille/_index.md" >}})**, je cherchais une méthode simple, fiable et économique pour **détecter un impact** (le lancer d’un palet dans un trou).  
 L’objectif : construire un **système de détection** précis, réactif, et surtout sans faux positifs.
 
 Après quelques explorations, le **capteur piézoélectrique** s’est imposé comme une piste sérieuse.  

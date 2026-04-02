@@ -2,7 +2,7 @@
 title: "5 conseils pour réussir vos photos de concert !"
 date: 2012-10-07
 updated: 2025-04-01
-author: "Guillaume"
+authors: ["monsieur-boivin"]
 slug: "photos-de-concert-conseils"
 categories:
   - Photo

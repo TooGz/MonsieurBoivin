@@ -1,6 +1,6 @@
 ---
 title: Prise en main du Samyang 8mm f/3.5 UMC Fish-Eye CS II
-author: Guillaume Boivin
+authors: ["monsieur-boivin"]
 layout: post
 permalink: /prise-en-main-du-samyang-8mm-f3-5-umc-fish-eye-cs-ii/
 draft: true

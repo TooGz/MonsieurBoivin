@@ -3,7 +3,7 @@ title: "Grenouille 3.0 - J01 : Découpes du bois (pieds & traverses)"
 description: "Journal Grenouille 3.0 — J01 : découpe du plateau, pieds et traverses. Méthode, sections finales, outils et contrôles pour un assemblage propre"
 date: 2025-09-29
 slug: "j01-decoupe-bois"
-author: "Monsieur Boivin"
+authors: ["monsieur-boivin"]
 tags: ["Jeu de la Grenouille","Artisanat","DIY","Projet maker","Menuiserie"]
 categories: ["Atelier de Michel"]
 series: ["Journal Grenouille"]

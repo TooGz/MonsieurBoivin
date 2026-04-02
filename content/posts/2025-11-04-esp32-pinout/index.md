@@ -2,7 +2,7 @@
 title: "ESP32 WROOM DevKit V1 – Pinout complet & GPIO à utiliser (Guide clair)"
 description: "ESP32 DevKit V1 : pinout complet, GPIO à utiliser ou éviter, ADC, SPI, I2C et schéma clair pour vos projets."
 
-author: "Monsieur Boivin"
+authors: ["monsieur-boivin"]
 slug: "esp32-pinout"
 date: 2025-11-03
 categories: ["Electronique"]
@@ -160,5 +160,5 @@ Voici les erreurs classiques :
 
 ## Aller plus loin avec l’ESP32
 
-- 🔗 **[Détection de vibration avec un capteur piézo et un esp32](/posts/capteurs-piezo-detection-vibration)**
-- 🔗 **[Projet Grenouille électronique](/../atelier/grenouille)**
+- 🔗 **[Détection de vibration avec un capteur piézo et un esp32]({{< relref "posts/2025-10-21-capteurs-piezo-detection/index.md" >}})**
+- 🔗 **[Projet Grenouille électronique]({{< relref "atelier/grenouille/_index.md" >}})**

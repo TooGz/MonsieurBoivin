@@ -4,7 +4,7 @@ description: "Planification approfondie de la création d'une borne d'arcade ful
 slug: "Construction-Borne-Arcade"
 date: 2024-03-29
 date_updated: 2025-04-03
-author: "Guillaume"
+authors: ["monsieur-boivin"]
 tags: ["Arcade", "DIY", "Borne"]
 categories: ["Gaming", "Arcade"] 
 image: "img/cover.webp"

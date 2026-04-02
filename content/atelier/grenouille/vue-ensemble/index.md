@@ -2,7 +2,7 @@
 title: "[Grenouille 3.0] - Vue d’ensemble"
 description: "Vue d’ensemble du projet Grenouille 3.0 : proportions, ergonomie, structure bois, électronique et conception globale du jeu de la grenouille."
 date: 2025-10-07
-author: "TooGz"
+authors: ["toogz"]
 tags: [
   "Grenouille 3.0",
   "Jeu de la Grenouille",

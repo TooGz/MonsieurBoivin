@@ -4,7 +4,7 @@ description: "Prototypage de la Grenouille 3.0 : tests de détection, LEDs, pann
 slug: "grenouille-proto"
 date: 2025-09-06T00:04:58+02:00
 lastmod: 2025-09-06T00:00:00+02:00
-author: "TooGz"
+authors: ["toogz"]
 tags: ["Grenouille 3.0", "Jeux en Bois", "DIY Électronique", "ESP32", "Arcade"]
 categories: ["DIY", "Électronique"]
 cover:
@@ -38,7 +38,7 @@ Un ESP32-S3 DevKit qui sert de cerveau au système.
 ### 2. Détection (MCP3008 + piézos)
 ![MCP3008](img/mcp3008.jpg)
 Je pars avec 4 capteurs piézo pour valider le montage complet (résistances, diodes, filtrage).  
-👉 [Lire la suite →](/grenouille-proto-detection)
+👉 [Lire la suite →]({{< relref "posts/2025-09-06-grenouille-proto-detection/index.md" >}})
 
 ### 3. Affichage HUB75
 ![HUB75](img/hub75.jpg)

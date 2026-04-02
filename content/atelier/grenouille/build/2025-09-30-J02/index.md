@@ -3,7 +3,7 @@ title: "Grenouille 3.0 - J02 : Réalisation des tenons et mortaises"
 description: "Journal Grenouille 3.0 — J02 : mortaises à la défonceuse et tenons ajustés. Tracé centré au trusquin, profondeur, tolérances et contrôle."
 date: 2025-09-30
 slug: "j02-tenons-mortaises"
-author: "Monsieur Boivin"
+authors: ["monsieur-boivin"]
 tags: ["Jeu de la Grenouille","Artisanat","Menuiserie","Tenon-mortaise","DIY","Projet maker"]
 categories: ["Atelier de Michel"]
 series: ["Journal Grenouille"]

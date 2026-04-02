@@ -5,7 +5,7 @@ slug: "{{ .Name }}"
 type: "recette"
 layout: "recette-single"
 date: {{ .Date }}
-author: "Monsieur Boivin"
+authors: ["monsieur-boivin"]
 categories: []
 tags: []
 difficulty: ""

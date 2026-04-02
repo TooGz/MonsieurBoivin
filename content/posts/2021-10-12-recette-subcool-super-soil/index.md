@@ -3,7 +3,7 @@ title: "Super Soil de Subcool : recette, utilisation et culture"
 description: "Tout savoir sur le Subcool Super Soil : recette, bienfaits, pour quelles cultures, et comment l'utiliser efficacement dans votre jardin."
 slug: "super-soil-subcool"
 date: "2021-10-12"
-author: "Mr Boivin"
+authors: ["monsieur-boivin"]
 categories: ["Jardin"]
 tags: ["terreau", "culture biologique", "permaculture"]
 image: "img/super-soil.png"

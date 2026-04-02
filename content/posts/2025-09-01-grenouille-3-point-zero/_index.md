@@ -15,8 +15,8 @@ Cette page conserve les premieres notes de cadrage du projet.
 
 Le point d'entree actif est maintenant ici :
 
-- [Projet Grenouille 3.0](/atelier/grenouille/)
-- [Carnet de construction](/atelier/grenouille/build/)
+- [Projet Grenouille 3.0]({{< relref "atelier/grenouille/_index.md" >}})
+- [Carnet de construction]({{< relref "atelier/grenouille/build/_index.md" >}})
 
 Les notes utiles de depart restent ci-dessous pour memoire.
 

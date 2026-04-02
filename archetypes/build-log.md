@@ -3,7 +3,7 @@ title: "{{ replace .Name "-" " " | title }}"
 description: ""
 slug: "{{ .Name }}"
 date: {{ .Date }}
-author: "Monsieur Boivin"
+authors: ["monsieur-boivin"]
 categories: ["Atelier de Michel"]
 tags: ["DIY", "Projet maker"]
 series: ["Journal Projet"]

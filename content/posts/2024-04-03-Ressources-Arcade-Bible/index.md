@@ -3,7 +3,7 @@ title: "Ressources Arcade - Ma Bible !"
 description: "Toutes mes ressources arcade collectées au fil des années : plans, tutos, forums, matos, logiciels, inspirations..."
 slug: "ressources-arcade"
 date: 2024-04-03T10:51:58+02:00
-author: "Monsieur Boivin"
+authors: ["monsieur-boivin"]
 tags: ["Ressources","Retrogaming","DIY"]
 categories: ["Arcade"]
 showTableOfContents: true

@@ -27,7 +27,7 @@ Un projet complet mêlant :
 - Journal de construction détaillé
 
 ➡️ **Voir le projet complet :**  
-[Découvrir le Jeu de la Grenouille](/atelier/grenouille/)
+[Découvrir le Jeu de la Grenouille]({{< relref "atelier/grenouille/_index.md" >}})
 
 ---
 
@@ -35,8 +35,8 @@ Un projet complet mêlant :
 
 Si tu t’intéresses aux microcontrôleurs et aux capteurs :
 
-- [ESP32 Pinout complet](/posts/esp32-pinout/)
-- [Capteurs piézo & détection de vibration](/posts/capteurs-piezo-detection-vibration/)
+- [ESP32 Pinout complet]({{< relref "posts/2025-11-04-esp32-pinout/index.md" >}})
+- [Capteurs piézo & détection de vibration]({{< relref "posts/2025-10-21-capteurs-piezo-detection/index.md" >}})
 
 Ces articles servent souvent de base aux projets plus avancés.
 

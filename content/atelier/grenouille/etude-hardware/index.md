@@ -1,7 +1,7 @@
 ---
 title: "Grenouille 3.0 – Étude des besoins hardware"
 description: "Analyse complète des besoins matériels : écrans HUB75, capteurs piezo, MCP3008, DFPlayer, LEDs, alimentation, et choix de l’ESP32-S3."
-author: "Monsieur Boivin"
+authors: ["monsieur-boivin"]
 slug: "etude-hardware"
 date: 2025-11-17
 categories: ["Grenouille 3.0", "Électronique", "Arcade"]

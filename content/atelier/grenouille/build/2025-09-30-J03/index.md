@@ -3,7 +3,7 @@ title: "Grenouille 3.0 - J03 : Assemblage a blanc et collage de la structure"
 description: "Journal Grenouille 3.0 - J03 : assemblage a blanc, controle des diagonales, ordre de collage et points de vigilance avant serrage final."
 date: 2025-10-01
 slug: "j03-assemblage-collage"
-author: "Monsieur Boivin"
+authors: ["monsieur-boivin"]
 tags: ["Jeu de la Grenouille", "Artisanat", "Menuiserie", "Collage", "DIY"]
 categories: ["Atelier de Michel"]
 series: ["Journal Grenouille"]
