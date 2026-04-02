@@ -1,32 +1,34 @@
 ---
-title: "Construction d'une borne d'arcade 2 joueurs De A à Z"
-description: "Planification approfondie de la création d'une borne d'arcade full size 2 joueurs"
+title: "Construction d'une borne d'arcade 2 joueurs de A à Z"
+description: "Guide de conception pour une borne d’arcade full size 2 joueurs : matériel, ergonomie, design, budget et feuille de route."
 slug: "Construction-Borne-Arcade"
 date: 2024-03-29
-date_updated: 2025-04-03
+updated: 2025-04-03
 authors: ["monsieur-boivin"]
 tags: ["Arcade", "DIY", "Borne"]
-categories: ["Gaming", "Arcade"] 
+categories: ["Gaming", "Arcade"]
 image: "img/cover.webp"
+showTableOfContents: true
 draft: true
 ---
+
+{{< lead >}}
+Ce billet sert de document de cadrage pour ma prochaine borne d’arcade 2 joueurs.
+J’y rassemble les contraintes, les arbitrages et les pistes techniques avant de passer à la fabrication.
+{{< /lead >}}
 
 ## Introduction
 ### Présentation du projet
 
-une borne d'arcade ravive non seulement la flamme de la nostalgie pour les amateurs de jeux rétro, mais elle représente également un projet personnel captivant, mêlant défi technique, créativité et passion pour le jeu. Ces bornes, emblématiques des salles d'arcade qui ont marqué les décennies passées, offrent une expérience de jeu inégalée, plongeant les joueurs dans un univers ludique et créant une ambiance conviviale.
+Une borne d'arcade ravive immédiatement la nostalgie des jeux rétro, mais elle représente aussi un projet personnel particulièrement stimulant, à la croisée du bricolage, de la technique et du design. Ces machines emblématiques des salles d'arcade ont marqué des générations entières, et elles gardent aujourd'hui encore une vraie force d'évocation.
 
-Le projet de créer de ses propres mains une borne d'arcade est motivé par diverses raisons. Pour certains, c'est la quête de revivre des moments emblématiques de leur jeunesse, de réintroduire le frisson des compétitions amicales sur des classiques comme "*Street Fighter*", "*Pac-Man*" ou encore "*Metal Slug*" dans le confort de leur foyer. Pour d'autres, il s'agit d'un défi personnel, une opportunité d'apprendre et de maîtriser de nouvelles compétences en électronique, en programmation ou en menuiserie.
+Créer sa propre borne d'arcade peut répondre à plusieurs envies à la fois. Pour certains, c'est une manière de retrouver les sensations des classiques comme "*Street Fighter*", "*Pac-Man*" ou "*Metal Slug*" à la maison. Pour d'autres, c'est surtout un défi personnel, une occasion d'apprendre et de progresser en électronique, en menuiserie, en intégration et en configuration logicielle.
 
-Ayant déjà conçu et réalisé deux bornes d'arcade (une petite 1 joueur, ecran 9,7 pouces 4:3 d'iPad et une 19 pouces, toujours en 4:3 mais 2 joueurs), chaque projet a été une aventure d'apprentissage, me permettant d'affiner mes compétences en menuiserie, en électronique et en programmation. Ces expériences précédentes ont été essentielles pour faire mes armes, me confrontant à divers défis et me poussant à explorer de nouvelles solutions techniques et créatives.
+Ayant déjà conçu et réalisé deux bornes d'arcade, une petite 1 joueur avec écran 9,7 pouces 4:3 d'iPad et une autre en 19 pouces toujours en 4:3 mais pensée pour 2 joueurs, j'ai pu accumuler une base d'expérience concrète. Chaque projet m'a permis d'affiner mes méthodes, de corriger mes erreurs et de mieux comprendre les compromis à faire entre encombrement, confort, budget et rendu final.
 
-Cette nouvelle borne d'arcade n'est donc pas un simple projet. Elle est le fruit de tout ce que j'ai pu apprendre au fil de mes constructions et recherches précédentes. Et de tout ce que j'ai encore apprendre ici. Elle incarne l'accumulation de connaissances techniques et d'astuces de bricolage acquis lors de la réalisation de mes premières machines. Chaque erreur passée, chaque succès, a contribué à forger une vision plus affinée et ambitieuse pour ce projet.
+Cette nouvelle borne n'est donc pas un simple “projet de plus”. Elle synthétise tout ce que j'ai appris jusque-là, tout en servant aussi de terrain d'exploration pour les choix que je n'ai pas encore testés. L'idée est de construire une machine plus aboutie, plus cohérente et plus agréable à utiliser au quotidien.
 
-Outre la satisfaction personnelle et le défi technique, cette borne se veut être un concentré d'innovation et de personnalisation. Elle reflétera non seulement ma passion pour les jeux d'arcade classiques, mais aussi mon évolution en tant que créateur. Avec un design pensé pour deux joueurs, elle promet des moments de partage et de compétition, rappelant les jours glorieux des salles d'arcade, tout en intégrant des fonctionnalités modernes qui témoignent des avancées technologiques et des préférences actuelles en matière de gaming.
-
-Au-delà du jeu, c'est un projet créatif, un élément de décoration qui apporte une touche unique et personnelle à l'espace de vie. Chaque choix de design, chaque composant sélectionné, est une décision longuement réfléchie qui allie esthétique et fonctionnalité, faisant de cette borne une œuvre d'art interactive et un hommage à l'age d'or du jeu vidéo.
-
-Dans cette nouvelle aventure, je compte non seulement à repousser les limites de ce que j'ai pu réaliser auparavant, mais aussi à partager a ma petite échelle cette expérience avec la communauté des amateurs d'arcade.
+Au-delà du jeu lui-même, je veux aussi en faire un bel objet, capable de trouver sa place dans une pièce de vie sans perdre son identité arcade. Ce billet sert donc de feuille de route : cadrer les choix, poser les contraintes, lister les idées, et garder une trace claire de la direction prise avant de passer à la fabrication.
 
 ---
 
@@ -70,46 +72,46 @@ Face à ces défis, il est important d'avoir une planification minutieuse, une r
 
 * **Sélection des jeux :** Déterminer les types de jeux désirés (classiques, combats, plateforme, etc.) pour orienter le choix du matériel.
 
-  > * Depuis les débuts de l'arcade "moderne" (pac-man en gros) jusqu'a pourquoi pas la génération PS3 / Switch ( Voir [Configuration Hardware](#le-système-darcade) )
-  > * Jeu horizontal (bandes noires pour les jeux tate - voir pour faire aussi une borne only Tate :/ )
-  > * Pas de jeux spinner. ( Joystick 8-Way / 6 btn d'actions / 1 btn START / 1 btn coins ) x 2 joueurs
-  > * Guncab ( 2 Lightguns) + Emetteur IR
-  > * Pincab ?!? ( 2 btn flippers / 1 btn tirette )
+  > * Depuis les débuts de l'arcade “moderne” jusqu'à, pourquoi pas, la génération PS3 / Switch. Voir [Configuration hardware](#le-système-darcade).
+  > * Priorité aux jeux horizontaux. Les jeux Tate resteront jouables, quitte à assumer des bandes noires ou à envisager plus tard une borne dédiée.
+  > * Pas de spinner prévu : joystick 8-way, 6 boutons d'action, 1 bouton Start et 1 bouton Coin par joueur.
+  > * Option à étudier : compatibilité lightguns avec 2 pistolets + émetteur IR.
+  > * Option ouverte : quelques usages “pincab” légers, mais ce n'est pas l'objectif principal.
 
 * **Expérience utilisateur :** Réflexion sur l’expérience de jeu (écran unique ou multiples, système sonore, etc.).
 
-  > * Jeux 1 ou 2 joueurs
-  > * Ecran 27 pouces 1440p
-  > * Son 2.1 ( 2x150W + Caisson )
-  > * Reglage son
-  > * Environnement lumineux ( boutons panel / bandeaux led rgb => "Ambilight" [*Jacky_Mode=True*])
-  > * Marquee Lumineux ( leds )
-  > * Monnayeur fonctionnel ( voir le montant - Yves si tu nous regarde !)
-  > * Jukebox Mode ? ( sujet a creuser )
-  > * Acces Rapide Clavier (Christian on pense à toi !) & Souris
-  > * Manettes ?!? ( Fil, Bluetooth ? )
+  > * Jeux 1 ou 2 joueurs.
+  > * Écran 27 pouces 1440p.
+  > * Son 2.1 (2 x 150 W + caisson).
+  > * Réglage audio accessible rapidement.
+  > * Environnement lumineux : boutons du panel + bandeaux LED RGB, façon “ambilight” assumée.
+  > * Marquee lumineuse.
+  > * Monnayeur fonctionnel, à définir proprement.
+  > * Mode jukebox éventuel, sujet à creuser.
+  > * Accès rapide clavier et souris pour la maintenance.
+  > * Question ouverte : support de manettes filaires ou Bluetooth.
 
 
 ### Conception et Plans
 
 #### Dimensions ergonomiques pour deux joueurs.
 
-  > * Réflexions sur les dimensions optimales pour la borne
-  > * Inclinaison de l'écran 27 pouces
-  > * Orientation idéales enceintes et caisson
-  > * Espacement entre les joueurs
+  > * Réflexion sur les dimensions optimales pour une borne 2 joueurs.
+  > * Inclinaison de l'écran 27 pouces.
+  > * Orientation idéale des enceintes et du caisson.
+  > * Espacement entre les joueurs.
 
 #### Élaboration des plans de la borne.
 
-  > * Regroupement de toutes les idées et pré-requis
-  >   Esquisses, Rough
-  > * Mise en 3D du design final ( probablement sur Fusion 360 )
+  > * Regroupement de toutes les idées et prérequis.
+  > * Esquisses, roughs et arbitrages d'encombrement.
+  > * Mise en 3D du design final, probablement sur Fusion 360.
 
 #### Design et personnalisation esthétique.
 
-  > * Choix du theme et des codes couleurs - Inspirations ( Pinterest )
-  > * Création des designs des vinyls ( Photoshop )
-  > * Adaptation (création ?) d'un thême Launchbox à celui de la borne ? 
+  > * Choix du thème et des codes couleurs, avec phase d'inspiration.
+  > * Création des visuels de vinyle.
+  > * Éventuelle adaptation d'un thème LaunchBox à l'identité visuelle de la borne.
 
 ---
 
@@ -121,15 +123,15 @@ Face à ces défis, il est important d'avoir une planification minutieuse, une r
 
 * Taille, type (LCD, LED), résolution, orientation (portrait ou paysage).
 
-  > * Ecran 27 pouces 16:9 QHD (Oled ? :dollars)
-  > * 2560 x 1440 ( 6 x 240p )
-  > * Paysage ( bezels pour jeux 4:3 ? )
+  > * Écran 27 pouces 16:9 QHD (OLED ?).
+  > * 2560 × 1440 (6 × 240p).
+  > * Orientation paysage, avec bezels éventuels pour les jeux 4:3.
 
 ### Le Système d’Arcade
 
 * Options de plateforme (PC, Raspberry Pi, console modifiée).
 
-  > * PC nu ( pas de boitier ) 
+  > * PC nu (pas de boîtier).
 
 * Logiciels et systèmes d’exploitation (Windows, Linux, RetroPie).
 
@@ -187,7 +189,7 @@ Face à ces défis, il est important d'avoir une planification minutieuse, une r
 ### Première Utilisation
 * Organisation d'une session inaugurale, feedback des utilisateurs.
 
-### Maintenance et Mises à Jour
+### Maintenance et mises à jour
 * Conseils pour l'entretien, les mises à jour logicielles, et l'ajout de nouveaux jeux.
 
 ---

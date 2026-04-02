@@ -1,14 +1,19 @@
 ---
-title: "Ressources Arcade - Ma Bible !"
-description: "Toutes mes ressources arcade collectées au fil des années : plans, tutos, forums, matos, logiciels, inspirations..."
+title: "Ressources arcade - ma bible"
+description: "Toutes mes ressources arcade collectées au fil des années : plans, tutos, forums, matériel, logiciels et inspirations."
 slug: "ressources-arcade"
 date: 2024-04-03T10:51:58+02:00
 authors: ["monsieur-boivin"]
-tags: ["Ressources","retrogaming","DIY"]
+tags: ["ressources", "retrogaming", "DIY"]
 categories: ["Arcade"]
 showTableOfContents: true
 draft: true
 ---
+
+{{< lead >}}
+Cette page me sert de base de connaissances arcade.
+J’y consigne les liens, outils, forums, inspirations et ressources que je veux retrouver vite pendant la conception d’une borne ou d’un setup rétro.
+{{< /lead >}}
 
 # 🧰 Outils & Technique
 
@@ -38,7 +43,7 @@ draft: true
 # 💻 Logiciels & Configs
 
 ## 🎛️ Frontends
-- [**Launchbox**](https://www.launchbox-app.com/) — Frontend Windows & MacOS  
+- [**Launchbox**](https://www.launchbox-app.com/) — Frontend Windows & macOS  
 - [**EmulationStation**](https://emulationstation.org/) — Open source, simple et efficace  
 - [**Hyperspin**](https://hyperspin-fe.com/) — Personnalisable mais lourd  
 - [**Emumovies**](https://emumovies.com/) — Médias automatiques (vidéos, logos, covers)
