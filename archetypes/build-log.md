@@ -5,7 +5,7 @@ slug: "{{ .Name }}"
 date: {{ .Date }}
 authors: ["monsieur-boivin"]
 categories: ["Atelier de Michel"]
-tags: ["DIY", "Projet maker"]
+tags: []
 series: ["Journal Projet"]
 series_order: 0
 showTableOfContents: true

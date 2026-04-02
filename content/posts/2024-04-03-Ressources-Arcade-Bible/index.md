@@ -4,7 +4,7 @@ description: "Toutes mes ressources arcade collectées au fil des années : plan
 slug: "ressources-arcade"
 date: 2024-04-03T10:51:58+02:00
 authors: ["monsieur-boivin"]
-tags: ["Ressources","Retrogaming","DIY"]
+tags: ["Ressources","retrogaming","DIY"]
 categories: ["Arcade"]
 showTableOfContents: true
 draft: true

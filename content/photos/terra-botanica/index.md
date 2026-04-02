@@ -1,7 +1,7 @@
 ---
 title: "Terra Botanica"
 description: "Des plantes :D"
-tags: ["Nature"]
+tags: ["nature"]
 date: 2012-10-10
 ---
 

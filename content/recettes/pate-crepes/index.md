@@ -4,7 +4,7 @@ description: "Une pâte à crêpes simple et savoureuse, idéale pour les goûte
 slug: "pate-a-crepes"
 layout: "recette-single"
 date: 2025-02-28
-categories: ["🍰 Desserts & Goûter"]
+categories: ["Desserts et goûter"]
 tags: ["crêpes", "pâte à crêpes", "facile", "rapide", "goûter", "fait-maison"]
 difficulty: "Facile"
 servings: "5"

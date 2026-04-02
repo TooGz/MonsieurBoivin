@@ -4,7 +4,7 @@ description: "Préparez des pastéis de nata maison sur le Big Green Egg, avec u
 slug: "pasteis-de-nata-kamado"
 layout: "recette-single"
 date: 2025-02-28
-categories: ["🍰 Desserts & Goûter"]
+categories: ["Desserts et goûter"]
 tags: ["pastéis de nata", "pâtisserie", "kamado", "cuisson indirecte", "portugal", "fait-maison", "four"]
 difficulty: "Moyen"
 servings: "20"

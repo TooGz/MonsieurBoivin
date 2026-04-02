@@ -5,7 +5,7 @@ description: "Des tenders ultra croustillants et juteux inspirés du KFC, avec u
 slug: "tenders-poulet-facon-kfc"
 layout: "recette-single"
 date: 2026-03-17
-categories: ["🍗 Street Food Maison"]
+categories: ["Street food maison"]
 tags: ["poulet", "tenders", "kfc", "croustillant", "bbq", "batch", "week-end"]
 difficulty: "Intermédiaire"
 servings: "6"

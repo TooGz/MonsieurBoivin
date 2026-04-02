@@ -9,7 +9,7 @@ tags: [
   "ESP32",
   "Menuiserie",
   "LED adressables",
-  "Projet maker"
+  "projet maker"
 ]
 series: ["Grenouille 3.0"]
 series_order: 0

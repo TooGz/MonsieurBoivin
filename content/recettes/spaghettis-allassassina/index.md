@@ -4,7 +4,7 @@ description: "Une recette italienne audacieuse où les spaghettis sont cuits com
 slug: "spaghettis-allassassina"
 layout: "recette-single"
 date: 2025-02-12
-categories: ["🔥 Kamado & Cuissons feu"]
+categories: ["Kamado et cuisson au feu"]
 tags: ["pâtes", "spaghettis", "italie", "kamado", "fumage", "fait-maison"]
 difficulty: "Moyen"
 servings: "2"

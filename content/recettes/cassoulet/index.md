@@ -5,7 +5,7 @@ slug: "cassoulet-kamado"
 layout: "recette-single"
 type: "recette-single"
 date: 2025-02-28
-categories: ["🔥 Kamado & Cuissons feu"]
+categories: ["Kamado et cuisson au feu"]
 tags: ["kamado", "cassoulet", "cuisson indirecte", "fumage", "poulet", "hiver"]
 cooking_tech: ["cuisson indirecte", "fumage", "grill"]
 difficulty: "Moyen"

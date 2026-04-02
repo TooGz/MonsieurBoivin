@@ -4,7 +4,7 @@ description: "Journal Grenouille 3.0 — J01 : découpe du plateau, pieds et tra
 date: 2025-09-29
 slug: "j01-decoupe-bois"
 authors: ["monsieur-boivin"]
-tags: ["Jeu de la Grenouille","Artisanat","DIY","Projet maker","Menuiserie"]
+tags: ["Jeu de la grenouille","Artisanat","DIY","projet maker","Menuiserie"]
 categories: ["Atelier de Michel"]
 series: ["Journal Grenouille"]
 series_order: 1

@@ -4,7 +4,7 @@ description: "Une pâte à pizza maison réalisée facilement au robot patissier
 slug: "pate-a-pizza"
 layout: "recette-single"
 date: 2025-04-02
-categories: ["🧂 Sauces, Pâtes & Marinades"]
+categories: ["Sauces, pâtes et marinades"]
 tags: ["pizza", "pâte à pizza", "italie", "kitchenaid", "fait-maison", "longue fermentation"]
 difficulty: "Facile"
 servings: "4 pizzas"

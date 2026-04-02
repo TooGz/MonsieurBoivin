@@ -4,7 +4,7 @@ description: "Des galettes bretonnes authentiques, à base de farine de sarrasin
 slug: "galettes-ble-noir"
 layout: "recette-single"
 date: 2025-02-28
-categories: ["🍝 Plats & Accompagnements"]
+categories: ["Plats et accompagnements"]
 tags: ["galette", "blé noir", "sarrasin", "facile", "traditionnel", "fait-maison"]
 difficulty: "Facile"
 servings: "5"

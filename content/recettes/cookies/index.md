@@ -3,7 +3,7 @@ title: "Cookies Boivin Family Edition"
 description: "La recette des fameux cookies de la famille Boivin !"
 slug: "cookies-boivin-family-edition"
 date: 2025-02-28
-categories: ["🍰 Desserts & Goûter"]
+categories: ["Desserts et goûter"]
 tags: ["cookies", "four", "rapide", "facile", "famille", "enfants"]
 difficulty: "Facile"
 servings: "6"

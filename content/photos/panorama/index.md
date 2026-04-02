@@ -1,6 +1,6 @@
 ---
 title: "Panorama"
-tags: ["Panorama"]
+tags: ["panorama"]
 date: 2012-10-10
 ---
 

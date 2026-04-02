@@ -3,7 +3,7 @@ title: "[Grenouille 3.0] - Introduction"
 description: "Redonner vie au jeu de la grenouille : un projet entre tradition, artisanat et technologie moderne."
 date: 2025-10-06
 authors: ["monsieur-boivin"]
-tags: ["Jeu de la Grenouille","Artisanat","DIY","Projet maker","Menuiserie","Design 3D","Électronique embarquée"]
+tags: ["Jeu de la grenouille","Artisanat","DIY","projet maker","Menuiserie","Design 3D","Électronique embarquée"]
 categories: ["Atelier de Michel"]
 series: ["Grenouille 3.0"]
 series_order: 1

@@ -2,7 +2,7 @@
 title: "Mercedes Paris"
 description: "Des voitures"
 categories: ["Photos"]
-tags: ["Car"]
+tags: ["voiture"]
 date: 2012-10-10
 ---
 

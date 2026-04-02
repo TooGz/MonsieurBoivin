@@ -4,7 +4,7 @@ description: "Journal Grenouille 3.0 — J02 : mortaises à la défonceuse et te
 date: 2025-09-30
 slug: "j02-tenons-mortaises"
 authors: ["monsieur-boivin"]
-tags: ["Jeu de la Grenouille","Artisanat","Menuiserie","Tenon-mortaise","DIY","Projet maker"]
+tags: ["Jeu de la grenouille","Artisanat","Menuiserie","Tenon-mortaise","DIY","projet maker"]
 categories: ["Atelier de Michel"]
 series: ["Journal Grenouille"]
 series_order: 2

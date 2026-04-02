@@ -4,7 +4,7 @@ description: "Un gâteau au yahourt revisité avec des morceaux de bananes fonda
 slug: "gateau-yahourt-banane"
 type: "recette"
 date: 2025-04-02
-categories: ["🍰 Desserts & Goûter"]
+categories: ["Desserts et goûter"]
 tags: ["gâteau", "banane", "yahourt", "four", "facile", "goûter"]
 difficulty: "Facile"
 servings: "8"

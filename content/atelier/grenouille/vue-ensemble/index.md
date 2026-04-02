@@ -5,7 +5,7 @@ date: 2025-10-07
 authors: ["toogz"]
 tags: [
   "Grenouille 3.0",
-  "Jeu de la Grenouille",
+  "Jeu de la grenouille",
   "Fabrication artisanale",
   "Design bois",
   "Électronique",

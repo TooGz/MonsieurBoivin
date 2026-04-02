@@ -4,8 +4,8 @@ type: "recette"
 title: "Bavette de bœuf grillée au Kamado"
 description: "Découvrez comment cuire une bavette de bœuf savoureuse sur le Kamado Big Green Egg pour une viande tendre et pleine de saveurs."
 slug: "bavette-boeuf-grillee"
-categories: ["🔥 Kamado & Cuissons feu"]
-tags: ["bavette", "boeuf", "grillade", "kamado", "bbq"]
+categories: ["Kamado et cuisson au feu"]
+tags: ["bavette", "bœuf", "grillade", "kamado", "bbq"]
 
 difficulty: "Facile"
 servings: "4"

@@ -32,7 +32,7 @@ tags:
   - ESP32
   - Menuiserie
   - LED adressables
-  - Projet maker
+  - projet maker
 
 # Séries : sépare le build log de la doc technique
 series: ["Journal Grenouille"]   # au lieu de "Grenouille 3.0" pour ne pas polluer

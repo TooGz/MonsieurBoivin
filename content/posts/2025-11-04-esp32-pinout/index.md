@@ -5,7 +5,7 @@ description: "ESP32 DevKit V1 : pinout complet, GPIO à utiliser ou éviter, ADC
 authors: ["monsieur-boivin"]
 slug: "esp32-pinout"
 date: 2025-11-03
-categories: ["Electronique"]
+categories: ["Électronique"]
 tags: ["ESP32", "WROOM", "Pinout", "GPIO", "DevKit", "Arduino", "IoT"]
 showTableOfContents: true
 draft: false

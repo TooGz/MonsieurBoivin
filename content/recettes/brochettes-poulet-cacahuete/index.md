@@ -4,7 +4,7 @@ description: "Préparez des brochettes de poulet au Kamado avec une délicieuse 
 slug: "brochettes-poulet-sauce-cacahuetes"
 layout: "recette-single"
 date: 2025-02-28
-categories: ["🔥 Kamado & Cuissons feu"]
+categories: ["Kamado et cuisson au feu"]
 tags: ["poulet", "brochettes", "kamado", "grill", "facile", "été"]
 difficulty: "Moyen"
 servings: "4-8"

@@ -5,7 +5,7 @@ authors: ["monsieur-boivin"]
 slug: "capteurs-piezo-detection-vibration"
 date: 2025-10-21
 categories: ["Électronique"]
-tags: ["piezo", "détection", "vibration", "ESP32", "MCP3008", "prototypage"]
+tags: ["piézo", "détection", "vibration", "ESP32", "MCP3008", "prototypage"]
 showTableOfContents: true
 draft: false
 ---

@@ -3,7 +3,7 @@ title: "[Grenouille 3.0] - Conception bois - Étude, matériaux et fabrication"
 description: "Redonner vie au jeu de la grenouille : un projet entre tradition, artisanat et technologie moderne."
 date: 2025-10-06
 authors: ["monsieur-boivin"]
-tags: ["Jeu de la Grenouille", "Conception"]
+tags: ["Jeu de la grenouille", "Conception"]
 categories: ["Atelier de Michel"]
 series: ["Grenouille 3.0"]
 series_order: 3

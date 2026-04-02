@@ -1,7 +1,7 @@
 ---
 title: "Amsterdam"
 categories: ["Photos"]
-tags: ["City shots"]
+tags: ["city shots"]
 date: 2012-10-10
 ---
 

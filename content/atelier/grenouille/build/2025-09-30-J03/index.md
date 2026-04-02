@@ -4,7 +4,7 @@ description: "Journal Grenouille 3.0 - J03 : assemblage a blanc, controle des di
 date: 2025-10-01
 slug: "j03-assemblage-collage"
 authors: ["monsieur-boivin"]
-tags: ["Jeu de la Grenouille", "Artisanat", "Menuiserie", "Collage", "DIY"]
+tags: ["Jeu de la grenouille", "Artisanat", "Menuiserie", "Collage", "DIY"]
 categories: ["Atelier de Michel"]
 series: ["Journal Grenouille"]
 series_order: 3

@@ -4,7 +4,7 @@ description: "Des gaufres croustillantes à l’extérieur et moelleuses à l’
 slug: "gaufres-boivin-family-edition"
 layout: "recette-single"
 date: 2025-02-28
-categories: ["🍰 Desserts & Goûter"]
+categories: ["Desserts et goûter"]
 tags: ["gaufres", "four", "rapide", "facile", "famille", "goûter"]
 difficulty: "Facile"
 servings: "6"
