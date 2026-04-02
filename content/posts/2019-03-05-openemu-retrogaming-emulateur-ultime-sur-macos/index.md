@@ -1,7 +1,8 @@
 ---
-title: "OpenEmu - Retrogaming l'émulateur ultime sur MacOS"
+title: "OpenEmu, l’émulateur retrogaming ultime sur macOS"
 date: "2019-03-05"
 description: "Jouer à vos jeux d'enfance sur votre Mac"
+authors: ["monsieur-boivin"]
 categories: ["Gaming"]
 tags: ["retrogaming", "macOS", "Arcade"]
 
@@ -10,14 +11,14 @@ showTableOfContents: false
 showBreadcrumbs: false
 ---
 
-Découvrez une petite perle de logiciel retrogaming sur Mac: **OpenEmu**
+Découvrez une petite perle du retrogaming sur Mac : **OpenEmu**
 <!--more-->
 
 ## Retour en force du rétrogaming
 
 Je ne sais pas pour vous, mais pour ma part, ces derniers temps, je suis à fond sur le rétrogaming. Rejouer aux jeux qui ont bercé mon enfance est un vrai plaisir, décuplé par la simplicité d'**OpenEmu**.
 
-La version stable de l'émulateur comprends déjà un bon nombre d'émulateurs:
+La version stable de l'émulateur comprend déjà un bon nombre d'émulateurs :
 
   * Gameboy/Gameboy color
   * Gameboy Advance
@@ -31,11 +32,11 @@ La version stable de l'émulateur comprends déjà un bon nombre d'émulateurs:
   * TurboGraphx-16
   * Virtual Boy
 
-## OpenEmu: la simplicité comme philosophie
+## OpenEmu : la simplicité comme philosophie
 
-Vous trouverez sur [OpenEmu.org][lnk-1] le logiciel qui est disponible pour **OS X** seulement.
+Vous trouverez sur [OpenEmu.org][lnk-1] le logiciel, disponible pour **OS X** seulement.
 
-La philosophie d'OpenEmu, c'est la simplicité d'utilisation et le moins que l'on puisse dire, c'est que c'est réussi! Une fois installé, glissez-déposez vos ROMs dans l'émulateur, et **OpenEmu** se charge du reste, gérant lui même votre bibliothèque de jeux.
+La philosophie d'OpenEmu, c'est la simplicité d'utilisation, et le moins que l'on puisse dire, c'est que c'est réussi ! Une fois installé, glissez-déposez vos ROMs dans l'émulateur, et **OpenEmu** se charge du reste en gérant lui-même votre bibliothèque de jeux.
 
 ![Nes Library][img-1]
 
@@ -45,11 +46,11 @@ Au niveau des options, c'est la même chose, tout ou presque est géré en inter
 
 Si **OpenEmu** n'est disponible que pour les accrocs du rétrogaming possédant un Mac, c'est qu'il utilise largement les technologies d'**OS X**. La présentation *Coverflow* des jeux l'illustre clairement. Un portage Windows ou Linux n'est pas à l'ordre du jour selon *[David McLeod][lnk-2]*, l'homme à l'origine du projet (accessoirement Directeur du design de **Twitch**).
 
-## A fond les manettes !
+## À fond les manettes !
 
 ![OpenEmu - Gameboy Controller Preferences][img-3]
 
-La configuration des manettes est aussi très *user friendly* et la quantité de contrôleurs compatibles est impressionnante, voici la liste non exhaustive:
+La configuration des manettes est aussi très *user friendly* et la quantité de contrôleurs compatibles est impressionnante. Voici une liste non exhaustive :
   
   * Dualshock 4
   * Manette Xbox 360 filaire (avec un driver Mac)
@@ -65,7 +66,7 @@ La configuration des manettes est aussi très *user friendly* et la quantité de
   * Nintendo Wiimote
   * Nintendo Wii U Pro
 
-Pour ma part, jouant exclusivement aux consoles de Big N, j'utilise le **Wii U Pro Controller** qui convient totalement pour pour toute les machines de Nintendo. Que du bonheur !
+Pour ma part, jouant exclusivement aux consoles de Big N, j'utilise le **Wii U Pro Controller**, qui convient parfaitement à toutes les machines de Nintendo. Que du bonheur !
 
 ![Popout Gameplay Window][img-4]
 
