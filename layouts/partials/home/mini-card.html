@@ -1,6 +1,10 @@
 {{ $page := .page }}
 {{ $disableImageOptimization := $page.Site.Params.disableImageOptimization | default false }}
 {{ $featured := false }}
+{{ $showDescription := .showDescription }}
+{{ $showMeta := or .recent .showMeta .showDate }}
+{{ $showDate := .showDate }}
+{{ $dateFormat := $page.Site.Language.Params.dateFormat | default ":date_long" }}
 
 {{ if not ($page.Params.hideFeatureImage | default false) }}
   {{ $images := $page.Resources.ByType "image" }}
@@ -26,6 +30,8 @@
   {{ end }}
 {{ end }}
 
+{{ $description := $page.Description | default ($page.Summary | plainify | truncate 170) }}
+
 <a class="home-redesign__mini-card{{ if .recent }} home-redesign__mini-card--recent{{ end }}" href="{{ $page.RelPermalink }}">
   {{ with $featured }}
     {{ $img := . }}
@@ -40,12 +46,15 @@
     </div>
   {{ end }}
   <div class="home-redesign__mini-card-body">
-    {{ if .recent }}
-      <p class="home-redesign__meta">{{ $page.Section | humanize }}</p>
-      <h3>{{ $page.Title }}</h3>
-    {{ else }}
-      <strong>{{ $page.Title }}</strong>
+    {{ if $showMeta }}
+      <p class="home-redesign__meta">
+        {{ $page.Section | humanize }}
+        {{ if $showDate }} · {{ $page.Date | time.Format $dateFormat }}{{ end }}
+      </p>
     {{ end }}
-    <!-- {{ with $page.Description }}<span>{{ . }}</span>{{ end }} -->
+    <h3 class="home-redesign__mini-card-title">{{ $page.Title }}</h3>
+    {{ if and $showDescription $description }}
+      <p class="home-redesign__mini-card-description">{{ $description }}</p>
+    {{ end }}
   </div>
 </a>
