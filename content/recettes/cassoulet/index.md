@@ -14,7 +14,7 @@ prep_time: "20 min"
 cook_time: "5h"
 rest_time: "12h"
 total_time: "17h20"
-image: "recettes/img/cassoulet.jpg"
+image: "cas-featured.jpg"
 
 internal_temps:
   - name: "Poitrine de porc"

@@ -12,7 +12,7 @@ prep_time: "10 min"
 cook_time: "30 min"
 rest_time: "30 min"
 total_time: "1h10"
-image: "recettes/img/galette-ble-noir.jpg"
+image: "galette-featured.jpg"
 video: ""
 
 internal_temps: []

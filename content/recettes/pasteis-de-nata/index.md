@@ -12,7 +12,7 @@ prep_time: "30 min"
 cook_time: "25 min"
 rest_time: "24h"
 total_time: "24h55"
-image: "recettes/img/pasteis-de-nata.jpg"
+image: "pn-featured.jpg"
 
 ingredients:
   - plat: "Tartelettes en pâte feuilletée"

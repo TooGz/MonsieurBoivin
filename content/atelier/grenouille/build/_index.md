@@ -15,10 +15,10 @@ showReadingTime: false
 showTaxonomies: false
 
 # SEO / médias (optionnels)
-image: "img/cover-build-log.jpg"
-images: ["img/cover-build-log.jpg"]
+image: "featured.jpg"
+images: ["featured.jpg"]
 cover:
-  image: "img/cover-build-log.jpg"
+  image: "featured.jpg"
   alt: "Grenouille 3.0 — fabrication artisanale et électronique"
   caption: "L’Atelier de Michel — build log"
   relative: true

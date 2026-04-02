@@ -12,7 +12,7 @@ prep_time: "15 min"
 cook_time: "25 min"
 rest_time: "0 min"
 total_time: "40 min"
-image: "recettes/img/pasta.jpg"
+image: "featured.jpg"
 video: ""
 
 internal_temps: []

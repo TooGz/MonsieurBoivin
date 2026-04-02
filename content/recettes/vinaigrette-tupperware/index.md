@@ -12,7 +12,7 @@ prep_time: "5 min"
 cook_time: ""
 rest_time: ""
 total_time: "5 min"
-image: "recettes/img/vinaigrette-tupperware.jpg"
+image: "v-featured.jpg"
 video: ""
 
 internal_temps: []

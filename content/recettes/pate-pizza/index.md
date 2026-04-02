@@ -12,7 +12,7 @@ prep_time: "15 min"
 cook_time: "8 min"
 rest_time: "24 h"
 total_time: "24 h"
-image: "recettes/img/pate-pizza.jpg"
+image: "piz-featured.jpg"
 video: ""
 
 internal_temps: []

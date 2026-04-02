@@ -13,7 +13,7 @@ cook_time: "35 min"
 rest_time: ""
 total_time: "45 min"
 authors: ["monsieur-boivin"]
-image: "recettes/img/gateau-yahourt-banane.jpg"
+image: "ba-featured.jpg"
 video: ""
 
 internal_temps: []

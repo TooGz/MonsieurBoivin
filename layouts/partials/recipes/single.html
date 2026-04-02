@@ -32,7 +32,7 @@
     ========================== */}}
     {{ $img := "" }}
     {{ with $p.Resources.GetMatch "featured.*" }}
-      {{ $img = ((.Fill "1200x800 center") | images.Quality 82).RelPermalink }}
+      {{ $img = (.Fill "1200x800 center").RelPermalink }}
     {{ else }}
       {{ $fallbackImg := ($p.Params.featured | default $p.Params.image | default (index $p.Params.cover "image") | default "") }}
       {{ if and $fallbackImg (ne (trim $fallbackImg " ") "") }}

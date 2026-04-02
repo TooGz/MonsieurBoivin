@@ -12,7 +12,7 @@ prep_time: "15 min"
 cook_time: "25 min"
 rest_time: "10 min"
 total_time: "50 min"
-image: "recettes/img/cote-de-boeuf.jpg"
+image: "cb-featured.jpg"
 ingredients:
   - plat: "Côte de Bœuf"
     items:

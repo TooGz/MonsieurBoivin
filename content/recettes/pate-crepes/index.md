@@ -12,7 +12,7 @@ prep_time: "10 min"
 cook_time: "30 min"
 rest_time: "30 min"
 total_time: "1h10"
-image: "recettes/img/pate-a-crepe.webp"
+image: "cr-featured.webp"
 video: ""
 
 internal_temps: []

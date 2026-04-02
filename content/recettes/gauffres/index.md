@@ -12,7 +12,7 @@ prep_time: "10 min"
 cook_time: "25 min"
 rest_time: "30 min"
 total_time: "1h05"
-image: "recettes/img/gaufre-boivin.jpg"
+image: "gf-featured.jpg"
 video: ""
 
 internal_temps: []

@@ -14,7 +14,7 @@ tags: [
   "Plans 3D"
 ]
 categories: ["Atelier de Michel"]
-image: "img/cover-vue-ensemble.jpg"
+image: "featured.png"
 image_alt: "Vue 3D du jeu de la grenouille artisanale avec grenouille en fonte et plateau en bois massif"
 series: ["Grenouille 3.0"]
 series_order: 2

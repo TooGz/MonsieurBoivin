@@ -12,7 +12,7 @@ prep_time: "55 min"
 cook_time: "15 min"
 rest_time: "12h"
 total_time: "13h15"
-image: "https://assets.biggreenegg.eu/app/uploads/2019/08/01161857/topimage-chicken-satay-2019m08-800x533.jpg"
+image: "bro-featured.jpg"
 
 ingredients:
   - plat: "Brochettes de Poulet"
