@@ -1,7 +1,7 @@
 ---
 title: "OpenEmu - Retrogaming l'émulateur ultime sur MacOS"
 date: "2019-03-05"
-description: "Jouer a vos jeux d'enfance sur votre Mac"
+description: "Jouer à vos jeux d'enfance sur votre Mac"
 categories: ["Gaming"]
 tags: ["retrogaming", "macOS", "Arcade"]
 
@@ -15,7 +15,7 @@ Découvrez une petite perle de logiciel retrogaming sur Mac: **OpenEmu**
 
 ## Retour en force du rétrogaming
 
-Je ne sais pas pour vous, mais pour ma part, ces derniers temps, je suis a fond sur le rétrogaming. Rejouer aux jeux qui ont bercés mon enfance est un vrai plaisir, décuplé par la simplicité d'**OpenEmu**.
+Je ne sais pas pour vous, mais pour ma part, ces derniers temps, je suis à fond sur le rétrogaming. Rejouer aux jeux qui ont bercé mon enfance est un vrai plaisir, décuplé par la simplicité d'**OpenEmu**.
 
 La version stable de l'émulateur comprends déjà un bon nombre d'émulateurs:
 
@@ -39,11 +39,11 @@ La philosophie d'OpenEmu, c'est la simplicité d'utilisation et le moins que l'o
 
 ![Nes Library][img-1]
 
-Au niveau des options, c'est la même chose, tout ou presque est géré en interne pour offrir la meilleure experience à l'utilisateur. Cela pourra froisser les utilisateurs plus expérimentés avides d'options en tout genre, mais c'est la garantie que la quasi totalité des ROMs sera fonctionnelle.
+Au niveau des options, c'est la même chose, tout ou presque est géré en interne pour offrir la meilleure expérience à l'utilisateur. Cela pourra froisser les utilisateurs plus expérimentés avides d'options en tout genre, mais c'est la garantie que la quasi-totalité des ROMs sera fonctionnelle.
 
 ![Coverflow][img-2]
 
-Si **OpenEmu** n'est disponible que pour les accrocs du rétrogaming possédant un Mac, c'est qu'il utilise largement les technologies d'**OS X**. La présentation *Coverflow* des jeux l'illustre clairement. Un portage Windows ou Linux n'est pas a l'ordre du jour selon *[David McLeod][lnk-2]*, L'homme à l'origine du projet (accessoirement Directeur du design de **Twitch**).
+Si **OpenEmu** n'est disponible que pour les accrocs du rétrogaming possédant un Mac, c'est qu'il utilise largement les technologies d'**OS X**. La présentation *Coverflow* des jeux l'illustre clairement. Un portage Windows ou Linux n'est pas à l'ordre du jour selon *[David McLeod][lnk-2]*, l'homme à l'origine du projet (accessoirement Directeur du design de **Twitch**).
 
 ## A fond les manettes !
 
@@ -69,7 +69,7 @@ Pour ma part, jouant exclusivement aux consoles de Big N, j'utilise le **Wii U P
 
 ![Popout Gameplay Window][img-4]
 
-Si vous cherchiez un moyen simple et sympa de rejouer a vos anciens jeux et que vous êtes sur **OS X** je ne pourrais que vous recommander de vous pencher sur [OpenEmu][lnk-1].
+Si vous cherchiez un moyen simple et sympa de rejouer à vos anciens jeux et que vous êtes sur **OS X**, je ne pourrais que vous recommander de vous pencher sur [OpenEmu][lnk-1].
 
 
 [img-1]:  ./img/Nintendo-NES-Library.png "Nintendo (NES) Library"

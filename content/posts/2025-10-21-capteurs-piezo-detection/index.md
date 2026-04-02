@@ -25,7 +25,7 @@ Voici le résultat de mes recherches et tests.
 Un **capteur piézo** convertit une **contrainte mécanique** (choc, vibration, flexion) en **tension électrique** grâce à l’effet piézoélectrique.  
 
 En pratique :
-- lorsqu’un palet frappe la surface reliée au piezo → le disque se déforme → une tension apparaît entre ses bornes,
+- lorsqu’un palet frappe la surface reliée au piézo → le disque se déforme → une tension apparaît entre ses bornes,
 - cette tension est **brève et proportionnelle à la force de l’impact**.
 
 ### Caractéristiques principales
@@ -68,7 +68,7 @@ Pour **1 capteur** :
 
 | Composant | Valeur | Rôle |
 |------------|---------|------|
-| Capteur piezo | Ø27 | Détection d’impact |
+| Capteur piézo | Ø27 | Détection d’impact |
 | Résistance (pull-down) | 1 MΩ | Décharge lente du signal |
 | Résistance série | 1–4,7 kΩ | Limite le courant / protège l’entrée ADC |
 | Diodes de protection | 2× 1N4148 | Clampent le signal entre 0 V et 3.3 V |
@@ -88,7 +88,7 @@ Pour **1 capteur** :
 | **Capteur de son** | Réagit aux bruits d’impact | Moins précis spatialement |
 | **Micro-interrupteur** | Déclenchement net | Contact mécanique, usure |
 
-Le piezo reste **le meilleur compromis** pour ce type d’usage :  
+Le piézo reste **le meilleur compromis** pour ce type d’usage :  
 → détection d’un choc ponctuel, sur une structure rigide, à faible coût.
 
 ---
@@ -115,7 +115,7 @@ Je reviendrai là-dessus dans un prochain article, une fois les composants reçu
 
 ## Points clés retenus
 
-- Les capteurs piezo sont **parfaits pour les chocs ponctuels**.  
+- Les capteurs piézo sont **parfaits pour les chocs ponctuels**.  
 - Un filtrage matériel (résistance + diodes + condo) est **indispensable**.  
 - Le MCP3008 permet de **multiplier les capteurs analogiques**.  
 - La fixation mécanique influence plus le signal que le code lui-même.  

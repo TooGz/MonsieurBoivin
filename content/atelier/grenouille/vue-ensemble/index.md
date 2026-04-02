@@ -63,15 +63,15 @@ Le plateau est **entièrement démontable**, ce qui permet de le poncer, le vern
 - Pieds en **Douglas** 70x40mm.  
 
 ### Rampes et bac à palets
-En facade, 4 etages de rampes récuperent tous les palets tombés dans le plateau.  
+En façade, 4 étages de rampes récupèrent tous les palets tombés dans le plateau.  
 - Réalisé en bois massif et en contreplaqué 10mm.    
 - Guidage via cloisons entre les rampes pour éviter les rebonds.
 
 ### Box "Electronique"
-- Contrelplaqué 10mm
-- Accès via une porte à l'arriere.  
-- Fermeture a clé.
-- Ecran
+- Contreplaqué 10mm
+- Accès via une porte à l'arrière.  
+- Fermeture à clé.
+- Écran
 
 ---
 

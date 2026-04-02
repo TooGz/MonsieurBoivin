@@ -1,6 +1,6 @@
 ---
 title: "Projet Grenouille 3.0"
-description: "Documentation sur la création d'un jeu de la grenouille electronique"
+description: "Documentation sur la création d'un jeu de la grenouille électronique"
 categories: ["Atelier de Michel"]
 tags: [
   "Jeu de la grenouille",
@@ -51,7 +51,7 @@ Plans, bois, assemblages, astuces, finitions...
 
 ## Électronique et intelligence du jeu
 
-Capteurs, câblage, LEDs, Ecran, firmware...
+Capteurs, câblage, LEDs, Écran, firmware...
 
 4. [Étude des besoins hardware](./etude-hardware)
 5. Intégration de l’électronique  
@@ -63,12 +63,12 @@ Capteurs, câblage, LEDs, Ecran, firmware...
 
 ## Expérience, maintenance & évolutions
 
-Finitions, Tests, Calibration, Evolutions...
+Finitions, Tests, Calibration, Évolutions...
 
 09. Interface & Expérience de jeu  
 10. Finitions & Design Final  
 11. Tests, calibration & dépannage  
-12. Evolutions  
+12. Évolutions  
 
 ---
 

@@ -56,7 +56,7 @@ Le choix du bois détermine la longévité du jeu, son poids et son look.
 
 ## 3.4. Outillage utilisé
 
-Je n’ai pas un atelier d’ébéniste, juste un petit etablie et quelques outils qui vont bien.  
+Je n’ai pas un atelier d’ébéniste, juste un petit établi et quelques outils qui vont bien.  
 
 - Scie sous table
 - Scie à onglet
@@ -66,9 +66,9 @@ Je n’ai pas un atelier d’ébéniste, juste un petit etablie et quelques outi
 - Défonceuse (pour les mortaises)   
 - Ciseau à bois
 - Trusquin
-- Metre
-- Equerre
-- Scie Cloche
+- Mètre
+- Équerre
+- Scie cloche
 
 ---
 

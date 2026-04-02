@@ -1,6 +1,6 @@
 ---
 title: "Grenouille 3.0 – Étude des besoins hardware"
-description: "Analyse complète des besoins matériels : écrans HUB75, capteurs piezo, MCP3008, DFPlayer, LEDs, alimentation, et choix de l’ESP32-S3."
+description: "Analyse complète des besoins matériels : écrans HUB75, capteurs piézo, MCP3008, DFPlayer, LEDs, alimentation, et choix de l’ESP32-S3."
 authors: ["monsieur-boivin"]
 slug: "etude-hardware"
 date: 2025-11-17
@@ -29,13 +29,13 @@ Pourquoi 128×64 ?
 
 Et surtout : ça donne de la place pour faire des trucs sympa, sans sacrifier la lisibilité.
 
-## La détection : piezos + MCP3008
+## La détection : piézos + MCP3008
 
 Le jeu repose sur l’impact : quand le palet tombe dans un trou, le jeu doit réagir instantanément.
 
 Je garde donc :
 
-- Des capteurs piezo  
+- Des capteurs piézo  
 - Branchés sur 2 MCP3008  
 - Soit 14 entrées analogiques (Pour les 14 trous du jeu)
 
@@ -111,7 +111,7 @@ La stabilité de l’alim est primordiale pour éviter bugs et parasitages.
 
 - **ESP32‑S3 N16R8** → cerveau  
 - **4 panneaux HUB75** → 128×64  
-- **2 MCP3008** → 14 capteurs piezo  
+- **2 MCP3008** → 14 capteurs piézo  
 - **DFPlayer Mini** → son  
 - **LED WS2812 / SK6812** → ambiance lumineuse  
 - **Boutons** → Start, Mode, Service  

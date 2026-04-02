@@ -1,6 +1,6 @@
 ---
 title: "Projet Grenouille 3.0 - Archive de cadrage"
-description: "Premieres notes de cadrage conservees comme archive interne. Le point d'entree actif du projet est maintenant la section Atelier."
+description: "Premières notes de cadrage conservées comme archive interne. Le point d'entrée actif du projet est maintenant la section Atelier."
 date: 2025-09-02T00:04:58+02:00
 tags: ["Jeux en Bois", "Grenouille"]
 categories: ["DIY"]
@@ -11,39 +11,39 @@ build:
   publishResources: false
 ---
 
-Cette page conserve les premieres notes de cadrage du projet.
+Cette page conserve les premières notes de cadrage du projet.
 
-Le point d'entree actif est maintenant ici :
+Le point d'entrée actif est maintenant ici :
 
 - [Projet Grenouille 3.0]({{< relref "atelier/grenouille/_index.md" >}})
 - [Carnet de construction]({{< relref "atelier/grenouille/build/_index.md" >}})
 
-Les notes utiles de depart restent ci-dessous pour memoire.
+Les notes utiles de départ restent ci-dessous pour mémoire.
 
 ## Besoin initial
 
-Avant de parler composants et architecture, je me suis demande ce qu'il fallait vraiment pour que la grenouille 3.0 soit un jeu fiable, fun et simple a utiliser.
+Avant de parler composants et architecture, je me suis demandé ce qu'il fallait vraiment pour que la grenouille 3.0 soit un jeu fiable, fun et simple à utiliser.
 
-- Detection fiable des lancers
+- Détection fiable des lancers
 - Retour visuel clair et immersif
 - Retour sonore dynamique
-- Logique de jeu evolutive
+- Logique de jeu évolutive
 - Robustesse et autonomie
-- Simplicite d'usage pour un joueur non technique
-- Possibilite d'ajouter de nouveaux modules plus tard
+- Simplicité d'usage pour un joueur non technique
+- Possibilité d'ajouter de nouveaux modules plus tard
 
 ## Contraintes d'usage
 
-- Demarrage instantane
-- Tolerance aux coupures
+- Démarrage instantané
+- Tolérance aux coupures
 - Auto-test au boot
 - Mode attract quand le jeu est inactif
 - Configuration locale simple
-- Mise a jour firmware sans procedure lourde
+- Mise à jour firmware sans procédure lourde
 
-## Roadmap de depart
+## Roadmap de départ
 
-- Proto minimal : 1 piezo + LED + buzzer
+- Proto minimal : 1 piézo + LED + buzzer
 - Multi-piezos via MCP3008
 - Effets lumineux
 - Audio
