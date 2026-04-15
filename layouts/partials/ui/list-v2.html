@@ -1,0 +1,130 @@
+{{ $enableToc := site.Params.list.showTableOfContents | default false }}
+{{ if isset .Params "showTableOfContents" }}
+  {{ $enableToc = index .Params "showTableOfContents" }}
+{{ else if isset .Params "ShowToc" }}
+  {{ $enableToc = index .Params "ShowToc" }}
+{{ else if isset .Params "showtoc" }}
+  {{ $enableToc = index .Params "showtoc" }}
+{{ end }}
+{{ $showToc := and $enableToc (in .TableOfContents "<ul") }}
+
+{{ $showBreadcrumbs := site.Params.list.showBreadcrumbs | default false }}
+{{ if isset .Params "showBreadcrumbs" }}
+  {{ $showBreadcrumbs = index .Params "showBreadcrumbs" }}
+{{ else if isset .Params "ShowBreadCrumbs" }}
+  {{ $showBreadcrumbs = index .Params "ShowBreadCrumbs" }}
+{{ else if isset .Params "showbreadcrumbs" }}
+  {{ $showBreadcrumbs = index .Params "showbreadcrumbs" }}
+{{ end }}
+
+{{ $orderByWeight := .Params.orderByWeight | default (site.Params.list.orderByWeight | default false) }}
+{{ $pages := .Pages.ByDate.Reverse }}
+{{ if $orderByWeight }}
+  {{ $pages = .Pages.ByWeight }}
+{{ end }}
+{{ $paginator := .Paginate $pages }}
+
+{{ $eyebrow := "Collection" }}
+{{ if eq .Kind "section" }}
+  {{ $eyebrow = .Section | humanize }}
+{{ else if eq .Kind "taxonomy" }}
+  {{ $eyebrow = .Data.Plural | default .Title | humanize }}
+{{ else if eq .Kind "term" }}
+  {{ $eyebrow = .Data.Singular | default .Type | humanize }}
+{{ else if .Type }}
+  {{ $eyebrow = .Type | humanize }}
+{{ end }}
+
+{{ $description := .Description | default (.Summary | plainify) }}
+{{ $entryCount := len .Pages }}
+{{ $showCardTags := and (eq .Section "posts") (ne .Kind "taxonomy") }}
+{{ $showCardDate := site.Params.article.showDate | default true }}
+{{ if or (eq .Section "recettes") (eq .Type "recette") (eq .Type "recettes") }}
+  {{ $showCardDate = false }}
+{{ end }}
+{{ if isset .Params "showDate" }}
+  {{ $showCardDate = index .Params "showDate" }}
+{{ else if and (isset .Params "cascade") (isset .Params.cascade "showDate") }}
+  {{ $showCardDate = index .Params.cascade "showDate" }}
+{{ end }}
+
+{{ $translations := .AllTranslations }}
+{{ with .File }}
+  {{ $path := .Path }}
+  {{ range $translations }}
+    {{ $lang := print "." .Lang ".md" }}
+    {{ $path = replace $path $lang ".md" }}
+  {{ end }}
+  {{ $jsPage := resources.Get "js/page.js" }}
+  {{ $jsPage = $jsPage | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+  <script
+    type="text/javascript"
+    src="{{ $jsPage.RelPermalink }}"
+    integrity="{{ $jsPage.Data.Integrity }}"
+    data-oid="views_{{ $path }}"
+    data-oid-likes="likes_{{ $path }}"></script>
+{{ end }}
+
+<section class="site-v2-page">
+  <header class="site-v2-hero">
+    {{ if $showBreadcrumbs }}
+      {{ partial "ui/breadcrumbs.html" . }}
+    {{ end }}
+    <p class="site-v2-eyebrow">{{ $eyebrow }}</p>
+    <h1 class="site-v2-title">{{ .Title | emojify }}</h1>
+    {{ with $description }}
+      <p class="site-v2-description">{{ . }}</p>
+    {{ end }}
+    <div class="site-v2-meta">
+      <span>{{ $entryCount }} contenus</span>
+      {{ if .Section }}<span>{{ .Section | humanize }}</span>{{ end }}
+      {{ if eq .Kind "term" }}<span>{{ .Data.Singular | default "archive" | humanize }}</span>{{ end }}
+    </div>
+  </header>
+
+  {{ with .Content }}
+    <section class="site-v2-intro">
+      <div class="prose max-w-none dark:prose-invert">
+        {{ . }}
+      </div>
+    </section>
+  {{ end }}
+
+  {{ if $showToc }}
+    <section class="site-v2-intro">
+      <div class="site-v2-section-head">
+        <h2>Sommaire</h2>
+        <p>Acces rapide au contenu de cette page.</p>
+      </div>
+      <div class="prose max-w-none dark:prose-invert">
+        {{ partial "toc.html" . }}
+      </div>
+    </section>
+  {{ end }}
+
+  {{ if gt (len $paginator.Pages) 0 }}
+    <section>
+      <div class="site-v2-section-head">
+        <h2>Tous les contenus</h2>
+        <p>Une vue d'ensemble claire, avec le meme langage visuel que la home.</p>
+      </div>
+      <div class="site-v2-card-grid">
+        {{ range $paginator.Pages }}
+          {{ partial "ui/list-card.html" (dict
+            "page" .
+            "showDescription" true
+            "showMeta" true
+            "showDate" $showCardDate
+            "showTags" $showCardTags
+          ) }}
+        {{ end }}
+      </div>
+    </section>
+  {{ else }}
+    <section class="site-v2-empty">
+      <p><em>{{ i18n "list.no_articles" | emojify }}</em></p>
+    </section>
+  {{ end }}
+
+  {{ partial "pagination.html" . }}
+</section>

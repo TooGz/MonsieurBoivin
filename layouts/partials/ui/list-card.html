@@ -1,0 +1,30 @@
+{{ $page := .page }}
+{{ $variant := .variant | default "feature" }}
+{{ $showDescription := true }}
+{{ if isset . "showDescription" }}
+  {{ $showDescription = .showDescription }}
+{{ end }}
+{{ $showMeta := true }}
+{{ if isset . "showMeta" }}
+  {{ $showMeta = .showMeta }}
+{{ end }}
+{{ $showDate := $page.Site.Params.article.showDate | default true }}
+{{ if isset $page.Params "showDate" }}
+  {{ $showDate = index $page.Params "showDate" }}
+{{ end }}
+{{ if isset . "showDate" }}
+  {{ $showDate = .showDate }}
+{{ end }}
+{{ $showTags := false }}
+{{ if isset . "showTags" }}
+  {{ $showTags = .showTags }}
+{{ end }}
+
+{{ partial "home/mini-card.html" (dict
+  "page" $page
+  "variant" $variant
+  "showDescription" $showDescription
+  "showMeta" $showMeta
+  "showDate" $showDate
+  "showTags" $showTags
+) }}

@@ -1,0 +1,19 @@
+{{- $page := . -}}
+{{- if not $page.IsHome -}}
+  <nav class="site-v2-crumbs" aria-label="Fil d'Ariane">
+    <ol>
+      <li><a href="{{ site.Home.RelPermalink }}">Accueil</a></li>
+      {{- template "site-v2-crumb" (dict "page" $page "current" $page) -}}
+      <li aria-current="page">{{ $page.Title | emojify }}</li>
+    </ol>
+  </nav>
+{{- end -}}
+
+{{- define "site-v2-crumb" -}}
+  {{- if .page.Parent -}}
+    {{- template "site-v2-crumb" (dict "page" .page.Parent "current" .current) -}}
+  {{- end -}}
+  {{- if and (not .page.IsHome) (ne .page .current) -}}
+    <li><a href="{{ .page.RelPermalink }}">{{ .page.Title | default (.page.Section | humanize) }}</a></li>
+  {{- end -}}
+{{- end -}}
