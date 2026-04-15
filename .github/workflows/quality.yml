@@ -1,0 +1,89 @@
+name: Quality Gate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.155.2"
+          extended: true
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Generate inventory
+        run: npm run audit:inventory
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Lint JavaScript
+        run: npm run lint:js
+
+      - name: Lint CSS
+        run: npm run lint:css
+
+      - name: Build static site
+        run: npm run build:site:ci
+
+      - name: Check links and anchors
+        run: npm run audit:links
+
+      - name: Check SEO templates
+        run: npm run audit:seo
+
+      - name: Validate HTML
+        run: npm run audit:html
+
+      - name: Run accessibility suite
+        run: npm run test:a11y
+
+      - name: Run shell smoke tests
+        run: npm run test:e2e
+
+      - name: Run Lighthouse CI
+        run: npm run lhci
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: reports/lighthouse

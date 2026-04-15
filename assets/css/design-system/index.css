@@ -1,0 +1,4 @@
+@layer ds-base, ds-components, ds-utilities, ds-overrides;
+
+/* Manifest file kept for documentation and editor discovery.
+   Hugo bundles the design-system files individually to preserve order without PostCSS imports. */

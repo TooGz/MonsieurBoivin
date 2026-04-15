@@ -1,0 +1,46 @@
+{
+  "name": "monsieurboivin-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Audit, design system, progressive migration and quality tooling for MonsieurBoivin.fr",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "inventory": "node scripts/inventory/generate-site-inventory.mjs",
+    "build:site": "hugo --gc --minify --environment production --baseURL https://monsieurboivin.fr/ --cacheDir ./.hugo_cache/npm-build",
+    "build:site:ci": "hugo --gc --minify --environment production --baseURL http://127.0.0.1:4173/ --cacheDir ./.hugo_cache/npm-build",
+    "serve:public": "node scripts/audit/serve-public.mjs",
+    "lint:js": "eslint .",
+    "lint:css": "stylelint \"assets/**/*.css\"",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "audit:inventory": "node scripts/inventory/generate-site-inventory.mjs",
+    "audit:links": "node scripts/audit/link-check.mjs",
+    "audit:seo": "node scripts/audit/seo-template-check.mjs",
+    "audit:html": "node scripts/audit/html-validator.mjs",
+    "audit:lighthouse": "node scripts/audit/lighthouse-run.mjs",
+    "audit:axe": "node scripts/audit/axe-run.mjs",
+    "audit": "node scripts/audit/run-all.mjs",
+    "test:e2e": "npm run build:site:ci && playwright test tests/site-shell.spec.mjs",
+    "test:a11y": "npm run build:site:ci && playwright test tests/a11y.spec.mjs",
+    "lhci": "lhci autorun --config=./lighthouserc.json"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@eslint/js": "^9.25.0",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.53.0",
+    "axe-core": "^4.10.2",
+    "chrome-launcher": "^1.1.2",
+    "eslint": "^9.25.0",
+    "globals": "^16.0.0",
+    "lighthouse": "^12.6.0",
+    "prettier": "^3.5.3",
+    "stylelint": "^16.18.0",
+    "stylelint-config-standard": "^37.0.0",
+    "vnu-jar": "^24.10.17",
+    "web-vitals": "^5.0.2"
+  }
+}

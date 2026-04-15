@@ -1,0 +1,796 @@
+﻿{
+    "generatedAt":  "2026-04-15T13:35:37.2712999Z",
+    "stack":  {
+                  "generator":  "Hugo",
+                  "theme":  "Blowfish",
+                  "routing":  "Filesystem content bundles + Hugo taxonomies",
+                  "css":  [
+                              "themes/blowfish/assets/css/compiled/main.css",
+                              "assets/css/design-system/*.css",
+                              "assets/css/styles.css",
+                              "assets/css/custom.css"
+                          ],
+                  "javascript":  [
+                                     "themes/blowfish/assets/js/*.js",
+                                     "assets/js/main.js",
+                                     "assets/js/components/*.js"
+                                 ],
+                  "ci":  [
+                             ".github/workflows/hugo.yaml",
+                             ".github/workflows/quality.yml"
+                         ]
+              },
+    "pages":  [
+                  {
+                      "source":  "_index.md",
+                      "url":  "/",
+                      "title":  "Cuisine maison, DIY et idées utiles à refaire",
+                      "pageType":  "home",
+                      "section":  "root",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "atelier/_index.md",
+                      "url":  "/atelier/",
+                      "title":  "Atelier – Projets Maker, Bois \u0026 Électronique",
+                      "pageType":  "listing:atelier",
+                      "section":  "atelier",
+                      "layout":  "list",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "atelier/grenouille/_index.md",
+                      "url":  "/atelier/grenouille/",
+                      "title":  "Projet Grenouille 3.0",
+                      "pageType":  "detail:project",
+                      "section":  "atelier",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "atelier/grenouille/build/_index.md",
+                      "url":  "/atelier/grenouille/carnet-de-construction/",
+                      "title":  "[Grenouille 3.0] - Carnet de construction",
+                      "pageType":  "detail:project",
+                      "section":  "atelier",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "atelier/grenouille/build/2025-09-29-J01/index.md",
+                      "url":  "/atelier/grenouille/build/j01-decoupe-bois/",
+                      "title":  "Grenouille 3.0 - J01 : Découpes du bois (pieds \u0026 traverses)",
+                      "pageType":  "detail:build-log",
+                      "section":  "atelier",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "atelier/grenouille/build/2025-09-30-J02/index.md",
+                      "url":  "/atelier/grenouille/build/j02-tenons-mortaises/",
+                      "title":  "Grenouille 3.0 - J02 : Réalisation des tenons et mortaises",
+                      "pageType":  "detail:build-log",
+                      "section":  "atelier",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "atelier/grenouille/build/2025-09-30-J03/index.md",
+                      "url":  "/atelier/grenouille/build/j03-assemblage-collage/",
+                      "title":  "Grenouille 3.0 - J03 : Assemblage à blanc et collage de la structure",
+                      "pageType":  "detail:build-log",
+                      "section":  "atelier",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  true
+                  },
+                  {
+                      "source":  "atelier/grenouille/conception-bois/index.md",
+                      "url":  "/atelier/grenouille/conception-bois/",
+                      "title":  "[Grenouille 3.0] - Conception bois - Étude, matériaux et fabrication",
+                      "pageType":  "detail:project",
+                      "section":  "atelier",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "atelier/grenouille/etude-hardware/index.md",
+                      "url":  "/atelier/grenouille/etude-hardware/",
+                      "title":  "Grenouille 3.0 – Étude des besoins hardware",
+                      "pageType":  "detail:project",
+                      "section":  "atelier",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "atelier/grenouille/introduction/index.md",
+                      "url":  "/atelier/grenouille/introduction/",
+                      "title":  "[Grenouille 3.0] - Introduction",
+                      "pageType":  "detail:project",
+                      "section":  "atelier",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "atelier/grenouille/vue-ensemble/index.md",
+                      "url":  "/atelier/grenouille/vue-ensemble/",
+                      "title":  "[Grenouille 3.0] - Vue d’ensemble",
+                      "pageType":  "detail:project",
+                      "section":  "atelier",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "authors/_index.md",
+                      "url":  "/authors/",
+                      "title":  "Auteurs",
+                      "pageType":  "listing:authors",
+                      "section":  "authors",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "authors/monsieur-boivin/_index.md",
+                      "url":  "/authors/monsieur-boivin/",
+                      "title":  "Monsieur Boivin",
+                      "pageType":  "detail:author-profile",
+                      "section":  "authors",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "authors/toogz/_index.md",
+                      "url":  "/authors/toogz/",
+                      "title":  "TooGz",
+                      "pageType":  "detail:author-profile",
+                      "section":  "authors",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "photos/_index.md",
+                      "url":  "/photos/",
+                      "title":  "Photos",
+                      "pageType":  "listing:photos",
+                      "section":  "photos",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "photos/2012-Youssoupha-le-chabada/index.md",
+                      "url":  "/photos/2012-Youssoupha-le-chabada/",
+                      "title":  "Youssoupha @ Le Chabada [2012]",
+                      "pageType":  "detail:photo-album",
+                      "section":  "photos",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "photos/amsterdam/index.md",
+                      "url":  "/photos/amsterdam/",
+                      "title":  "Amsterdam",
+                      "pageType":  "detail:photo-album",
+                      "section":  "photos",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "photos/Foire Saint Martin/index.md",
+                      "url":  "/photos/Foire Saint Martin/",
+                      "title":  "Foire St Martin [2012]",
+                      "pageType":  "detail:photo-album",
+                      "section":  "photos",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "photos/mercedes-paris/index.md",
+                      "url":  "/photos/mercedes-paris/",
+                      "title":  "Mercedes Paris",
+                      "pageType":  "detail:photo-album",
+                      "section":  "photos",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "photos/panorama/index.md",
+                      "url":  "/photos/panorama/",
+                      "title":  "Panorama",
+                      "pageType":  "detail:photo-album",
+                      "section":  "photos",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "photos/Paris/index.md",
+                      "url":  "/photos/Paris/",
+                      "title":  "Paris",
+                      "pageType":  "detail:photo-album",
+                      "section":  "photos",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "photos/Scred-Connexion-urbano-festival-2012/index.md",
+                      "url":  "/photos/Scred-Connexion-urbano-festival-2012/",
+                      "title":  "Scred Connexion @ Urbano Festival [2012]",
+                      "pageType":  "detail:photo-album",
+                      "section":  "photos",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "photos/soleil-d-hiver-angers/index.md",
+                      "url":  "/photos/soleil-d-hiver-angers/",
+                      "title":  "Soleil d\u0027Hiver @ Angers [2012]",
+                      "pageType":  "detail:photo-album",
+                      "section":  "photos",
+                      "layout":  "album-single",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "photos/terra-botanica/index.md",
+                      "url":  "/photos/terra-botanica/",
+                      "title":  "Terra Botanica",
+                      "pageType":  "detail:photo-album",
+                      "section":  "photos",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "photos/Urbano Tour/index.md",
+                      "url":  "/photos/Urbano Tour/",
+                      "title":  "Urbano Tour",
+                      "pageType":  "detail:photo-album",
+                      "section":  "photos",
+                      "layout":  "album-single",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "photos/Youssoupha-Urbano-Festival/index.md",
+                      "url":  "/photos/Youssoupha-Urbano-Festival/",
+                      "title":  "Youssoupha @ Urbano Festival",
+                      "pageType":  "detail:photo-album",
+                      "section":  "photos",
+                      "layout":  "album-single",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "posts/_index.md",
+                      "url":  "/posts/",
+                      "title":  "Articles",
+                      "pageType":  "listing:articles",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "posts/2012-08-01-les-bases-de-la-photographie-part-1-3-ouverture/index.md",
+                      "url":  "/posts/bases-photo-ouverture/",
+                      "title":  "Les bases de la photographie [PART 1/3] : l’ouverture",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "posts/2012-08-08-les-bases-de-la-photographie-part-2-3-vitesse-obturation/index.md",
+                      "url":  "/posts/bases-photo-vitesse-obturation/",
+                      "title":  "Les bases de la photographie [PART 2/3] : la vitesse d’obturation",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "posts/2012-08-09-les-bases-de-la-photographie-part-3-3-sensibilite/index.md",
+                      "url":  "/posts/bases-photo-sensibilite/",
+                      "title":  "Les bases de la photographie [PART 3/3] : la sensibilité ISO",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "posts/2012-09-13-pourquoi-il-faut-shooter-en-raw/index.md",
+                      "url":  "/posts/2012-09-13-pourquoi-il-faut-shooter-en-raw/",
+                      "title":  "Pourquoi il faut shooter en RAW - archive incomplète",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  true
+                  },
+                  {
+                      "source":  "posts/2012-09-29-la-profondeur-de-champ-et-le-flou-darriere-plan-ou-le-bokeh-quelques-explications/index.md",
+                      "url":  "/posts/profondeur-de-champ-et-bokeh/",
+                      "title":  "Profondeur de champ et bokeh : comprendre (enfin) le flou d’arrière-plan",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "posts/2012-10-07-5-conseils-pour-reussir-les-photos-de-concert/index.md",
+                      "url":  "/posts/photos-de-concert-conseils/",
+                      "title":  "5 conseils pour réussir vos photos de concert !",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "posts/2013-03-05-prise-en-main-du-samyang-8mm-f3-5-umc-fish-eye-cs-ii/index.md",
+                      "url":  "/posts/2013-03-05-prise-en-main-du-samyang-8mm-f3-5-umc-fish-eye-cs-ii/",
+                      "title":  "Prise en main du Samyang 8mm f/3.5 UMC Fish-Eye CS II",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "post",
+                      "contentType":  "",
+                      "draft":  true
+                  },
+                  {
+                      "source":  "posts/2019-03-05-openemu-retrogaming-emulateur-ultime-sur-macos/index.md",
+                      "url":  "/posts/2019-03-05-openemu-retrogaming-emulateur-ultime-sur-macos/",
+                      "title":  "OpenEmu, l’émulateur retrogaming ultime sur macOS",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "posts/2019-10-10-le-moteur-deux-temps/index.md",
+                      "url":  "/posts/2019-10-10-le-moteur-deux-temps/",
+                      "title":  "Le moteur deux temps - archive incomplète",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  true
+                  },
+                  {
+                      "source":  "posts/2021-10-12-recette-subcool-super-soil/index.md",
+                      "url":  "/posts/super-soil-subcool/",
+                      "title":  "Super Soil de Subcool : recette, utilisation et culture",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "posts/2024-03-29-Construction-Borne-Arcade-Upright-de-A-a-Z/index.md",
+                      "url":  "/posts/Construction-Borne-Arcade/",
+                      "title":  "Construction d\u0027une borne d\u0027arcade 2 joueurs de A à Z",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  true
+                  },
+                  {
+                      "source":  "posts/2024-04-03-Ressources-Arcade-Bible/index.md",
+                      "url":  "/posts/ressources-arcade/",
+                      "title":  "Ressources arcade - ma bible",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  true
+                  },
+                  {
+                      "source":  "posts/2025-09-01-grenouille-3-point-zero/_index.md",
+                      "url":  "/posts/2025-09-01-grenouille-3-point-zero/",
+                      "title":  "Projet Grenouille 3.0 - Archive de cadrage",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  true
+                  },
+                  {
+                      "source":  "posts/2025-09-06-grenouille-proto-detection/index.md",
+                      "url":  "/posts/grenouille-proto-detection/",
+                      "title":  "Proto Détection — MCP3008 + capteurs piézo",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  true
+                  },
+                  {
+                      "source":  "posts/2025-09-06-proto-grenouille-3-point-zero-vue-ensemble/index.md",
+                      "url":  "/posts/grenouille-proto/",
+                      "title":  "Projet Grenouille 3.0 — Proto",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  true
+                  },
+                  {
+                      "source":  "posts/2025-10-21-capteurs-piezo-detection/index.md",
+                      "url":  "/posts/capteurs-piezo-detection-vibration/",
+                      "title":  "Capteurs Piézo et Détection de Vibrations",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "posts/2025-11-04-esp32-pinout/index.md",
+                      "url":  "/posts/esp32-pinout/",
+                      "title":  "ESP32 WROOM DevKit V1 – Pinout complet \u0026 GPIO à utiliser (Guide clair)",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "posts/2026-01-22-Macintosh-Plus-sur-Internet/index.md",
+                      "url":  "/posts/mac-plus-internet/",
+                      "title":  "Ressources pour connecter un Macintosh de 1986 sur le Web",
+                      "pageType":  "detail:article",
+                      "section":  "posts",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/_index.md",
+                      "url":  "/recettes/",
+                      "title":  "Carnet de Recettes",
+                      "pageType":  "listing:recipes",
+                      "section":  "recettes",
+                      "layout":  "",
+                      "contentType":  "recette",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/bavette/index.md",
+                      "url":  "/recettes/bavette-boeuf-grillee/",
+                      "title":  "Bavette de bœuf grillée au Kamado",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "",
+                      "contentType":  "recette",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/brochettes-poulet-cacahuete/index.md",
+                      "url":  "/recettes/brochettes-poulet-sauce-cacahuetes/",
+                      "title":  "Brochettes de poulet à la sauce aux cacahuètes et achards maison",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "recette-single",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/cassoulet/index.md",
+                      "url":  "/recettes/cassoulet-kamado/",
+                      "title":  "Cassoulet au Kamado Big Green Egg",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "recette-single",
+                      "contentType":  "recette-single",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/cookies/index.md",
+                      "url":  "/recettes/cookies-boivin-family-edition/",
+                      "title":  "Cookies Boivin Family Edition",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/cote-de-boeuf/index.md",
+                      "url":  "/recettes/cote-de-boeuf-kamado/",
+                      "title":  "Côte de Bœuf au Kamado",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "recette-single",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/galettes-ble-noir/index.md",
+                      "url":  "/recettes/galettes-ble-noir/",
+                      "title":  "Galettes de Blé Noir",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "recette-single",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/gateau-yahourt-banane/index.md",
+                      "url":  "/recettes/gateau-yahourt-banane/",
+                      "title":  "Gâteau au Yahourt \u0026 Bananes",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "",
+                      "contentType":  "recette",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/gauffres/index.md",
+                      "url":  "/recettes/gaufres-boivin-family-edition/",
+                      "title":  "Gaufres Boivin Family Edition",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "recette-single",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/pasteis-de-nata/index.md",
+                      "url":  "/recettes/pasteis-de-nata-kamado/",
+                      "title":  "Pastéis de nata au Kamado",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "recette-single",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/pate-crepes/index.md",
+                      "url":  "/recettes/pate-a-crepes/",
+                      "title":  "Pâte à Crêpes",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "recette-single",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/pate-pizza/index.md",
+                      "url":  "/recettes/pate-a-pizza/",
+                      "title":  "Pâte à Pizza Maison (Style Napolitain)",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "recette-single",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/spaghettis-allassassina/index.md",
+                      "url":  "/recettes/spaghettis-allassassina/",
+                      "title":  "Spaghettis All’assassina",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "recette-single",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/tender-facon-kfc/index.md",
+                      "url":  "/recettes/tenders-poulet-facon-kfc/",
+                      "title":  "Tenders de Poulet Facon KFC",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "recette-single",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "recettes/vinaigrette-tupperware/index.md",
+                      "url":  "/recettes/vinaigrette-tupperware/",
+                      "title":  "Vinaigrette \u0027Tupperware",
+                      "pageType":  "detail:recipe",
+                      "section":  "recettes",
+                      "layout":  "recette-single",
+                      "contentType":  "",
+                      "draft":  false
+                  },
+                  {
+                      "source":  "tags/_index.md",
+                      "url":  "/tags/",
+                      "title":  "Tags",
+                      "pageType":  "listing:tags",
+                      "section":  "tags",
+                      "layout":  "",
+                      "contentType":  "",
+                      "draft":  false
+                  }
+              ],
+    "pageTypes":  [
+                      {
+                          "pageType":  "detail:article",
+                          "count":  18
+                      },
+                      {
+                          "pageType":  "detail:recipe",
+                          "count":  14
+                      },
+                      {
+                          "pageType":  "detail:photo-album",
+                          "count":  11
+                      },
+                      {
+                          "pageType":  "detail:project",
+                          "count":  6
+                      },
+                      {
+                          "pageType":  "detail:build-log",
+                          "count":  3
+                      },
+                      {
+                          "pageType":  "detail:author-profile",
+                          "count":  2
+                      },
+                      {
+                          "pageType":  "listing:tags",
+                          "count":  1
+                      },
+                      {
+                          "pageType":  "listing:recipes",
+                          "count":  1
+                      },
+                      {
+                          "pageType":  "listing:articles",
+                          "count":  1
+                      },
+                      {
+                          "pageType":  "listing:atelier",
+                          "count":  1
+                      },
+                      {
+                          "pageType":  "home",
+                          "count":  1
+                      },
+                      {
+                          "pageType":  "listing:photos",
+                          "count":  1
+                      },
+                      {
+                          "pageType":  "listing:authors",
+                          "count":  1
+                      }
+                  ],
+    "components":  [
+                       {
+                           "id":  "global-header",
+                           "role":  "Header + navigation legacy Blowfish",
+                           "source":  "themes/blowfish/layouts/partials/header/basic.html"
+                       },
+                       {
+                           "id":  "global-footer",
+                           "role":  "Footer global legacy Blowfish",
+                           "source":  "themes/blowfish/layouts/partials/footer.html"
+                       },
+                       {
+                           "id":  "home-shell-v2",
+                           "role":  "Homepage custom shell with hero, timeline, filters, CTA",
+                           "source":  "layouts/partials/home/custom.html"
+                       },
+                       {
+                           "id":  "mini-card",
+                           "role":  "Reusable cards for article / recipe / project highlights",
+                           "source":  "layouts/partials/home/mini-card.html"
+                       },
+                       {
+                           "id":  "recipe-single",
+                           "role":  "Dedicated recipe detail layout",
+                           "source":  "layouts/partials/recipes/single.html"
+                       },
+                       {
+                           "id":  "design-system-patterns",
+                           "role":  "Reference component patterns and tokens for migration",
+                           "source":  "design-system/components/*.html"
+                       }
+                   ],
+    "sampleRoutes":  [
+                         {
+                             "label":  "Cuisine maison, DIY et idées utiles à refaire",
+                             "route":  "/",
+                             "pageType":  "home"
+                         },
+                         {
+                             "label":  "Articles",
+                             "route":  "/posts/",
+                             "pageType":  "listing:articles"
+                         },
+                         {
+                             "label":  "Carnet de Recettes",
+                             "route":  "/recettes/",
+                             "pageType":  "listing:recipes"
+                         },
+                         {
+                             "label":  "Les bases de la photographie [PART 1/3] : l’ouverture",
+                             "route":  "/posts/bases-photo-ouverture/",
+                             "pageType":  "detail:article"
+                         },
+                         {
+                             "label":  "Bavette de bœuf grillée au Kamado",
+                             "route":  "/recettes/bavette-boeuf-grillee/",
+                             "pageType":  "detail:recipe"
+                         },
+                         {
+                             "label":  "Projet Grenouille 3.0",
+                             "route":  "/atelier/grenouille/",
+                             "pageType":  "detail:project"
+                         },
+                         {
+                             "label":  "Youssoupha @ Le Chabada [2012]",
+                             "route":  "/photos/2012-Youssoupha-le-chabada/",
+                             "pageType":  "detail:photo-album"
+                         }
+                     ],
+    "debts":  [
+                  {
+                      "level":  "high",
+                      "area":  "layout-shell",
+                      "summary":  "Home custom v2 et pages legacy Blowfish n utilisent pas encore le meme shell visuel.",
+                      "impact":  "Header, footer, densite de contenu et cartes changent trop d un type de page a l autre."
+                  },
+                  {
+                      "level":  "high",
+                      "area":  "css-architecture",
+                      "summary":  "Le repo melange classes Blowfish compilees et CSS custom maison.",
+                      "impact":  "Collision de conventions, duplication de tokens et maintenance plus lente."
+                  },
+                  {
+                      "level":  "medium",
+                      "area":  "component-consistency",
+                      "summary":  "Les cartes articles, listings sections et recette-single n ont pas encore la meme grille ni la meme hierarchie meta.",
+                      "impact":  "Le site ne lit pas encore comme un systeme unique."
+                  },
+                  {
+                      "level":  "medium",
+                      "area":  "js-behaviour",
+                      "summary":  "Le theme legacy, la home v2 et les scripts d audit introduisent plusieurs zones JS.",
+                      "impact":  "Il faut unifier data-js, theme toggle et menu mobile."
+                  },
+                  {
+                      "level":  "low",
+                      "area":  "tooling",
+                      "summary":  "Le repo n avait pas de package root ni de quality gate front avant cette passe.",
+                      "impact":  "Les regressions HTML, SEO, a11y et perf passaient plus facilement."
+                  },
+                  {
+                      "level":  "low",
+                      "area":  "coverage",
+                      "summary":  "12 pages photo restent surtout documentaires et n utilisent pas encore de pattern v2 dedie.",
+                      "impact":  "Un pattern galerie ou album doit arriver dans une deuxieme vague."
+                  }
+              ]
+}

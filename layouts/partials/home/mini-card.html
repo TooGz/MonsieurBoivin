@@ -1,11 +1,14 @@
 {{ $page := .page }}
+{{ $variant := .variant | default "feature" }}
+{{ $showDescription := .showDescription | default false }}
+{{ $showMeta := or .showMeta .showDate }}
+{{ $showDate := .showDate | default false }}
+{{ $showTags := .showTags | default false }}
+{{ $filterable := .filterable | default false }}
 {{ $disableImageOptimization := $page.Site.Params.disableImageOptimization | default false }}
-{{ $featured := false }}
-{{ $showDescription := .showDescription }}
-{{ $showMeta := or .recent .showMeta .showDate }}
-{{ $showDate := .showDate }}
 {{ $dateFormat := $page.Site.Language.Params.dateFormat | default ":date_long" }}
 
+{{ $featured := false }}
 {{ if not ($page.Params.hideFeatureImage | default false) }}
   {{ $images := $page.Resources.ByType "image" }}
   {{ $featured = $images.GetMatch "*feature*" }}
@@ -31,30 +34,53 @@
 {{ end }}
 
 {{ $description := $page.Description | default ($page.Summary | plainify | truncate 170) }}
+{{ $tags := $page.Params.tags | default (slice) }}
+{{ $filterTags := slice }}
+{{ range $tags }}
+  {{ $filterTags = $filterTags | append (. | urlize) }}
+{{ end }}
 
-<a class="home-redesign__mini-card{{ if .recent }} home-redesign__mini-card--recent{{ end }}" href="{{ $page.RelPermalink }}">
-  {{ with $featured }}
-    {{ $img := . }}
-    {{ if and (not $disableImageOptimization) (ne .MediaType.SubType "svg") }}
-      {{ $img = .Fill "640x360 center" }}
+<article
+  class="home-hub-card home-hub-card--{{ $variant }}"
+  {{ if $filterable }}data-filter-card data-tags="{{ delimit $filterTags " " }}"{{ end }}>
+  <a class="home-hub-card__link" href="{{ $page.RelPermalink }}">
+    {{ with $featured }}
+      {{ $img := . }}
+      {{ if and (not $disableImageOptimization) (ne .MediaType.SubType "svg") }}
+        {{ $img = .Fill "720x480 center q90" }}
+      {{ end }}
+      <div class="home-hub-card__media">
+        <img
+          src="{{ $img.RelPermalink }}"
+          alt="{{ $page.Params.image_alt | default (index $page.Params.cover "alt") | default $page.Title }}"
+          width="{{ $img.Width }}"
+          height="{{ $img.Height }}"
+          loading="lazy"
+          decoding="async">
+      </div>
     {{ end }}
-    <div class="home-redesign__mini-card-media">
-      <img
-        class="home-redesign__mini-card-image"
-        src="{{ $img.RelPermalink }}"
-        alt="{{ $page.Params.image_alt | default (index $page.Params.cover "alt") | default $page.Title }}">
+
+    <div class="home-hub-card__body">
+      {{ if $showMeta }}
+        <p class="home-hub-card__meta">
+          <span>{{ $page.Section | humanize }}</span>
+          {{ if $showDate }}<span>{{ $page.Date | time.Format $dateFormat }}</span>{{ end }}
+        </p>
+      {{ end }}
+
+      <h3 class="home-hub-card__title">{{ $page.Title }}</h3>
+
+      {{ if and $showDescription $description }}
+        <p class="home-hub-card__description">{{ $description }}</p>
+      {{ end }}
+
+      {{ if and $showTags (gt (len $tags) 0) }}
+        <ul class="home-hub-card__tags" aria-label="Tags">
+          {{ range first 3 $tags }}
+            <li>{{ . }}</li>
+          {{ end }}
+        </ul>
+      {{ end }}
     </div>
-  {{ end }}
-  <div class="home-redesign__mini-card-body">
-    {{ if $showMeta }}
-      <p class="home-redesign__meta">
-        {{ $page.Section | humanize }}
-        {{ if $showDate }} · {{ $page.Date | time.Format $dateFormat }}{{ end }}
-      </p>
-    {{ end }}
-    <h3 class="home-redesign__mini-card-title">{{ $page.Title }}</h3>
-    {{ if and $showDescription $description }}
-      <p class="home-redesign__mini-card-description">{{ $description }}</p>
-    {{ end }}
-  </div>
-</a>
+  </a>
+</article>

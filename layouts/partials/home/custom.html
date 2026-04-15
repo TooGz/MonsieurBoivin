@@ -2,396 +2,487 @@
 {{ $posts := where $allPages "Section" "posts" }}
 {{ $recipes := where $allPages "Section" "recettes" }}
 {{ $workshopPages := where $allPages "Section" "atelier" }}
-{{ $recentLimit := .Site.Params.homepage.showRecentItems | default 6 }}
-{{ $recentPages := first $recentLimit $allPages }}
+{{ $recentPages := first 5 $allPages }}
+{{ $featuredArticles := first 6 $posts }}
+{{ $featuredRecipes := first 3 $recipes }}
+{{ $featuredWorkshop := first 3 $workshopPages }}
+{{ $dateFormat := .Site.Language.Params.dateFormat | default ":date_long" }}
 
 {{ $grenouille := site.GetPage "/atelier/grenouille" }}
 {{ $grenouilleBuild := site.GetPage "/atelier/grenouille/build" }}
-{{ $grenouilleHardware := site.GetPage "/atelier/grenouille/etude-hardware" }}
-
 {{ $buildPages := slice }}
 {{ with $grenouilleBuild }}
   {{ $buildPages = .RegularPages.ByDate.Reverse }}
 {{ end }}
-{{ $recentBuildPages := first 3 $buildPages }}
+{{ $latestBuild := false }}
+{{ if gt (len $buildPages) 0 }}
+  {{ $latestBuild = index $buildPages 0 }}
+{{ end }}
+
+{{ $projectLink := "/atelier/" | relLangURL }}
+{{ with $grenouille }}
+  {{ $projectLink = .RelPermalink }}
+{{ end }}
 
 {{ $projectDocCount := 0 }}
 {{ with $grenouille }}
   {{ $projectDocCount = len .RegularPages }}
 {{ end }}
 
-{{ $latestBuild := false }}
-{{ if gt (len $buildPages) 0 }}
-  {{ $latestBuild = index $buildPages 0 }}
-{{ end }}
-
-{{ $latestPage := false }}
-{{ if gt (len $recentPages) 0 }}
-  {{ $latestPage = index $recentPages 0 }}
-{{ end }}
-
-{{ $starterContent := slice }}
-{{ with site.GetPage "/atelier/grenouille" }}{{ $starterContent = $starterContent | append . }}{{ end }}
-{{ with site.GetPage "/posts/esp32-pinout" }}{{ $starterContent = $starterContent | append . }}{{ end }}
-{{ with site.GetPage "/posts/capteurs-piezo-detection-vibration" }}{{ $starterContent = $starterContent | append . }}{{ end }}
-{{ with site.GetPage "/recettes/tender-facon-kfc" }}{{ $starterContent = $starterContent | append . }}{{ end }}
-
-{{ $projectLink := "/atelier/" | relLangURL }}
-{{ with $grenouille }}{{ $projectLink = .RelPermalink }}{{ end }}
-
+{{ $authorName := .Site.Params.Author.name | default .Site.Title }}
+{{ $authorRole := .Site.Params.Author.role | default "Cuisine maison, atelier DIY et notes utiles" }}
+{{ $authorSignature := .Site.Params.Author.headline | default .Site.Params.description }}
+{{ $lead := .Description | default .Site.Params.description }}
 {{ $disableImageOptimization := .Site.Params.disableImageOptimization | default false }}
-{{ $disableHeroImageFilter := .Site.Params.homepage.disableHeroImageFilter | default false }}
 
-<article class="home-redesign-hero max-w-full prose dark:prose-invert">
-  <div class="relative">
-    <div class="absolute inset-x-0 bottom-0 h-1/2"></div>
-    <div class="home-redesign__hero-wrap mx-auto p-0">
-      <div class="relative shadow-xl sm:overflow-hidden rounded-2xl home-redesign__hero-frame">
-        <div class="absolute inset-0">
-          {{ $homepageImage := "" }}
-          {{ with .Site.Params.defaultBackgroundImage }}
-            {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
-              {{ $homepageImage = resources.GetRemote . }}
-            {{ else }}
-              {{ $homepageImage = resources.Get . }}
-            {{ end }}
-          {{ end }}
-          {{ with .Site.Params.homepage.homepageImage }}
-            {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
-              {{ $homepageImage = resources.GetRemote . }}
-            {{ else }}
-              {{ $homepageImage = resources.Get . }}
-            {{ end }}
-          {{ end }}
-          {{ if $homepageImage }}
-            <img class="h-full w-full object-cover nozoom mt-0 mr-0 mb-0 ml-0" src="{{ $homepageImage.RelPermalink }}">
-            {{ if not $disableHeroImageFilter }}
-              <div class="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-600 dark:from-primary-600 dark:to-secondary-800 mix-blend-multiply"></div>
-            {{ else }}
-              <div class="absolute inset-0 from-primary-500 to-secondary-600 dark:from-primary-600 dark:to-secondary-800 mix-blend-multiply"></div>
-            {{ end }}
-          {{ end }}
-        </div>
-        <div class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-28 lg:px-8">
-          <div class="home-redesign__hero-shell">
-            <div class="home-redesign__hero-copy">
-              <div class="home-redesign__hero-tags" aria-hidden="true">
-                <span class="home-redesign__hero-tag">Cuisine maison</span>
-                <span class="home-redesign__hero-tag">DIY documente</span>
-                <span class="home-redesign__hero-tag">Notes utiles</span>
-              </div>
+{{ $authorImage := "" }}
+{{ with .Site.Params.Author.image }}
+  {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
+    {{ $authorImage = resources.GetRemote . }}
+  {{ else }}
+    {{ $authorImage = resources.Get . }}
+  {{ end }}
+{{ end }}
+{{ if and $authorImage (not $disableImageOptimization) }}
+  {{ $authorImage = $authorImage.Fill "220x220 center q96" }}
+{{ end }}
 
-              <p class="home-redesign__hero-kicker">Carnet vivant pour suivre ce qui se construit, se cuisine et se garde sous la main.</p>
+{{ $heroImage := "" }}
+{{ with .Site.Params.homepage.homepageImage }}
+  {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
+    {{ $heroImage = resources.GetRemote . }}
+  {{ else }}
+    {{ $heroImage = resources.Get . }}
+  {{ end }}
+{{ end }}
+{{ if and $heroImage (not $disableImageOptimization) }}
+  {{ $heroImage = $heroImage.Fill "1600x900 center q92" }}
+{{ end }}
 
-              {{ with .Site.Params.Author.image }}
-                {{ $authorImage := "" }}
-                {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
-                  {{ $authorImage = resources.GetRemote . }}
-                {{ else }}
-                  {{ $authorImage = resources.Get . }}
-                {{ end }}
-                {{ if $authorImage }}
-                  {{ if not $disableImageOptimization }}
-                    {{ $authorImage = $authorImage.Fill (print "288x288 q" ( $.Site.Params.Author.imagequality | default "96" )) }}
-                  {{ end }}
-                  <img class="home-redesign__hero-avatar" width="144" height="144" alt="{{ $.Site.Params.Author.name | default " Author" }}" src="{{ $authorImage.RelPermalink }}">
-                {{ end }}
-              {{ end }}
+{{ $tagScratch := newScratch }}
+{{ $tagScratch.Set "tags" (slice) }}
+{{ range $featuredArticles }}
+  {{ range first 4 (.Params.tags | default (slice)) }}
+    {{ $tags := $tagScratch.Get "tags" }}
+    {{ if not (in $tags .) }}
+      {{ $tagScratch.Set "tags" ($tags | append .) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $articleTags := first 6 ($tagScratch.Get "tags") }}
 
-              {{ if not $disableHeroImageFilter }}
-                <h1 class="home-redesign__hero-title text-neutral-200">
-                  {{ .Site.Params.Author.name | default .Site.Title }}
-                </h1>
-                {{ with .Site.Params.Author.headline }}
-                  <h2 class="home-redesign__hero-subtitle text-neutral-300">
-                    {{ . | markdownify }}
-                  </h2>
-                {{ end }}
-              {{ else }}
-                <h1 class="home-redesign__hero-title text-neutral-800 dark:text-neutral-200">
-                  {{ .Site.Params.Author.name | default .Site.Title }}
-                </h1>
-                {{ with .Site.Params.Author.headline }}
-                  <h2 class="home-redesign__hero-subtitle text-neutral-800 dark:text-neutral-300">
-                    {{ . | markdownify }}
-                  </h2>
-                {{ end }}
-              {{ end }}
+<div class="home-hub" data-home-hub>
+  <header class="home-hub__page-header" aria-label="En-tête de la page d'accueil">
+    <nav class="home-hub__nav" data-sticky-shell aria-label="Navigation principale">
+      <a class="home-hub__brand" href="{{ "/" | relLangURL }}">
+        {{ with $authorImage }}
+          <img
+            src="{{ .RelPermalink }}"
+            alt="Portrait de {{ $authorName }}"
+            width="{{ .Width }}"
+            height="{{ .Height }}"
+            fetchpriority="high"
+            decoding="async">
+        {{ end }}
+        <span>
+          <strong>{{ $authorName }}</strong>
+          <small>Atelier, cuisine, notes</small>
+        </span>
+      </a>
 
-              <div class="home-redesign__hero-social">
-                {{ with .Site.Params.Author.links }}
-                  <div class="home-redesign__hero-social-links">
-                    {{ range $links := . }}
-                      {{ range $name, $url := $links }}
-                        {{ if not $disableHeroImageFilter }}
-                          <a class="home-redesign__social-link text-primary-300" href="{{ $url }}" target="_blank" aria-label="{{ $name | title }}" rel="me noopener noreferrer">{{ partial "icon.html" $name }}</a>
-                        {{ else }}
-                          <a class="home-redesign__social-link text-primary-800 dark:text-primary-200" href="{{ $url }}" target="_blank" aria-label="{{ $name | title }}" rel="me noopener noreferrer">{{ partial "icon.html" $name }}</a>
-                        {{ end }}
-                      {{ end }}
-                    {{ end }}
-                  </div>
-                {{ end }}
-              </div>
+      <div class="home-hub__nav-links" aria-label="Liens rapides">
+        <a href="#maintenant">Projet</a>
+        <a href="#articles">Articles</a>
+        <a href="{{ "/recettes/" | relLangURL }}">Cuisine</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#contact">Contact</a>
+      </div>
 
-              <section class="home-redesign__hero-content prose prose-invert">{{ .Content }}</section>
+      <div class="home-hub__nav-actions">
+        <button class="home-hub__theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+          <span class="home-hub__theme-icon home-hub__theme-icon--moon" aria-hidden="true">{{ partial "icon.html" "moon" }}</span>
+          <span class="home-hub__theme-icon home-hub__theme-icon--sun" aria-hidden="true">{{ partial "icon.html" "sun" }}</span>
+          <span data-theme-label>Mode sombre</span>
+        </button>
 
-              <div class="home-redesign__hero-band" aria-label="Resume du site">
-                <a class="home-redesign__hero-stat home-redesign__hero-stat--link" href="{{ "/posts/" | relLangURL }}" aria-label="Voir toutes les notes">
-                  <p class="home-redesign__hero-stat-label">Notes</p>
-                  <p class="home-redesign__hero-stat-value">{{ len $posts }}</p>
-                </a>
-                <a class="home-redesign__hero-stat home-redesign__hero-stat--link" href="{{ "/recettes/" | relLangURL }}" aria-label="Voir toutes les recettes">
-                  <p class="home-redesign__hero-stat-label">Recettes</p>
-                  <p class="home-redesign__hero-stat-value">{{ len $recipes }}</p>
-                </a>
-                <a class="home-redesign__hero-stat home-redesign__hero-stat--link" href="{{ "/atelier/" | relLangURL }}" aria-label="Voir tout l'atelier">
-                  <p class="home-redesign__hero-stat-label">Atelier</p>
-                  <p class="home-redesign__hero-stat-value">{{ len $workshopPages }}</p>
-                </a>
-                <article class="home-redesign__hero-stat home-redesign__hero-stat--wide">
-                  <p class="home-redesign__hero-stat-label">Dernier mouvement</p>
-                  {{ with $latestPage }}
-                    <p class="home-redesign__hero-stat-value home-redesign__hero-stat-value--text">{{ .Title }}</p>
-                  {{ else }}
-                    <p class="home-redesign__hero-stat-value home-redesign__hero-stat-value--text">Nouvelle page bientot</p>
-                  {{ end }}
-                </article>
-              </div>
-
-              <div class="home-redesign__actions home-redesign__actions--hero">
-                <a class="home-redesign__button home-redesign__button--primary" href="{{ $projectLink }}">Suivre le projet en cours</a>
-                <a class="home-redesign__button" href="#en-ce-moment">Voir le tableau de bord</a>
-                <a class="home-redesign__button" href="#pour-commencer">Commencer ici</a>
-              </div>
-            </div>
-
-            <aside class="home-redesign__hero-rail">
-              <article class="home-redesign__hero-panel">
-                <p class="home-redesign__eyebrow">En ce moment</p>
-                {{ with $grenouille }}
-                  <h3>{{ .Title }}</h3>
-                  {{ with .Description }}<p>{{ . }}</p>{{ end }}
-                {{ else }}
-                  <h3>L'atelier en cours</h3>
-                  <p>Le projet principal du moment reste accessible depuis la section atelier.</p>
-                {{ end }}
-
-                <ul class="home-redesign__hero-list">
-                  {{ with $latestBuild }}
-                    <li>Derniere etape : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-                  {{ end }}
-                  <li>{{ $projectDocCount }} page{{ if ne $projectDocCount 1 }}s{{ end }} actives dans la doc projet{{ if gt (len $buildPages) 0 }}, plus {{ len $buildPages }} entree{{ if ne (len $buildPages) 1 }}s{{ end }} de build log{{ end }}.</li>
-                </ul>
-
-                <div class="home-redesign__hero-panel-actions">
-                  {{ with $grenouille }}
-                    <a class="home-redesign__button home-redesign__button--primary" href="{{ .RelPermalink }}">Ouvrir le projet</a>
-                  {{ end }}
-                </div>
-              </article>
-
-              <article class="home-redesign__hero-panel home-redesign__hero-panel--secondary">
-                <p class="home-redesign__eyebrow">Cadence du site</p>
-                {{ with $latestPage }}
-                  <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-                  <p>{{ .Date | time.Format (.Site.Language.Params.dateFormat | default ":date_long") }}</p>
-                {{ else }}
-                  <h3>Le prochain ajout arrive</h3>
-                  <p>Le carnet continue de bouger entre atelier, cuisine et notes.</p>
-                {{ end }}
-
-                <div class="home-redesign__hero-pulse">
-                  <span class="home-redesign__hero-pulse-dot" aria-hidden="true"></span>
-                  <p>{{ len $allPages }} pages publiees a explorer.</p>
-                </div>
-              </article>
-            </aside>
+        <details class="home-hub__nav-disclosure" data-nav-disclosure>
+          <summary aria-label="Ouvrir le menu mobile">
+            <span>{{ partial "icon.html" "bars" }}</span>
+            <span>Menu</span>
+          </summary>
+          <div class="home-hub__nav-panel">
+            <a href="#maintenant">Projet</a>
+            <a href="#articles">Articles</a>
+            <a href="{{ "/atelier/" | relLangURL }}">Atelier</a>
+            <a href="{{ "/recettes/" | relLangURL }}">Cuisine</a>
+            <a href="#timeline">Timeline</a>
+            <a href="#contact">Contact</a>
+            <button class="home-hub__theme-toggle home-hub__theme-toggle--panel" type="button" data-theme-toggle aria-pressed="false">
+              <span class="home-hub__theme-icon home-hub__theme-icon--moon" aria-hidden="true">{{ partial "icon.html" "moon" }}</span>
+              <span class="home-hub__theme-icon home-hub__theme-icon--sun" aria-hidden="true">{{ partial "icon.html" "sun" }}</span>
+              <span data-theme-label>Mode sombre</span>
+            </button>
           </div>
+        </details>
+      </div>
+    </nav>
+
+    <section class="home-hub__hero" aria-labelledby="home-hero-title">
+      {{ with $heroImage }}
+        <div class="home-hub__hero-backdrop" aria-hidden="true">
+          <img
+            src="{{ .RelPermalink }}"
+            alt="Arrière-plan bleu nuit du site Monsieur Boivin"
+            width="{{ .Width }}"
+            height="{{ .Height }}"
+            fetchpriority="high"
+            decoding="async">
         </div>
-      </div>
-    </div>
-  </div>
-</article>
-
-<section class="home-redesign">
-  <section class="home-redesign__section" id="en-ce-moment">
-    <div class="home-redesign__section-heading">
-      <div>
-        <p class="home-redesign__eyebrow">Tableau de bord</p>
-        <h2>Le site comme carnet vivant</h2>
-        <p>Projet en cours, volume de contenu utile, et dernier mouvement du site. L'idée est simple : retrouver vite ce qui compte sans fouiller partout.</p>
-      </div>
-    </div>
-
-    <div class="home-redesign__dashboard-grid">
-      <article class="home-redesign__project-card">
-        <p class="home-redesign__spotlight-label">Projet du moment</p>
-        {{ with $grenouille }}
-          <h3>{{ .Title }}</h3>
-          {{ with .Description }}<p>{{ . }}</p>{{ end }}
-        {{ else }}
-          <h3>L'atelier en cours</h3>
-          <p>Le projet principal du moment reste accessible depuis la section atelier.</p>
-        {{ end }}
-
-        <ul class="home-redesign__project-list">
-          {{ with $latestBuild }}
-            <li>Derniere etape publiee : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-          {{ end }}
-          <li>{{ $projectDocCount }} page{{ if ne $projectDocCount 1 }}s{{ end }} de documentation active{{ if gt (len $buildPages) 0 }}, plus {{ len $buildPages }} entree{{ if ne (len $buildPages) 1 }}s{{ end }} dans le carnet de build{{ end }}.</li>
-          <li>Le projet reste separe entre documentation de fond, etapes de fabrication et recherches hardware pour garder une lecture claire.</li>
-        </ul>
-
-        <div class="home-redesign__actions">
-          {{ with $grenouille }}
-            <a class="home-redesign__button home-redesign__button--primary" href="{{ .RelPermalink }}">Voir le projet</a>
-          {{ end }}
-          {{ with $grenouilleBuild }}
-            <a class="home-redesign__button" href="{{ .RelPermalink }}">Ouvrir le carnet</a>
-          {{ end }}
-          {{ with $grenouilleHardware }}
-            <a class="home-redesign__button" href="{{ .RelPermalink }}">Voir la partie hardware</a>
-          {{ end }}
-        </div>
-      </article>
-
-      <div class="home-redesign__metrics">
-        <article class="home-redesign__metric">
-          <p class="home-redesign__metric-label">Articles et notes</p>
-          <p class="home-redesign__metric-value">{{ len $posts }}</p>
-          <p class="home-redesign__metric-note">guides, recherches et ressources a garder sous la main</p>
-        </article>
-
-        <article class="home-redesign__metric">
-          <p class="home-redesign__metric-label">Recettes</p>
-          <p class="home-redesign__metric-value">{{ len $recipes }}</p>
-          <p class="home-redesign__metric-note">fiches pensees pour etre vraiment refaites</p>
-        </article>
-
-        <article class="home-redesign__metric">
-          <p class="home-redesign__metric-label">Pages atelier</p>
-          <p class="home-redesign__metric-value">{{ len $workshopPages }}</p>
-          <p class="home-redesign__metric-note">projet, build log, conception bois et hardware</p>
-        </article>
-
-        <article class="home-redesign__metric">
-          <p class="home-redesign__metric-label">Derniere mise a jour</p>
-          {{ with $latestPage }}
-            <p class="home-redesign__metric-value home-redesign__metric-value--text">{{ .Date | time.Format (.Site.Language.Params.dateFormat | default ":date_long") }}</p>
-            <p class="home-redesign__metric-note"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
-          {{ else }}
-            <p class="home-redesign__metric-value home-redesign__metric-value--text">A venir</p>
-          {{ end }}
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="home-redesign__section" id="pour-commencer">
-    <div class="home-redesign__section-heading">
-      <div>
-        <p class="home-redesign__eyebrow">Pour commencer</p>
-        <h2>Les meilleures portes d'entree du site</h2>
-        <p>Si vous decouvrez le site, commencez par ces quelques pages. Elles representent bien l'equilibre entre atelier, guides utiles et cuisine maison.</p>
-      </div>
-    </div>
-
-    <div class="home-redesign__recent-grid">
-      {{ range $starterContent }}
-        <article class="home-redesign__recent-card">
-          {{ partial "home/mini-card.html" (dict "page" . "showMeta" true "showDate" true "showDescription" true) }}
-        </article>
       {{ end }}
-    </div>
-  </section>
 
-  <section class="home-redesign__section">
-    <div class="home-redesign__section-heading">
-      <div>
-        <p class="home-redesign__eyebrow">Suivre ce que je loggue</p>
-        <h2>Trois facons d'entrer dans le site</h2>
-        <p>Les recherches et guides pour comprendre, l'atelier pour suivre un projet vivant, et la cuisine pour garder des recettes qui meritent de revenir a table.</p>
-      </div>
-    </div>
+      <div class="home-hub__hero-shell">
+        <div class="home-hub__hero-copy">
+          <p class="home-hub__eyebrow">Carnet perso qui reste utile</p>
 
-    <div class="home-redesign__content-columns">
-      <div class="home-redesign__column">
-        <div class="home-redesign__column-head">
-          <h3>Notes et recherches</h3>
-          <a href="{{ "/posts/" | relLangURL }}">Tout voir</a>
+          <div class="home-hub__tag-row" aria-label="Univers du site">
+            <span>Recettes testées</span>
+            <span>Atelier DIY</span>
+            <span>Notes utiles</span>
+          </div>
+
+          <div class="home-hub__identity">
+            {{ with $authorImage }}
+              <img
+                class="home-hub__avatar"
+                src="{{ .RelPermalink }}"
+                alt="Portrait de {{ $authorName }}"
+                width="{{ .Width }}"
+                height="{{ .Height }}"
+                decoding="async">
+            {{ end }}
+
+            <div>
+              <h1 id="home-hero-title">{{ $authorName }}</h1>
+              <p class="home-hub__hero-role">{{ $authorRole }}</p>
+            </div>
+          </div>
+
+          <p class="home-hub__hero-signature">{{ $authorSignature }}</p>
+          <p class="home-hub__hero-description">{{ $lead }}</p>
+
+          <div class="home-hub__hero-actions">
+            <a class="home-hub__button home-hub__button--primary" href="{{ $projectLink }}">Suivre le projet en cours</a>
+            <a class="home-hub__button" href="#articles">Ouvrir les derniers articles</a>
+          </div>
+
+          <div class="home-hub__socials" aria-label="Réseaux de {{ $authorName }}">
+            {{ with .Site.Params.Author.links }}
+              {{ range . }}
+                {{ range $name, $url := . }}
+                  <a href="{{ $url }}" target="_blank" rel="me noopener noreferrer" aria-label="{{ $name | title }}">
+                    {{ partial "icon.html" $name }}
+                  </a>
+                {{ end }}
+              {{ end }}
+            {{ end }}
+            <a href="mailto:{{ .Site.Params.Author.email }}" aria-label="Envoyer un email">{{ partial "icon.html" "email" }}</a>
+          </div>
+
+          <ul class="home-hub__hero-metrics" aria-label="Repères rapides">
+            <li>
+              <strong>{{ len $posts }}</strong>
+              <span>articles</span>
+            </li>
+            <li>
+              <strong>{{ len $recipes }}</strong>
+              <span>recettes</span>
+            </li>
+            <li>
+              <strong>{{ len $workshopPages }}</strong>
+              <span>pages atelier</span>
+            </li>
+          </ul>
         </div>
-        <div class="home-redesign__stack">
-          {{ range first 3 $posts }}
-            {{ partial "home/mini-card.html" (dict "page" . "showMeta" true "showDate" true "showDescription" true) }}
-          {{ end }}
-        </div>
-      </div>
 
-      <div class="home-redesign__column">
-        <div class="home-redesign__column-head">
-          <h3>Atelier vivant</h3>
-          <a href="{{ "/atelier/" | relLangURL }}">Tout voir</a>
-        </div>
-        <div class="home-redesign__stack">
-          {{ range first 3 $workshopPages }}
-            {{ partial "home/mini-card.html" (dict "page" . "showMeta" true "showDate" true "showDescription" true) }}
-          {{ end }}
-        </div>
-      </div>
+        <aside class="home-hub__hero-rail" aria-label="Résumé du moment">
+          <article class="home-hub__panel home-hub__panel--accent">
+            <p class="home-hub__eyebrow">En ce moment</p>
+            {{ with $grenouille }}
+              <h2>{{ .Title }}</h2>
+              <p>{{ .Description | default "Le gros morceau du moment, documenté étape par étape." }}</p>
+            {{ else }}
+              <h2>Projet principal</h2>
+              <p>Je garde ici le chantier actif, les tests et les choix qui valent le détour.</p>
+            {{ end }}
 
-      <div class="home-redesign__column">
-        <div class="home-redesign__column-head">
-          <h3>Recettes a refaire</h3>
-          <a href="{{ "/recettes/" | relLangURL }}">Tout voir</a>
-        </div>
-        <div class="home-redesign__stack">
-          {{ range first 3 $recipes }}
-            {{ partial "home/mini-card.html" (dict "page" . "showMeta" true "showDate" true "showDescription" true) }}
-          {{ end }}
-        </div>
-      </div>
-    </div>
-  </section>
+            <ul class="home-hub__bullet-list">
+              {{ with $latestBuild }}
+                <li>Dernière étape publiée : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+              {{ end }}
+              <li>{{ $projectDocCount }} page{{ if ne $projectDocCount 1 }}s{{ end }} de doc déjà en ligne.</li>
+              <li>Chrono, photos, matos et retours terrain au même endroit.</li>
+            </ul>
 
-  <section class="home-redesign__section">
-    <div class="home-redesign__section-heading">
-      <div>
-        <p class="home-redesign__eyebrow">Carnet recent</p>
-        <h2>Les derniers ajouts du site</h2>
-        <p>Le flux recent pour voir ce qui a bouge en dernier, sans distinction artificielle entre projet, note, recette ou build log.</p>
-      </div>
-    </div>
-
-    <div class="home-redesign__recent-grid">
-      {{ range $recentPages }}
-        <article class="home-redesign__recent-card">
-          {{ partial "home/mini-card.html" (dict "page" . "recent" true "showMeta" true "showDate" true "showDescription" true) }}
-        </article>
-      {{ end }}
-    </div>
-  </section>
-
-  {{ if gt (len $recentBuildPages) 0 }}
-    <section class="home-redesign__section">
-      <div class="home-redesign__section-heading">
-        <div>
-          <p class="home-redesign__eyebrow">Journal de fabrication</p>
-          <h2>Les dernieres etapes du build</h2>
-          <p>La partie la plus chronologique du site. Ici je garde la trace des choix, des etapes et des petits ajustements de l'atelier.</p>
-        </div>
-        {{ with $grenouilleBuild }}
-          <a href="{{ .RelPermalink }}">Voir tout le carnet</a>
-        {{ end }}
-      </div>
-
-      <div class="home-redesign__recent-grid">
-        {{ range $recentBuildPages }}
-          <article class="home-redesign__recent-card">
-            {{ partial "home/mini-card.html" (dict "page" . "showMeta" true "showDate" true "showDescription" true) }}
+            <a class="home-hub__button home-hub__button--primary" href="{{ $projectLink }}">Voir le dossier</a>
           </article>
-        {{ end }}
+
+          <article class="home-hub__panel">
+            <p class="home-hub__eyebrow">Dernier mouvement</p>
+            {{ with index $recentPages 0 }}
+              <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+              <p>{{ .Date | time.Format $dateFormat }}</p>
+              <p>{{ .Description | default (.Summary | plainify | truncate 130) }}</p>
+            {{ end }}
+          </article>
+        </aside>
       </div>
     </section>
-  {{ end }}
-</section>
+  </header>
+
+  <div class="home-hub__main" id="home-hub-main">
+    <section class="home-hub__section" id="maintenant">
+      <div class="home-hub__section-heading">
+        <div>
+          <p class="home-hub__eyebrow">Tableau de bord</p>
+          <h2>Ce qui bouge vraiment sur le site</h2>
+          <p>Le projet actif, le volume utile et les dernières mises à jour. Pas de remplissage, juste ce qui aide à choisir où cliquer.</p>
+        </div>
+      </div>
+
+      <div class="home-hub__dashboard">
+        <article class="home-hub__spotlight">
+          <p class="home-hub__eyebrow">Projet du moment</p>
+          {{ with $grenouille }}
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Description | default "Un gros projet atelier tenu au propre, avec build log, doc et partie hardware." }}</p>
+          {{ else }}
+            <h3>Atelier en cours</h3>
+            <p>Le chantier principal reste centralisé côté atelier avec les étapes importantes et les choix de matos.</p>
+          {{ end }}
+
+          <ul class="home-hub__bullet-list">
+            {{ with $latestBuild }}
+              <li>Dernière étape : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+            {{ end }}
+            <li>{{ len $buildPages }} entrées chronologiques déjà publiées dans le build log.</li>
+            <li>Les ressources longues restent séparées des notes rapides pour retrouver un truc sans perdre du temps.</li>
+          </ul>
+
+          <div class="home-hub__inline-actions">
+            <a class="home-hub__button home-hub__button--primary" href="{{ $projectLink }}">Voir le projet</a>
+            {{ with $grenouilleBuild }}
+              <a class="home-hub__button" href="{{ .RelPermalink }}">Ouvrir le journal</a>
+            {{ end }}
+          </div>
+        </article>
+
+        <div class="home-hub__metric-grid" aria-label="Statistiques du site">
+          <article class="home-hub__metric">
+            <span>Articles</span>
+            <strong>{{ len $posts }}</strong>
+            <p>guides, recherches et billets techniques</p>
+          </article>
+          <article class="home-hub__metric">
+            <span>Recettes</span>
+            <strong>{{ len $recipes }}</strong>
+            <p>des fiches que j’ai envie de refaire</p>
+          </article>
+          <article class="home-hub__metric">
+            <span>Atelier</span>
+            <strong>{{ len $workshopPages }}</strong>
+            <p>doc, conception, build log et tests</p>
+          </article>
+          <article class="home-hub__metric">
+            <span>Dernière mise à jour</span>
+            {{ with index $recentPages 0 }}
+              <strong class="home-hub__metric-copy">{{ .Date | time.Format $dateFormat }}</strong>
+              <p><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+            {{ end }}
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-hub__section" id="timeline">
+      <div class="home-hub__section-heading">
+        <div>
+          <p class="home-hub__eyebrow">Timeline courte</p>
+          <h2>Le fil rouge des derniers ajouts</h2>
+          <p>Une vue chronologique pour voir tout de suite si ça parle atelier, cuisine ou bidouille.</p>
+        </div>
+      </div>
+
+      <div class="home-hub__timeline-layout">
+        <ol class="home-hub__timeline-list" aria-label="Chronologie récente">
+          {{ range $recentPages }}
+            <li class="home-hub__timeline-item">
+              <span class="home-hub__timeline-dot" aria-hidden="true"></span>
+              <div class="home-hub__timeline-body">
+                <p class="home-hub__timeline-meta">{{ .Section | humanize }} · {{ .Date | time.Format $dateFormat }}</p>
+                <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                <p>{{ .Description | default (.Summary | plainify | truncate 150) }}</p>
+              </div>
+            </li>
+          {{ end }}
+        </ol>
+
+        <aside class="home-hub__timeline-side">
+          <article class="home-hub__panel">
+            <p class="home-hub__eyebrow">Pour rentrer vite</p>
+            <ul class="home-hub__quick-links">
+              <li><a href="{{ "/posts/" | relLangURL }}">Tous les articles</a></li>
+              <li><a href="{{ "/atelier/" | relLangURL }}">L’atelier complet</a></li>
+              <li><a href="{{ "/recettes/" | relLangURL }}">Le carnet de recettes</a></li>
+              <li><a href="{{ "/photos/" | relLangURL }}">Les albums photo</a></li>
+            </ul>
+          </article>
+        </aside>
+      </div>
+    </section>
+
+    <section class="home-hub__section" id="articles" data-filter-group>
+      <div class="home-hub__section-heading">
+        <div>
+          <p class="home-hub__eyebrow">Articles</p>
+          <h2>Les billets à ouvrir en premier</h2>
+          <p>Je garde les tags en façade pour filtrer vite. Sans JavaScript, tout reste visible et cliquable.</p>
+        </div>
+        <p class="home-hub__counter"><strong data-filter-count>{{ len $featuredArticles }}</strong> article{{ if ne (len $featuredArticles) 1 }}s{{ end }}</p>
+      </div>
+
+      <div class="home-hub__filters" role="toolbar" aria-label="Filtrer les articles">
+        <button type="button" class="is-active" data-filter="all" aria-pressed="true">Tout voir</button>
+        {{ range $articleTags }}
+          <button type="button" data-filter="{{ . | urlize }}" aria-pressed="false">{{ . }}</button>
+        {{ end }}
+      </div>
+
+      <div class="home-hub__card-grid home-hub__card-grid--articles" data-filter-results>
+        {{ range $featuredArticles }}
+          {{ partial "home/mini-card.html" (dict
+            "page" .
+            "variant" "feature"
+            "showMeta" true
+            "showDate" true
+            "showDescription" true
+            "showTags" true
+            "filterable" true
+          ) }}
+        {{ end }}
+      </div>
+
+      <p class="home-hub__empty-state" data-filter-empty hidden>Aucun article ne colle à ce filtre. Repasse sur “Tout voir” et on repart.</p>
+    </section>
+
+    <section class="home-hub__section" id="explorer">
+      <div class="home-hub__section-heading">
+        <div>
+          <p class="home-hub__eyebrow">Portes d’entrée</p>
+          <h2>Trois façons de parcourir le site sans tourner en rond</h2>
+          <p>Atelier pour les gros chantiers, cuisine pour le concret immédiat, et récents si tu veux juste voir ce qui a bougé.</p>
+        </div>
+      </div>
+
+      <div class="home-hub__triptych">
+        <section class="home-hub__stack">
+          <div class="home-hub__stack-head">
+            <h3>Atelier</h3>
+            <a href="{{ "/atelier/" | relLangURL }}">Tout voir</a>
+          </div>
+          <div class="home-hub__stack-grid">
+            {{ range $featuredWorkshop }}
+              {{ partial "home/mini-card.html" (dict
+                "page" .
+                "variant" "compact"
+                "showMeta" true
+                "showDate" true
+                "showDescription" true
+              ) }}
+            {{ end }}
+          </div>
+        </section>
+
+        <section class="home-hub__stack">
+          <div class="home-hub__stack-head">
+            <h3>Cuisine</h3>
+            <a href="{{ "/recettes/" | relLangURL }}">Tout voir</a>
+          </div>
+          <div class="home-hub__stack-grid">
+            {{ range $featuredRecipes }}
+              {{ partial "home/mini-card.html" (dict
+                "page" .
+                "variant" "compact"
+                "showMeta" true
+                "showDate" true
+                "showDescription" true
+              ) }}
+            {{ end }}
+          </div>
+        </section>
+
+        <section class="home-hub__stack">
+          <div class="home-hub__stack-head">
+            <h3>Récents</h3>
+            <a href="{{ "/" | relLangURL }}">Tout revoir</a>
+          </div>
+          <div class="home-hub__stack-grid">
+            {{ range first 3 $recentPages }}
+              {{ partial "home/mini-card.html" (dict
+                "page" .
+                "variant" "compact"
+                "showMeta" true
+                "showDate" true
+                "showDescription" true
+              ) }}
+            {{ end }}
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="home-hub__section home-hub__section--cta" id="contact">
+      <div class="home-hub__cta">
+        <div>
+          <p class="home-hub__eyebrow">Contact / collab</p>
+          <h2>Besoin d’un regard clair sur un projet, une recette ou une page qui doit mieux raconter le taf ?</h2>
+          <p>Je peux documenter, simplifier et remettre du concret là où ça part en vrille. Si ça mérite d’être utile, ça m’intéresse.</p>
+        </div>
+
+        <div class="home-hub__cta-actions">
+          <a class="home-hub__button home-hub__button--primary" href="mailto:{{ .Site.Params.Author.email }}">M’écrire</a>
+          <a class="home-hub__button" href="{{ $projectLink }}">Voir mon gros chantier</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="home-hub__footer" aria-label="Pied de page">
+    <div>
+      <a class="home-hub__footer-brand" href="{{ "/" | relLangURL }}">{{ $authorName }}</a>
+      <p>Je documente ce qui vaut le coup de rester dans les favoris. Le reste, je le laisse tomber.</p>
+    </div>
+
+    <nav class="home-hub__footer-nav" aria-label="Navigation de pied de page">
+      <a href="#maintenant">Projet</a>
+      <a href="#articles">Articles</a>
+      <a href="{{ "/atelier/" | relLangURL }}">Atelier</a>
+      <a href="{{ "/recettes/" | relLangURL }}">Cuisine</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="home-hub__footer-socials" aria-label="Réseaux">
+      {{ with .Site.Params.Author.links }}
+        {{ range . }}
+          {{ range $name, $url := . }}
+            <a href="{{ $url }}" target="_blank" rel="me noopener noreferrer" aria-label="{{ $name | title }}">
+              {{ partial "icon.html" $name }}
+            </a>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      <a href="mailto:{{ .Site.Params.Author.email }}">contact@monsieurboivin.fr</a>
+    </div>
+
+    <p class="home-hub__footer-note">© {{ now.Format "2006" }} {{ $authorName }}. Hugo propre, HTML sémantique, JS léger.</p>
+  </footer>
+</div>

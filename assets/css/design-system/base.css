@@ -1,0 +1,58 @@
+@layer ds-base {
+  html {
+    scroll-padding-top: 6rem;
+  }
+
+  :target {
+    scroll-margin-top: 6rem;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--ds-color-accent);
+    outline-offset: 3px;
+  }
+
+  body {
+    accent-color: var(--ds-color-accent);
+  }
+
+  img,
+  svg,
+  video {
+    height: auto;
+  }
+
+  [data-js="off"] .js-only {
+    display: none !important;
+  }
+
+  [data-js="off"] .c-nav__panel {
+    position: static;
+    display: grid;
+    margin-top: var(--ds-space-3);
+    box-shadow: none;
+  }
+
+  [data-js="off"] [data-filter-card] {
+    display: block;
+  }
+
+  [data-js="off"] [data-filter-empty] {
+    display: none !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

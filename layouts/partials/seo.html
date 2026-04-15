@@ -5,56 +5,78 @@
 {{ with .Params.seo.meta_title }}
   {{ $metaTitle = . }}
 {{ else }}
-  {{ $patterns := .Site.Params.seoPatterns }}
-  {{ $title := .Title }}
-  {{ $pattern := "" }}
-
-  {{ if eq $section "recettes" }}
-    {{ $pattern = $patterns.recettes_title }}
-  {{ else if eq $section "atelier" }}
-    {{ $pattern = $patterns.atelier_title }}
-  {{ else if eq $section "posts" }}
-    {{ $pattern = $patterns.tech_title }}
-  {{ end }}
-
-  {{ if $pattern }}
-    {{ $baseTitle := printf $pattern $title }}
-    {{ $metaTitle = printf "%s | %s" $baseTitle $siteName }}
+  {{ if .IsHome }}
+    {{ $metaTitle = printf "Cuisine maison, DIY, atelier et notes utiles | %s" $siteName }}
   {{ else }}
-    {{ $metaTitle = printf "%s | %s" $title $siteName }}
+    {{ $patterns := .Site.Params.seoPatterns }}
+    {{ $title := .Title }}
+    {{ $pattern := "" }}
+
+    {{ if eq $section "recettes" }}
+      {{ $pattern = $patterns.recettes_title }}
+    {{ else if eq $section "atelier" }}
+      {{ $pattern = $patterns.atelier_title }}
+    {{ else if eq $section "posts" }}
+      {{ $pattern = $patterns.tech_title }}
+    {{ end }}
+
+    {{ if $pattern }}
+      {{ $metaTitle = printf "%s | %s" (printf $pattern $title) $siteName }}
+    {{ else }}
+      {{ $metaTitle = printf "%s | %s" $title $siteName }}
+    {{ end }}
   {{ end }}
 {{ end }}
 
-<title>{{ $metaTitle }}</title>
-
 {{ $metaDescription := "" }}
-
 {{ with .Params.seo.meta_description }}
   {{ $metaDescription = . }}
 {{ else }}
-  {{ $descriptionPatterns := .Site.Params.seoDescriptions }}
+  {{ if .IsHome }}
+    {{ $metaDescription = .Description | default .Site.Params.description | default "Cuisine maison, atelier DIY, recettes testées et notes utiles à garder sous la main." }}
+  {{ else }}
+    {{ $descriptionPatterns := .Site.Params.seoDescriptions }}
 
-  {{ if eq $section "recettes" }}
-    {{ with $descriptionPatterns.recettes }}
-      {{ $metaDescription = printf . $.Title }}
+    {{ if eq $section "recettes" }}
+      {{ with $descriptionPatterns.recettes }}
+        {{ $metaDescription = printf . $.Title }}
+      {{ end }}
+    {{ else if eq $section "atelier" }}
+      {{ with $descriptionPatterns.atelier }}
+        {{ $metaDescription = printf . $.Title }}
+      {{ end }}
+    {{ else if eq $section "posts" }}
+      {{ with $descriptionPatterns.posts }}
+        {{ $metaDescription = printf . $.Title }}
+      {{ end }}
     {{ end }}
-  {{ else if eq $section "atelier" }}
-    {{ with $descriptionPatterns.atelier }}
-      {{ $metaDescription = printf . $.Title }}
-    {{ end }}
-  {{ else if eq $section "posts" }}
-    {{ with $descriptionPatterns.posts }}
-      {{ $metaDescription = printf . $.Title }}
-    {{ end }}
-  {{ end }}
 
-  {{ if not $metaDescription }}
-    {{ if .Description }}
-      {{ $metaDescription = .Description }}
-    {{ else }}
-      {{ $metaDescription = .Site.Params.description }}
+    {{ if not $metaDescription }}
+      {{ $metaDescription = .Description | default .Summary | default .Site.Params.description }}
     {{ end }}
   {{ end }}
 {{ end }}
 
+{{ $canonical := .Permalink | absURL }}
+{{ $robots := .Params.robots | default .Site.Params.robots | default "index,follow,max-image-preview:large" }}
+{{ $keywords := .Params.keywords | default .Site.Params.keywords }}
+{{ $ogType := cond .IsPage "article" "website" }}
+{{ $locale := replace (.Site.LanguageCode | default "fr-fr") "-" "_" }}
+
+<title>{{ $metaTitle }}</title>
 <meta name="description" content="{{ $metaDescription | plainify }}">
+<link rel="canonical" href="{{ $canonical }}">
+<meta name="robots" content="{{ $robots }}">
+
+{{ with $keywords }}
+  <meta name="keywords" content="{{ delimit . ", " }}">
+{{ end }}
+
+<meta property="og:locale" content="{{ $locale }}">
+<meta property="og:type" content="{{ $ogType }}">
+<meta property="og:title" content="{{ $metaTitle }}">
+<meta property="og:description" content="{{ $metaDescription | plainify }}">
+<meta property="og:url" content="{{ $canonical }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $metaTitle }}">
+<meta name="twitter:description" content="{{ $metaDescription | plainify }}">

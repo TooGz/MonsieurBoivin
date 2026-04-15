@@ -1,0 +1,47 @@
+@layer ds-components {
+  .c-nav {
+    position: sticky;
+    top: 1rem;
+    z-index: var(--ds-z-header);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ds-space-3);
+    padding: var(--ds-space-3) var(--ds-space-4);
+    border: 1px solid var(--ds-color-border);
+    border-radius: var(--ds-radius-lg);
+    background: var(--ds-color-bg-elevated);
+    box-shadow: var(--ds-shadow-md);
+    backdrop-filter: blur(18px);
+  }
+
+  .c-nav__brand,
+  .c-nav__links,
+  .c-nav__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-3);
+  }
+
+  .c-nav__brand {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .c-nav__toggle,
+  .c-nav__link {
+    min-height: 44px;
+  }
+
+  .c-nav__panel {
+    position: absolute;
+    inset-inline-end: 0;
+    top: calc(100% + var(--ds-space-2));
+    min-width: 16rem;
+    padding: var(--ds-space-3);
+    border: 1px solid var(--ds-color-border);
+    border-radius: var(--ds-radius-md);
+    background: var(--ds-color-bg-strong);
+    box-shadow: var(--ds-shadow-lg);
+  }
+}

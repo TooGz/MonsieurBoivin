@@ -1,0 +1,35 @@
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML -}}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {{- $pages := slice site.Home -}}
+  {{- range site.Sections -}}
+    {{- $pages = $pages | append . -}}
+  {{- end -}}
+  {{- range site.RegularPages -}}
+    {{- $pages = $pages | append . -}}
+  {{- end -}}
+
+  {{- range $pages -}}
+    <url>
+      <loc>{{ .Permalink }}</loc>
+      {{ with .Lastmod }}<lastmod>{{ .Format "2006-01-02T15:04:05-07:00" }}</lastmod>{{ end }}
+      <changefreq>
+        {{- if .IsHome -}}
+          daily
+        {{- else if .IsSection -}}
+          weekly
+        {{- else -}}
+          monthly
+        {{- end -}}
+      </changefreq>
+      <priority>
+        {{- if .IsHome -}}
+          1.0
+        {{- else if .IsSection -}}
+          0.8
+        {{- else -}}
+          0.6
+        {{- end -}}
+      </priority>
+    </url>
+  {{- end -}}
+</urlset>

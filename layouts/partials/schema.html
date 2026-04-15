@@ -1,23 +1,60 @@
-{{ if .IsHome -}}
+{{- $home := site.Home -}}
+{{- $authorName := site.Params.Author.name | default site.Title -}}
+{{- $authorEmail := site.Params.Author.email | default "" -}}
+{{- $authorImage := site.Params.Author.image | default "" -}}
+{{- $authorHeadline := site.Params.Author.headline | default site.Params.description | default "" -}}
+{{- $sameAs := slice -}}
+{{- with site.Params.Author.links -}}
+  {{- range . -}}
+    {{- range $name, $url := . -}}
+      {{- if not (strings.HasPrefix $url "mailto:") -}}
+        {{- $sameAs = $sameAs | append $url -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{ if .IsHome }}
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": "{{ (site.GetPage "/").Permalink | safeURL }}",
-    "name": "{{ .Site.Title | safeJS }}",
-    {{ with .Site.Params.description }}"description": "{{ . | safeJS }}",{{ end }}
-    {{ with .Site.LanguageCode }}"inLanguage": "{{ . }}",{{ end }}
-    "url": "{{ (site.GetPage "/").Permalink | safeURL }}",
-    {{ with .Site.Params.keywords }}"keywords": {{ . }},{{ end }}
-    "publisher" : {
+  [
+    {
+      "@context": "https://schema.org",
       "@type": "Person",
-      "name": "{{ .Site.Params.Author.name | safeJS }}"
+      "@id": "{{ printf "%s#person" $home.Permalink | safeURL }}",
+      "name": "{{ $authorName | safeJS }}",
+      {{ with $authorEmail }}"email": "{{ . | safeJS }}",{{ end }}
+      {{ with $authorHeadline }}"description": "{{ . | safeJS }}",{{ end }}
+      {{ with $authorImage }}"image": "{{ . | absURL | safeURL }}",{{ end }}
+      {{ with $sameAs }}"sameAs": {{ . }},{{ end }}
+      "url": "{{ $home.Permalink | safeURL }}"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "{{ printf "%s#website" $home.Permalink | safeURL }}",
+      "url": "{{ $home.Permalink | safeURL }}",
+      "name": "{{ site.Title | safeJS }}",
+      {{ with site.Params.description }}"description": "{{ . | safeJS }}",{{ end }}
+      {{ with site.Params.keywords }}"keywords": {{ . }},{{ end }}
+      "inLanguage": "{{ site.LanguageCode | default "fr" }}",
+      "publisher": { "@id": "{{ printf "%s#person" $home.Permalink | safeURL }}" }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "{{ printf "%s#webpage" .Permalink | safeURL }}",
+      "url": "{{ .Permalink | safeURL }}",
+      "name": "{{ .Title | default site.Title | safeJS }}",
+      {{ with .Description }}"description": "{{ . | safeJS }}",{{ end }}
+      "isPartOf": { "@id": "{{ printf "%s#website" $home.Permalink | safeURL }}" },
+      "about": { "@id": "{{ printf "%s#person" $home.Permalink | safeURL }}" },
+      "inLanguage": "{{ site.LanguageCode | default "fr" }}"
     }
-  }
+  ]
   </script>
 {{ else if .IsPage }}
   {{- $iso8601 := "2006-01-02T15:04:05-07:00" -}}
-  {{- $schemaAuthor := .Site.Params.Author.name -}}
+  {{- $schemaAuthor := $authorName -}}
   {{- if isset .Params "authors" -}}
     {{- $authors := index .Params "authors" -}}
     {{- if gt (len $authors) 0 -}}
@@ -32,32 +69,61 @@
     {{- $schemaAuthor = index .Params "author" -}}
   {{- end -}}
   <script type="application/ld+json">
-  [{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "articleSection": "{{ (site.GetPage .Section).Title | safeJS }}",
-    "name": "{{ .Title | safeJS }}",
-    "headline": "{{ .Title | safeJS }}",
-    {{ with .Description }}"description": "{{ . | safeJS }}",{{ end }}
-    {{ with .Summary }}"abstract": "{{ . | safeJS }}",{{ end }}
-    {{ with .Site.LanguageCode }}"inLanguage": "{{ . }}",{{ end }}
-    "url" : "{{ .Permalink }}",
-    "author" : {
-      "@type": "Person",
-      "name": "{{ $schemaAuthor | safeJS }}"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "{{ printf "%s#webpage" .Permalink | safeURL }}",
+      "url": "{{ .Permalink | safeURL }}",
+      "name": "{{ .Title | safeJS }}",
+      {{ with .Description }}"description": "{{ . | safeJS }}",{{ else with .Summary }}"description": "{{ . | plainify | safeJS }}",{{ end }}
+      "isPartOf": { "@id": "{{ printf "%s#website" $home.Permalink | safeURL }}" },
+      "about": { "@id": "{{ printf "%s#person" $home.Permalink | safeURL }}" },
+      "inLanguage": "{{ site.LanguageCode | default "fr" }}"
     },
-    {{ with .PublishDate }}"copyrightYear": "{{ .Format "2006" }}",{{ end }}
-    {{ with .Date }}"dateCreated": "{{ .Format $iso8601 }}",{{ end }}
-    {{ with .PublishDate }}"datePublished": "{{ .Format $iso8601 }}",{{ end }}
-    {{ with .ExpiryDate }}"expires": "{{ .Format $iso8601 }}",{{ end }}
-    {{ with .Lastmod }}"dateModified": "{{ .Format $iso8601 }}",{{ end }}
-    {{ if .Keywords }}
-    {{ with .Keywords }}"keywords": {{ . }},{{ end }}
-    {{ else }}
-    {{ with .Params.tags }}"keywords": {{ . }},{{ end }}
-    {{ end }}
-    "mainEntityOfPage": "true",
-    "wordCount": "{{ .WordCount }}"
-  }]
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "@id": "{{ printf "%s#article" .Permalink | safeURL }}",
+      "headline": "{{ .Title | safeJS }}",
+      "name": "{{ .Title | safeJS }}",
+      {{ with .Description }}"description": "{{ . | safeJS }}",{{ end }}
+      {{ with .Summary }}"abstract": "{{ . | plainify | safeJS }}",{{ end }}
+      "author": {
+        "@type": "Person",
+        "name": "{{ $schemaAuthor | safeJS }}"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "{{ $authorName | safeJS }}"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ printf "%s#webpage" .Permalink | safeURL }}"
+      },
+      "url": "{{ .Permalink | safeURL }}",
+      "inLanguage": "{{ site.LanguageCode | default "fr" }}",
+      {{ with .Date }}"dateCreated": "{{ .Format $iso8601 }}",{{ end }}
+      {{ with .PublishDate }}"datePublished": "{{ .Format $iso8601 }}",{{ end }}
+      {{ with .Lastmod }}"dateModified": "{{ .Format $iso8601 }}",{{ end }}
+      {{ with .Params.tags }}"keywords": {{ . }},{{ end }}
+      "wordCount": "{{ .WordCount }}"
+    }
+  ]
+  </script>
+{{ else }}
+  {{- $nodeDescription := .Description | default site.Params.description | default "" -}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "{{ printf "%s#webpage" .Permalink | safeURL }}",
+    "url": "{{ .Permalink | safeURL }}",
+    "name": "{{ .Title | default site.Title | safeJS }}",
+    {{ with $nodeDescription }}"description": "{{ . | plainify | safeJS }}",{{ end }}
+    "isPartOf": { "@id": "{{ printf "%s#website" $home.Permalink | safeURL }}" },
+    "about": { "@id": "{{ printf "%s#person" $home.Permalink | safeURL }}" },
+    "inLanguage": "{{ site.LanguageCode | default "fr" }}"
+  }
   </script>
 {{ end }}

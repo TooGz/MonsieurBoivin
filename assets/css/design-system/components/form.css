@@ -1,0 +1,35 @@
+@layer ds-components {
+  .c-form {
+    display: grid;
+    gap: var(--ds-space-4);
+  }
+
+  .c-form__field {
+    display: grid;
+    gap: var(--ds-space-2);
+  }
+
+  .c-form__label {
+    font-size: var(--ds-text-sm);
+    font-weight: 700;
+  }
+
+  .c-form__control,
+  .c-form__button {
+    min-height: 48px;
+    padding: 0.8rem 1rem;
+    border-radius: var(--ds-radius-md);
+    border: 1px solid var(--ds-color-border);
+    background: var(--ds-color-bg-strong);
+    color: var(--ds-color-ink);
+  }
+
+  .c-form__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--ds-color-accent), var(--ds-color-accent-strong));
+    border-color: transparent;
+    color: #fff;
+  }
+}

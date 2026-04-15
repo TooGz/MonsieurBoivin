@@ -1,0 +1,17 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.validate": [
+    "javascript"
+  ],
+  "stylelint.validate": [
+    "css"
+  ],
+  "files.eol": "\n",
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/public": true,
+    "**/resources": true,
+    "**/.hugo_cache": true
+  }
+}

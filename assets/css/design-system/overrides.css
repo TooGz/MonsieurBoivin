@@ -1,0 +1,10 @@
+@layer ds-overrides {
+  html[data-ui="legacy"] .c-nav,
+  html[data-ui="legacy"] .c-hero,
+  html[data-ui="legacy"] .c-card,
+  html[data-ui="legacy"] .c-form,
+  html[data-ui="legacy"] .c-timeline,
+  html[data-ui="legacy"] .c-footer {
+    all: unset;
+  }
+}

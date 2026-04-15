@@ -1,0 +1,12 @@
+/* TEAM */
+Author: Monsieur Boivin
+Site: https://monsieurboivin.fr
+Contact: contact@monsieurboivin.fr
+Instagram: https://instagram.com/toogz
+
+/* STACK */
+Built with: Hugo + Blowfish
+Frontend: semantic HTML, critical CSS, layered CSS, lightweight ES modules
+
+/* NOTE */
+Je fais des trucs. Je les teste. Je te montre ce qui vaut le coup.

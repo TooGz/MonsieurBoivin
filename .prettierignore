@@ -1,0 +1,7 @@
+node_modules/
+public/
+resources/
+.hugo_cache/
+playwright-report/
+test-results/
+reports/lighthouse/

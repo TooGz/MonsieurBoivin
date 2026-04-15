@@ -9,17 +9,16 @@ title = "MonsieurBoivin.fr"
   rtl = false
   dateFormat = "2 January 2006"
   logo = "img/MonsieurBoivin.png"
-  description = "Mon petit bordel sur le net !"
+  description = "Cuisine maison, atelier DIY, recettes testées et notes utiles à garder sous la main."
+  keywords = ["Monsieur Boivin", "DIY", "recettes maison", "atelier bricolage", "blog technique"]
 
 [params.author]
   name = "Monsieur Boivin"
   email = "contact@monsieurboivin.fr"
   image = "img/MonsieurBoivin.png"
+  role = "Cuisine maison, atelier DIY et notes utiles"
   headline = "Je fais des trucs. Je les teste. Je te montre ce qui vaut le coup."
   bio = "Mon petit bordel sur le net"
   links = [
     { instagram = "https://instagram.com/toogz" }
-    #{ tiktok = "https://www.tiktok.com/@monsieur.boivin" },
-    #{ pinterest = "https://fr.pinterest.com/MonsieurBoivin/_saved/"}
-  
   ]

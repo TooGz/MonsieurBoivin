@@ -1,0 +1,32 @@
+@layer ds-components {
+  .c-card {
+    display: grid;
+    overflow: hidden;
+    border: 1px solid var(--ds-color-border);
+    border-radius: var(--ds-radius-lg);
+    background: var(--ds-color-bg-elevated);
+    box-shadow: var(--ds-shadow-md);
+    transition:
+      transform var(--ds-duration-base) var(--ds-ease-standard),
+      box-shadow var(--ds-duration-base) var(--ds-ease-standard);
+  }
+
+  .c-card__body {
+    display: grid;
+    gap: var(--ds-space-3);
+    padding: var(--ds-space-4);
+  }
+
+  .c-card__meta {
+    color: var(--ds-color-subtle);
+    font-size: var(--ds-text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .c-card:hover,
+  .c-card:focus-within {
+    transform: translateY(-3px);
+    box-shadow: var(--ds-shadow-lg);
+  }
+}

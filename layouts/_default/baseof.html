@@ -1,19 +1,20 @@
 <!doctype html>
 <html
-  lang="{{ with site.Params.isoCode | default (site.LanguageCode | default " en") }}{{- . -}}{{ end }}"
-  dir="{{ if site.Params.rtl | default false -}}
-    rtl
-  {{- else -}}
-    ltr
-  {{- end }}"
+  lang="{{ with site.Params.isoCode | default (site.LanguageCode | default "fr") }}{{- . -}}{{ end }}"
+  dir="{{ if site.Params.rtl | default false }}rtl{{ else }}ltr{{ end }}"
   class="scroll-smooth"
-  data-default-appearance="{{ site.Params.defaultAppearance | default " light" }}"
-  data-auto-appearance="{{ site.Params.autoSwitchAppearance | default " true" }}">
+  data-ui="{{- $uiVersion := site.Params.ui.defaultVersion | default "legacy" -}}{{- if .IsHome -}}{{- $uiVersion = site.Params.ui.homeVersion | default "v2" -}}{{- end -}}{{- with .Params.uiVersion -}}{{- $uiVersion = . -}}{{- end -}}{{- $uiVersion -}}"
+  data-js="off"
+  data-default-appearance="{{ site.Params.defaultAppearance | default "light" }}"
+  data-auto-appearance="{{ site.Params.autoSwitchAppearance | default "true" }}">
   {{- partial "head.html" . -}}
 
+  {{- $bodyClass := "site-shell flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600" -}}
+  {{- if .IsHome -}}
+    {{- $bodyClass = "site-shell site-shell--home min-h-screen overflow-x-clip bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600" -}}
+  {{- end -}}
 
-  <body
-    class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600">
+  <body class="{{ $bodyClass }}" data-page-kind="{{ if .IsHome }}home{{ else if .IsPage }}page{{ else if .IsSection }}section{{ else }}other{{ end }}">
     <div id="the-top" class="absolute flex self-center">
       <a
         class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
@@ -22,22 +23,29 @@
         {{ i18n "nav.skip_to_main" }}
       </a>
     </div>
-    {{ $header := print "header/" site.Params.header.layout ".html" }}
-    {{ if templates.Exists ( printf "partials/%s" $header ) }}
-      {{ partial $header . }}
-    {{ else }}
-      {{ partial "header/basic.html" . }}
+
+    {{ if not .IsHome }}
+      {{ $header := print "header/" site.Params.header.layout ".html" }}
+      {{ if templates.Exists (printf "partials/%s" $header) }}
+        {{ partial $header . }}
+      {{ else }}
+        {{ partial "header/basic.html" . }}
+      {{ end }}
     {{ end }}
+
     <div class="relative flex flex-col grow">
-      <main id="main-content" class="grow">
+      <main id="main-content" class="grow" aria-label="Contenu principal">
         {{ block "main" . }}{{ end }}
-        {{ if and (site.Params.footer.showScrollToTop | default true) (gt .WordCount 1) }}
+        {{ if and (not .IsHome) (site.Params.footer.showScrollToTop | default true) (gt .WordCount 1) }}
           {{- partial "scroll-to-top.html" . -}}
         {{ end }}
       </main>
-      {{- partial "footer.html" . -}}
-      {{ if site.Params.enableSearch | default false }}
-        {{- partial "search.html" . -}}
+
+      {{ if not .IsHome }}
+        {{- partial "footer.html" . -}}
+        {{ if site.Params.enableSearch | default false }}
+          {{- partial "search.html" . -}}
+        {{ end }}
       {{ end }}
     </div>
   </body>
