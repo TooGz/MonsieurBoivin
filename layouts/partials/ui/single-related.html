@@ -1,0 +1,20 @@
+{{ if .Params.showRelatedContent | default (.Site.Params.article.showRelatedContent | default false) }}
+  {{ $related := .Site.RegularPages.Related . | first (.Site.Params.article.relatedContentLimit | default 3) }}
+  {{ with $related }}
+    <section class="site-v2-single__panel site-v2-single__related">
+      <div class="site-v2-section-head">
+        <h2>{{ i18n "article.related_articles" | emojify }}</h2>
+        <p>Quelques pistes pour prolonger la lecture.</p>
+      </div>
+      <div class="site-v2-card-grid">
+        {{ range . }}
+          {{ partial "ui/list-card.html" (dict
+            "page" .
+            "showDescription" true
+            "showMeta" true
+          ) }}
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+{{ end }}

@@ -33,7 +33,7 @@
   {{ end }}
 {{ end }}
 
-{{ $description := $page.Description | default ($page.Summary | plainify | truncate 170) }}
+{{ $description := partial "functions/page-description.html" (dict "page" $page "truncate" 170) | strings.TrimSpace }}
 {{ $tags := $page.Params.tags | default (slice) }}
 {{ $filterTags := slice }}
 {{ range $tags }}

@@ -1,0 +1,169 @@
+{{ $p := . }}
+{{ partial "ui/single-context.html" . }}
+{{ $single := .Scratch.Get "__uiSingleContext" }}
+{{ $isRecipePage := index $single "isRecipePage" }}
+{{ $showAuthorBottom := index $single "showAuthorBottom" }}
+{{ $showBreadcrumbs := index $single "showBreadcrumbs" }}
+{{ $showToc := index $single "showToc" }}
+
+{{ partial "ui/single-featured-data.html" . }}
+{{ $featured := .Scratch.Get "__uiSingleFeaturedData" }}
+
+{{ $eyebrow := .CurrentSection.LinkTitle | default (.Section | humanize) }}
+{{ if $isRecipePage }}
+  {{ $eyebrow = "Recette" }}
+{{ else if eq .Section "atelier" }}
+  {{ $eyebrow = "Projet atelier" }}
+{{ else if eq .Section "photos" }}
+  {{ $eyebrow = "Photo" }}
+{{ end }}
+
+{{ $showDate := index $single "showDate" }}
+{{ $showDateUpdated := index $single "showDateUpdated" }}
+{{ $showReadingTime := index $single "showReadingTime" }}
+{{ $showZenMode := index $single "showZenMode" }}
+{{ $description := "" }}
+{{ if not $isRecipePage }}
+  {{ $description = partial "functions/page-description.html" (dict "page" . "truncate" 220) | strings.TrimSpace }}
+{{ end }}
+
+{{ $metaParts := slice }}
+{{ if $showDate }}
+  {{ $metaParts = $metaParts | append (partial "meta/date.html" .Date) }}
+{{ end }}
+{{ if $showDateUpdated }}
+  {{ $metaParts = $metaParts | append (partial "meta/date-updated.html" .Lastmod) }}
+{{ end }}
+{{ if $showReadingTime }}
+  {{ $metaParts = $metaParts | append (partial "meta/reading-time.html" .) }}
+{{ end }}
+{{ if $showZenMode }}
+  {{ $metaParts = $metaParts | append (partial "meta/zen-mode.html" .) }}
+{{ end }}
+
+{{ partial "ui/page-script.html" . }}
+
+<section class="site-v2-single{{ if $isRecipePage }} site-v2-single--recipe{{ end }}">
+  <header class="site-v2-hero site-v2-single__hero">
+    {{ if $showBreadcrumbs }}
+      {{ partial "ui/breadcrumbs.html" . }}
+    {{ end }}
+
+    <div class="site-v2-single__hero-grid{{ if not (index $featured "src") }} is-simple{{ end }}">
+      <div class="site-v2-single__hero-copy">
+        <p class="site-v2-eyebrow">{{ $eyebrow }}</p>
+        <h1 class="site-v2-title">{{ .Title | emojify }}</h1>
+
+        {{ with $description }}
+          <p class="site-v2-description">{{ . }}</p>
+        {{ end }}
+
+        {{ with $metaParts }}
+          <div class="site-v2-single__meta">
+            {{ delimit . "<span class=\"site-v2-single__meta-sep\">&#8226;</span>" | safeHTML }}
+          </div>
+        {{ end }}
+
+        {{ if and .Draft .Site.Params.article.showDraftLabel }}
+          <div class="site-v2-single__chips">
+            <span class="site-v2-single__chip site-v2-single__chip--accent">{{ i18n "article.draft" | emojify }}</span>
+          </div>
+        {{ end }}
+
+        {{ if index $single "showTaxonomies" }}
+          <div class="site-v2-single__chips">
+            {{ range $taxonomy, $terms := .Site.Taxonomies }}
+              {{ if and (not (eq $taxonomy "authors")) (not (eq $taxonomy "series")) }}
+                {{ range $p.GetTerms $taxonomy }}
+                  <a class="site-v2-single__chip" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                {{ end }}
+              {{ end }}
+            {{ end }}
+          </div>
+        {{ else if index $single "showCategoryOnly" }}
+          <div class="site-v2-single__chips">
+            {{ range (.GetTerms "categories") }}
+              <a class="site-v2-single__chip" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+
+      {{ with index $featured "src" }}
+        <figure class="site-v2-single__figure">
+          <img
+            src="{{ . }}"
+            alt="{{ index $featured "alt" }}"
+            {{ with index $featured "width" }}width="{{ . }}"{{ end }}
+            {{ with index $featured "height" }}height="{{ . }}"{{ end }}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async">
+        </figure>
+      {{ end }}
+    </div>
+  </header>
+
+  {{ if not $showAuthorBottom }}
+    <section class="site-v2-single__panel site-v2-single__author">
+      {{ partial "ui/single-author.html" . }}
+    </section>
+  {{ end }}
+
+  {{ if $isRecipePage }}
+    <div class="site-v2-single__recipe-wrap">
+      {{ partial "recipes/single.html" . }}
+    </div>
+    {{ if $showAuthorBottom }}
+      <section class="site-v2-single__panel site-v2-single__author">
+        {{ partial "ui/single-author.html" . }}
+      </section>
+    {{ end }}
+    {{ partial "ui/single-sharing.html" . }}
+    {{ partial "ui/single-related.html" . }}
+    {{ partial "ui/single-pagination.html" . }}
+  {{ else }}
+    <div class="site-v2-single__body">
+      <div class="site-v2-single__main">
+        {{ if .Params.series }}
+          <section class="site-v2-single__panel site-v2-single__series">
+            {{ partial "series/series.html" . }}
+          </section>
+        {{ end }}
+
+        <section class="site-v2-single__panel site-v2-single__content">
+          <div class="article-content prose max-w-none dark:prose-invert">
+            {{ .Content }}
+            {{ partial "ui/single-reply.html" (dict "page" . "variant" "v2") }}
+          </div>
+        </section>
+
+        {{ if $showAuthorBottom }}
+          <section class="site-v2-single__panel site-v2-single__author">
+            {{ partial "ui/single-author.html" . }}
+          </section>
+        {{ end }}
+
+        {{ if .Params.series }}
+          <section class="site-v2-single__panel site-v2-single__series">
+            {{ partial "series/series-closed.html" . }}
+          </section>
+        {{ end }}
+
+        {{ partial "ui/single-sharing.html" . }}
+        {{ partial "ui/single-related.html" . }}
+        {{ partial "ui/single-pagination.html" . }}
+
+        {{ partial "ui/single-comments.html" (dict "page" . "variant" "v2") }}
+      </div>
+
+      {{ if $showToc }}
+        <aside class="site-v2-single__toc">
+          <div class="site-v2-single__panel site-v2-single__toc-panel">
+            {{ partial "toc.html" . }}
+          </div>
+        </aside>
+      {{ end }}
+    </div>
+  {{ end }}
+</section>

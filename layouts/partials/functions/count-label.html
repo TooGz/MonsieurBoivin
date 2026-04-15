@@ -1,0 +1,9 @@
+{{- $count := int (.count | default 0) -}}
+{{- $singular := .singular | default "" -}}
+{{- $plural := .plural | default $singular -}}
+
+{{- if eq $count 1 -}}
+  {{- $singular -}}
+{{- else -}}
+  {{- $plural -}}
+{{- end -}}

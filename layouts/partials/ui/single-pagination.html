@@ -1,0 +1,35 @@
+{{ if .Params.showPagination | default (.Site.Params.article.showPagination | default true) }}
+  {{ if or .NextInSection .PrevInSection }}
+    {{ $next := .NextInSection }}
+    {{ $prev := .PrevInSection }}
+    {{ if .Params.invertPagination | default (.Site.Params.article.invertPagination | default false) }}
+      {{ $next = .PrevInSection }}
+      {{ $prev = .NextInSection }}
+    {{ end }}
+    <nav class="site-v2-single__panel site-v2-single__pagination" aria-label="Navigation entre les contenus">
+      <div class="site-v2-single__pager">
+        {{ if $prev }}
+          <a class="site-v2-single__pager-card" href="{{ $prev.RelPermalink }}">
+            <small>Precedent</small>
+            <strong>{{ $prev.Title | emojify }}</strong>
+            {{ if .Params.showDate | default (.Site.Params.article.showDate | default true) }}
+              <span>{{ partial "functions/date.html" $prev.Date }}</span>
+            {{ end }}
+          </a>
+        {{ else }}
+          <span></span>
+        {{ end }}
+
+        {{ if $next }}
+          <a class="site-v2-single__pager-card site-v2-single__pager-card--next" href="{{ $next.RelPermalink }}">
+            <small>Suivant</small>
+            <strong>{{ $next.Title | emojify }}</strong>
+            {{ if .Params.showDate | default (.Site.Params.article.showDate | default true) }}
+              <span>{{ partial "functions/date.html" $next.Date }}</span>
+            {{ end }}
+          </a>
+        {{ end }}
+      </div>
+    </nav>
+  {{ end }}
+{{ end }}

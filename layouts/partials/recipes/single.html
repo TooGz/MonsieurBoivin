@@ -1,20 +1,14 @@
 {{/* layouts/partials/recipes/single.html */}}
 {{ $p := . }}
+{{ partial "ui/single-context.html" $p }}
+{{ $single := $p.Scratch.Get "__uiSingleContext" }}
 
 <section class="recette-single mt-6 flex max-w-full flex-col prose dark:prose-invert lg:flex-row">
 
   {{/* =========================
       TOC
   ========================== */}}
-  {{ $enableToc := site.Params.article.showTableOfContents | default false }}
-  {{ if isset $p.Params "showTableOfContents" }}
-    {{ $enableToc = index $p.Params "showTableOfContents" }}
-  {{ else if isset $p.Params "ShowToc" }}
-    {{ $enableToc = index $p.Params "ShowToc" }}
-  {{ else if isset $p.Params "showtoc" }}
-    {{ $enableToc = index $p.Params "showtoc" }}
-  {{ end }}
-  {{ $showToc := and $enableToc (in $p.TableOfContents "<ul") }}
+  {{ $showToc := index $single "showRecipeToc" }}
   {{ $topClass := cond (hasPrefix site.Params.header.layout "fixed") "lg:top-[140px]" "lg:top-10" }}
 
   {{ if $showToc }}
@@ -356,8 +350,11 @@
     {{/* =========================
         PARTAGE + RELATED
     ========================== */}}
-    {{ partial "sharing-links.html" $p }}
-    {{ partial "related.html" $p }}
+    {{ $uiVersion := partial "ui/version.html" $p | strings.TrimSpace }}
+    {{ if eq $uiVersion "legacy" }}
+      {{ partial "sharing-links.html" $p }}
+      {{ partial "related.html" $p }}
+    {{ end }}
 
   </div>
 </section>

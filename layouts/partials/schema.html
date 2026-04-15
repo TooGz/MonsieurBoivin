@@ -2,7 +2,8 @@
 {{- $authorName := site.Params.Author.name | default site.Title -}}
 {{- $authorEmail := site.Params.Author.email | default "" -}}
 {{- $authorImage := site.Params.Author.image | default "" -}}
-{{- $authorHeadline := site.Params.Author.headline | default site.Params.description | default "" -}}
+{{- $siteDescription := site.Params.description | default site.Language.Params.description | default "" -}}
+{{- $authorHeadline := site.Params.Author.headline | default $siteDescription | default "" -}}
 {{- $sameAs := slice -}}
 {{- with site.Params.Author.links -}}
   {{- range . -}}
@@ -15,6 +16,7 @@
 {{- end -}}
 
 {{ if .IsHome }}
+  {{- $homeDescription := partial "functions/page-description.html" (dict "page" . "fallback" $siteDescription) | strings.TrimSpace -}}
   <script type="application/ld+json">
   [
     {
@@ -34,7 +36,7 @@
       "@id": "{{ printf "%s#website" $home.Permalink | safeURL }}",
       "url": "{{ $home.Permalink | safeURL }}",
       "name": "{{ site.Title | safeJS }}",
-      {{ with site.Params.description }}"description": "{{ . | safeJS }}",{{ end }}
+      {{ with $siteDescription }}"description": "{{ . | safeJS }}",{{ end }}
       {{ with site.Params.keywords }}"keywords": {{ . }},{{ end }}
       "inLanguage": "{{ site.LanguageCode | default "fr" }}",
       "publisher": { "@id": "{{ printf "%s#person" $home.Permalink | safeURL }}" }
@@ -45,7 +47,7 @@
       "@id": "{{ printf "%s#webpage" .Permalink | safeURL }}",
       "url": "{{ .Permalink | safeURL }}",
       "name": "{{ .Title | default site.Title | safeJS }}",
-      {{ with .Description }}"description": "{{ . | safeJS }}",{{ end }}
+      {{ with $homeDescription }}"description": "{{ . | safeJS }}",{{ end }}
       "isPartOf": { "@id": "{{ printf "%s#website" $home.Permalink | safeURL }}" },
       "about": { "@id": "{{ printf "%s#person" $home.Permalink | safeURL }}" },
       "inLanguage": "{{ site.LanguageCode | default "fr" }}"
@@ -69,7 +71,8 @@
   {{- else if isset .Params "author" -}}
     {{- $schemaAuthor = index .Params "author" -}}
   {{- end -}}
-  {{- $pageDescription := .Description | default (.Summary | plainify) -}}
+  {{- $pageDescription := partial "functions/page-description.html" (dict "page" .) | strings.TrimSpace -}}
+  {{- $pageAbstract := partial "functions/page-description.html" (dict "page" .) | strings.TrimSpace -}}
   {{- $schemaNodes := slice -}}
   {{- $pageNode := dict
     "@context" "https://schema.org"
@@ -233,11 +236,11 @@
       "inLanguage" (site.LanguageCode | default "fr")
       "wordCount" (printf "%d" .WordCount)
     -}}
-    {{- with .Description -}}
+    {{- with $pageDescription -}}
       {{- $articleNode = merge $articleNode (dict "description" .) -}}
     {{- end -}}
-    {{- with .Summary -}}
-      {{- $articleNode = merge $articleNode (dict "abstract" (. | plainify)) -}}
+    {{- with $pageAbstract -}}
+      {{- $articleNode = merge $articleNode (dict "abstract" .) -}}
     {{- end -}}
     {{- with .Date -}}
       {{- $articleNode = merge $articleNode (dict "dateCreated" (.Format $iso8601)) -}}
@@ -256,7 +259,7 @@
   {{- $schemaJSON := $schemaNodes | jsonify -}}
   {{- printf "<script type=\"application/ld+json\">%s</script>" $schemaJSON | safeHTML -}}
 {{ else }}
-  {{- $nodeDescription := .Description | default site.Params.description | default "" -}}
+  {{- $nodeDescription := partial "functions/page-description.html" (dict "page" . "fallback" $siteDescription) | strings.TrimSpace -}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",

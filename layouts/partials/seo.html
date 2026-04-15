@@ -1,5 +1,7 @@
 {{ $siteName := .Site.Title }}
 {{ $section := .Section }}
+{{ $siteDescription := .Site.Params.description | default .Site.Language.Params.description | default "Cuisine maison, atelier DIY, recettes testees et notes utiles a garder sous la main." }}
+{{ $pageDescription := partial "functions/page-description.html" (dict "page" .) | strings.TrimSpace }}
 {{ $metaTitle := "" }}
 
 {{ with .Params.seo.meta_title }}
@@ -28,31 +30,39 @@
   {{ end }}
 {{ end }}
 
-{{ $metaDescription := "" }}
+{{ $metaDescription := $siteDescription }}
 {{ with .Params.seo.meta_description }}
-  {{ $metaDescription = . }}
+  {{ $candidate := . | plainify | strings.TrimSpace }}
+  {{ if ne $candidate "" }}
+    {{ $metaDescription = $candidate }}
+  {{ end }}
 {{ else }}
   {{ if .IsHome }}
-    {{ $metaDescription = .Description | default .Site.Params.description | default "Cuisine maison, atelier DIY, recettes testées et notes utiles à garder sous la main." }}
+    {{ if ne $pageDescription "" }}
+      {{ $metaDescription = $pageDescription }}
+    {{ end }}
   {{ else }}
     {{ $descriptionPatterns := .Site.Params.seoDescriptions }}
+    {{ $patternDescription := "" }}
 
     {{ if eq $section "recettes" }}
       {{ with $descriptionPatterns.recettes }}
-        {{ $metaDescription = printf . $.Title }}
+        {{ $patternDescription = printf . $.Title }}
       {{ end }}
     {{ else if eq $section "atelier" }}
       {{ with $descriptionPatterns.atelier }}
-        {{ $metaDescription = printf . $.Title }}
+        {{ $patternDescription = printf . $.Title }}
       {{ end }}
     {{ else if eq $section "posts" }}
       {{ with $descriptionPatterns.posts }}
-        {{ $metaDescription = printf . $.Title }}
+        {{ $patternDescription = printf . $.Title }}
       {{ end }}
     {{ end }}
 
-    {{ if not $metaDescription }}
-      {{ $metaDescription = .Description | default .Summary | default .Site.Params.description }}
+    {{ if ne ($patternDescription | strings.TrimSpace) "" }}
+      {{ $metaDescription = $patternDescription }}
+    {{ else if ne $pageDescription "" }}
+      {{ $metaDescription = $pageDescription }}
     {{ end }}
   {{ end }}
 {{ end }}
@@ -64,7 +74,7 @@
 {{ $locale := replace (.Site.LanguageCode | default "fr-fr") "-" "_" }}
 
 <title>{{ $metaTitle }}</title>
-<meta name="description" content="{{ $metaDescription | plainify }}">
+<meta name="description" content="{{ $metaDescription | plainify | strings.TrimSpace }}">
 <link rel="canonical" href="{{ $canonical }}">
 <meta name="robots" content="{{ $robots }}">
 
@@ -75,8 +85,8 @@
 <meta property="og:locale" content="{{ $locale }}">
 <meta property="og:type" content="{{ $ogType }}">
 <meta property="og:title" content="{{ $metaTitle }}">
-<meta property="og:description" content="{{ $metaDescription | plainify }}">
+<meta property="og:description" content="{{ $metaDescription | plainify | strings.TrimSpace }}">
 <meta property="og:url" content="{{ $canonical }}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ $metaTitle }}">
-<meta name="twitter:description" content="{{ $metaDescription | plainify }}">
+<meta name="twitter:description" content="{{ $metaDescription | plainify | strings.TrimSpace }}">

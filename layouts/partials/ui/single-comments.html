@@ -1,0 +1,22 @@
+{{ $page := .page }}
+{{ $variant := .variant | default "legacy" }}
+{{ $showComments := $page.Params.showComments | default (site.Params.article.showComments | default false) }}
+
+{{ if $showComments }}
+  {{ if templates.Exists "partials/comments.html" }}
+    {{ if eq $variant "v2" }}
+      <section class="site-v2-single__panel">
+        {{ partial "comments.html" $page }}
+      </section>
+    {{ else }}
+      <div class="pt-3">
+        <hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+        <div class="pt-3">
+          {{ partial "comments.html" $page }}
+        </div>
+      </div>
+    {{ end }}
+  {{ else }}
+    {{ warnf "[BLOWFISH] Comments are enabled for %s but no comments partial exists." $page.File.Path }}
+  {{ end }}
+{{ end }}

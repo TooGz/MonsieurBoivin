@@ -1,0 +1,27 @@
+{{ with .Params.sharingLinks | default (.Site.Params.article.sharingLinks | default false) }}
+  {{ $links := site.Data.sharing }}
+  <section class="site-v2-single__panel site-v2-single__sharing">
+    <div class="site-v2-section-head">
+      <h2>Partager</h2>
+      <p>Envoyer cette page sans retomber sur le rendu legacy.</p>
+    </div>
+    <div class="site-v2-single__sharing-links">
+      {{ range . }}
+        {{ $shareKey := . }}
+        {{ with index $links . }}
+          {{ $label := i18n .title | default (.icon | humanize) }}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            class="site-v2-single__share-link"
+            href="{{ printf .url $.Permalink $.Title }}"
+            title="{{ $label }}"
+            aria-label="{{ $label }}">
+            {{ partial "icon.html" .icon }}
+            <span>{{ $label | default ($shareKey | humanize) }}</span>
+          </a>
+        {{ end }}
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

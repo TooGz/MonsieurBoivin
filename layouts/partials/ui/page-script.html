@@ -1,0 +1,34 @@
+{{ $page := . }}
+{{ $jsPage := resources.Get "js/page.js" }}
+{{ $jsPage = $jsPage | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+
+{{ if eq $page.Kind "taxonomy" }}
+  <script
+    type="text/javascript"
+    src="{{ $jsPage.RelPermalink }}"
+    integrity="{{ $jsPage.Data.Integrity }}"
+    data-oid="views_taxonomy_{{ $page.Data.Plural }}"
+    data-oid-likes="likes_taxonomy_{{ $page.Data.Plural }}"></script>
+{{ else if and (eq $page.Kind "term") (not $page.File) }}
+  <script
+    type="text/javascript"
+    src="{{ $jsPage.RelPermalink }}"
+    integrity="{{ $jsPage.Data.Integrity }}"
+    data-oid="views_term_{{ $page.Data.Term }}"
+    data-oid-likes="likes_term_{{ $page.Data.Term }}"></script>
+{{ else }}
+  {{ $translations := $page.AllTranslations }}
+  {{ with $page.File }}
+    {{ $path := .Path }}
+    {{ range $translations }}
+      {{ $lang := print "." .Lang ".md" }}
+      {{ $path = replace $path $lang ".md" }}
+    {{ end }}
+    <script
+      type="text/javascript"
+      src="{{ $jsPage.RelPermalink }}"
+      integrity="{{ $jsPage.Data.Integrity }}"
+      data-oid="views_{{ $path }}"
+      data-oid-likes="likes_{{ $path }}"></script>
+  {{ end }}
+{{ end }}

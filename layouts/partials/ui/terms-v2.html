@@ -1,0 +1,66 @@
+{{ $showBreadcrumbs := .Params.showBreadcrumbs | default (site.Params.taxonomy.showBreadcrumbs | default false) }}
+{{ $showCount := site.Params.taxonomy.showTermCount | default true }}
+{{ $description := partial "functions/page-description.html" (dict "page" . "truncate" 220) | strings.TrimSpace }}
+{{ $termCount := len .Data.Terms }}
+{{ $taxonomyKey := .Data.Plural | default .Type }}
+{{ $taxonomyLabel := partial "functions/taxonomy-label.html" (dict
+  "key" $taxonomyKey
+  "form" "plural"
+  "fallback" (.Title | default (.Data.Plural | humanize))
+) | strings.TrimSpace }}
+{{ $pageTitle := .Title | default $taxonomyLabel }}
+{{ $generatedTitle := .Data.Plural | default $taxonomyKey | humanize }}
+{{ if or (not $pageTitle) (eq ($pageTitle | lower) ($generatedTitle | lower)) }}
+  {{ $pageTitle = $taxonomyLabel }}
+{{ end }}
+{{ $eyebrow := $taxonomyLabel | default $pageTitle }}
+{{ $showHeroDescription := and (not .Content) $description }}
+{{ $termLabel := partial "functions/count-label.html" (dict "count" $termCount "singular" "entrée" "plural" "entrées") | strings.TrimSpace }}
+
+{{ partial "ui/page-script.html" . }}
+
+<section class="site-v2-page">
+  <header class="site-v2-hero">
+    {{ if $showBreadcrumbs }}
+      {{ partial "ui/breadcrumbs.html" . }}
+    {{ end }}
+    <p class="site-v2-eyebrow">{{ $eyebrow }}</p>
+    <h1 class="site-v2-title">{{ $pageTitle | emojify }}</h1>
+    {{ with $showHeroDescription }}
+      <p class="site-v2-description">{{ . }}</p>
+    {{ end }}
+    <div class="site-v2-meta">
+      <span>{{ $termCount }} {{ $termLabel }}</span>
+      <span>{{ $eyebrow }}</span>
+    </div>
+  </header>
+
+  {{ with .Content }}
+    <section class="site-v2-intro">
+      <div class="prose max-w-none dark:prose-invert">
+        {{ . }}
+      </div>
+    </section>
+  {{ end }}
+
+  {{ if gt $termCount 0 }}
+    <section>
+      <div class="site-v2-section-head">
+        <h2>Tout parcourir</h2>
+        <p>Chaque entrée renvoie vers les contenus associés.</p>
+      </div>
+      <div class="site-v2-card-grid">
+        {{ range .Data.Terms.Alphabetical }}
+          {{ partial "ui/term-card.html" (dict
+            "term" .
+            "showCount" $showCount
+          ) }}
+        {{ end }}
+      </div>
+    </section>
+  {{ else }}
+    <section class="site-v2-empty">
+      <p><em>{{ i18n "list.no_articles" | emojify }}</em></p>
+    </section>
+  {{ end }}
+</section>

@@ -1,0 +1,85 @@
+{{- $p := . -}}
+
+{{- $enableToc := site.Params.list.showTableOfContents | default false -}}
+{{- if isset $p.Params "showTableOfContents" -}}
+  {{- $enableToc = index $p.Params "showTableOfContents" -}}
+{{- else if isset $p.Params "ShowToc" -}}
+  {{- $enableToc = index $p.Params "ShowToc" -}}
+{{- else if isset $p.Params "showtoc" -}}
+  {{- $enableToc = index $p.Params "showtoc" -}}
+{{- end -}}
+
+{{- $showBreadcrumbs := site.Params.list.showBreadcrumbs | default false -}}
+{{- if isset $p.Params "showBreadcrumbs" -}}
+  {{- $showBreadcrumbs = index $p.Params "showBreadcrumbs" -}}
+{{- else if isset $p.Params "ShowBreadCrumbs" -}}
+  {{- $showBreadcrumbs = index $p.Params "ShowBreadCrumbs" -}}
+{{- else if isset $p.Params "showbreadcrumbs" -}}
+  {{- $showBreadcrumbs = index $p.Params "showbreadcrumbs" -}}
+{{- end -}}
+
+{{- $orderByWeight := $p.Params.orderByWeight | default (site.Params.list.orderByWeight | default false) -}}
+{{- $cardView := $p.Params.cardView | default (site.Params.list.cardView | default false) -}}
+{{- $cardViewScreenWidth := $p.Params.cardViewScreenWidth | default (site.Params.list.cardViewScreenWidth | default false) -}}
+{{- $groupByYear := $p.Params.groupByYear | default (site.Params.list.groupByYear | default false) -}}
+
+{{- $taxonomyKey := "" -}}
+{{- if eq $p.Kind "taxonomy" -}}
+  {{- $taxonomyKey = $p.Data.Plural | default $p.Type | default $p.Title -}}
+{{- else if eq $p.Kind "term" -}}
+  {{- $taxonomyKey = $p.Type | default $p.Data.Plural | default $p.Data.Singular -}}
+{{- end -}}
+
+{{- $taxonomyPlural := "" -}}
+{{- $taxonomySingular := "" -}}
+{{- if $taxonomyKey -}}
+  {{- $taxonomyPlural = partial "functions/taxonomy-label.html" (dict
+    "key" $taxonomyKey
+    "form" "plural"
+    "fallback" ($p.Data.Plural | default $p.Title | default $taxonomyKey)
+  ) | strings.TrimSpace -}}
+  {{- $taxonomySingular = partial "functions/taxonomy-label.html" (dict
+    "key" $taxonomyKey
+    "form" "singular"
+    "fallback" ($p.Data.Singular | default $p.Type | default $taxonomyKey)
+  ) | strings.TrimSpace -}}
+{{- end -}}
+
+{{- $showCardDate := site.Params.article.showDate | default true -}}
+{{- if or (eq $p.Section "recettes") (eq $p.Type "recette") (eq $p.Type "recettes") -}}
+  {{- $showCardDate = false -}}
+{{- end -}}
+{{- if isset $p.Params "showDate" -}}
+  {{- $showCardDate = index $p.Params "showDate" -}}
+{{- else if and (isset $p.Params "cascade") (isset $p.Params.cascade "showDate") -}}
+  {{- $showCardDate = index $p.Params.cascade "showDate" -}}
+{{- end -}}
+
+{{- $eyebrow := "Collection" -}}
+{{- if eq $p.Kind "section" -}}
+  {{- $eyebrow = $p.Section | humanize -}}
+{{- else if eq $p.Kind "taxonomy" -}}
+  {{- $eyebrow = $taxonomyPlural | default ($p.Data.Plural | default $p.Title | humanize) -}}
+{{- else if eq $p.Kind "term" -}}
+  {{- $eyebrow = $taxonomySingular | default ($p.Data.Singular | default $p.Type | humanize) -}}
+{{- else if $p.Type -}}
+  {{- $eyebrow = $p.Type | humanize -}}
+{{- end -}}
+
+{{- $p.Scratch.Set "__uiListContext" (dict
+  "showToc" (and $enableToc (in $p.TableOfContents "<ul"))
+  "showBreadcrumbs" $showBreadcrumbs
+  "orderByWeight" $orderByWeight
+  "cardView" $cardView
+  "cardViewScreenWidth" $cardViewScreenWidth
+  "groupByYear" (and (not $orderByWeight) $groupByYear)
+  "showCardDate" $showCardDate
+  "showCardTags" (and (eq $p.Section "posts") (ne $p.Kind "taxonomy"))
+  "eyebrow" $eyebrow
+  "taxonomySingular" $taxonomySingular
+  "taxonomyPlural" $taxonomyPlural
+  "description" (partial "functions/page-description.html" (dict "page" $p) | strings.TrimSpace)
+  "entryCount" (len $p.Pages)
+  "showHero" (site.Params.list.showHero | default false)
+  "heroStyle" (print "hero/" site.Params.list.heroStyle ".html")
+) -}}

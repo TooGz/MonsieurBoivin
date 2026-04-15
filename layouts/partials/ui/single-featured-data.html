@@ -1,0 +1,74 @@
+{{- $p := . -}}
+{{- $hero := newScratch -}}
+{{- $hero.Set "src" "" -}}
+{{- $hero.Set "width" 0 -}}
+{{- $hero.Set "height" 0 -}}
+{{- $heroAlt := $p.Title -}}
+{{- with $p.Params.image_alt -}}
+  {{- $heroAlt = . -}}
+{{- else -}}
+  {{- with $p.Params.cover -}}
+    {{- with index . "alt" -}}
+      {{- $heroAlt = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $featured := false -}}
+{{- if not ($p.Params.hideFeatureImage | default false) -}}
+  {{- $images := $p.Resources.ByType "image" -}}
+  {{- $featured = $images.GetMatch "*feature*" -}}
+  {{- if not $featured -}}
+    {{- $featured = $images.GetMatch "{*cover*,*thumbnail*}" -}}
+  {{- end -}}
+  {{- if and (not $featured) (gt (len $images) 0) -}}
+    {{- $featured = index $images 0 -}}
+  {{- end -}}
+
+  {{- if not $featured -}}
+    {{- $paramImage := $p.Params.featured | default $p.Params.featureimage | default $p.Params.image | default "" -}}
+    {{- if not $paramImage -}}
+      {{- with $p.Params.cover -}}
+        {{- with index . "image" -}}
+          {{- $paramImage = . -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if $paramImage -}}
+      {{- if or (strings.HasPrefix $paramImage "http:") (strings.HasPrefix $paramImage "https:") -}}
+        {{- with resources.GetRemote $paramImage -}}
+          {{- $featured = . -}}
+        {{- else -}}
+          {{- $hero.Set "src" $paramImage -}}
+        {{- end -}}
+      {{- else -}}
+        {{- with $p.Resources.GetMatch $paramImage -}}
+          {{- $featured = . -}}
+        {{- else -}}
+          {{- with resources.Get $paramImage -}}
+            {{- $featured = . -}}
+          {{- else -}}
+            {{- $hero.Set "src" ($paramImage | relURL) -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with $featured -}}
+  {{- $img := . -}}
+  {{- if ne .MediaType.SubType "svg" -}}
+    {{- $img = .Fill "1200x900 center" -}}
+  {{- end -}}
+  {{- $hero.Set "src" $img.RelPermalink -}}
+  {{- $hero.Set "width" $img.Width -}}
+  {{- $hero.Set "height" $img.Height -}}
+{{- end -}}
+
+{{- $p.Scratch.Set "__uiSingleFeaturedData" (dict
+  "src" ($hero.Get "src")
+  "alt" $heroAlt
+  "width" ($hero.Get "width")
+  "height" ($hero.Get "height")
+) -}}

@@ -412,6 +412,69 @@ html.dark .site-v2-menu-button {
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
 }
 
+.site-v2-term-card {
+  border: 1px solid var(--site-v2-border);
+  border-radius: var(--site-v2-radius);
+  background: var(--site-v2-panel);
+  box-shadow: var(--site-v2-shadow);
+  overflow: hidden;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.site-v2-term-card__link {
+  display: grid;
+  gap: 0.85rem;
+  min-height: 100%;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.site-v2-term-card__head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.site-v2-term-card__title {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.site-v2-term-card__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.1rem;
+  min-height: 2.1rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: var(--site-v2-accent-soft);
+  color: var(--site-v2-ink);
+  font-size: 0.88rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.site-v2-term-card__description {
+  margin: 0;
+  color: var(--site-v2-muted);
+  font-size: 0.95rem;
+  line-height: 1.58;
+}
+
+.site-v2-term-card:hover,
+.site-v2-term-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: var(--site-v2-shadow-strong);
+  border-color: rgba(240, 109, 42, 0.2);
+}
+
 .site-v2-empty {
   padding: 1.2rem;
   color: var(--site-v2-muted);
@@ -650,6 +713,284 @@ body.site-shell--v2 #search-results a:focus-visible {
   background: var(--site-v2-accent-soft);
 }
 
+.site-v2-single {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.site-v2-single__hero {
+  padding: 1.35rem;
+}
+
+.site-v2-single__hero-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.site-v2-single__hero-copy {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.site-v2-single__hero-copy .site-v2-description {
+  margin-top: 0;
+}
+
+.site-v2-single__figure {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--site-v2-border);
+  border-radius: var(--site-v2-radius);
+  background: rgba(127, 143, 167, 0.12);
+  box-shadow: var(--site-v2-shadow);
+}
+
+.site-v2-single__figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 16rem;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.site-v2-single__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.8rem;
+  color: var(--site-v2-muted);
+}
+
+.site-v2-single__meta > * {
+  margin: 0;
+}
+
+.site-v2-single__meta-sep {
+  color: var(--site-v2-subtle);
+}
+
+.site-v2-single__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.site-v2-single__chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--site-v2-border);
+  border-radius: 999px;
+  background: var(--site-v2-panel);
+  color: var(--site-v2-ink);
+  font-size: 0.84rem;
+  text-decoration: none;
+}
+
+.site-v2-single__chip:hover,
+.site-v2-single__chip:focus-visible {
+  border-color: var(--site-v2-accent);
+  background: var(--site-v2-accent-soft);
+}
+
+.site-v2-single__chip--accent {
+  border-color: rgba(240, 109, 42, 0.3);
+  background: var(--site-v2-accent-soft);
+}
+
+.site-v2-single__body {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.site-v2-single__main {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.site-v2-single__panel {
+  border: 1px solid var(--site-v2-border);
+  border-radius: var(--site-v2-radius-lg);
+  background: var(--site-v2-panel);
+  box-shadow: var(--site-v2-shadow);
+  padding: 1.2rem;
+}
+
+.site-v2-single__panel > :first-child {
+  margin-top: 0;
+}
+
+.site-v2-single__panel > :last-child {
+  margin-bottom: 0;
+}
+
+.site-v2-single__content .article-content {
+  max-width: none;
+  margin: 0;
+}
+
+.site-v2-single__content .prose {
+  max-width: none;
+}
+
+.site-v2-single__reply {
+  margin-top: 2rem;
+}
+
+.site-v2-single__reply-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.8rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--site-v2-border);
+  border-radius: 999px;
+  text-decoration: none;
+  background: var(--site-v2-panel-strong);
+}
+
+.site-v2-single__reply-link:hover,
+.site-v2-single__reply-link:focus-visible {
+  border-color: var(--site-v2-accent);
+  background: var(--site-v2-accent-soft);
+}
+
+.site-v2-single__author .author,
+.site-v2-single__author .author-extra {
+  margin-top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.site-v2-single__author .author img,
+.site-v2-single__author .author-extra img {
+  border: 1px solid var(--site-v2-border);
+  box-shadow: var(--site-v2-shadow);
+}
+
+.site-v2-single__author .author a,
+.site-v2-single__author .author-extra a {
+  text-decoration: none;
+}
+
+.site-v2-single__author .author a:hover,
+.site-v2-single__author .author-extra a:hover,
+.site-v2-single__author .author a:focus-visible,
+.site-v2-single__author .author-extra a:focus-visible {
+  color: var(--site-v2-accent-strong);
+}
+
+.site-v2-single__series details {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.site-v2-single__sharing-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.site-v2-single__share-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.7rem;
+  padding: 0.65rem 0.95rem;
+  border: 1px solid var(--site-v2-border);
+  border-radius: 999px;
+  background: var(--site-v2-panel-strong);
+  text-decoration: none;
+}
+
+.site-v2-single__share-link:hover,
+.site-v2-single__share-link:focus-visible {
+  border-color: var(--site-v2-accent);
+  background: var(--site-v2-accent-soft);
+}
+
+.site-v2-single__share-link span {
+  font-size: 0.88rem;
+}
+
+.site-v2-single__pagination {
+  padding: 0;
+  overflow: hidden;
+}
+
+.site-v2-single__pager {
+  display: grid;
+  gap: 1px;
+  background: var(--site-v2-border);
+}
+
+.site-v2-single__pager-card {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem 1.15rem;
+  text-decoration: none;
+  background: var(--site-v2-panel-strong);
+}
+
+.site-v2-single__pager-card small {
+  color: var(--site-v2-subtle);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.site-v2-single__pager-card strong {
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.site-v2-single__pager-card span {
+  color: var(--site-v2-muted);
+  font-size: 0.9rem;
+}
+
+.site-v2-single__pager-card:hover,
+.site-v2-single__pager-card:focus-visible {
+  background: var(--site-v2-accent-soft);
+}
+
+.site-v2-single__pager-card--next {
+  text-align: right;
+}
+
+.site-v2-single__toc {
+  width: 100%;
+}
+
+.site-v2-single__toc-panel .toc {
+  padding-inline-start: 0;
+}
+
+.site-v2-single__toc-panel .toc details,
+.site-v2-single__toc-panel .toc details > div {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.site-v2-single__toc-panel .toc nav > ul {
+  margin: 0;
+}
+
+.site-v2-single__recipe-wrap {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.site-v2-single--recipe .recette-single {
+  margin-top: 0;
+}
+
 @media (min-width: 720px) {
   body.site-shell--v2 #main-content.site-v2-main {
     padding: 1.5rem 1.25rem 4rem;
@@ -657,6 +998,19 @@ body.site-shell--v2 #search-results a:focus-visible {
 
   .site-v2-header-wrap {
     padding-inline: 1.25rem;
+  }
+
+  .site-v2-single__hero-grid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(16rem, 24rem);
+    align-items: center;
+  }
+
+  .site-v2-single__hero-grid.is-simple {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .site-v2-single__pager {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -686,6 +1040,16 @@ body.site-shell--v2 #search-results a:focus-visible {
     grid-template-columns: minmax(0, 1.4fr) auto auto;
     align-items: center;
   }
+
+  .site-v2-single__body {
+    grid-template-columns: minmax(0, 1fr) minmax(15rem, 18rem);
+    align-items: start;
+  }
+
+  .site-v2-single__toc-panel {
+    position: sticky;
+    top: 7rem;
+  }
 }
 
 @media (max-width: 719px) {
@@ -698,6 +1062,7 @@ body.site-shell--v2 #search-results a:focus-visible {
   .site-v2-icon-button,
   .site-v2-menu-button,
   .home-hub-card,
+  .site-v2-term-card,
   .home-hub-card__media img,
   .site-v2-pagination__link {
     transition: none !important;
@@ -706,7 +1071,9 @@ body.site-shell--v2 #search-results a:focus-visible {
   .site-v2-icon-button:hover,
   .site-v2-menu-button:hover,
   .home-hub-card:hover,
-  .home-hub-card:focus-within {
+  .site-v2-term-card:hover,
+  .home-hub-card:focus-within,
+  .site-v2-term-card:focus-within {
     transform: none;
   }
 }

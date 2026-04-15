@@ -1,0 +1,37 @@
+{{ $authorsData := site.Data.authors }}
+{{ $baseURL := site.BaseURL }}
+{{ $page := . }}
+{{ $pageAuthors := slice }}
+
+{{ if not (strings.HasSuffix $baseURL "/") }}
+  {{ $baseURL = delimit (slice $baseURL "/") "" }}
+{{ end }}
+
+{{ if isset .Params "authors" }}
+  {{ $pageAuthors = index .Params "authors" }}
+{{ else if isset .Params "author" }}
+  {{ $pageAuthors = slice (index .Params "author") }}
+{{ end }}
+
+{{ if .Params.showAuthor | default (site.Params.article.showAuthor | default true) }}
+  {{ if gt (len $pageAuthors) 0 }}
+    {{ range $author := $pageAuthors }}
+      {{ $authorData := index $authorsData $author }}
+      {{ $finalLink := "" }}
+      {{ $currentLang := site.Language.Lang }}
+      {{ if eq site.LanguagePrefix "" }}
+        {{ $finalLink = printf "%sauthors/%s/" $baseURL $author }}
+      {{ else }}
+        {{ $finalLink = printf "%s%s/authors/%s/" $baseURL $currentLang $author }}
+      {{ end }}
+
+      {{ if $authorData }}
+        {{ partial "author-extra.html" (dict "context" $page "data" $authorData "link" $finalLink) }}
+      {{ else }}
+        {{ partial "author-extra.html" (dict "context" $page "data" (dict "name" $author) "link" "") }}
+      {{ end }}
+    {{ end }}
+  {{ else }}
+    {{ partial "author.html" . }}
+  {{ end }}
+{{ end }}

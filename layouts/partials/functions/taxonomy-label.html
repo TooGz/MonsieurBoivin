@@ -1,0 +1,27 @@
+{{- $rawKey := .key | default "" -}}
+{{- $form := .form | default "plural" -}}
+{{- $fallback := .fallback | default ($rawKey | humanize) -}}
+{{- $key := $rawKey | lower | strings.TrimSpace -}}
+
+{{- $singular := "" -}}
+{{- $plural := "" -}}
+
+{{- if eq $key "tags" -}}
+  {{- $singular = "Tag" -}}
+  {{- $plural = "Tags" -}}
+{{- else if eq $key "categories" -}}
+  {{- $singular = "Catégorie" -}}
+  {{- $plural = "Catégories" -}}
+{{- else if eq $key "authors" -}}
+  {{- $singular = "Auteur" -}}
+  {{- $plural = "Auteurs" -}}
+{{- else if eq $key "series" -}}
+  {{- $singular = "Série" -}}
+  {{- $plural = "Séries" -}}
+{{- end -}}
+
+{{- if eq $form "singular" -}}
+  {{- $singular | default $fallback -}}
+{{- else -}}
+  {{- $plural | default $fallback -}}
+{{- end -}}

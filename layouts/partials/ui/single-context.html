@@ -1,0 +1,41 @@
+{{- $p := . -}}
+{{- $isRecipePage := or (eq $p.Section "recettes") (eq $p.Type "recettes") (eq $p.Type "recette") -}}
+{{- $showAuthorBottom := $p.Params.showAuthorBottom | default (site.Params.article.showAuthorBottom | default false) -}}
+
+{{- $showBreadcrumbs := site.Params.article.showBreadcrumbs | default false -}}
+{{- if isset $p.Params "showBreadcrumbs" -}}
+  {{- $showBreadcrumbs = index $p.Params "showBreadcrumbs" -}}
+{{- else if isset $p.Params "ShowBreadCrumbs" -}}
+  {{- $showBreadcrumbs = index $p.Params "ShowBreadCrumbs" -}}
+{{- else if isset $p.Params "showbreadcrumbs" -}}
+  {{- $showBreadcrumbs = index $p.Params "showbreadcrumbs" -}}
+{{- end -}}
+
+{{- $enableToc := site.Params.article.showTableOfContents | default false -}}
+{{- if isset $p.Params "showTableOfContents" -}}
+  {{- $enableToc = index $p.Params "showTableOfContents" -}}
+{{- else if isset $p.Params "ShowToc" -}}
+  {{- $enableToc = index $p.Params "ShowToc" -}}
+{{- else if isset $p.Params "showtoc" -}}
+  {{- $enableToc = index $p.Params "showtoc" -}}
+{{- end -}}
+
+{{- $showDate := $p.Params.showDate | default ($p.Site.Params.article.showDate | default true) -}}
+{{- $showDateUpdated := and ($p.Params.showDateUpdated | default ($p.Site.Params.article.showDateUpdated | default false)) (ne (partial "functions/date.html" $p.Date) (partial "functions/date.html" $p.Lastmod)) (gt ($p.Lastmod | time.Format "2006") 1) -}}
+{{- $showReadingTime := and ($p.Params.showReadingTime | default ($p.Site.Params.article.showReadingTime | default true)) (ne $p.ReadingTime 0) -}}
+{{- $showZenMode := $p.Params.showZenMode | default ($p.Site.Params.article.showZenMode | default false) -}}
+
+{{- $p.Scratch.Set "__uiSingleContext" (dict
+  "isRecipePage" $isRecipePage
+  "showAuthorBottom" $showAuthorBottom
+  "showBreadcrumbs" $showBreadcrumbs
+  "enableToc" $enableToc
+  "showToc" (and (not $isRecipePage) $enableToc (in $p.TableOfContents "<ul"))
+  "showRecipeToc" (and $enableToc (in $p.TableOfContents "<ul"))
+  "showDate" $showDate
+  "showDateUpdated" $showDateUpdated
+  "showReadingTime" $showReadingTime
+  "showZenMode" $showZenMode
+  "showTaxonomies" ($p.Params.showTaxonomies | default ($p.Site.Params.article.showTaxonomies | default false))
+  "showCategoryOnly" ($p.Params.showCategoryOnly | default ($p.Site.Params.article.showCategoryOnly | default false))
+) -}}

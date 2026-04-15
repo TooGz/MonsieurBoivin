@@ -1,69 +1,24 @@
-{{ $enableToc := site.Params.list.showTableOfContents | default false }}
-{{ if isset .Params "showTableOfContents" }}
-  {{ $enableToc = index .Params "showTableOfContents" }}
-{{ else if isset .Params "ShowToc" }}
-  {{ $enableToc = index .Params "ShowToc" }}
-{{ else if isset .Params "showtoc" }}
-  {{ $enableToc = index .Params "showtoc" }}
-{{ end }}
-{{ $showToc := and $enableToc (in .TableOfContents "<ul") }}
-
-{{ $showBreadcrumbs := site.Params.list.showBreadcrumbs | default false }}
-{{ if isset .Params "showBreadcrumbs" }}
-  {{ $showBreadcrumbs = index .Params "showBreadcrumbs" }}
-{{ else if isset .Params "ShowBreadCrumbs" }}
-  {{ $showBreadcrumbs = index .Params "ShowBreadCrumbs" }}
-{{ else if isset .Params "showbreadcrumbs" }}
-  {{ $showBreadcrumbs = index .Params "showbreadcrumbs" }}
-{{ end }}
-
-{{ $orderByWeight := .Params.orderByWeight | default (site.Params.list.orderByWeight | default false) }}
+{{ partial "ui/list-context.html" . }}
+{{ $list := .Scratch.Get "__uiListContext" }}
+{{ $showToc := index $list "showToc" }}
+{{ $showBreadcrumbs := index $list "showBreadcrumbs" }}
+{{ $orderByWeight := index $list "orderByWeight" }}
 {{ $pages := .Pages.ByDate.Reverse }}
 {{ if $orderByWeight }}
   {{ $pages = .Pages.ByWeight }}
 {{ end }}
 {{ $paginator := .Paginate $pages }}
 
-{{ $eyebrow := "Collection" }}
-{{ if eq .Kind "section" }}
-  {{ $eyebrow = .Section | humanize }}
-{{ else if eq .Kind "taxonomy" }}
-  {{ $eyebrow = .Data.Plural | default .Title | humanize }}
-{{ else if eq .Kind "term" }}
-  {{ $eyebrow = .Data.Singular | default .Type | humanize }}
-{{ else if .Type }}
-  {{ $eyebrow = .Type | humanize }}
-{{ end }}
+{{ $eyebrow := index $list "eyebrow" }}
+{{ $description := index $list "description" }}
+{{ $entryCount := index $list "entryCount" }}
+{{ $showCardTags := index $list "showCardTags" }}
+{{ $showCardDate := index $list "showCardDate" }}
+{{ $taxonomySingular := index $list "taxonomySingular" }}
+{{ $taxonomyPlural := index $list "taxonomyPlural" }}
+{{ $entryLabel := partial "functions/count-label.html" (dict "count" $entryCount "singular" "contenu" "plural" "contenus") | strings.TrimSpace }}
 
-{{ $description := .Description | default (.Summary | plainify) }}
-{{ $entryCount := len .Pages }}
-{{ $showCardTags := and (eq .Section "posts") (ne .Kind "taxonomy") }}
-{{ $showCardDate := site.Params.article.showDate | default true }}
-{{ if or (eq .Section "recettes") (eq .Type "recette") (eq .Type "recettes") }}
-  {{ $showCardDate = false }}
-{{ end }}
-{{ if isset .Params "showDate" }}
-  {{ $showCardDate = index .Params "showDate" }}
-{{ else if and (isset .Params "cascade") (isset .Params.cascade "showDate") }}
-  {{ $showCardDate = index .Params.cascade "showDate" }}
-{{ end }}
-
-{{ $translations := .AllTranslations }}
-{{ with .File }}
-  {{ $path := .Path }}
-  {{ range $translations }}
-    {{ $lang := print "." .Lang ".md" }}
-    {{ $path = replace $path $lang ".md" }}
-  {{ end }}
-  {{ $jsPage := resources.Get "js/page.js" }}
-  {{ $jsPage = $jsPage | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
-  <script
-    type="text/javascript"
-    src="{{ $jsPage.RelPermalink }}"
-    integrity="{{ $jsPage.Data.Integrity }}"
-    data-oid="views_{{ $path }}"
-    data-oid-likes="likes_{{ $path }}"></script>
-{{ end }}
+{{ partial "ui/page-script.html" . }}
 
 <section class="site-v2-page">
   <header class="site-v2-hero">
@@ -76,9 +31,14 @@
       <p class="site-v2-description">{{ . }}</p>
     {{ end }}
     <div class="site-v2-meta">
-      <span>{{ $entryCount }} contenus</span>
-      {{ if .Section }}<span>{{ .Section | humanize }}</span>{{ end }}
-      {{ if eq .Kind "term" }}<span>{{ .Data.Singular | default "archive" | humanize }}</span>{{ end }}
+      <span>{{ $entryCount }} {{ $entryLabel }}</span>
+      {{ if eq .Kind "taxonomy" }}
+        {{ with $taxonomyPlural }}<span>{{ . }}</span>{{ end }}
+      {{ else if eq .Kind "term" }}
+        <span>{{ $taxonomySingular | default (.Data.Singular | default "archive" | humanize) }}</span>
+      {{ else if .Section }}
+        <span>{{ .Section | humanize }}</span>
+      {{ end }}
     </div>
   </header>
 

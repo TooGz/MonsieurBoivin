@@ -1,0 +1,18 @@
+{{ $term := .term }}
+{{ $showCount := .showCount | default true }}
+{{ $description := partial "functions/page-description.html" (dict "page" $term.Page "truncate" 160) | strings.TrimSpace }}
+
+<article class="site-v2-term-card">
+  <a class="site-v2-term-card__link" href="{{ $term.Page.RelPermalink }}">
+    <div class="site-v2-term-card__head">
+      <h3 class="site-v2-term-card__title">{{ $term.Page.Title | emojify }}</h3>
+      {{ if $showCount }}
+        <span class="site-v2-term-card__count">{{ $term.Count }}</span>
+      {{ end }}
+    </div>
+
+    {{ with $description }}
+      <p class="site-v2-term-card__description">{{ . }}</p>
+    {{ end }}
+  </a>
+</article>

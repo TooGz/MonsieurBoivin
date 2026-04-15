@@ -1,0 +1,24 @@
+{{- $page := .page -}}
+{{- $truncate := .truncate | default 0 -}}
+{{- $fallback := .fallback | default "" -}}
+{{- $description := "" -}}
+
+{{- with $page.Description -}}
+  {{- $description = . | plainify | strings.TrimSpace -}}
+{{- end -}}
+
+{{- if eq $description "" -}}
+  {{- with $page.Summary -}}
+    {{- $description = . | plainify | strings.TrimSpace -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq $description "" -}}
+  {{- $description = $fallback | plainify | strings.TrimSpace -}}
+{{- end -}}
+
+{{- if and (gt $truncate 0) (gt (len $description) $truncate) -}}
+  {{- $description = $description | truncate $truncate -}}
+{{- end -}}
+
+{{- $description -}}
