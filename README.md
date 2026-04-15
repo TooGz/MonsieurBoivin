@@ -14,6 +14,14 @@ Refonte home + socle d'audit + design system minimal pour homogeniser tout le si
 
 ## Commandes
 
+Versions attendues :
+
+- Hugo extended `0.150.0`
+- Node.js `22.18.0`
+
+Le repo pinne ces versions dans `.tool-versions` pour les environnements compatibles `asdf` ou `mise`.
+Si vous lancez une version plus recente de Hugo, Blowfish peut afficher un warning de compatibilite meme si le build passe.
+
 Dev Hugo :
 
 ```bash

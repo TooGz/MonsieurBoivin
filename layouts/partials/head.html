@@ -6,10 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="theme-color" content="#0f172a">
+  {{ $uiVersion := partial "ui/version.html" . | strings.TrimSpace }}
 
   {{ partial "seo.html" . }}
 
-  {{ if .IsHome }}
+  {{ if and .IsHome (ne $uiVersion "legacy") }}
     {{ $criticalCSS := resources.Get "css/critical.css" }}
     {{ with $criticalCSS }}
       {{ $criticalCSS = . | resources.Minify }}
@@ -39,6 +40,7 @@
   {{ end }}
 
   {{ $assets := newScratch }}
+  {{ $isRecipePage := and .IsPage (or (eq .Section "recettes") (eq .Type "recettes") (eq .Type "recette")) }}
   {{ $cssScheme := resources.Get (printf "css/schemes/%s.css" (.Site.Params.colorScheme | default "blowfish")) }}
   {{ if not $cssScheme }}
     {{ $cssScheme = resources.Get "css/schemes/blowfish.css" }}
@@ -81,9 +83,6 @@
   {{ end }}
   {{ $cssMain := resources.Get "css/compiled/main.css" }}
   {{ $assets.Add "css" (slice $cssMain) }}
-  {{ with resources.Get "css/styles.css" }}
-    {{ $assets.Add "css" (slice .) }}
-  {{ end }}
   {{ with resources.Get "css/custom.css" }}
     {{ $assets.Add "css" (slice .) }}
   {{ end }}
@@ -98,6 +97,26 @@
     rel="stylesheet"
     href="{{ $bundleCSS.RelPermalink }}"
     integrity="{{ $bundleCSS.Data.Integrity }}">
+  {{ if and .IsHome (ne $uiVersion "legacy") }}
+    {{ with resources.Get "css/home.css" }}
+      {{ $homeCSS := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+      <link
+        type="text/css"
+        rel="stylesheet"
+        href="{{ $homeCSS.RelPermalink }}"
+        integrity="{{ $homeCSS.Data.Integrity }}">
+    {{ end }}
+  {{ end }}
+  {{ if $isRecipePage }}
+    {{ with resources.Get "css/recipes.css" }}
+      {{ $recipeCSS := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+      <link
+        type="text/css"
+        rel="stylesheet"
+        href="{{ $recipeCSS.RelPermalink }}"
+        integrity="{{ $recipeCSS.Data.Integrity }}">
+    {{ end }}
+  {{ end }}
 
   {{ $jsAppearance := resources.Get "js/appearance.js" }}
   {{ $jsAppearance = $jsAppearance | resources.ExecuteAsTemplate "js/appearance.js" . | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
@@ -153,13 +172,15 @@
       data-copied="{{ i18n "code.copied" }}"></script>
   {{ end }}
 
-  {{ with resources.Get "js/main.js" }}
-    {{ $jsMain := . | js.Build (dict "targetPath" "js/home-ui.js" "minify" hugo.IsProduction) | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
-    <script
-      defer
-      type="module"
-      src="{{ $jsMain.RelPermalink }}"
-      integrity="{{ $jsMain.Data.Integrity }}"></script>
+  {{ if ne $uiVersion "legacy" }}
+    {{ with resources.Get "js/main.js" }}
+      {{ $jsMain := . | js.Build (dict "targetPath" "js/home-ui.js" "minify" hugo.IsProduction) | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+      <script
+        defer
+        type="module"
+        src="{{ $jsMain.RelPermalink }}"
+        integrity="{{ $jsMain.Data.Integrity }}"></script>
+    {{ end }}
   {{ end }}
 
   {{ if not .Site.Params.disableImageZoom | default true }}

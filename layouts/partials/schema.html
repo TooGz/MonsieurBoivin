@@ -54,6 +54,7 @@
   </script>
 {{ else if .IsPage }}
   {{- $iso8601 := "2006-01-02T15:04:05-07:00" -}}
+  {{- $isRecipePage := or (eq .Section "recettes") (eq .Type "recettes") (eq .Type "recette") -}}
   {{- $schemaAuthor := $authorName -}}
   {{- if isset .Params "authors" -}}
     {{- $authors := index .Params "authors" -}}
@@ -68,49 +69,192 @@
   {{- else if isset .Params "author" -}}
     {{- $schemaAuthor = index .Params "author" -}}
   {{- end -}}
-  <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "@id": "{{ printf "%s#webpage" .Permalink | safeURL }}",
-      "url": "{{ .Permalink | safeURL }}",
-      "name": "{{ .Title | safeJS }}",
-      {{ with .Description }}"description": "{{ . | safeJS }}",{{ else with .Summary }}"description": "{{ . | plainify | safeJS }}",{{ end }}
-      "isPartOf": { "@id": "{{ printf "%s#website" $home.Permalink | safeURL }}" },
-      "about": { "@id": "{{ printf "%s#person" $home.Permalink | safeURL }}" },
-      "inLanguage": "{{ site.LanguageCode | default "fr" }}"
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "@id": "{{ printf "%s#article" .Permalink | safeURL }}",
-      "headline": "{{ .Title | safeJS }}",
-      "name": "{{ .Title | safeJS }}",
-      {{ with .Description }}"description": "{{ . | safeJS }}",{{ end }}
-      {{ with .Summary }}"abstract": "{{ . | plainify | safeJS }}",{{ end }}
-      "author": {
-        "@type": "Person",
-        "name": "{{ $schemaAuthor | safeJS }}"
-      },
-      "publisher": {
-        "@type": "Person",
-        "name": "{{ $authorName | safeJS }}"
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "{{ printf "%s#webpage" .Permalink | safeURL }}"
-      },
-      "url": "{{ .Permalink | safeURL }}",
-      "inLanguage": "{{ site.LanguageCode | default "fr" }}",
-      {{ with .Date }}"dateCreated": "{{ .Format $iso8601 }}",{{ end }}
-      {{ with .PublishDate }}"datePublished": "{{ .Format $iso8601 }}",{{ end }}
-      {{ with .Lastmod }}"dateModified": "{{ .Format $iso8601 }}",{{ end }}
-      {{ with .Params.tags }}"keywords": {{ . }},{{ end }}
-      "wordCount": "{{ .WordCount }}"
-    }
-  ]
-  </script>
+  {{- $pageDescription := .Description | default (.Summary | plainify) -}}
+  {{- $schemaNodes := slice -}}
+  {{- $pageNode := dict
+    "@context" "https://schema.org"
+    "@type" "WebPage"
+    "@id" (printf "%s#webpage" .Permalink | safeURL)
+    "url" (.Permalink | safeURL)
+    "name" .Title
+    "isPartOf" (dict "@id" (printf "%s#website" $home.Permalink | safeURL))
+    "about" (dict "@id" (printf "%s#person" $home.Permalink | safeURL))
+    "inLanguage" (site.LanguageCode | default "fr")
+  -}}
+  {{- with $pageDescription -}}
+    {{- $pageNode = merge $pageNode (dict "description" .) -}}
+  {{- end -}}
+  {{- $schemaNodes = $schemaNodes | append $pageNode -}}
+
+  {{- if $isRecipePage -}}
+    {{- $recipeNode := dict
+      "@context" "https://schema.org"
+      "@type" "Recipe"
+      "@id" (printf "%s#recipe" .Permalink | safeURL)
+      "name" .Title
+      "author" (dict "@type" "Person" "name" $schemaAuthor)
+      "publisher" (dict "@type" "Person" "name" $authorName)
+      "mainEntityOfPage" (dict "@type" "WebPage" "@id" (printf "%s#webpage" .Permalink | safeURL))
+      "url" (.Permalink | safeURL)
+      "inLanguage" (site.LanguageCode | default "fr")
+    -}}
+    {{- with $pageDescription -}}
+      {{- $recipeNode = merge $recipeNode (dict "description" .) -}}
+    {{- end -}}
+    {{- with .Date -}}
+      {{- $recipeNode = merge $recipeNode (dict "dateCreated" (.Format $iso8601)) -}}
+    {{- end -}}
+    {{- with .PublishDate -}}
+      {{- $recipeNode = merge $recipeNode (dict "datePublished" (.Format $iso8601)) -}}
+    {{- end -}}
+    {{- with .Lastmod -}}
+      {{- $recipeNode = merge $recipeNode (dict "dateModified" (.Format $iso8601)) -}}
+    {{- end -}}
+    {{- with .Params.tags -}}
+      {{- $recipeNode = merge $recipeNode (dict "keywords" .) -}}
+    {{- end -}}
+    {{- with .Params.categories -}}
+      {{- $recipeNode = merge $recipeNode (dict "recipeCategory" (delimit . ", ")) -}}
+    {{- end -}}
+    {{- with .Params.servings -}}
+      {{- $recipeNode = merge $recipeNode (dict "recipeYield" (printf "%v" .)) -}}
+    {{- end -}}
+    {{- $prepDuration := trim (partial "recipes/schema-duration.html" .Params.prep_time) " \n\r\t" -}}
+    {{- with $prepDuration -}}
+      {{- $recipeNode = merge $recipeNode (dict "prepTime" .) -}}
+    {{- end -}}
+    {{- $cookDuration := trim (partial "recipes/schema-duration.html" .Params.cook_time) " \n\r\t" -}}
+    {{- with $cookDuration -}}
+      {{- $recipeNode = merge $recipeNode (dict "cookTime" .) -}}
+    {{- end -}}
+    {{- $totalDuration := trim (partial "recipes/schema-duration.html" .Params.total_time) " \n\r\t" -}}
+    {{- with $totalDuration -}}
+      {{- $recipeNode = merge $recipeNode (dict "totalTime" .) -}}
+    {{- end -}}
+
+    {{- partial "recipes/hero-data.html" . -}}
+    {{- $hero := .Scratch.Get "__recipeHeroData" -}}
+    {{- with index $hero "src" -}}
+      {{- $imageURL := . -}}
+      {{- if not (or (strings.HasPrefix $imageURL "http:") (strings.HasPrefix $imageURL "https:")) -}}
+        {{- $imageURL = $imageURL | absURL -}}
+      {{- end -}}
+      {{- $recipeNode = merge $recipeNode (dict "image" (slice $imageURL)) -}}
+    {{- end -}}
+
+    {{- $recipeIngredients := slice -}}
+    {{- with .Params.ingredients -}}
+      {{- range . -}}
+        {{- range .items -}}
+          {{- $ingredientName := trim (.name | default "") " " -}}
+          {{- if ne $ingredientName "" -}}
+            {{- $ingredientParts := slice -}}
+            {{- $ingredientQuantity := trim (printf "%v" (.quantity | default "")) " " -}}
+            {{- $ingredientUnit := trim (.unit | default "") " " -}}
+            {{- if ne $ingredientQuantity "" -}}
+              {{- $ingredientParts = $ingredientParts | append $ingredientQuantity -}}
+            {{- end -}}
+            {{- if ne $ingredientUnit "" -}}
+              {{- $ingredientParts = $ingredientParts | append $ingredientUnit -}}
+            {{- end -}}
+            {{- $ingredientParts = $ingredientParts | append $ingredientName -}}
+            {{- $recipeIngredients = $recipeIngredients | append (delimit $ingredientParts " ") -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if gt (len $recipeIngredients) 0 -}}
+      {{- $recipeNode = merge $recipeNode (dict "recipeIngredient" $recipeIngredients) -}}
+    {{- end -}}
+
+    {{- $recipeInstructions := slice -}}
+    {{- with .Params.mise_en_place -}}
+      {{- $sectionSteps := slice -}}
+      {{- range . -}}
+        {{- if and . (ne (trim . " ") "") -}}
+          {{- $sectionSteps = $sectionSteps | append (dict "@type" "HowToStep" "text" .) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if gt (len $sectionSteps) 0 -}}
+        {{- $recipeInstructions = $recipeInstructions | append (dict "@type" "HowToSection" "name" "Mise en place" "itemListElement" $sectionSteps) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- with .Params.preparation -}}
+      {{- $sectionSteps := slice -}}
+      {{- range . -}}
+        {{- if and . (ne (trim . " ") "") -}}
+          {{- $sectionSteps = $sectionSteps | append (dict "@type" "HowToStep" "text" .) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if gt (len $sectionSteps) 0 -}}
+        {{- $recipeInstructions = $recipeInstructions | append (dict "@type" "HowToSection" "name" "Préparation" "itemListElement" $sectionSteps) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- with .Params.cooking -}}
+      {{- $sectionSteps := slice -}}
+      {{- with .steps -}}
+        {{- range . -}}
+          {{- if and . (ne (trim . " ") "") -}}
+            {{- $sectionSteps = $sectionSteps | append (dict "@type" "HowToStep" "text" .) -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if gt (len $sectionSteps) 0 -}}
+        {{- $recipeInstructions = $recipeInstructions | append (dict "@type" "HowToSection" "name" "Cuisson" "itemListElement" $sectionSteps) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- with .Params.serving -}}
+      {{- $sectionSteps := slice -}}
+      {{- range . -}}
+        {{- if and . (ne (trim . " ") "") -}}
+          {{- $sectionSteps = $sectionSteps | append (dict "@type" "HowToStep" "text" .) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if gt (len $sectionSteps) 0 -}}
+        {{- $recipeInstructions = $recipeInstructions | append (dict "@type" "HowToSection" "name" "Service" "itemListElement" $sectionSteps) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if gt (len $recipeInstructions) 0 -}}
+      {{- $recipeNode = merge $recipeNode (dict "recipeInstructions" $recipeInstructions) -}}
+    {{- end -}}
+
+    {{- $schemaNodes = $schemaNodes | append $recipeNode -}}
+  {{- else -}}
+    {{- $articleNode := dict
+      "@context" "https://schema.org"
+      "@type" "Article"
+      "@id" (printf "%s#article" .Permalink | safeURL)
+      "headline" .Title
+      "name" .Title
+      "author" (dict "@type" "Person" "name" $schemaAuthor)
+      "publisher" (dict "@type" "Person" "name" $authorName)
+      "mainEntityOfPage" (dict "@type" "WebPage" "@id" (printf "%s#webpage" .Permalink | safeURL))
+      "url" (.Permalink | safeURL)
+      "inLanguage" (site.LanguageCode | default "fr")
+      "wordCount" (printf "%d" .WordCount)
+    -}}
+    {{- with .Description -}}
+      {{- $articleNode = merge $articleNode (dict "description" .) -}}
+    {{- end -}}
+    {{- with .Summary -}}
+      {{- $articleNode = merge $articleNode (dict "abstract" (. | plainify)) -}}
+    {{- end -}}
+    {{- with .Date -}}
+      {{- $articleNode = merge $articleNode (dict "dateCreated" (.Format $iso8601)) -}}
+    {{- end -}}
+    {{- with .PublishDate -}}
+      {{- $articleNode = merge $articleNode (dict "datePublished" (.Format $iso8601)) -}}
+    {{- end -}}
+    {{- with .Lastmod -}}
+      {{- $articleNode = merge $articleNode (dict "dateModified" (.Format $iso8601)) -}}
+    {{- end -}}
+    {{- with .Params.tags -}}
+      {{- $articleNode = merge $articleNode (dict "keywords" .) -}}
+    {{- end -}}
+    {{- $schemaNodes = $schemaNodes | append $articleNode -}}
+  {{- end -}}
+  {{- $schemaJSON := $schemaNodes | jsonify -}}
+  {{- printf "<script type=\"application/ld+json\">%s</script>" $schemaJSON | safeHTML -}}
 {{ else }}
   {{- $nodeDescription := .Description | default site.Params.description | default "" -}}
   <script type="application/ld+json">

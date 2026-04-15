@@ -1,0 +1,44 @@
+{{- $raw := lower (trim (printf "%v" .) " ") -}}
+{{- $duration := "" -}}
+
+{{- if ne $raw "" -}}
+  {{- $clean := replaceRE "\\s+" "" $raw -}}
+  {{- $hours := "" -}}
+  {{- $minutes := "" -}}
+
+  {{- if in $clean "h" -}}
+    {{- $hours = replaceRE "^.*?([0-9]+)h.*$" "$1" $clean -}}
+    {{- if eq $hours $clean -}}
+      {{- $hours = "" -}}
+    {{- end -}}
+
+    {{- $minutesMatches := findRE "[0-9]+min" $clean 1 -}}
+    {{- if gt (len $minutesMatches) 0 -}}
+      {{- $minutes = replaceRE "^([0-9]+)min$" "$1" (index $minutesMatches 0) -}}
+    {{- else if gt (len (findRE "^\\d+h\\d+$" $clean 1)) 0 -}}
+      {{- $minutes = replaceRE "^\\d+h(\\d+)$" "$1" $clean -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $minutesMatches := findRE "[0-9]+min" $clean 1 -}}
+    {{- if gt (len $minutesMatches) 0 -}}
+      {{- $minutes = replaceRE "^([0-9]+)min$" "$1" (index $minutesMatches 0) -}}
+    {{- else if gt (len (findRE "^\\d+$" $clean 1)) 0 -}}
+      {{- $minutes = $clean -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if and $hours (ne $hours "") (ne $hours "0") -}}
+    {{- $duration = printf "%s%sH" $duration $hours -}}
+  {{- end -}}
+  {{- if and $minutes (ne $minutes "") (ne $minutes "0") -}}
+    {{- $duration = printf "%s%sM" $duration $minutes -}}
+  {{- end -}}
+
+  {{- if ne $duration "" -}}
+    {{- $duration = printf "PT%s" $duration -}}
+  {{- else if or (eq $hours "0") (eq $minutes "0") -}}
+    {{- $duration = "PT0M" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $duration -}}

@@ -3,7 +3,7 @@
   lang="{{ with site.Params.isoCode | default (site.LanguageCode | default "fr") }}{{- . -}}{{ end }}"
   dir="{{ if site.Params.rtl | default false }}rtl{{ else }}ltr{{ end }}"
   class="scroll-smooth"
-  data-ui="{{- $uiVersion := site.Params.ui.defaultVersion | default "legacy" -}}{{- if .IsHome -}}{{- $uiVersion = site.Params.ui.homeVersion | default "v2" -}}{{- end -}}{{- with .Params.uiVersion -}}{{- $uiVersion = . -}}{{- end -}}{{- $uiVersion -}}"
+  data-ui="{{- partial "ui/version.html" . | strings.TrimSpace -}}"
   data-js="off"
   data-default-appearance="{{ site.Params.defaultAppearance | default "light" }}"
   data-auto-appearance="{{ site.Params.autoSwitchAppearance | default "true" }}">

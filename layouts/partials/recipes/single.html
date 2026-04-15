@@ -1,7 +1,7 @@
 {{/* layouts/partials/recipes/single.html */}}
 {{ $p := . }}
 
-<section class="max-w-full mt-6 prose dark:prose-invert">
+<section class="recette-single mt-6 flex max-w-full flex-col prose dark:prose-invert lg:flex-row">
 
   {{/* =========================
       TOC
@@ -18,31 +18,31 @@
   {{ $topClass := cond (hasPrefix site.Params.header.layout "fixed") "lg:top-[140px]" "lg:top-10" }}
 
   {{ if $showToc }}
-    <aside class="order-first lg:ml-auto px-0 lg:order-last lg:ps-8">
+    <aside class="recette-single__toc order-first px-0 lg:order-last lg:ml-auto lg:ps-8">
       <div class="toc ps-5 print:hidden lg:sticky {{ $topClass }}">
         {{ partial "toc.html" $p }}
       </div>
     </aside>
   {{ end }}
 
-  <div class="min-w-0 min-h-0 max-w-fit">
+  <div class="recette-single__body min-h-0 min-w-0 w-full max-w-4xl flex-1">
 
     {{/* =========================
         IMAGE HERO
     ========================== */}}
-    {{ $img := "" }}
-    {{ with $p.Resources.GetMatch "featured.*" }}
-      {{ $img = (.Fill "1200x800 center").RelPermalink }}
-    {{ else }}
-      {{ $fallbackImg := ($p.Params.featured | default $p.Params.image | default (index $p.Params.cover "image") | default "") }}
-      {{ if and $fallbackImg (ne (trim $fallbackImg " ") "") }}
-        {{ $img = $fallbackImg | relURL }}
-      {{ end }}
-    {{ end }}
-
-    {{ if and $img (ne (trim $img " ") "") }}
+    {{ partial "recipes/hero-data.html" $p }}
+    {{ $hero := $p.Scratch.Get "__recipeHeroData" }}
+    {{ $heroSrc := index $hero "src" }}
+    {{ if and $heroSrc (ne (trim $heroSrc " ") "") }}
       <div class="recette-single__hero">
-        <img src="{{ $img }}" alt="{{ $p.Title }}" loading="lazy" />
+        <img
+          src="{{ $heroSrc }}"
+          alt="{{ index $hero "alt" }}"
+          {{ with index $hero "width" }}width="{{ . }}"{{ end }}
+          {{ with index $hero "height" }}height="{{ . }}"{{ end }}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async">
       </div>
     {{ end }}
 

@@ -1,0 +1,59 @@
+{{- $p := . -}}
+{{- $hero := newScratch -}}
+{{- $hero.Set "src" "" -}}
+{{- $hero.Set "width" 0 -}}
+{{- $hero.Set "height" 0 -}}
+{{- $heroAlt := $p.Title -}}
+
+{{- with $p.Params.image_alt -}}
+  {{- $heroAlt = . -}}
+{{- else -}}
+  {{- with $p.Params.cover -}}
+    {{- with index . "alt" -}}
+      {{- $heroAlt = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $heroImage := false -}}
+{{- $images := $p.Resources.ByType "image" -}}
+{{- $heroImage = $images.GetMatch "*feature*" -}}
+{{- if not $heroImage -}}
+  {{- $heroImage = $images.GetMatch "{*cover*,*thumbnail*}" -}}
+{{- end -}}
+{{- if and (not $heroImage) (gt (len $images) 0) -}}
+  {{- $heroImage = index $images 0 -}}
+{{- end -}}
+
+{{- with $heroImage -}}
+  {{- $img := . -}}
+  {{- if ne .MediaType.SubType "svg" -}}
+    {{- $img = .Fill "1200x800 center" -}}
+  {{- end -}}
+  {{- $hero.Set "src" $img.RelPermalink -}}
+  {{- $hero.Set "width" $img.Width -}}
+  {{- $hero.Set "height" $img.Height -}}
+{{- else -}}
+  {{- $fallbackImg := $p.Params.featured | default $p.Params.image | default "" -}}
+  {{- if not $fallbackImg -}}
+    {{- with $p.Params.cover -}}
+      {{- with index . "image" -}}
+        {{- $fallbackImg = . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if and $fallbackImg (ne (trim $fallbackImg " ") "") -}}
+    {{- if or (strings.HasPrefix $fallbackImg "http:") (strings.HasPrefix $fallbackImg "https:") -}}
+      {{- $hero.Set "src" $fallbackImg -}}
+    {{- else -}}
+      {{- $hero.Set "src" ($fallbackImg | relURL) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $p.Scratch.Set "__recipeHeroData" (dict
+  "src" ($hero.Get "src")
+  "alt" $heroAlt
+  "width" ($hero.Get "width")
+  "height" ($hero.Get "height")
+) -}}

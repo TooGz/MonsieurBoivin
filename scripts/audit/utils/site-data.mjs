@@ -294,7 +294,7 @@ export const buildSiteInventory = async () => {
       css: [
         "themes/blowfish/assets/css/compiled/main.css",
         "assets/css/design-system/*.css",
-        "assets/css/styles.css",
+        "assets/css/home.css",
         "assets/css/custom.css"
       ],
       javascript: [

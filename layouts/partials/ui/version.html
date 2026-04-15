@@ -1,0 +1,8 @@
+{{- $uiVersion := site.Params.ui.defaultVersion | default "legacy" -}}
+{{- if .IsHome -}}
+  {{- $uiVersion = site.Params.ui.homeVersion | default "v2" -}}
+{{- end -}}
+{{- with .Params.uiVersion -}}
+  {{- $uiVersion = . -}}
+{{- end -}}
+{{- $uiVersion -}}

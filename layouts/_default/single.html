@@ -1,8 +1,9 @@
 {{ define "main" }}
   {{ .Scratch.Set "scope" "single" }}
+  {{ $isRecipePage := or (eq .Section "recettes") (eq .Type "recettes") (eq .Type "recette") }}
   <article>
     {{/* Hero */}}
-    {{ if .Params.showHero | default (site.Params.article.showHero | default false) }}
+    {{ if and (not $isRecipePage) (.Params.showHero | default (site.Params.article.showHero | default false)) }}
       {{ $heroStyle := .Params.heroStyle }}
       {{ if not $heroStyle }}{{ $heroStyle = site.Params.article.heroStyle }}{{ end }}
       {{ $heroStyle := print "hero/" $heroStyle ".html" }}
@@ -38,7 +39,7 @@
     </header>
 
     {{/* Body */}}
-    {{ if or (eq .Section "recettes") (eq .Type "recettes") (eq .Type "recette") }}
+    {{ if $isRecipePage }}
 
     {{/* ======= SINGLE RECETTE DÉDIÉ ======= */}}
     {{ partial "recipes/single.html" . }}

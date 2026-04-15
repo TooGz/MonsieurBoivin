@@ -5,7 +5,7 @@
 - Generateur : Hugo
 - Theme : Blowfish
 - Routage : content bundles filesystem + taxonomies Hugo
-- CSS : `themes/blowfish/assets/css/compiled/main.css`, `assets/css/design-system/*.css`, `assets/css/styles.css`, `assets/css/custom.css`
+- CSS : `themes/blowfish/assets/css/compiled/main.css`, `assets/css/design-system/*.css`, `assets/css/home.css`, `assets/css/custom.css`
 - JS : `themes/blowfish/assets/js/*.js`, `assets/js/main.js`, `assets/js/components/*.js`
 - CI : `.github/workflows/hugo.yaml`, `.github/workflows/quality.yml`
 
