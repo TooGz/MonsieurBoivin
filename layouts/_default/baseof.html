@@ -22,7 +22,8 @@
   {{- end -}}
 
   <body class="{{ $bodyClass }}" data-page-kind="{{ if .IsHome }}home{{ else if .IsPage }}page{{ else if .IsSection }}section{{ else }}other{{ end }}">
-    <div id="the-top" class="absolute flex self-center">
+    <div id="page-top" aria-hidden="true"></div>
+    <div class="absolute flex self-center">
       <a
         class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
         href="#main-content">
@@ -48,11 +49,9 @@
         {{ end }}
       </main>
 
-      {{ if not .IsHome }}
-        {{- partial "footer.html" . -}}
-        {{ if site.Params.enableSearch | default false }}
-          {{- partial "search.html" . -}}
-        {{ end }}
+      {{- partial "footer.html" . -}}
+      {{ if and (not .IsHome) (site.Params.enableSearch | default false) }}
+        {{- partial "search.html" . -}}
       {{ end }}
     </div>
   </body>

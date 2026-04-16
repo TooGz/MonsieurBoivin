@@ -322,7 +322,7 @@ html.dark .home-hub__theme-icon--sun {
 }
 
 .home-hub__hero-metrics li {
-  min-width: 8rem;
+  min-width: 7rem;
   padding: 0.95rem 1rem;
   border-radius: 1.1rem;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -350,6 +350,10 @@ html.dark .home-hub__theme-icon--sun {
 
 .home-hub__panel a {
   color: #fff;
+}
+
+.home-hub__panel .home-hub__button {
+  margin-top: 1rem;
 }
 
 .home-hub__bullet-list {

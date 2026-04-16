@@ -1,92 +1,26 @@
-{{ $footerMenu := .Site.Menus.footer }}
-{{ if not $footerMenu }}
-  {{ $footerMenu = .Site.Menus.main }}
+{{ partial "footer/site-footer.html" . }}
+
+{{ $pageAssetFlags := partial "functions/page-asset-flags.html" (dict "page" .) }}
+{{ $shouldEnableImageZoom := index $pageAssetFlags "needsImageZoom" }}
+{{ if $shouldEnableImageZoom }}
+  <script>
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: "rgba(0,0,0,0.5)",
+      scrollOffset: 0,
+    });
+  </script>
 {{ end }}
-{{ $socialLinks := .Site.Params.Author.links | default (slice) }}
-{{ $brandText := .Site.Params.Author.headline | default .Site.Params.description | default .Site.Params.Author.role }}
-
-<footer id="site-footer" class="site-v2-footer print:hidden">
-  <div class="site-v2-footer-shell">
-    <div class="site-v2-footer__brand">
-      <a href="{{ "" | relLangURL }}">{{ .Site.Title | plainify }}</a>
-      {{ with $brandText }}
-        <p>{{ . }}</p>
-      {{ end }}
-    </div>
-
-    {{ if $footerMenu }}
-      <nav class="site-v2-footer__nav" aria-label="Navigation secondaire">
-        {{ range $footerMenu }}
-          <a
-            href="{{ .URL }}"
-            {{ if or (strings.HasPrefix .URL "http:") (strings.HasPrefix .URL "https:") }}target="_blank" rel="noopener noreferrer"{{ end }}
-            title="{{ .Title }}">
-            {{ .Name | markdownify }}
-          </a>
-        {{ end }}
-      </nav>
-    {{ end }}
-
-    <div class="grid gap-3">
-      {{ if or (gt (len $socialLinks) 0) (.Site.Params.Author.email) }}
-        <div class="site-v2-footer__socials" aria-label="Liens externes">
-          {{ range $socialLinks }}
-            {{ range $name, $url := . }}
-              <a href="{{ $url }}" target="_blank" rel="me noopener noreferrer" title="{{ $name | humanize }}">
-                {{ partial "icon.html" $name }}
-                <span class="sr-only">{{ $name | humanize }}</span>
-              </a>
-            {{ end }}
-          {{ end }}
-          {{ with .Site.Params.Author.email }}
-            <a href="mailto:{{ . }}" title="Envoyer un email">
-              {{ partial "icon.html" "envelope" }}
-              <span>Mail</span>
-            </a>
-          {{ end }}
-        </div>
-      {{ end }}
-
-      <p class="site-v2-footer__meta">
-        {{ if .Site.Params.footer.showCopyright | default true }}
-          {{- with replace .Site.Params.copyright "{ year }" now.Year -}}
-            {{ . | markdownify }}
-          {{- else -}}
-            &copy; {{ now.Format "2006" }} {{ .Site.Params.Author.name | markdownify }}
-          {{- end -}}
-        {{ end }}
-        {{ if .Site.Params.footer.showThemeAttribution | default true }}
-          {{ if .Site.Params.footer.showCopyright | default true }}<span> Â· </span>{{ end }}
-          {{ $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a>` }}
-          {{ $blowfish := printf `<a href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a>` }}
-          {{ i18n "footer.powered_by" (dict "Hugo" $hugo "Theme" $blowfish) | safeHTML }}
-        {{ end }}
-      </p>
-    </div>
-  </div>
-
-  {{ $pageAssetFlags := partial "functions/page-asset-flags.html" (dict "page" .) }}
-  {{ $shouldEnableImageZoom := index $pageAssetFlags "needsImageZoom" }}
-  {{ if $shouldEnableImageZoom }}
-    <script>
-      mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
-        margin: 24,
-        background: "rgba(0,0,0,0.5)",
-        scrollOffset: 0,
-      });
-    </script>
-  {{ end }}
-  {{ $pageMetrics := partial "functions/page-metrics-state.html" . }}
-  {{ $hasFirebase := partial "functions/firebase-configured.html" . }}
-  {{ if and $hasFirebase (index $pageMetrics "hasCounters") }}
-    {{ $jsProcess := resources.Get "js/process.js" }}
-    {{ $jsProcess = $jsProcess | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
-    <script
-      type="text/javascript"
-      src="{{ $jsProcess.RelPermalink }}"
-      integrity="{{ $jsProcess.Data.Integrity }}"></script>
-  {{ end }}
-  {{ if templates.Exists "partials/extend-footer.html" }}
-    {{ partialCached "extend-footer.html" . }}
-  {{ end }}
-</footer>
+{{ $pageMetrics := partial "functions/page-metrics-state.html" . }}
+{{ $hasFirebase := partial "functions/firebase-configured.html" . }}
+{{ if and $hasFirebase (index $pageMetrics "hasCounters") }}
+  {{ $jsProcess := resources.Get "js/process.js" }}
+  {{ $jsProcess = $jsProcess | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
+  <script
+    type="text/javascript"
+    src="{{ $jsProcess.RelPermalink }}"
+    integrity="{{ $jsProcess.Data.Integrity }}"></script>
+{{ end }}
+{{ if templates.Exists "partials/extend-footer.html" }}
+  {{ partialCached "extend-footer.html" . }}
+{{ end }}

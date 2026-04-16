@@ -1,0 +1,213 @@
+{{ $siteTitle := .Site.Title | plainify }}
+{{ $author := .Site.Params.Author }}
+{{ $headline := $author.headline | default .Site.Params.description | default $author.role }}
+{{ $summary := .Site.Params.description | default $author.role }}
+{{ $email := $author.email }}
+{{ $socialLinks := $author.links | default (slice) }}
+{{ $homeURL := "" | relLangURL }}
+{{ $rssOutput := .Site.Home.OutputFormats.Get "rss" }}
+{{ $footerMenu := .Site.Menus.footer }}
+{{ $showFooterNav := .Site.Params.footer.showMenu | default true }}
+{{ $showCopyright := .Site.Params.footer.showCopyright | default true }}
+{{ $showThemeAttribution := .Site.Params.footer.showThemeAttribution | default true }}
+{{ $showBackToTop := .Site.Params.footer.showScrollToTop | default true }}
+
+{{ $exploreLinks := slice
+  (dict "label" "Accueil" "url" $homeURL "match" "home")
+  (dict "label" "Articles" "url" ("/posts/" | relLangURL) "section" "posts")
+  (dict "label" "Atelier" "url" ("/atelier/" | relLangURL) "section" "atelier")
+  (dict "label" "Cuisine" "url" ("/recettes/" | relLangURL) "section" "recettes")
+  (dict "label" "Photos" "url" ("/photos/" | relLangURL) "section" "photos")
+}}
+
+{{ $shortcutLinks := slice
+  (dict "label" "Projet du moment" "url" (printf "%s#maintenant" $homeURL))
+  (dict "label" "Derniers ajouts" "url" (printf "%s#timeline" $homeURL))
+  (dict "label" "Projet Grenouille" "url" ("/atelier/grenouille/" | relLangURL))
+}}
+{{ with $rssOutput }}
+  {{ $shortcutLinks = $shortcutLinks | append (dict "label" "Flux RSS" "url" .RelPermalink "type" .MediaType.Type) }}
+{{ end }}
+
+<footer id="site-footer" class="site-footer print:hidden{{ if .IsHome }} site-footer--home{{ else }} site-footer--v2{{ end }}">
+  <div class="site-footer__shell">
+    <div class="site-footer__grid">
+      <section class="site-footer__brand" aria-labelledby="site-footer-title">
+        <p class="site-footer__eyebrow">Documentation vivante</p>
+        <h2 id="site-footer-title" class="site-footer__title">
+          <a href="{{ $homeURL }}">{{ $siteTitle }}</a>
+        </h2>
+        {{ with $headline }}
+          <p class="site-footer__lede">{{ . }}</p>
+        {{ end }}
+        {{ with $summary }}
+          <p class="site-footer__summary">{{ . }}</p>
+        {{ end }}
+      </section>
+
+      {{ if $showFooterNav }}
+        <nav class="site-footer__group" aria-labelledby="site-footer-explore">
+          <details class="site-footer__accordion" data-footer-accordion open>
+            <summary class="site-footer__accordion-summary">
+              <span id="site-footer-explore" class="site-footer__accordion-title" role="heading" aria-level="2">Explorer</span>
+              <span class="site-footer__accordion-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="site-footer__accordion-body">
+              <p>Les grandes entrées du site, sans détour.</p>
+              <ul class="site-footer__list" role="list">
+                {{ range $exploreLinks }}
+                  {{ $label := index . "label" }}
+                  {{ $url := index . "url" }}
+                  {{ $match := index . "match" }}
+                  {{ $section := index . "section" }}
+                  {{ $isCurrent := false }}
+                  {{ if and $match (eq $match "home") $.IsHome }}
+                    {{ $isCurrent = true }}
+                  {{ end }}
+                  {{ if and $section (or (eq $.Section $section) (eq $.Type $section)) }}
+                    {{ $isCurrent = true }}
+                  {{ end }}
+                  <li>
+                    <a href="{{ $url }}"{{ if $isCurrent }} aria-current="page"{{ end }}>{{ $label }}</a>
+                  </li>
+                {{ end }}
+              </ul>
+            </div>
+          </details>
+        </nav>
+
+        <nav class="site-footer__group" aria-labelledby="site-footer-shortcuts">
+          <details class="site-footer__accordion" data-footer-accordion open>
+            <summary class="site-footer__accordion-summary">
+              <span id="site-footer-shortcuts" class="site-footer__accordion-title" role="heading" aria-level="2">{{ if $footerMenu }}Raccourcis{{ else }}Aller vite{{ end }}</span>
+              <span class="site-footer__accordion-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="site-footer__accordion-body">
+              <p>
+                {{ if $footerMenu }}
+                  Liens personnalisés pour compléter la navigation principale.
+                {{ else }}
+                  Le projet vivant, les nouveautés et le flux pour suivre sans fouiller.
+                {{ end }}
+              </p>
+              <ul class="site-footer__list" role="list">
+                {{ if $footerMenu }}
+                  {{ range $footerMenu }}
+                    {{ $url := .URL }}
+                    {{ $isExternal := or (strings.HasPrefix $url "http:") (strings.HasPrefix $url "https:") }}
+                    <li>
+                      <a href="{{ $url }}"{{ if $isExternal }} target="_blank" rel="noopener noreferrer"{{ end }}>
+                        {{ .Name | plainify }}
+                      </a>
+                    </li>
+                  {{ end }}
+                {{ else }}
+                  {{ range $shortcutLinks }}
+                    {{ $url := index . "url" }}
+                    {{ $type := index . "type" }}
+                    <li>
+                      <a href="{{ $url }}"{{ with $type }} type="{{ . }}"{{ end }}>
+                        {{ index . "label" }}
+                      </a>
+                    </li>
+                  {{ end }}
+                {{ end }}
+              </ul>
+            </div>
+          </details>
+        </nav>
+      {{ end }}
+
+      {{ if or $email (gt (len $socialLinks) 0) }}
+        <section class="site-footer__group site-footer__group--contact" aria-labelledby="site-footer-contact">
+          <details class="site-footer__accordion" data-footer-accordion open>
+            <summary class="site-footer__accordion-summary">
+              <span id="site-footer-contact" class="site-footer__accordion-title" role="heading" aria-level="2">Contact & veille</span>
+              <span class="site-footer__accordion-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="site-footer__accordion-body">
+              <p>Mail pour me joindre et réseaux pour suivre le site sans dépendre d’une plateforme unique.</p>
+
+              <ul class="site-footer__list site-footer__list--contact" role="list">
+                {{ with $email }}
+                  <li>
+                    <a href="mailto:{{ . }}">{{ . }}</a>
+                  </li>
+                {{ end }}
+              </ul>
+
+              {{ if gt (len $socialLinks) 0 }}
+                <div class="site-footer__socials" aria-label="Réseaux sociaux">
+                  {{ range $socialLinks }}
+                    {{ range $name, $url := . }}
+                      {{ $label := $name | humanize | title }}
+                      <a href="{{ $url }}" target="_blank" rel="me noopener noreferrer">
+                        {{ partial "icon.html" $name }}
+                        <span>{{ $label }}</span>
+                      </a>
+                    {{ end }}
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+          </details>
+        </section>
+      {{ end }}
+    </div>
+
+    {{ if or $showCopyright $showThemeAttribution $showBackToTop }}
+      <div class="site-footer__meta">
+        {{ if $showCopyright }}
+          <p class="site-footer__meta-copy">
+            {{- with replace .Site.Params.copyright "{ year }" now.Year -}}
+              {{ . | markdownify }}
+            {{- else -}}
+              &copy; {{ now.Format "2006" }} {{ $author.name | default $siteTitle | markdownify }}
+            {{- end -}}
+          </p>
+        {{ end }}
+
+        {{ if or $showThemeAttribution $showBackToTop }}
+          <div class="site-footer__meta-links">
+            {{ if $showBackToTop }}
+              <a href="#page-top">Haut de page</a>
+            {{ end }}
+            {{ if $showThemeAttribution }}
+              {{ if $showBackToTop }}
+                <span class="site-footer__meta-separator" aria-hidden="true">•</span>
+              {{ end }}
+              <span>
+                {{ $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a>` }}
+                {{ $blowfish := printf `<a href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a>` }}
+                {{ i18n "footer.powered_by" (dict "Hugo" $hugo "Theme" $blowfish) | safeHTML }}
+              </span>
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</footer>
+
+<script>
+  (() => {
+    const accordions = document.querySelectorAll("[data-footer-accordion]");
+    if (!accordions.length) return;
+
+    const desktopMedia = window.matchMedia("(min-width: 720px)");
+
+    const syncFooterAccordions = () => {
+      accordions.forEach((accordion) => {
+        accordion.open = desktopMedia.matches;
+      });
+    };
+
+    syncFooterAccordions();
+
+    if (typeof desktopMedia.addEventListener === "function") {
+      desktopMedia.addEventListener("change", syncFooterAccordions);
+    } else if (typeof desktopMedia.addListener === "function") {
+      desktopMedia.addListener(syncFooterAccordions);
+    }
+  })();
+</script>

@@ -300,8 +300,7 @@ html.dark .site-v2-menu-button {
 
 .site-v2-hero,
 .site-v2-intro,
-.site-v2-empty,
-.site-v2-footer-shell {
+.site-v2-empty {
   border: 1px solid var(--site-v2-border);
   border-radius: var(--site-v2-radius-lg);
   background: var(--site-v2-panel);
@@ -610,80 +609,6 @@ html.dark .site-v2-menu-button {
 .site-v2-pagination__link:hover,
 .site-v2-pagination__link:focus-visible,
 .site-v2-pagination__link.is-current {
-  border-color: var(--site-v2-accent);
-  background: var(--site-v2-accent-soft);
-}
-
-.site-v2-footer {
-  padding: 0 1rem 1rem;
-}
-
-.site-v2-footer-shell {
-  display: grid;
-  gap: 1rem;
-  width: min(100%, var(--site-v2-max));
-  margin: 0 auto;
-  padding: 1.2rem;
-  background: var(--site-v2-panel-strong);
-}
-
-.site-v2-footer__brand {
-  display: grid;
-  gap: 0.45rem;
-}
-
-.site-v2-footer__brand a {
-  font-size: 1.35rem;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.site-v2-footer__brand p,
-.site-v2-footer__meta {
-  margin: 0;
-  color: var(--site-v2-muted);
-}
-
-.site-v2-footer__nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem 1rem;
-}
-
-.site-v2-footer__nav a {
-  color: var(--site-v2-muted);
-  text-decoration: none;
-}
-
-.site-v2-footer__nav a:hover,
-.site-v2-footer__nav a:focus-visible {
-  color: var(--site-v2-ink);
-}
-
-.site-v2-footer__socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-}
-
-.site-v2-footer__socials a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.6rem;
-  min-height: 2.6rem;
-  padding: 0.55rem;
-  border: 1px solid var(--site-v2-border);
-  border-radius: 999px;
-  text-decoration: none;
-}
-
-.site-v2-footer__socials a:last-child {
-  padding-inline: 0.95rem;
-}
-
-.site-v2-footer__socials a:hover,
-.site-v2-footer__socials a:focus-visible {
   border-color: var(--site-v2-accent);
   background: var(--site-v2-accent-soft);
 }
@@ -1037,11 +962,6 @@ body.site-shell--v2 #search-results a:focus-visible {
     display: none;
   }
 
-  .site-v2-footer-shell {
-    grid-template-columns: minmax(0, 1.4fr) auto auto;
-    align-items: center;
-  }
-
   .site-v2-single__body {
     grid-template-columns: minmax(0, 1fr) minmax(15rem, 18rem);
     align-items: start;
@@ -1098,8 +1018,7 @@ body.site-shell--v2 #search-results a:focus-visible {
 
   .site-v2-hero,
   .site-v2-intro,
-  .site-v2-empty,
-  .site-v2-footer-shell {
+  .site-v2-empty {
     border-radius: 1.2rem;
   }
 

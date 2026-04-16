@@ -90,6 +90,9 @@
   {{ with resources.Get "css/custom.css" }}
     {{ $assets.Add "css" (slice .) }}
   {{ end }}
+  {{ with resources.Get "css/site-footer.css" }}
+    {{ $assets.Add "css" (slice .) }}
+  {{ end }}
   {{ if $shouldEnableImageZoom }}
     {{ with resources.Get "lib/zoom/style.css" }}
       {{ $assets.Add "css" (slice .) }}

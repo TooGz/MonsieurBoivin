@@ -6,7 +6,7 @@
 {{ $recentPages := first 5 $allPages }}
 {{ $featuredArticles := first 8 $posts }}
 {{ $featuredRecipes := first 3 $recipes }}
-{{ $featuredPhotos := first 3 $photoPages }}
+{{ $featuredPhotos := first 4 $photoPages }}
 {{ $featuredWorkshop := first 3 $workshopPages }}
 {{ $dateFormat := .Site.Language.Params.dateFormat | default ":date_long" }}
 
@@ -433,25 +433,7 @@
             {{ end }}
           </div>
         </section>
-
-        <section class="home-hub__stack">
-          <div class="home-hub__stack-head">
-            <h3>Récents</h3>
-            <a href="{{ "/" | relLangURL }}">Tout revoir</a>
-          </div>
-          <div class="home-hub__stack-grid">
-            {{ range first 3 $recentPages }}
-              {{ partial "home/mini-card.html" (dict
-                "page" .
-                "variant" "compact"
-                "showMeta" true
-                "showDate" true
-                "showDescription" true
-              ) }}
-            {{ end }}
-          </div>
-        </section>
-
+        
         <section class="home-hub__stack">
           <div class="home-hub__stack-head">
             <h3>Photos</h3>
@@ -469,6 +451,25 @@
             {{ end }}
           </div>
         </section>
+        <section class="home-hub__stack">
+          <div class="home-hub__stack-head">
+            <h3>Recents</h3>
+            <a href="{{ "/" | relLangURL }}#timeline">Voir le fil</a>
+          </div>
+          <div class="home-hub__stack-grid">
+            {{ range first 3 $recentPages }}
+              {{ partial "home/mini-card.html" (dict
+                "page" .
+                "variant" "compact"
+                "showMeta" true
+                "showDate" true
+                "showDescription" true
+              ) }}
+            {{ end }}
+          </div>
+        </section>
+
+
       </div>
     </section>
 
@@ -488,33 +489,4 @@
     </section>
   </div>
 
-  <footer class="home-hub__footer" aria-label="Pied de page">
-    <div>
-      <a class="home-hub__footer-brand" href="{{ "/" | relLangURL }}">{{ $authorName }}</a>
-      <p>Je documente ce qui vaut le coup de rester dans les favoris. Le reste, je le laisse tomber.</p>
-    </div>
-
-    <nav class="home-hub__footer-nav" aria-label="Navigation de pied de page">
-      <a href="#maintenant">Projet</a>
-      <a href="#articles">Articles</a>
-      <a href="{{ "/atelier/" | relLangURL }}">Atelier</a>
-      <a href="{{ "/recettes/" | relLangURL }}">Cuisine</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <div class="home-hub__footer-socials" aria-label="Réseaux">
-      {{ with .Site.Params.Author.links }}
-        {{ range . }}
-          {{ range $name, $url := . }}
-            <a href="{{ $url }}" target="_blank" rel="me noopener noreferrer" aria-label="{{ $name | title }}">
-              {{ partial "icon.html" $name }}
-            </a>
-          {{ end }}
-        {{ end }}
-      {{ end }}
-      <a href="mailto:{{ .Site.Params.Author.email }}">contact@monsieurboivin.fr</a>
-    </div>
-
-    <p class="home-hub__footer-note">© 2012-{{ now.Format "2006" }} | {{ $authorName }}</p>
-  </footer>
 </div>
