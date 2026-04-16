@@ -347,14 +347,5 @@
       {{ end }}
     {{ end }}
 
-    {{/* =========================
-        PARTAGE + RELATED
-    ========================== */}}
-    {{ $uiVersion := partial "ui/version.html" $p | strings.TrimSpace }}
-    {{ if eq $uiVersion "legacy" }}
-      {{ partial "sharing-links.html" $p }}
-      {{ partial "related.html" $p }}
-    {{ end }}
-
   </div>
 </section>

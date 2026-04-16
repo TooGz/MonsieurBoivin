@@ -1,153 +1,133 @@
-{{ $uiVersion := partial "ui/version.html" . | strings.TrimSpace }}
-{{ if ne $uiVersion "legacy" }}
-  {{ $page := . }}
-  {{ $logo := false }}
-  {{ with .Site.Params.logo }}
-    {{ $logo = resources.Get . }}
-  {{ end }}
-  {{ $brandRole := .Site.Params.Author.role | default .Site.Params.description | default .Site.Params.Author.headline }}
+{{ $page := . }}
+{{ $logo := false }}
+{{ with .Site.Params.logo }}
+  {{ $logo = resources.Get . }}
+{{ end }}
+{{ $brandRole := .Site.Params.Author.role | default .Site.Params.description | default .Site.Params.Author.headline }}
 
-  <div class="site-v2-header-spacer print:hidden"></div>
-  <header class="site-v2-header-wrap print:hidden">
-    <div class="site-v2-header-shell">
-      <a class="site-v2-brand" href="{{ "" | relLangURL }}">
-        {{ with $logo }}
-          <img
-            src="{{ .RelPermalink }}"
-            width="{{ .Width }}"
-            height="{{ .Height }}"
-            class="site-v2-brand__logo logo nozoom"
-            alt="{{ site.Title }}">
+<div class="site-v2-header-spacer print:hidden"></div>
+<header class="site-v2-header-wrap print:hidden">
+  <div class="site-v2-header-shell">
+    <a class="site-v2-brand" href="{{ "" | relLangURL }}">
+      {{ with $logo }}
+        <img
+          src="{{ .RelPermalink }}"
+          width="{{ .Width }}"
+          height="{{ .Height }}"
+          class="site-v2-brand__logo logo nozoom"
+          alt="{{ site.Title }}">
+      {{ end }}
+      <span class="site-v2-brand__copy">
+        <span class="site-v2-brand__title">{{ .Site.Title | plainify }}</span>
+        {{ with $brandRole }}
+          <span class="site-v2-brand__role">{{ . }}</span>
         {{ end }}
-        <span class="site-v2-brand__copy">
-          <span class="site-v2-brand__title">{{ .Site.Title | plainify }}</span>
-          {{ with $brandRole }}
-            <span class="site-v2-brand__role">{{ . }}</span>
-          {{ end }}
-        </span>
-      </a>
+      </span>
+    </a>
 
-      {{ if .Site.Menus.main }}
-        <nav class="site-v2-nav" aria-label="Navigation principale">
-          {{ range .Site.Menus.main }}
-            {{ $isCurrent := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}
-            <a
-              href="{{ .URL }}"
-              {{ if or (strings.HasPrefix .URL "http:") (strings.HasPrefix .URL "https:") }}target="_blank" rel="noopener noreferrer"{{ end }}
-              class="site-v2-nav__link{{ if $isCurrent }} is-current{{ end }}">
-              {{ .Name | markdownify }}
-            </a>
-          {{ end }}
-        </nav>
+    {{ if .Site.Menus.main }}
+      <nav class="site-v2-nav" aria-label="Navigation principale">
+        {{ range .Site.Menus.main }}
+          {{ $isCurrent := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}
+          <a
+            href="{{ .URL }}"
+            {{ if or (strings.HasPrefix .URL "http:") (strings.HasPrefix .URL "https:") }}target="_blank" rel="noopener noreferrer"{{ end }}
+            class="site-v2-nav__link{{ if $isCurrent }} is-current{{ end }}">
+            {{ .Name | markdownify }}
+          </a>
+        {{ end }}
+      </nav>
+    {{ end }}
+
+    <div class="site-v2-actions">
+      {{ if .Site.Params.enableSearch | default false }}
+        <button
+          id="search-button"
+          type="button"
+          class="site-v2-icon-button site-v2-desktop-only"
+          aria-label="{{ i18n "search.open_button_title" }}"
+          title="{{ i18n "search.open_button_title" }}">
+          {{ partial "icon.html" "search" }}
+        </button>
+        <button
+          id="search-button-mobile"
+          type="button"
+          class="site-v2-icon-button site-v2-mobile-only"
+          aria-label="{{ i18n "search.open_button_title" }}"
+          title="{{ i18n "search.open_button_title" }}">
+          {{ partial "icon.html" "search" }}
+        </button>
       {{ end }}
 
-      <div class="site-v2-actions">
-        {{ if .Site.Params.enableSearch | default false }}
-          <button
-            id="search-button"
-            type="button"
-            class="site-v2-icon-button site-v2-desktop-only"
-            aria-label="{{ i18n "search.open_button_title" }}"
-            title="{{ i18n "search.open_button_title" }}">
-            {{ partial "icon.html" "search" }}
-          </button>
-          <button
-            id="search-button-mobile"
-            type="button"
-            class="site-v2-icon-button site-v2-mobile-only"
-            aria-label="{{ i18n "search.open_button_title" }}"
-            title="{{ i18n "search.open_button_title" }}">
-            {{ partial "icon.html" "search" }}
-          </button>
-        {{ end }}
+      {{ if .Site.Params.footer.showAppearanceSwitcher | default false }}
+        <button
+          id="appearance-switcher"
+          type="button"
+          class="site-v2-icon-button site-v2-desktop-only"
+          aria-label="Basculer le theme"
+          title="Basculer le theme">
+          <span class="flex items-center justify-center dark:hidden">
+            {{ partial "icon.html" "moon" }}
+          </span>
+          <span class="hidden items-center justify-center dark:flex">
+            {{ partial "icon.html" "sun" }}
+          </span>
+        </button>
+        <button
+          id="appearance-switcher-mobile"
+          type="button"
+          class="site-v2-icon-button site-v2-mobile-only"
+          aria-label="Basculer le theme"
+          title="Basculer le theme">
+          <span class="flex items-center justify-center dark:hidden">
+            {{ partial "icon.html" "moon" }}
+          </span>
+          <span class="hidden items-center justify-center dark:flex">
+            {{ partial "icon.html" "sun" }}
+          </span>
+        </button>
+      {{ end }}
 
-        {{ if .Site.Params.footer.showAppearanceSwitcher | default false }}
-          <button
-            id="appearance-switcher"
-            type="button"
-            class="site-v2-icon-button site-v2-desktop-only"
-            aria-label="Basculer le theme"
-            title="Basculer le theme">
-            <span class="flex items-center justify-center dark:hidden">
-              {{ partial "icon.html" "moon" }}
-            </span>
-            <span class="hidden items-center justify-center dark:flex">
-              {{ partial "icon.html" "sun" }}
-            </span>
-          </button>
-          <button
-            id="appearance-switcher-mobile"
-            type="button"
-            class="site-v2-icon-button site-v2-mobile-only"
-            aria-label="Basculer le theme"
-            title="Basculer le theme">
-            <span class="flex items-center justify-center dark:hidden">
-              {{ partial "icon.html" "moon" }}
-            </span>
-            <span class="hidden items-center justify-center dark:flex">
-              {{ partial "icon.html" "sun" }}
-            </span>
-          </button>
-        {{ end }}
-
-        {{ if .Site.Menus.main }}
-          <button
-            id="menu-button"
-            type="button"
-            class="site-v2-menu-button site-v2-mobile-only"
-            aria-label="Ouvrir le menu"
-            aria-expanded="false"
-            title="Ouvrir le menu">
-            {{ partial "icon.html" "bars" }}
-          </button>
-          <div
-            id="menu-wrapper"
-            class="site-v2-mobile-overlay invisible opacity-0 transition-opacity">
-            <div class="site-v2-mobile-panel">
-              <div class="site-v2-mobile-top">
-                <p class="site-v2-mobile-title">Navigation</p>
-                <button
-                  id="menu-close-button"
-                  type="button"
-                  class="site-v2-icon-button"
-                  aria-label="Fermer le menu"
-                  title="Fermer le menu">
-                  {{ partial "icon.html" "xmark" }}
-                </button>
-              </div>
-              <nav class="site-v2-mobile-nav" aria-label="Navigation mobile">
-                {{ range .Site.Menus.main }}
-                  {{ $isCurrent := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}
-                  <a
-                    href="{{ .URL }}"
-                    {{ if or (strings.HasPrefix .URL "http:") (strings.HasPrefix .URL "https:") }}target="_blank" rel="noopener noreferrer"{{ end }}
-                    class="site-v2-mobile-link{{ if $isCurrent }} is-current{{ end }}">
-                    <span>{{ .Name | markdownify }}</span>
-                    <small>{{ .Identifier | default .Title | default "section" }}</small>
-                  </a>
-                {{ end }}
-              </nav>
+      {{ if .Site.Menus.main }}
+        <button
+          id="menu-button"
+          type="button"
+          class="site-v2-menu-button site-v2-mobile-only"
+          aria-label="Ouvrir le menu"
+          aria-expanded="false"
+          title="Ouvrir le menu">
+          {{ partial "icon.html" "bars" }}
+        </button>
+        <div
+          id="menu-wrapper"
+          class="site-v2-mobile-overlay invisible opacity-0 transition-opacity">
+          <div class="site-v2-mobile-panel">
+            <div class="site-v2-mobile-top">
+              <p class="site-v2-mobile-title">Navigation</p>
+              <button
+                id="menu-close-button"
+                type="button"
+                class="site-v2-icon-button"
+                aria-label="Fermer le menu"
+                title="Fermer le menu">
+                {{ partial "icon.html" "xmark" }}
+              </button>
             </div>
+            <nav class="site-v2-mobile-nav" aria-label="Navigation mobile">
+              {{ range .Site.Menus.main }}
+                {{ $isCurrent := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}
+                <a
+                  href="{{ .URL }}"
+                  {{ if or (strings.HasPrefix .URL "http:") (strings.HasPrefix .URL "https:") }}target="_blank" rel="noopener noreferrer"{{ end }}
+                  class="site-v2-mobile-link{{ if $isCurrent }} is-current{{ end }}">
+                  <span>{{ .Name | markdownify }}</span>
+                  <small>{{ .Identifier | default .Title | default "section" }}</small>
+                </a>
+              {{ end }}
+            </nav>
           </div>
-        {{ end }}
-      </div>
-    </div>
-  </header>
-{{ else }}
-  <div class="min-h-[148px]"></div>
-  <div class="fixed inset-x-0 pl-[24px] pr-[24px] z-100">
-    <div
-      id="menu-blur"
-      class="absolute opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl shadow-2xl"></div>
-    <div class="relative max-w-[64rem] ml-auto mr-auto">
-      {{ partial "header/basic.html" . }}
+        </div>
+      {{ end }}
     </div>
   </div>
-  {{ $backgroundBlur := resources.Get "js/background-blur.js" }}
-  {{ $backgroundBlur = $backgroundBlur | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
-  <script
-    type="text/javascript"
-    src="{{ $backgroundBlur.RelPermalink }}"
-    integrity="{{ $backgroundBlur.Data.Integrity }}"
-    data-blur-id="menu-blur"></script>
-{{ end }}
+</header>

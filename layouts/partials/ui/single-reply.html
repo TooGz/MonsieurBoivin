@@ -1,5 +1,5 @@
 {{ $page := .page }}
-{{ $variant := .variant | default "legacy" }}
+{{ $variant := .variant | default "v2" }}
 {{ $defaultReplyByEmail := site.Params.replyByEmail }}
 {{ $replyByEmail := default $defaultReplyByEmail $page.Params.replyByEmail }}
 

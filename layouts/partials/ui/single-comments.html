@@ -1,5 +1,5 @@
 {{ $page := .page }}
-{{ $variant := .variant | default "legacy" }}
+{{ $variant := .variant | default "v2" }}
 {{ $showComments := $page.Params.showComments | default (site.Params.article.showComments | default false) }}
 
 {{ if $showComments }}

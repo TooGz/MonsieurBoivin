@@ -6,11 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="theme-color" content="#0f172a">
-  {{ $uiVersion := partial "ui/version.html" . | strings.TrimSpace }}
 
   {{ partial "seo.html" . }}
 
-  {{ if and .IsHome (ne $uiVersion "legacy") }}
+  {{ if .IsHome }}
     {{ $criticalCSS := resources.Get "css/critical.css" }}
     {{ with $criticalCSS }}
       {{ $criticalCSS = . | resources.Minify }}
@@ -77,9 +76,6 @@
     {{ with resources.Get "css/design-system/utilities.css" }}
       {{ $assets.Add "css" (slice .) }}
     {{ end }}
-    {{ with resources.Get "css/design-system/overrides.css" }}
-      {{ $assets.Add "css" (slice .) }}
-    {{ end }}
   {{ end }}
   {{ $cssMain := resources.Get "css/compiled/main.css" }}
   {{ $assets.Add "css" (slice $cssMain) }}
@@ -97,7 +93,7 @@
     rel="stylesheet"
     href="{{ $bundleCSS.RelPermalink }}"
     integrity="{{ $bundleCSS.Data.Integrity }}">
-  {{ if and (ne $uiVersion "legacy") (not .IsHome) }}
+  {{ if not .IsHome }}
     {{ with resources.Get "css/site-v2.css" }}
       {{ $siteV2CSS := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
       <link
@@ -107,7 +103,7 @@
         integrity="{{ $siteV2CSS.Data.Integrity }}">
     {{ end }}
   {{ end }}
-  {{ if and .IsHome (ne $uiVersion "legacy") }}
+  {{ if .IsHome }}
     {{ with resources.Get "css/home.css" }}
       {{ $homeCSS := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
       <link
@@ -182,15 +178,13 @@
       data-copied="{{ i18n "code.copied" }}"></script>
   {{ end }}
 
-  {{ if ne $uiVersion "legacy" }}
-    {{ with resources.Get "js/main.js" }}
-      {{ $jsMain := . | js.Build (dict "targetPath" "js/home-ui.js" "minify" hugo.IsProduction) | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
-      <script
-        defer
-        type="module"
-        src="{{ $jsMain.RelPermalink }}"
-        integrity="{{ $jsMain.Data.Integrity }}"></script>
-    {{ end }}
+  {{ with resources.Get "js/main.js" }}
+    {{ $jsMain := . | js.Build (dict "targetPath" "js/home-ui.js" "minify" hugo.IsProduction) | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+    <script
+      defer
+      type="module"
+      src="{{ $jsMain.RelPermalink }}"
+      integrity="{{ $jsMain.Data.Integrity }}"></script>
   {{ end }}
 
   {{ if not .Site.Params.disableImageZoom | default true }}

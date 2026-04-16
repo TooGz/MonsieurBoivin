@@ -1,8 +1,3 @@
 {{ define "main" }}
-  {{ $uiVersion := partial "ui/version.html" . | strings.TrimSpace }}
-  {{ if ne $uiVersion "legacy" }}
-    {{ partial "ui/list-v2.html" . }}
-  {{ else }}
-    {{ partial "ui/list-legacy.html" . }}
-  {{ end }}
+  {{ partial "ui/list-v2.html" . }}
 {{ end }}
