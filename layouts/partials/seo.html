@@ -14,6 +14,7 @@
 {{ end }}
 {{ $metaTitle := "" }}
 {{ $metaDescription := partial "functions/meta-description.html" (dict "page" .) | strings.TrimSpace }}
+{{ $isContentPage := .IsPage }}
 
 {{ with .Params.seo.meta_title }}
   {{ $metaTitle = . }}
@@ -29,12 +30,14 @@
     {{ $title := .Title }}
     {{ $pattern := "" }}
 
-    {{ if eq $section "recettes" }}
-      {{ $pattern = $patterns.recettes_title }}
-    {{ else if eq $section "atelier" }}
-      {{ $pattern = $patterns.atelier_title }}
-    {{ else if eq $section "posts" }}
-      {{ $pattern = $patterns.tech_title }}
+    {{ if $isContentPage }}
+      {{ if eq $section "recettes" }}
+        {{ $pattern = $patterns.recettes_title }}
+      {{ else if eq $section "atelier" }}
+        {{ $pattern = $patterns.atelier_title }}
+      {{ else if eq $section "posts" }}
+        {{ $pattern = $patterns.tech_title }}
+      {{ end }}
     {{ end }}
 
     {{ if $pattern }}

@@ -17,6 +17,8 @@
 {{ $taxonomySingular := index $list "taxonomySingular" }}
 {{ $taxonomyPlural := index $list "taxonomyPlural" }}
 {{ $entryLabel := partial "functions/count-label.html" (dict "count" $entryCount "singular" "contenu" "plural" "contenus") | strings.TrimSpace }}
+{{ $introContent := .Content | strings.TrimSpace }}
+{{ $hasIntroContent := ne $introContent "" }}
 
 {{ partial "ui/page-script.html" . }}
 
@@ -27,8 +29,8 @@
     {{ end }}
     <p class="site-v2-eyebrow">{{ $eyebrow }}</p>
     <h1 class="site-v2-title">{{ .Title | emojify }}</h1>
-    {{ with $description }}
-      <p class="site-v2-description">{{ . }}</p>
+    {{ if and (not $hasIntroContent) $description }}
+      <p class="site-v2-description">{{ $description }}</p>
     {{ end }}
     <div class="site-v2-meta">
       <span>{{ $entryCount }} {{ $entryLabel }}</span>
@@ -42,10 +44,10 @@
     </div>
   </header>
 
-  {{ with .Content }}
+  {{ if $hasIntroContent }}
     <section class="site-v2-intro">
       <div class="prose max-w-none dark:prose-invert">
-        {{ . }}
+        {{ .Content }}
       </div>
     </section>
   {{ end }}

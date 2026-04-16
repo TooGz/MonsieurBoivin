@@ -82,6 +82,7 @@ body.site-shell--home :focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 0.8rem;
+  flex: 1 1 auto;
   min-width: 0;
   text-decoration: none;
 }
@@ -103,6 +104,9 @@ body.site-shell--home :focus-visible {
 .home-hub__brand strong {
   font-size: 1rem;
   line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .home-hub__brand small {
@@ -376,5 +380,47 @@ html.dark .home-hub__theme-icon--sun {
     grid-template-columns: minmax(0, 1.5fr) minmax(20rem, 0.9fr);
     gap: 1.25rem;
     padding: 1.75rem;
+  }
+}
+
+@media (max-width: 959px) {
+  .home-hub__theme-toggle > span[data-theme-label] {
+    display: none;
+  }
+
+  .home-hub__theme-toggle--panel > span[data-theme-label] {
+    display: inline;
+  }
+}
+
+@media (max-width: 699px) {
+  .home-hub__nav {
+    gap: 0.55rem;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .home-hub__nav-actions {
+    flex: none;
+    gap: 0.45rem;
+  }
+
+  .home-hub__theme-toggle,
+  .home-hub__nav-disclosure summary {
+    min-height: 2.6rem;
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+@media (max-width: 479px) {
+  .home-hub {
+    padding-inline: 0.85rem;
+  }
+
+  .home-hub__nav {
+    padding: 0.7rem 0.75rem;
+  }
+
+  .home-hub__nav-disclosure summary > span:last-child {
+    display: none;
   }
 }

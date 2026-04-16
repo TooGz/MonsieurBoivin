@@ -66,17 +66,19 @@
     {{- $descriptionPatterns := $page.Site.Params.seoDescriptions -}}
     {{- $patternDescription := "" -}}
 
-    {{- if eq $section "recettes" -}}
-      {{- with $descriptionPatterns.recettes -}}
-        {{- $patternDescription = printf . $page.Title -}}
-      {{- end -}}
-    {{- else if eq $section "atelier" -}}
-      {{- with $descriptionPatterns.atelier -}}
-        {{- $patternDescription = printf . $page.Title -}}
-      {{- end -}}
-    {{- else if eq $section "posts" -}}
-      {{- with $descriptionPatterns.posts -}}
-        {{- $patternDescription = printf . $page.Title -}}
+    {{- if $page.IsPage -}}
+      {{- if eq $section "recettes" -}}
+        {{- with $descriptionPatterns.recettes -}}
+          {{- $patternDescription = printf . $page.Title -}}
+        {{- end -}}
+      {{- else if eq $section "atelier" -}}
+        {{- with $descriptionPatterns.atelier -}}
+          {{- $patternDescription = printf . $page.Title -}}
+        {{- end -}}
+      {{- else if eq $section "posts" -}}
+        {{- with $descriptionPatterns.posts -}}
+          {{- $patternDescription = printf . $page.Title -}}
+        {{- end -}}
       {{- end -}}
     {{- end -}}
 

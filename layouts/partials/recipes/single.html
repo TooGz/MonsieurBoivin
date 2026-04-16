@@ -12,7 +12,7 @@
   {{ $topClass := cond (hasPrefix site.Params.header.layout "fixed") "lg:top-[140px]" "lg:top-10" }}
 
   {{ if $showToc }}
-    <aside class="recette-single__toc order-first px-0 lg:order-last lg:ml-auto lg:ps-8">
+    <aside class="recette-single__toc order-last px-0 lg:order-last lg:ml-auto lg:ps-8">
       <div class="toc ps-5 print:hidden lg:sticky {{ $topClass }}">
         {{ partial "toc.html" $p }}
       </div>

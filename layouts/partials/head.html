@@ -41,6 +41,9 @@
   {{ $assets := newScratch }}
   {{ $isRecipePage := and .IsPage (or (eq .Section "recettes") (eq .Type "recettes") (eq .Type "recette")) }}
   {{ $shouldEnableImageZoom := and (not (.Site.Params.disableImageZoom | default true)) .IsPage }}
+  {{ $pageAssetFlags := partial "functions/page-asset-flags.html" (dict "page" .) }}
+  {{ $shouldLoadCodeCopy := index $pageAssetFlags "needsCodeCopy" }}
+  {{ $shouldLoadKatexRender := index $pageAssetFlags "needsKatexRender" }}
   {{ $pageMetrics := partial "functions/page-metrics-state.html" . }}
   {{ $hasFirebase := partial "functions/firebase-configured.html" . }}
   {{ $shouldLoadPageMetrics := and $hasFirebase (index $pageMetrics "hasCounters") }}
@@ -161,7 +164,7 @@
     {{ $jsSearch := resources.Get "js/search.js" }}
     {{ $assets.Add "js" (slice $jsFuse $jsSearch) }}
   {{ end }}
-  {{ if .Site.Params.enableCodeCopy | default false }}
+  {{ if $shouldLoadCodeCopy }}
     {{ $jsCode := resources.Get "js/code.js" }}
     {{ $assets.Add "js" (slice $jsCode) }}
   {{ end }}
@@ -177,15 +180,27 @@
     {{ $buttonLikes := resources.Get "js/button-likes.js" }}
     {{ $assets.Add "js" (slice $buttonLikes) }}
   {{ end }}
-  {{ $katexRender := resources.Get "js/katex-render.js" }}
-  {{ $assets.Add "js" (slice $katexRender) }}
+  {{ if $shouldLoadKatexRender }}
+    {{ $katexRender := resources.Get "js/katex-render.js" }}
+    {{ $assets.Add "js" (slice $katexRender) }}
+  {{ end }}
   {{ if $assets.Get "js" }}
-    {{ $bundleJSPath := "js/main.bundle.site.js" }}
+    {{ $bundleJSParts := slice "main" "bundle" }}
     {{ if .IsHome }}
-      {{ $bundleJSPath = "js/main.bundle.home.js" }}
-    {{ else if $shouldLoadLikesButton }}
-      {{ $bundleJSPath = "js/main.bundle.site.likes.js" }}
+      {{ $bundleJSParts = $bundleJSParts | append "home" }}
+    {{ else }}
+      {{ $bundleJSParts = $bundleJSParts | append "site" }}
+      {{ if $shouldLoadLikesButton }}
+        {{ $bundleJSParts = $bundleJSParts | append "likes" }}
+      {{ end }}
+      {{ if $shouldLoadCodeCopy }}
+        {{ $bundleJSParts = $bundleJSParts | append "code" }}
+      {{ end }}
+      {{ if $shouldLoadKatexRender }}
+        {{ $bundleJSParts = $bundleJSParts | append "katex" }}
+      {{ end }}
     {{ end }}
+    {{ $bundleJSPath := printf "js/%s.js" (delimit $bundleJSParts ".") }}
     {{ $bundleJS := $assets.Get "js" | resources.Concat $bundleJSPath | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
     <script
       defer

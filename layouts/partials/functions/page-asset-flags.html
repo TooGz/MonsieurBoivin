@@ -1,0 +1,15 @@
+{{- $page := .page | default . -}}
+{{- $rawContent := "" -}}
+{{- with $page.RawContent -}}
+  {{- $rawContent = . -}}
+{{- end -}}
+
+{{- $hasCodeFence := and $page.IsPage (gt (len (findRE "(?m)^```+" $rawContent)) 0) -}}
+{{- $hasHighlightShortcode := and $page.IsPage (or ($page.HasShortcode "highlight") ($page.HasShortcode "codeimporter")) -}}
+{{- $needsCodeCopy := and ($page.Site.Params.enableCodeCopy | default false) (or $hasCodeFence $hasHighlightShortcode) -}}
+{{- $needsKatexRender := and $page.IsPage ($page.HasShortcode "katex") -}}
+
+{{- return (dict
+  "needsCodeCopy" $needsCodeCopy
+  "needsKatexRender" $needsKatexRender
+) -}}
