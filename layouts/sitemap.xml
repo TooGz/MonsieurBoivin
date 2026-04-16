@@ -1,35 +1,41 @@
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML -}}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {{- $pages := slice site.Home -}}
-  {{- range site.Sections -}}
-    {{- $pages = $pages | append . -}}
-  {{- end -}}
-  {{- range site.RegularPages -}}
-    {{- $pages = $pages | append . -}}
-  {{- end -}}
+  {{- $pages := where site.Pages "Kind" "in" (slice "home" "section" "page" "taxonomy" "term") -}}
 
   {{- range $pages -}}
-    <url>
-      <loc>{{ .Permalink }}</loc>
-      {{ with .Lastmod }}<lastmod>{{ .Format "2006-01-02T15:04:05-07:00" }}</lastmod>{{ end }}
-      <changefreq>
-        {{- if .IsHome -}}
-          daily
-        {{- else if .IsSection -}}
-          weekly
-        {{- else -}}
-          monthly
-        {{- end -}}
-      </changefreq>
-      <priority>
-        {{- if .IsHome -}}
-          1.0
-        {{- else if .IsSection -}}
-          0.8
-        {{- else -}}
-          0.6
-        {{- end -}}
-      </priority>
-    </url>
+    {{- $taxonomySEO := partial "functions/taxonomy-seo.html" . -}}
+    {{- $shouldSitemap := true -}}
+    {{- if or (eq .Kind "taxonomy") (eq .Kind "term") -}}
+      {{- $shouldSitemap = index $taxonomySEO "shouldIndex" -}}
+    {{- end -}}
+    {{- if and (isset .Params "robots") (in (lower (printf "%v" .Params.robots)) "noindex") -}}
+      {{- $shouldSitemap = false -}}
+    {{- end -}}
+    {{- if $shouldSitemap -}}
+      <url>
+        <loc>{{ .Permalink }}</loc>
+        {{ with .Lastmod }}<lastmod>{{ .Format "2006-01-02T15:04:05-07:00" }}</lastmod>{{ end }}
+        <changefreq>
+          {{- if .IsHome -}}
+            daily
+          {{- else if or .IsSection (eq .Kind "taxonomy") -}}
+            weekly
+          {{- else -}}
+            monthly
+          {{- end -}}
+        </changefreq>
+        <priority>
+          {{- if .IsHome -}}
+            1.0
+          {{- else if or .IsSection (eq .Kind "taxonomy") -}}
+            0.8
+          {{- else if eq .Kind "term" -}}
+            0.5
+          {{- else -}}
+            0.6
+          {{- end -}}
+        </priority>
+      </url>
+    {{- end -}}
   {{- end -}}
 </urlset>

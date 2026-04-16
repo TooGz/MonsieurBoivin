@@ -15,7 +15,7 @@ Cette page me sert de base de connaissances arcade.
 J’y consigne les liens, outils, forums, inspirations et ressources que je veux retrouver vite pendant la conception d’une borne ou d’un setup rétro.
 {{< /lead >}}
 
-# 🧰 Outils & Technique
+## 🧰 Outils & Technique
 
 ## 🔩 Layouts, Plans & Mesures
 - [**Slagcoin — Panel Layouts**](https://www.slagcoin.com/joystick/layout.html)  
@@ -40,7 +40,7 @@ J’y consigne les liens, outils, forums, inspirations et ressources que je veux
 
 ---
 
-# 💻 Logiciels & Configs
+## 💻 Logiciels & Configs
 
 ## 🎛️ Frontends
 - [**Launchbox**](https://www.launchbox-app.com/) — Frontend Windows & macOS  
@@ -58,7 +58,7 @@ J’y consigne les liens, outils, forums, inspirations et ressources que je veux
 
 ---
 
-# 🪄 Inspirations & Rendus
+## 🪄 Inspirations & Rendus
 
 - [**Ultra Megacade Upgrade (YouTube)**](https://www.youtube.com/watch?v=yLTHo6f2gOM)  
   ➜ Borne monstrueuse bardée de LEDs & DOF.  
@@ -74,7 +74,7 @@ J’y consigne les liens, outils, forums, inspirations et ressources que je veux
 
 ---
 
-# 🌐 Communautés & Ressources utiles
+## 🌐 Communautés & Ressources utiles
 
 - 🇫🇷 [**HFSPlay**](https://forum.hfsplay.fr)  
 - 🌍 [**Arcade Controls**](http://forum.arcadecontrols.com)  
@@ -83,7 +83,7 @@ J’y consigne les liens, outils, forums, inspirations et ressources que je veux
 
 ---
 
-# 🗂️ Notes & Ajouts futurs
+## 🗂️ Notes & Ajouts futurs
 
 > Cette page est **vivante** :  
 > j’y ajoute au fil du temps mes trouvailles, tests, idées et retours d’expérience.  

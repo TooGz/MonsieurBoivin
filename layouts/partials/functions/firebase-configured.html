@@ -1,0 +1,8 @@
+{{- $hasFirebase := false -}}
+{{- with .Site.Params.firebase -}}
+  {{- $apiKey := .apiKey | default "" -}}
+  {{- $authDomain := .authDomain | default "" -}}
+  {{- $projectId := .projectId | default "" -}}
+  {{- $hasFirebase = and (ne $apiKey "") (ne $authDomain "") (ne $projectId "") -}}
+{{- end -}}
+{{- return $hasFirebase -}}

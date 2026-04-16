@@ -1,0 +1,49 @@
+{{- $page := .page -}}
+{{- $resource := .resource -}}
+{{- $src := .src | default "" -}}
+{{- $index := int (.index | default 0) -}}
+{{- $alt := .alt | default "" | plainify | htmlUnescape | strings.TrimSpace -}}
+
+{{- if and (eq $alt "") $resource -}}
+  {{- with $resource.Params.alt -}}
+    {{- $alt = . | plainify | htmlUnescape | strings.TrimSpace -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq $alt "" -}}
+  {{- $name := "" -}}
+  {{- if $resource -}}
+    {{- $name = $resource.Name | default (path.Base $resource.RelPermalink) -}}
+  {{- else if ne $src "" -}}
+    {{- $name = path.Base $src -}}
+  {{- end -}}
+
+  {{- $label := $name | replaceRE `\.[^.]+$` "" -}}
+  {{- $label = $label | replaceRE `[_-]\d{4,}([_-][[:alnum:]]+)?$` "" -}}
+  {{- $label = $label | replaceRE `[._-]+` " " -}}
+  {{- $label = $label | replaceRE `\s+` " " | strings.TrimSpace | humanize -}}
+  {{- $labelLower := lower $label -}}
+  {{- $pageTitle := $page.Title | default "Photo" -}}
+  {{- $pageTitleLower := lower $pageTitle -}}
+  {{- $containsPageTitle := and (ne $pageTitleLower "") (in $labelLower $pageTitleLower) -}}
+  {{- $hasNumericSuffix := gt (len (findRE `[0-9]+$` $labelLower)) 0 -}}
+  {{- $isGenericLabel := in (slice "" "featured" "feature" "cover" "thumbnail" "thumb" "image" "img" "photo") $labelLower -}}
+
+  {{- if $isGenericLabel -}}
+    {{- $alt = $pageTitle -}}
+  {{- else if eq $label "" -}}
+    {{- if gt $index 0 -}}
+      {{- $alt = printf "%s - photo %d" $pageTitle $index -}}
+    {{- else -}}
+      {{- $alt = $pageTitle -}}
+    {{- end -}}
+  {{- else if and $containsPageTitle $hasNumericSuffix (gt $index 0) -}}
+    {{- $alt = printf "%s - photo %d" $pageTitle $index -}}
+  {{- else if or (eq $pageTitle "") $containsPageTitle -}}
+    {{- $alt = $label -}}
+  {{- else -}}
+    {{- $alt = printf "%s - %s" $pageTitle $label -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $alt | htmlUnescape | strings.TrimSpace -}}

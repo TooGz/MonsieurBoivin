@@ -16,7 +16,7 @@
 {{- end -}}
 
 {{ if .IsHome }}
-  {{- $homeDescription := partial "functions/page-description.html" (dict "page" . "fallback" $siteDescription) | strings.TrimSpace -}}
+  {{- $homeDescription := partial "functions/meta-description.html" (dict "page" .) | strings.TrimSpace -}}
   <script type="application/ld+json">
   [
     {
@@ -57,6 +57,7 @@
 {{ else if .IsPage }}
   {{- $iso8601 := "2006-01-02T15:04:05-07:00" -}}
   {{- $isRecipePage := or (eq .Section "recettes") (eq .Type "recettes") (eq .Type "recette") -}}
+  {{- $isPhotoGalleryPage := eq .Section "photos" -}}
   {{- $schemaAuthor := $authorName -}}
   {{- if isset .Params "authors" -}}
     {{- $authors := index .Params "authors" -}}
@@ -71,12 +72,14 @@
   {{- else if isset .Params "author" -}}
     {{- $schemaAuthor = index .Params "author" -}}
   {{- end -}}
+  {{- $pageMetaDescription := partial "functions/meta-description.html" (dict "page" .) | strings.TrimSpace -}}
   {{- $pageDescription := partial "functions/page-description.html" (dict "page" .) | strings.TrimSpace -}}
   {{- $pageAbstract := partial "functions/page-description.html" (dict "page" .) | strings.TrimSpace -}}
   {{- $schemaNodes := slice -}}
+  {{- $pageNodeType := cond $isPhotoGalleryPage "ImageGallery" "WebPage" -}}
   {{- $pageNode := dict
     "@context" "https://schema.org"
-    "@type" "WebPage"
+    "@type" $pageNodeType
     "@id" (printf "%s#webpage" .Permalink | safeURL)
     "url" (.Permalink | safeURL)
     "name" .Title
@@ -84,8 +87,87 @@
     "about" (dict "@id" (printf "%s#person" $home.Permalink | safeURL))
     "inLanguage" (site.LanguageCode | default "fr")
   -}}
-  {{- with $pageDescription -}}
+  {{- with $pageMetaDescription -}}
     {{- $pageNode = merge $pageNode (dict "description" .) -}}
+  {{- end -}}
+
+  {{- if $isPhotoGalleryPage -}}
+    {{- $pageNode = merge $pageNode (dict
+      "author" (dict "@type" "Person" "name" $schemaAuthor)
+      "publisher" (dict "@type" "Person" "name" $authorName)
+    ) -}}
+    {{- with .Date -}}
+      {{- $pageNode = merge $pageNode (dict "dateCreated" (.Format $iso8601)) -}}
+    {{- end -}}
+    {{- with .PublishDate -}}
+      {{- $pageNode = merge $pageNode (dict "datePublished" (.Format $iso8601)) -}}
+    {{- end -}}
+    {{- with .Lastmod -}}
+      {{- $pageNode = merge $pageNode (dict "dateModified" (.Format $iso8601)) -}}
+    {{- end -}}
+    {{- with .Params.tags -}}
+      {{- $pageNode = merge $pageNode (dict "keywords" .) -}}
+    {{- end -}}
+
+    {{- partial "ui/single-featured-data.html" . -}}
+    {{- $featuredData := .Scratch.Get "__uiSingleFeaturedData" -}}
+    {{- with index $featuredData "src" -}}
+      {{- $primaryImage := dict
+        "@type" "ImageObject"
+        "contentUrl" (. | absURL)
+        "url" (. | absURL)
+        "representativeOfPage" true
+      -}}
+      {{- with index $featuredData "alt" -}}
+        {{- $primaryImage = merge $primaryImage (dict "caption" . "name" .) -}}
+      {{- end -}}
+      {{- with index $featuredData "width" -}}
+        {{- if gt (int .) 0 -}}
+          {{- $primaryImage = merge $primaryImage (dict "width" (int .)) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- with index $featuredData "height" -}}
+        {{- if gt (int .) 0 -}}
+          {{- $primaryImage = merge $primaryImage (dict "height" (int .)) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $pageNode = merge $pageNode (dict
+        "primaryImageOfPage" $primaryImage
+        "image" $primaryImage
+      ) -}}
+    {{- end -}}
+
+    {{- $galleryMediaLimit := 24 -}}
+    {{- $mediaObjects := slice -}}
+    {{- range $index, $img := first $galleryMediaLimit (.Resources.ByType "image") -}}
+      {{- $caption := partial "functions/image-alt.html" (dict
+        "page" $
+        "resource" $img
+        "index" (add $index 1)
+      ) | strings.TrimSpace -}}
+      {{- $mediaObject := dict
+        "@type" "ImageObject"
+        "contentUrl" ($img.RelPermalink | absURL)
+        "url" ($img.RelPermalink | absURL)
+      -}}
+      {{- with $caption -}}
+        {{- $mediaObject = merge $mediaObject (dict "caption" . "name" .) -}}
+      {{- end -}}
+      {{- with $img.Width -}}
+        {{- if gt (int .) 0 -}}
+          {{- $mediaObject = merge $mediaObject (dict "width" (int .)) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- with $img.Height -}}
+        {{- if gt (int .) 0 -}}
+          {{- $mediaObject = merge $mediaObject (dict "height" (int .)) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $mediaObjects = $mediaObjects | append $mediaObject -}}
+    {{- end -}}
+    {{- if gt (len $mediaObjects) 0 -}}
+      {{- $pageNode = merge $pageNode (dict "associatedMedia" $mediaObjects) -}}
+    {{- end -}}
   {{- end -}}
   {{- $schemaNodes = $schemaNodes | append $pageNode -}}
 
@@ -101,7 +183,7 @@
       "url" (.Permalink | safeURL)
       "inLanguage" (site.LanguageCode | default "fr")
     -}}
-    {{- with $pageDescription -}}
+    {{- with $pageMetaDescription -}}
       {{- $recipeNode = merge $recipeNode (dict "description" .) -}}
     {{- end -}}
     {{- with .Date -}}
@@ -222,7 +304,7 @@
     {{- end -}}
 
     {{- $schemaNodes = $schemaNodes | append $recipeNode -}}
-  {{- else -}}
+  {{- else if not $isPhotoGalleryPage -}}
     {{- $articleNode := dict
       "@context" "https://schema.org"
       "@type" "Article"
@@ -236,7 +318,7 @@
       "inLanguage" (site.LanguageCode | default "fr")
       "wordCount" (printf "%d" .WordCount)
     -}}
-    {{- with $pageDescription -}}
+    {{- with $pageMetaDescription -}}
       {{- $articleNode = merge $articleNode (dict "description" .) -}}
     {{- end -}}
     {{- with $pageAbstract -}}
@@ -259,7 +341,7 @@
   {{- $schemaJSON := $schemaNodes | jsonify -}}
   {{- printf "<script type=\"application/ld+json\">%s</script>" $schemaJSON | safeHTML -}}
 {{ else }}
-  {{- $nodeDescription := partial "functions/page-description.html" (dict "page" . "fallback" $siteDescription) | strings.TrimSpace -}}
+  {{- $nodeDescription := partial "functions/meta-description.html" (dict "page" .) | strings.TrimSpace -}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",

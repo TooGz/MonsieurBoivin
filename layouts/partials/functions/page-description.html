@@ -21,4 +21,4 @@
   {{- $description = $description | truncate $truncate -}}
 {{- end -}}
 
-{{- $description -}}
+{{- $description | htmlUnescape -}}

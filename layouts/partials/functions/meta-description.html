@@ -1,0 +1,91 @@
+{{- $page := .page | default . -}}
+{{- $siteName := $page.Site.Title -}}
+{{- $section := $page.Section -}}
+{{- $siteDescription := $page.Site.Params.description | default $page.Site.Language.Params.description | default "Cuisine maison, atelier DIY, recettes testees et notes utiles a garder sous la main." -}}
+{{- $pageDescription := partial "functions/page-description.html" (dict "page" $page) | strings.TrimSpace -}}
+{{- $taxonomySEO := partial "functions/taxonomy-seo.html" $page -}}
+{{- $isTaxonomyRoot := eq $page.Kind "taxonomy" -}}
+{{- $isTermPage := eq $page.Kind "term" -}}
+{{- $taxonomyKey := "" -}}
+{{- $taxonomyItemCount := 0 -}}
+
+{{- with $taxonomySEO -}}
+  {{- $taxonomyKey = index . "taxonomyKey" -}}
+  {{- $taxonomyItemCount = index . "itemCount" -}}
+{{- end -}}
+
+{{- $metaDescription := $siteDescription -}}
+
+{{- with $page.Params.seo.meta_description -}}
+  {{- $candidate := . | plainify | htmlUnescape | strings.TrimSpace -}}
+  {{- if ne $candidate "" -}}
+    {{- $metaDescription = $candidate -}}
+  {{- end -}}
+{{- else -}}
+  {{- if $page.IsHome -}}
+    {{- if ne $pageDescription "" -}}
+      {{- $metaDescription = $pageDescription -}}
+    {{- end -}}
+  {{- else if $isTaxonomyRoot -}}
+    {{- if ne $pageDescription "" -}}
+      {{- $metaDescription = $pageDescription -}}
+    {{- else -}}
+      {{- $taxonomyPlural := index $taxonomySEO "plural" | default ($page.Title | lower) -}}
+      {{- $metaDescription = printf "Parcourir les %s disponibles sur %s." $taxonomyPlural $siteName -}}
+    {{- end -}}
+  {{- else if $isTermPage -}}
+    {{- if ne $pageDescription "" -}}
+      {{- $metaDescription = $pageDescription -}}
+    {{- else -}}
+      {{- $contentLabel := partial "functions/count-label.html" (dict "count" $taxonomyItemCount "singular" "contenu" "plural" "contenus") | strings.TrimSpace -}}
+      {{- if eq $taxonomyKey "tags" -}}
+        {{- $metaDescription = printf "%d %s lies au tag %s sur %s : articles, recettes et projets a parcourir." $taxonomyItemCount $contentLabel $page.Title $siteName -}}
+      {{- else if eq $taxonomyKey "categories" -}}
+        {{- $metaDescription = printf "%d %s dans la categorie %s sur %s : billets, recettes et projets associes." $taxonomyItemCount $contentLabel $page.Title $siteName -}}
+      {{- else if eq $taxonomyKey "authors" -}}
+        {{- $metaDescription = printf "%d %s signes par %s sur %s." $taxonomyItemCount $contentLabel $page.Title $siteName -}}
+      {{- else if eq $taxonomyKey "series" -}}
+        {{- $metaDescription = printf "%d %s regroupes dans la serie %s sur %s." $taxonomyItemCount $contentLabel $page.Title $siteName -}}
+      {{- else -}}
+        {{- $metaDescription = printf "%d %s regroupes dans %s sur %s." $taxonomyItemCount $contentLabel $page.Title $siteName -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else if eq $section "photos" -}}
+    {{- if ne $pageDescription "" -}}
+      {{- $metaDescription = $pageDescription -}}
+    {{- else -}}
+      {{- $imageCount := len ($page.Resources.ByType "image") -}}
+      {{- $imageLabel := partial "functions/count-label.html" (dict "count" $imageCount "singular" "photo" "plural" "photos") | strings.TrimSpace -}}
+      {{- if gt $imageCount 0 -}}
+        {{- $metaDescription = printf "Album photo %s sur %s : %d %s a parcourir." $page.Title $siteName $imageCount $imageLabel -}}
+      {{- else -}}
+        {{- $metaDescription = printf "Album photo %s sur %s." $page.Title $siteName -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $descriptionPatterns := $page.Site.Params.seoDescriptions -}}
+    {{- $patternDescription := "" -}}
+
+    {{- if eq $section "recettes" -}}
+      {{- with $descriptionPatterns.recettes -}}
+        {{- $patternDescription = printf . $page.Title -}}
+      {{- end -}}
+    {{- else if eq $section "atelier" -}}
+      {{- with $descriptionPatterns.atelier -}}
+        {{- $patternDescription = printf . $page.Title -}}
+      {{- end -}}
+    {{- else if eq $section "posts" -}}
+      {{- with $descriptionPatterns.posts -}}
+        {{- $patternDescription = printf . $page.Title -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if ne ($patternDescription | strings.TrimSpace) "" -}}
+      {{- $metaDescription = $patternDescription -}}
+    {{- else if ne $pageDescription "" -}}
+      {{- $metaDescription = $pageDescription -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $metaDescription | htmlUnescape | strings.TrimSpace -}}

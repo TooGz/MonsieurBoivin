@@ -9,8 +9,6 @@ tags: ["terreau", "culture biologique", "permaculture"]
 image: "img/super-soil.png"
 ---
 
-# Super Soil de Subcool : la recette organique ultime pour un sol vivant
-
 Le **Super Soil de Subcool** est un mélange organique "prêt à l'emploi" qui couvre tous les besoins nutritifs des plantes tout au long de leur cycle de vie. Conçu à l'origine pour la culture du cannabis en intérieur, il est aujourd'hui utilisé dans de nombreuses cultures gourmandes en nutriments : tomates, poivrons, courges, etc.
 
 Dans cet article, on je vous donne **la recette complète**, son **fonctionnement**, ses **applications concrètes** dans le jardin, et même des **astuces pour l'adapter à d'autres plantes** !

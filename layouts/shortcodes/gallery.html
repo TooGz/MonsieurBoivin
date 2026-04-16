@@ -1,35 +1,144 @@
 {{ $id := delimit (slice "gallery" (partial "functions/uid.html" .)) "-" -}}
 {{ $content := .Inner -}}
+{{ $galleryClass := default "grid-w50 md:grid-w33 xl:grid-w25" (.Get "class") -}}
 
-{{/* Si aucun contenu n'est passé au shortcode, on génère les <img> depuis les ressources images de la page */}}
+{{/* Si aucun contenu n'est passe au shortcode, on genere les <img> depuis les ressources images de la page */}}
 {{ if eq (trim $content " \n\r\t") "" -}}
-  {{ $cls := default "grid-w50 md:grid-w33 xl:grid-w25" (.Get "class") -}}
+  {{ $images := .Page.Resources.ByType "image" -}}
+  {{ $galleryImages := $images -}}
+
+  {{ if and (eq .Page.Section "photos") (gt (len $images) 1) -}}
+    {{ $featured := $images.GetMatch "*feature*" -}}
+    {{ if not $featured -}}
+      {{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" -}}
+    {{ end -}}
+    {{ if not $featured -}}
+      {{ $featured = index $images 0 -}}
+    {{ end -}}
+
+    {{ with $featured -}}
+      {{ $filtered := slice -}}
+      {{ range $images -}}
+        {{ if ne .RelPermalink $featured.RelPermalink -}}
+          {{ $filtered = $filtered | append . -}}
+        {{ end -}}
+      {{ end -}}
+      {{ if gt (len $filtered) 0 -}}
+        {{ $galleryImages = $filtered -}}
+      {{ end -}}
+    {{ end -}}
+  {{ end -}}
+
   {{ $imgs := slice -}}
-  {{ range .Page.Resources.ByType "image" -}}
-    {{ $imgs = $imgs | append (printf `<img src="%s" class="%s" />` .RelPermalink $cls) -}}
+  {{ range $index, $img := $galleryImages -}}
+    {{ $alt := partial "functions/image-alt.html" (dict
+      "page" $.Page
+      "resource" $img
+      "index" (add $index 1)
+    ) | strings.TrimSpace -}}
+    {{ $imgs = $imgs | append (printf `<img src="%s" alt=%q class="%s" width="%d" height="%d" loading="lazy" decoding="async">` $img.RelPermalink $alt $galleryClass $img.Width $img.Height) -}}
   {{ end -}}
   {{ $content = delimit $imgs "\n" -}}
 {{ end -}}
 
-{{/* find all img tags */}}
-{{ range findRE `<img\s+[^>]*>` $content -}}
+{{/* Trouve les balises img et enrichit les attributs manquants */}}
+{{ range $index, $_ := findRE `<img\s+[^>]*>` $content -}}
   {{ $imgTag := . -}}
+  {{ $imgResource := false -}}
+  {{ $imgWidth := 0 -}}
+  {{ $imgHeight := 0 -}}
+
   {{ with findRESubmatch `src=['"]([^'"]+)['"]` $imgTag -}}
     {{ $srcAttr := index (index . 0) 0 -}}
     {{ $srcValue := index (index . 0) 1 -}}
     {{ $srcValueFinal := $srcValue -}}
 
     {{ if or (hasPrefix $srcValue "http://") (hasPrefix $srcValue "https://") -}}
-      {{ with resources.GetRemote $srcValue -}}{{ $srcValueFinal = .RelPermalink -}}{{ end -}}
+      {{ with resources.GetRemote $srcValue -}}
+        {{ $imgResource = . -}}
+        {{ $srcValueFinal = .RelPermalink -}}
+      {{ end -}}
     {{ else -}}
       {{ with $.Page.Resources.GetMatch $srcValue -}}
+        {{ $imgResource = . -}}
         {{ $srcValueFinal = .RelPermalink -}}
       {{ else -}}
-        {{ with resources.GetMatch $srcValue -}}{{ $srcValueFinal = .RelPermalink -}}{{ end -}}
+        {{ with resources.GetMatch $srcValue -}}
+          {{ $imgResource = . -}}
+          {{ $srcValueFinal = .RelPermalink -}}
+        {{ end -}}
       {{ end -}}
     {{ end -}}
 
     {{ $newTag := replace $imgTag $srcAttr (printf `src="%s"` $srcValueFinal) -}}
+
+    {{ with $imgResource -}}
+      {{ if ne .MediaType.SubType "svg" -}}
+        {{ $imgWidth = .Width -}}
+        {{ $imgHeight = .Height -}}
+      {{ end -}}
+    {{ end -}}
+
+    {{ $computedAlt := "" -}}
+    {{ with findRESubmatch `alt=['"]([^'"]*)['"]` $newTag -}}
+      {{ $altAttr := index (index . 0) 0 -}}
+      {{ $altValue := index (index . 0) 1 | htmlUnescape | strings.TrimSpace -}}
+      {{ $computedAlt = partial "functions/image-alt.html" (dict
+        "page" $.Page
+        "resource" $imgResource
+        "src" $srcValue
+        "alt" $altValue
+        "index" (add $index 1)
+      ) | strings.TrimSpace -}}
+      {{ if eq $altValue "" -}}
+        {{ $newTag = replace $newTag $altAttr (printf `alt=%q` $computedAlt) -}}
+      {{ end -}}
+    {{ else -}}
+      {{ $computedAlt = partial "functions/image-alt.html" (dict
+        "page" $.Page
+        "resource" $imgResource
+        "src" $srcValue
+        "index" (add $index 1)
+      ) | strings.TrimSpace -}}
+      {{ if hasSuffix $newTag "/>" -}}
+        {{ $newTag = replace $newTag "/>" (printf ` alt=%q />` $computedAlt) -}}
+      {{ else -}}
+        {{ $newTag = replace $newTag ">" (printf ` alt=%q>` $computedAlt) -}}
+      {{ end -}}
+    {{ end -}}
+
+    {{ if and (gt $imgWidth 0) (eq (len (findRE `\swidth=` $newTag)) 0) -}}
+      {{ if hasSuffix $newTag "/>" -}}
+        {{ $newTag = replace $newTag "/>" (printf ` width="%d" />` $imgWidth) -}}
+      {{ else -}}
+        {{ $newTag = replace $newTag ">" (printf ` width="%d">` $imgWidth) -}}
+      {{ end -}}
+    {{ end -}}
+
+    {{ if and (gt $imgHeight 0) (eq (len (findRE `\sheight=` $newTag)) 0) -}}
+      {{ if hasSuffix $newTag "/>" -}}
+        {{ $newTag = replace $newTag "/>" (printf ` height="%d" />` $imgHeight) -}}
+      {{ else -}}
+        {{ $newTag = replace $newTag ">" (printf ` height="%d">` $imgHeight) -}}
+      {{ end -}}
+    {{ end -}}
+
+    {{ if eq (len (findRE `\sloading=` $newTag)) 0 -}}
+      {{ if hasSuffix $newTag "/>" -}}
+        {{ $newTag = replace $newTag "/>" ` loading="lazy" />` -}}
+      {{ else -}}
+        {{ $newTag = replace $newTag ">" ` loading="lazy">` -}}
+      {{ end -}}
+    {{ end -}}
+
+    {{ if eq (len (findRE `\sdecoding=` $newTag)) 0 -}}
+      {{ if hasSuffix $newTag "/>" -}}
+        {{ $newTag = replace $newTag "/>" ` decoding="async" />` -}}
+      {{ else -}}
+        {{ $newTag = replace $newTag ">" ` decoding="async">` -}}
+      {{ end -}}
+    {{ end -}}
+
     {{ $content = replace $content $imgTag $newTag -}}
   {{ end -}}
 {{ end -}}

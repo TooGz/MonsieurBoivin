@@ -1,0 +1,35 @@
+{{- $scope := "" -}}
+{{- if .IsPage -}}
+  {{- $scope = "article" -}}
+{{- else if eq .Kind "section" -}}
+  {{- $scope = "list" -}}
+{{- else if eq .Kind "taxonomy" -}}
+  {{- $scope = "taxonomy" -}}
+{{- else if eq .Kind "term" -}}
+  {{- $scope = "term" -}}
+{{- end -}}
+
+{{- $showViews := false -}}
+{{- $showLikes := false -}}
+
+{{- if $scope -}}
+  {{- with index .Site.Params $scope -}}
+    {{- $showViews = .showViews | default false -}}
+    {{- $showLikes = .showLikes | default false -}}
+  {{- end -}}
+
+  {{- if isset .Params "showViews" -}}
+    {{- $showViews = .Params.showViews -}}
+  {{- end -}}
+  {{- if isset .Params "showLikes" -}}
+    {{- $showLikes = .Params.showLikes -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return (dict
+  "scope" $scope
+  "showViews" $showViews
+  "showLikes" $showLikes
+  "hasCounters" (or $showViews $showLikes)
+  "needsLikesButton" $showLikes
+) -}}

@@ -40,6 +40,11 @@
 
   {{ $assets := newScratch }}
   {{ $isRecipePage := and .IsPage (or (eq .Section "recettes") (eq .Type "recettes") (eq .Type "recette")) }}
+  {{ $shouldEnableImageZoom := and (not (.Site.Params.disableImageZoom | default true)) .IsPage }}
+  {{ $pageMetrics := partial "functions/page-metrics-state.html" . }}
+  {{ $hasFirebase := partial "functions/firebase-configured.html" . }}
+  {{ $shouldLoadPageMetrics := and $hasFirebase (index $pageMetrics "hasCounters") }}
+  {{ $shouldLoadLikesButton := and $shouldLoadPageMetrics (index $pageMetrics "needsLikesButton") }}
   {{ $cssScheme := resources.Get (printf "css/schemes/%s.css" (.Site.Params.colorScheme | default "blowfish")) }}
   {{ if not $cssScheme }}
     {{ $cssScheme = resources.Get "css/schemes/blowfish.css" }}
@@ -82,12 +87,16 @@
   {{ with resources.Get "css/custom.css" }}
     {{ $assets.Add "css" (slice .) }}
   {{ end }}
-  {{ if not .Site.Params.disableImageZoom | default true }}
+  {{ if $shouldEnableImageZoom }}
     {{ with resources.Get "lib/zoom/style.css" }}
       {{ $assets.Add "css" (slice .) }}
     {{ end }}
   {{ end }}
-  {{ $bundleCSS := $assets.Get "css" | resources.Concat "css/main.bundle.css" | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
+  {{ $bundleCSSPath := "css/main.bundle.base.css" }}
+  {{ if $shouldEnableImageZoom }}
+    {{ $bundleCSSPath = "css/main.bundle.zoom.css" }}
+  {{ end }}
+  {{ $bundleCSS := $assets.Get "css" | resources.Concat $bundleCSSPath | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
   <link
     type="text/css"
     rel="stylesheet"
@@ -147,7 +156,7 @@
       integrity="{{ $jsZenMode.Data.Integrity }}"></script>
   {{ end }}
 
-  {{ if .Site.Params.enableSearch | default false }}
+  {{ if and (not .IsHome) (.Site.Params.enableSearch | default false) }}
     {{ $jsFuse := resources.Get "lib/fuse/fuse.min.js" }}
     {{ $jsSearch := resources.Get "js/search.js" }}
     {{ $assets.Add "js" (slice $jsFuse $jsSearch) }}
@@ -160,14 +169,24 @@
     {{ $jsRTL := resources.Get "js/rtl.js" }}
     {{ $assets.Add "js" (slice $jsRTL) }}
   {{ end }}
-  {{ $jsMobileMenu := resources.Get "js/mobilemenu.js" }}
-  {{ $assets.Add "js" (slice $jsMobileMenu) }}
-  {{ $buttonLikes := resources.Get "js/button-likes.js" }}
-  {{ $assets.Add "js" (slice $buttonLikes) }}
+  {{ if not .IsHome }}
+    {{ $jsMobileMenu := resources.Get "js/mobilemenu.js" }}
+    {{ $assets.Add "js" (slice $jsMobileMenu) }}
+  {{ end }}
+  {{ if $shouldLoadLikesButton }}
+    {{ $buttonLikes := resources.Get "js/button-likes.js" }}
+    {{ $assets.Add "js" (slice $buttonLikes) }}
+  {{ end }}
   {{ $katexRender := resources.Get "js/katex-render.js" }}
   {{ $assets.Add "js" (slice $katexRender) }}
   {{ if $assets.Get "js" }}
-    {{ $bundleJS := $assets.Get "js" | resources.Concat "js/main.bundle.js" | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
+    {{ $bundleJSPath := "js/main.bundle.site.js" }}
+    {{ if .IsHome }}
+      {{ $bundleJSPath = "js/main.bundle.home.js" }}
+    {{ else if $shouldLoadLikesButton }}
+      {{ $bundleJSPath = "js/main.bundle.site.likes.js" }}
+    {{ end }}
+    {{ $bundleJS := $assets.Get "js" | resources.Concat $bundleJSPath | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
     <script
       defer
       type="text/javascript"
@@ -178,16 +197,18 @@
       data-copied="{{ i18n "code.copied" }}"></script>
   {{ end }}
 
-  {{ with resources.Get "js/main.js" }}
-    {{ $jsMain := . | js.Build (dict "targetPath" "js/home-ui.js" "minify" hugo.IsProduction) | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
-    <script
-      defer
-      type="module"
-      src="{{ $jsMain.RelPermalink }}"
-      integrity="{{ $jsMain.Data.Integrity }}"></script>
+  {{ if .IsHome }}
+    {{ with resources.Get "js/main.js" }}
+      {{ $jsMain := . | js.Build (dict "targetPath" "js/home-ui.js" "minify" hugo.IsProduction) | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+      <script
+        defer
+        type="module"
+        src="{{ $jsMain.RelPermalink }}"
+        integrity="{{ $jsMain.Data.Integrity }}"></script>
+    {{ end }}
   {{ end }}
 
-  {{ if not .Site.Params.disableImageZoom | default true }}
+  {{ if $shouldEnableImageZoom }}
     {{ $zoomJS := resources.Get "lib/zoom/zoom.min.umd.js" | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
     <script src="{{ $zoomJS.RelPermalink }}" integrity="{{ $zoomJS.Data.Integrity }}"></script>
   {{ end }}
@@ -219,6 +240,12 @@
 
   {{- $images := .Resources.ByType "image" -}}
   {{- $socialImage := $images.GetMatch "*feature*" -}}
+  {{- if not $socialImage -}}
+    {{- $socialImage = $images.GetMatch "{*cover*,*thumbnail*}" -}}
+  {{- end -}}
+  {{- if and (not $socialImage) (gt (len $images) 0) -}}
+    {{- $socialImage = index $images 0 -}}
+  {{- end -}}
   {{- if not $socialImage -}}
     {{- with .Site.Params.defaultSocialImage -}}
       {{- if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") -}}
@@ -258,8 +285,8 @@
     {{ partial "extend-head-uncached.html" . }}
   {{ end }}
 
-  {{ with $.Site.Params.firebase }}
-    {{ if isset $.Site.Params "firebase" }}
+  {{ if $shouldLoadPageMetrics }}
+    {{ with $.Site.Params.firebase }}
       <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
       <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
       <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>

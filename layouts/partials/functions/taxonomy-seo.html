@@ -1,0 +1,63 @@
+{{- $page := . -}}
+{{- $kind := $page.Kind -}}
+{{- $taxonomyKey := "" -}}
+{{- $singular := "" -}}
+{{- $plural := "" -}}
+{{- $itemCount := 0 -}}
+{{- $minIndexableCount := 0 -}}
+{{- $hasEditorialContent := false -}}
+{{- $shouldIndex := true -}}
+
+{{- if or (eq $kind "taxonomy") (eq $kind "term") -}}
+  {{- $taxonomyKey = $page.Data.Plural | default $page.Type | default "" -}}
+  {{- $singular = partial "functions/taxonomy-label.html" (dict
+    "key" $taxonomyKey
+    "form" "singular"
+    "fallback" ($page.Data.Singular | default ($taxonomyKey | humanize))
+  ) | strings.TrimSpace -}}
+  {{- $plural = partial "functions/taxonomy-label.html" (dict
+    "key" $taxonomyKey
+    "form" "plural"
+    "fallback" ($page.Data.Plural | default ($taxonomyKey | humanize))
+  ) | strings.TrimSpace -}}
+{{- end -}}
+
+{{- with $page.Content -}}
+  {{- $hasEditorialContent = ne (trim (. | plainify) " \n\r\t") "" -}}
+{{- end -}}
+
+{{- if eq $kind "taxonomy" -}}
+  {{- $itemCount = len $page.Data.Terms -}}
+  {{- if eq $itemCount 0 -}}
+    {{- $shouldIndex = false -}}
+  {{- end -}}
+{{- else if eq $kind "term" -}}
+  {{- $itemCount = len $page.Pages -}}
+
+  {{- if eq $taxonomyKey "tags" -}}
+    {{- $minIndexableCount = 3 -}}
+  {{- else if eq $taxonomyKey "categories" -}}
+    {{- $minIndexableCount = 2 -}}
+  {{- end -}}
+
+  {{- if and (gt $minIndexableCount 0) (not $hasEditorialContent) -}}
+    {{- $shouldIndex = ge $itemCount $minIndexableCount -}}
+  {{- else if eq $itemCount 0 -}}
+    {{- $shouldIndex = false -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if isset $page.Params "seo_index" -}}
+  {{- $shouldIndex = index $page.Params "seo_index" -}}
+{{- end -}}
+
+{{- return (dict
+  "kind" $kind
+  "taxonomyKey" $taxonomyKey
+  "singular" $singular
+  "plural" $plural
+  "itemCount" $itemCount
+  "minIndexableCount" $minIndexableCount
+  "hasEditorialContent" $hasEditorialContent
+  "shouldIndex" $shouldIndex
+) -}}

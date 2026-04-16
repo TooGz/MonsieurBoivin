@@ -65,7 +65,8 @@
     </div>
   </div>
 
-  {{ if not .Site.Params.disableImageZoom | default true }}
+  {{ $shouldEnableImageZoom := and (not (.Site.Params.disableImageZoom | default true)) .IsPage }}
+  {{ if $shouldEnableImageZoom }}
     <script>
       mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
         margin: 24,
@@ -74,12 +75,16 @@
       });
     </script>
   {{ end }}
-  {{ $jsProcess := resources.Get "js/process.js" }}
-  {{ $jsProcess = $jsProcess | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
-  <script
-    type="text/javascript"
-    src="{{ $jsProcess.RelPermalink }}"
-    integrity="{{ $jsProcess.Data.Integrity }}"></script>
+  {{ $pageMetrics := partial "functions/page-metrics-state.html" . }}
+  {{ $hasFirebase := partial "functions/firebase-configured.html" . }}
+  {{ if and $hasFirebase (index $pageMetrics "hasCounters") }}
+    {{ $jsProcess := resources.Get "js/process.js" }}
+    {{ $jsProcess = $jsProcess | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
+    <script
+      type="text/javascript"
+      src="{{ $jsProcess.RelPermalink }}"
+      integrity="{{ $jsProcess.Data.Integrity }}"></script>
+  {{ end }}
   {{ if templates.Exists "partials/extend-footer.html" }}
     {{ partialCached "extend-footer.html" . }}
   {{ end }}

@@ -26,15 +26,20 @@ function _getPackeryOptions(nodeGallery) {
   };
 }
 
-(function init() {
-  $(window).on("load", function () {
-    let packeries = [];
-    let nodeGalleries = document.querySelectorAll(".gallery");
+function initGalleries() {
+  const nodeGalleries = document.querySelectorAll(".gallery");
 
-    nodeGalleries.forEach((nodeGallery) => {
-      let packery = new Packery(nodeGallery, _getPackeryOptions(nodeGallery));
-      packeries.push(packery);
-    });
-    console.groupEnd();
+  if (!nodeGalleries.length || typeof Packery === "undefined") {
+    return;
+  }
+
+  nodeGalleries.forEach((nodeGallery) => {
+    new Packery(nodeGallery, _getPackeryOptions(nodeGallery));
   });
-})();
+}
+
+if (document.readyState === "complete") {
+  initGalleries();
+} else {
+  window.addEventListener("load", initGalleries, { once: true });
+}

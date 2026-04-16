@@ -1,14 +1,29 @@
 {{ $siteName := .Site.Title }}
 {{ $section := .Section }}
-{{ $siteDescription := .Site.Params.description | default .Site.Language.Params.description | default "Cuisine maison, atelier DIY, recettes testees et notes utiles a garder sous la main." }}
-{{ $pageDescription := partial "functions/page-description.html" (dict "page" .) | strings.TrimSpace }}
+{{ $taxonomySEO := partial "functions/taxonomy-seo.html" . }}
+{{ $isTaxonomyRoot := eq .Kind "taxonomy" }}
+{{ $isTermPage := eq .Kind "term" }}
+{{ $isTaxonomyPage := or $isTaxonomyRoot $isTermPage }}
+{{ $taxonomySingular := "" }}
+{{ $taxonomyPlural := "" }}
+{{ $taxonomyShouldIndex := true }}
+{{ with $taxonomySEO }}
+  {{ $taxonomySingular = index . "singular" }}
+  {{ $taxonomyPlural = index . "plural" }}
+  {{ $taxonomyShouldIndex = index . "shouldIndex" }}
+{{ end }}
 {{ $metaTitle := "" }}
+{{ $metaDescription := partial "functions/meta-description.html" (dict "page" .) | strings.TrimSpace }}
 
 {{ with .Params.seo.meta_title }}
   {{ $metaTitle = . }}
 {{ else }}
   {{ if .IsHome }}
     {{ $metaTitle = printf "Cuisine maison, DIY, atelier et notes utiles | %s" $siteName }}
+  {{ else if $isTaxonomyRoot }}
+    {{ $metaTitle = printf "%s | %s" ($taxonomyPlural | default .Title) $siteName }}
+  {{ else if $isTermPage }}
+    {{ $metaTitle = printf "%s | %s | %s" .Title ($taxonomySingular | default (.Data.Singular | default "Archive")) $siteName }}
   {{ else }}
     {{ $patterns := .Site.Params.seoPatterns }}
     {{ $title := .Title }}
@@ -30,51 +45,18 @@
   {{ end }}
 {{ end }}
 
-{{ $metaDescription := $siteDescription }}
-{{ with .Params.seo.meta_description }}
-  {{ $candidate := . | plainify | strings.TrimSpace }}
-  {{ if ne $candidate "" }}
-    {{ $metaDescription = $candidate }}
-  {{ end }}
-{{ else }}
-  {{ if .IsHome }}
-    {{ if ne $pageDescription "" }}
-      {{ $metaDescription = $pageDescription }}
-    {{ end }}
-  {{ else }}
-    {{ $descriptionPatterns := .Site.Params.seoDescriptions }}
-    {{ $patternDescription := "" }}
-
-    {{ if eq $section "recettes" }}
-      {{ with $descriptionPatterns.recettes }}
-        {{ $patternDescription = printf . $.Title }}
-      {{ end }}
-    {{ else if eq $section "atelier" }}
-      {{ with $descriptionPatterns.atelier }}
-        {{ $patternDescription = printf . $.Title }}
-      {{ end }}
-    {{ else if eq $section "posts" }}
-      {{ with $descriptionPatterns.posts }}
-        {{ $patternDescription = printf . $.Title }}
-      {{ end }}
-    {{ end }}
-
-    {{ if ne ($patternDescription | strings.TrimSpace) "" }}
-      {{ $metaDescription = $patternDescription }}
-    {{ else if ne $pageDescription "" }}
-      {{ $metaDescription = $pageDescription }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-
 {{ $canonical := .Permalink | absURL }}
+{{ $hasRobotsOverride := isset .Params "robots" }}
 {{ $robots := .Params.robots | default .Site.Params.robots | default "index,follow,max-image-preview:large" }}
+{{ if and $isTaxonomyPage (not $taxonomyShouldIndex) (not $hasRobotsOverride) }}
+  {{ $robots = "noindex,follow,max-image-preview:large" }}
+{{ end }}
 {{ $keywords := .Params.keywords | default .Site.Params.keywords }}
 {{ $ogType := cond .IsPage "article" "website" }}
 {{ $locale := replace (.Site.LanguageCode | default "fr-fr") "-" "_" }}
 
 <title>{{ $metaTitle }}</title>
-<meta name="description" content="{{ $metaDescription | plainify | strings.TrimSpace }}">
+<meta name="description" content="{{ $metaDescription | strings.TrimSpace }}">
 <link rel="canonical" href="{{ $canonical }}">
 <meta name="robots" content="{{ $robots }}">
 
@@ -85,8 +67,8 @@
 <meta property="og:locale" content="{{ $locale }}">
 <meta property="og:type" content="{{ $ogType }}">
 <meta property="og:title" content="{{ $metaTitle }}">
-<meta property="og:description" content="{{ $metaDescription | plainify | strings.TrimSpace }}">
+<meta property="og:description" content="{{ $metaDescription | strings.TrimSpace }}">
 <meta property="og:url" content="{{ $canonical }}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ $metaTitle }}">
-<meta name="twitter:description" content="{{ $metaDescription | plainify | strings.TrimSpace }}">
+<meta name="twitter:description" content="{{ $metaDescription | strings.TrimSpace }}">
