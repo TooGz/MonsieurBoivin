@@ -10,6 +10,9 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    env:
+      HUGO_VERSION: 0.150.0
+      NODE_VERSION: 22.18.0
 
     steps:
       - name: Checkout
@@ -19,21 +22,23 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: "22.18.0"
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: "0.150.0"
-          extended: true
+      - name: Install Hugo
+        run: |
+          curl -sLJO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          mkdir -p "${HOME}/.local/hugo"
+          tar -C "${HOME}/.local/hugo" -xf "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          rm "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          echo "${HOME}/.local/hugo" >> "${GITHUB_PATH}"
 
       - name: Install dependencies
         run: npm install
@@ -75,15 +80,17 @@ jobs:
         run: npm run lhci
 
       - name: Upload Playwright report
-        if: always()
-        uses: actions/upload-artifact@v4
+        if: ${{ always() && hashFiles('playwright-report/**/*') != '' }}
+        uses: actions/upload-artifact@v6
         with:
           name: playwright-report
           path: playwright-report
+          if-no-files-found: ignore
 
       - name: Upload Lighthouse reports
-        if: always()
-        uses: actions/upload-artifact@v4
+        if: ${{ always() && hashFiles('.lighthouseci/**/*') != '' }}
+        uses: actions/upload-artifact@v6
         with:
           name: lighthouse-reports
-          path: reports/lighthouse
+          path: .lighthouseci
+          if-no-files-found: ignore
