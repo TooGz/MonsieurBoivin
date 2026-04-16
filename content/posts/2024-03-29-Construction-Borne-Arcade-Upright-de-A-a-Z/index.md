@@ -1,6 +1,6 @@
 ---
-title: "Construction d'une borne d'arcade 2 joueurs de A à Z"
-description: "Guide de conception pour une borne d’arcade full size 2 joueurs : matériel, ergonomie, design, budget et feuille de route."
+title: "Construction d’une borne d’arcade 2 joueurs de A à Z"
+description: "Feuille de route pour concevoir une borne d’arcade full size 2 joueurs : écran, ergonomie, matériel, budget, menuiserie et arbitrages."
 slug: "Construction-Borne-Arcade"
 date: 2024-03-29
 updated: 2025-04-03
@@ -10,6 +10,10 @@ categories: ["Gaming", "Arcade"]
 image: "img/cover.webp"
 showTableOfContents: true
 draft: true
+
+seo:
+  meta_title: "Construire une borne d’arcade 2 joueurs : guide complet de A a Z"
+  meta_description: "Conception d’une borne d’arcade full size 2 joueurs : ecran, ergonomie, materiel, budget, menuiserie et feuille de route."
 ---
 
 {{< lead >}}

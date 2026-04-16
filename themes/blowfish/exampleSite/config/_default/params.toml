@@ -87,8 +87,6 @@ fingerprintAlgorithm = "sha512" # Valid values are "sha512" (default), "sha384",
   showAuthorsBadges = true 
   showWordCount = false
   sharingLinks = [ "linkedin", "twitter", "bluesky", "reddit", "whatsapp", "telegram", "pinterest", "facebook", "email", "line"]
-  showZenMode = true
-
 [list]
   showHero = true
   heroStyle = "background" # valid options: basic, big, background, thumbAndBackground

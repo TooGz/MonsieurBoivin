@@ -1,6 +1,6 @@
 ---
 title: "Projet Grenouille 3.0 - Archive de cadrage"
-description: "Premières notes de cadrage conservées comme archive interne. Le point d'entrée actif du projet est maintenant la section Atelier."
+description: "Premières notes de cadrage conservées comme archive interne. Le point d’entrée actif du projet est maintenant la section Atelier."
 date: 2025-09-02T00:04:58+02:00
 tags: ["Jeux en Bois", "Grenouille"]
 categories: ["DIY"]

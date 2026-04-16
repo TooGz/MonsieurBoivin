@@ -11,7 +11,11 @@ tags:
   - concert
 
 image: "img/photos-concert.jpg"
-description: "Comment réussir ses photos de concert malgré la lumière chaotique ? Voici 5 conseils concrets pour capturer l’énergie de la scène, même avec du matériel limité."
+description: "5 conseils de terrain pour réussir ses photos de concert en basse lumière : ouverture, ISO, vitesse, placement et gestion des éclairages de scène."
+
+seo:
+  meta_title: "Photos de concert : 5 conseils pour shooter en basse lumiere"
+  meta_description: "5 conseils concrets pour reussir ses photos de concert : ouverture, ISO, vitesse, placement et gestion de la lumiere de scene."
 ---
 
 La **photo de concert**, c’est un vrai défi. On se retrouve souvent dans une salle plongée dans la pénombre, avec des spots qui clignotent dans tous les sens, et des artistes qui bougent sans arrêt. Bref, c’est pas franchement l’environnement le plus simple pour faire des images nettes, bien exposées et percutantes.

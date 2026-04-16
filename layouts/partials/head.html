@@ -40,8 +40,8 @@
 
   {{ $assets := newScratch }}
   {{ $isRecipePage := and .IsPage (or (eq .Section "recettes") (eq .Type "recettes") (eq .Type "recette")) }}
-  {{ $shouldEnableImageZoom := and (not (.Site.Params.disableImageZoom | default true)) .IsPage }}
   {{ $pageAssetFlags := partial "functions/page-asset-flags.html" (dict "page" .) }}
+  {{ $shouldEnableImageZoom := index $pageAssetFlags "needsImageZoom" }}
   {{ $shouldLoadCodeCopy := index $pageAssetFlags "needsCodeCopy" }}
   {{ $shouldLoadKatexRender := index $pageAssetFlags "needsKatexRender" }}
   {{ $pageMetrics := partial "functions/page-metrics-state.html" . }}
@@ -147,16 +147,6 @@
     {{ $jsA11y := resources.Get "js/a11y.js" }}
     {{ $jsA11y = $jsA11y | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
     <script src="{{ $jsA11y.RelPermalink }}" integrity="{{ $jsA11y.Data.Integrity }}"></script>
-  {{ end }}
-
-  {{ $shouldIncludeZenMode := or (.Site.Params.enableA11y | default false) (.Params.showZenMode | default (.Site.Params.article.showZenMode | default false)) }}
-  {{ if and .IsPage $shouldIncludeZenMode }}
-    {{ $jsZenMode := resources.Get "js/zen-mode.js" }}
-    {{ $jsZenMode = $jsZenMode | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
-    <script
-      type="text/javascript"
-      src="{{ $jsZenMode.RelPermalink }}"
-      integrity="{{ $jsZenMode.Data.Integrity }}"></script>
   {{ end }}
 
   {{ if and (not .IsHome) (.Site.Params.enableSearch | default false) }}

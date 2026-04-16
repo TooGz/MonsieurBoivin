@@ -1,6 +1,6 @@
 ---
 title: "Galettes de Blé Noir"
-description: "Des galettes bretonnes authentiques, à base de farine de sarrasin, idéales pour des repas salés garnis à l'infini."
+description: "Des galettes bretonnes authentiques, à base de farine de sarrasin, idéales pour des repas salés à garnir à l’infini."
 slug: "galettes-ble-noir"
 layout: "recette-single"
 date: 2025-02-28

@@ -12,7 +12,11 @@ tags:
   - bokeh
   - profondeur de champ
   - flou artistique
-description: "Comment fonctionne la profondeur de champ et le bokeh ? Et comment les maîtriser simplement pour réussir vos photos avec un bel effet de flou artistique ? Voici une explication claire et sans jargon."
+description: "Comprendre simplement la profondeur de champ et le bokeh pour obtenir un beau flou d’arrière-plan : ouverture, distance, focale et exemples concrets."
+
+seo:
+  meta_title: "Profondeur de champ et bokeh : comment obtenir un beau flou"
+  meta_description: "Comprendre la profondeur de champ et le bokeh pour creer un flou d’arriere-plan propre : ouverture, distance, focale et exemples simples."
 ---
 
 La **profondeur de champ (PDC)** détermine la zone de netteté d’une photo.  

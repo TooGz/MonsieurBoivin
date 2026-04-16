@@ -43,12 +43,11 @@
     {{/* =========================
         DESCRIPTION
     ========================== */}}
-    {{ with $p.Params.description }}
-      {{ if ne (trim . " ") "" }}
-        <section class="recette-single__section">
-          <p class="recette-single__description">{{ . }}</p>
-        </section>
-      {{ end }}
+    {{ $recipeDescription := partial "functions/page-description.html" (dict "page" $p) | strings.TrimSpace }}
+    {{ with $recipeDescription }}
+      <section class="recette-single__section">
+        <p class="recette-single__description">{{ . }}</p>
+      </section>
     {{ end }}
 
     {{/* =========================

@@ -1,7 +1,7 @@
 ---
 title: "OpenEmu, l’émulateur retrogaming ultime sur macOS"
 date: "2019-03-05"
-description: "Jouer à vos jeux d'enfance sur votre Mac"
+description: "Pourquoi OpenEmu reste une référence du retrogaming sur Mac : consoles compatibles, interface soignée, manettes et prise en main sans prise de tête."
 authors: ["monsieur-boivin"]
 categories: ["Gaming"]
 tags: ["retrogaming", "macOS", "Arcade"]
@@ -9,6 +9,10 @@ tags: ["retrogaming", "macOS", "Arcade"]
 image: "img/Retro-Logo-Grid.jpg"
 showTableOfContents: false
 showBreadcrumbs: false
+
+seo:
+  meta_title: "OpenEmu sur macOS : emulateur retro simple, propre et complet"
+  meta_description: "Pourquoi OpenEmu reste une reference du retrogaming sur Mac : consoles compatibles, interface, manettes et prise en main."
 ---
 
 Découvrez une petite perle du retrogaming sur Mac : **OpenEmu**

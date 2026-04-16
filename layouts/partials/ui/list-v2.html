@@ -38,8 +38,6 @@
         {{ with $taxonomyPlural }}<span>{{ . }}</span>{{ end }}
       {{ else if eq .Kind "term" }}
         <span>{{ $taxonomySingular | default (.Data.Singular | default "archive" | humanize) }}</span>
-      {{ else if .Section }}
-        <span>{{ .Section | humanize }}</span>
       {{ end }}
     </div>
   </header>
@@ -66,10 +64,6 @@
 
   {{ if gt (len $paginator.Pages) 0 }}
     <section>
-      <div class="site-v2-section-head">
-        <h2>Tous les contenus</h2>
-        <p>Une vue d'ensemble claire, avec le meme langage visuel que la home.</p>
-      </div>
       <div class="site-v2-card-grid">
         {{ range $paginator.Pages }}
           {{ partial "ui/list-card.html" (dict

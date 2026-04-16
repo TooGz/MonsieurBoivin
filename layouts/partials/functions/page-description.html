@@ -21,4 +21,4 @@
   {{- $description = $description | truncate $truncate -}}
 {{- end -}}
 
-{{- $description | htmlUnescape -}}
+{{- partial "functions/normalize-text.html" $description -}}

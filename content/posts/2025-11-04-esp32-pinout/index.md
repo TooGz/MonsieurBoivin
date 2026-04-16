@@ -1,6 +1,6 @@
 ---
 title: "ESP32 WROOM DevKit V1 – Pinout complet & GPIO à utiliser (Guide clair)"
-description: "ESP32 DevKit V1 : pinout complet, GPIO à utiliser ou éviter, ADC, SPI, I2C et schéma clair pour vos projets."
+description: "Guide clair du pinout ESP32 DevKit V1 : GPIO sûrs, broches de boot, ADC, SPI, I2C et schéma pratique pour vos projets."
 
 authors: ["monsieur-boivin"]
 slug: "esp32-pinout"
@@ -11,8 +11,8 @@ showTableOfContents: true
 draft: false
 
 seo:
-  meta_title: "ESP32 Pinout complet (DevKit V1) – GPIO à utiliser ou éviter"
-  meta_description: "Pinout ESP32 DevKit V1 expliqué simplement : GPIO sûrs, broches à éviter, ADC, SPI, I2C + schéma clair."
+  meta_title: "ESP32 pinout complet (DevKit V1) : GPIO utiles et broches a eviter"
+  meta_description: "Guide clair du pinout ESP32 DevKit V1 : GPIO surs, broches de boot, ADC, SPI, I2C et schema complet pour vos projets."
 ---
 
 Tu cherches le **pinout complet de l’ESP32 WROOM DevKit V1** avec un schéma clair et des explications simples, directement utilisables dans tes projets ?

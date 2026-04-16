@@ -1,5 +1,5 @@
 ---
-title: "Vinaigrette 'Tupperware'"
+title: "Vinaigrette « Tupperware »"
 description: "Une vinaigrette maison rapide, équilibrée et savoureuse, parfaite pour toutes tes salades. La recette culte transmise dans les familles."
 slug: "vinaigrette-tupperware"
 layout: "recette-single"

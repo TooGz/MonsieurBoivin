@@ -1,6 +1,6 @@
 ---
 title: "Ressources pour connecter un Macintosh de 1986 sur le Web"
-description: "Ressources, méthodes et outils pour connecter un Macintosh Plus (1986) à Internet en 2026 : émulation, matériel, réseaux et web rétro."
+description: "Comment connecter un Macintosh Plus (1986) à Internet en 2026 : émulation, BlueSCSI, Pico W, proxies web et outils utiles."
 authors: ["monsieur-boivin"]
 slug: "mac-plus-internet"
 date: 2026-01-26
@@ -8,6 +8,10 @@ categories: ["Informatique", "Rétro-computing"]
 tags: ["Macintosh Plus", "rétro", "Internet", "Vintage", "ChatGPT", "BlueSCSI", "Pico W" ]
 showTableOfContents: true
 draft: false
+
+seo:
+  meta_title: "Macintosh Plus sur Internet : outils, materiel et web retro en 2026"
+  meta_description: "Comment connecter un Macintosh Plus a Internet en 2026 : BlueSCSI, Pico W, emulation, proxies web et ressources utiles."
 ---
 
 ## But

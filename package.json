@@ -9,8 +9,8 @@
   },
   "scripts": {
     "inventory": "node scripts/inventory/generate-site-inventory.mjs",
-    "build:site": "hugo --gc --minify --environment production --baseURL https://monsieurboivin.fr/ --cacheDir ./.hugo_cache/npm-build",
-    "build:site:ci": "hugo --gc --minify --environment production --baseURL http://127.0.0.1:4173/ --cacheDir ./.hugo_cache/npm-build",
+    "build:site": "hugo --gc --minify --cleanDestinationDir --environment production --baseURL https://monsieurboivin.fr/ --cacheDir ./.hugo_cache/npm-build",
+    "build:site:ci": "hugo --gc --minify --cleanDestinationDir --environment production --baseURL http://127.0.0.1:4173/ --cacheDir ./.hugo_cache/npm-build",
     "serve:public": "node scripts/audit/serve-public.mjs",
     "lint:js": "eslint .",
     "lint:css": "stylelint \"assets/**/*.css\"",

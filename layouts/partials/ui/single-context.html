@@ -23,7 +23,6 @@
 {{- $showDate := $p.Params.showDate | default ($p.Site.Params.article.showDate | default true) -}}
 {{- $showDateUpdated := and ($p.Params.showDateUpdated | default ($p.Site.Params.article.showDateUpdated | default false)) (ne (partial "functions/date.html" $p.Date) (partial "functions/date.html" $p.Lastmod)) (gt ($p.Lastmod | time.Format "2006") 1) -}}
 {{- $showReadingTime := and ($p.Params.showReadingTime | default ($p.Site.Params.article.showReadingTime | default true)) (ne $p.ReadingTime 0) -}}
-{{- $showZenMode := $p.Params.showZenMode | default ($p.Site.Params.article.showZenMode | default false) -}}
 
 {{- $p.Scratch.Set "__uiSingleContext" (dict
   "isRecipePage" $isRecipePage
@@ -35,7 +34,6 @@
   "showDate" $showDate
   "showDateUpdated" $showDateUpdated
   "showReadingTime" $showReadingTime
-  "showZenMode" $showZenMode
   "showTaxonomies" ($p.Params.showTaxonomies | default ($p.Site.Params.article.showTaxonomies | default false))
   "showCategoryOnly" ($p.Params.showCategoryOnly | default ($p.Site.Params.article.showCategoryOnly | default false))
 ) -}}

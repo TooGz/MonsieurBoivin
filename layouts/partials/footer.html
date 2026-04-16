@@ -65,7 +65,8 @@
     </div>
   </div>
 
-  {{ $shouldEnableImageZoom := and (not (.Site.Params.disableImageZoom | default true)) .IsPage }}
+  {{ $pageAssetFlags := partial "functions/page-asset-flags.html" (dict "page" .) }}
+  {{ $shouldEnableImageZoom := index $pageAssetFlags "needsImageZoom" }}
   {{ if $shouldEnableImageZoom }}
     <script>
       mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {

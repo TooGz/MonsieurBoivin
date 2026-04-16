@@ -1,0 +1,19 @@
+{{- $page := .page | default . -}}
+{{- $abstract := "" -}}
+
+{{- with $page.Params.seo.abstract -}}
+  {{- $candidate := partial "functions/normalize-text.html" (. | plainify) -}}
+  {{- if ne $candidate "" -}}
+    {{- $abstract = $candidate -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq $abstract "" -}}
+  {{- $abstract = partial "functions/page-description.html" (dict "page" $page) | strings.TrimSpace -}}
+{{- end -}}
+
+{{- if eq $abstract "" -}}
+  {{- $abstract = partial "functions/meta-description.html" (dict "page" $page) | strings.TrimSpace -}}
+{{- end -}}
+
+{{- partial "functions/normalize-text.html" $abstract -}}

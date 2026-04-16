@@ -17,7 +17,7 @@
 {{- $metaDescription := $siteDescription -}}
 
 {{- with $page.Params.seo.meta_description -}}
-  {{- $candidate := . | plainify | htmlUnescape | strings.TrimSpace -}}
+  {{- $candidate := partial "functions/normalize-text.html" (. | plainify) -}}
   {{- if ne $candidate "" -}}
     {{- $metaDescription = $candidate -}}
   {{- end -}}
@@ -90,4 +90,4 @@
   {{- end -}}
 {{- end -}}
 
-{{- $metaDescription | htmlUnescape | strings.TrimSpace -}}
+{{- partial "functions/normalize-text.html" $metaDescription -}}

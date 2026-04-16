@@ -1,17 +1,6 @@
 /*! tailwindcss v4.1.12 | MIT License | https://tailwindcss.com */
 /*! Blowfish | MIT License | https://github.com/nunocoracao/blowfish */
 @layer properties;
-#zen-mode-button {
-  cursor: pointer;
-}
-.zen-mode {
-  position: relative;
-}
-body.zen-mode-enable {
-  #bmc-wbtn, .author {
-    display: none !important;
-  }
-}
 .prose .chroma {
   position: static;
   border-radius: var(--radius-md);

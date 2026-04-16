@@ -1,0 +1,6 @@
+{{- $text := printf "%v" (. | default "") -}}
+{{- $normalized := $text | htmlUnescape | strings.TrimSpace -}}
+{{- $normalized = replaceRE "&#39;|&#x27;|&#8217;|&#8216;|&apos;|&rsquo;|&lsquo;" "’" $normalized -}}
+{{- $normalized = replaceRE "&#34;|&#8220;|&#8221;|&quot;|&ldquo;|&rdquo;" "\"" $normalized -}}
+{{- $normalized = replaceRE "&nbsp;" " " $normalized -}}
+{{- $normalized | strings.TrimSpace -}}

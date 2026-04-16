@@ -73,8 +73,7 @@
     {{- $schemaAuthor = index .Params "author" -}}
   {{- end -}}
   {{- $pageMetaDescription := partial "functions/meta-description.html" (dict "page" .) | strings.TrimSpace -}}
-  {{- $pageDescription := partial "functions/page-description.html" (dict "page" .) | strings.TrimSpace -}}
-  {{- $pageAbstract := partial "functions/page-description.html" (dict "page" .) | strings.TrimSpace -}}
+  {{- $pageAbstract := partial "functions/page-abstract.html" (dict "page" .) | strings.TrimSpace -}}
   {{- $schemaNodes := slice -}}
   {{- $pageNodeType := cond $isPhotoGalleryPage "ImageGallery" "WebPage" -}}
   {{- $pageNode := dict

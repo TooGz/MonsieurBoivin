@@ -1,10 +1,12 @@
 {{ $allPages := site.RegularPages.ByDate.Reverse }}
 {{ $posts := where $allPages "Section" "posts" }}
 {{ $recipes := where $allPages "Section" "recettes" }}
+{{ $photoPages := where $allPages "Section" "photos" }}
 {{ $workshopPages := where $allPages "Section" "atelier" }}
 {{ $recentPages := first 5 $allPages }}
-{{ $featuredArticles := first 6 $posts }}
+{{ $featuredArticles := first 8 $posts }}
 {{ $featuredRecipes := first 3 $recipes }}
+{{ $featuredPhotos := first 3 $photoPages }}
 {{ $featuredWorkshop := first 3 $workshopPages }}
 {{ $dateFormat := .Site.Language.Params.dateFormat | default ":date_long" }}
 
@@ -32,7 +34,10 @@
 {{ $authorName := .Site.Params.Author.name | default .Site.Title }}
 {{ $authorRole := .Site.Params.Author.role | default "Cuisine maison, atelier DIY et notes utiles" }}
 {{ $authorSignature := .Site.Params.Author.headline | default .Site.Params.description }}
-{{ $lead := .Description | default .Site.Params.description }}
+{{ $lead := partial "functions/page-description.html" (dict "page" .) | strings.TrimSpace }}
+{{ if eq $lead "" }}
+  {{ $lead = .Site.Params.description }}
+{{ end }}
 {{ $disableImageOptimization := .Site.Params.disableImageOptimization | default false }}
 
 {{ $authorImage := "" }}
@@ -93,8 +98,9 @@
       <div class="home-hub__nav-links" aria-label="Liens rapides">
         <a href="#maintenant">Projet</a>
         <a href="#articles">Articles</a>
+        <a href="{{ "/atelier/" | relLangURL }}">Atelier</a>
         <a href="{{ "/recettes/" | relLangURL }}">Cuisine</a>
-        <a href="#timeline">Timeline</a>
+        <a href="{{ "/photos/" | relLangURL }}">Photos</a>
         <a href="#contact">Contact</a>
       </div>
 
@@ -115,7 +121,7 @@
             <a href="#articles">Articles</a>
             <a href="{{ "/atelier/" | relLangURL }}">Atelier</a>
             <a href="{{ "/recettes/" | relLangURL }}">Cuisine</a>
-            <a href="#timeline">Timeline</a>
+            <a href="{{ "/photos/" | relLangURL }}">Photos</a>
             <a href="#contact">Contact</a>
             <button class="home-hub__theme-toggle home-hub__theme-toggle--panel" type="button" data-theme-toggle aria-pressed="false">
               <span class="home-hub__theme-icon home-hub__theme-icon--moon" aria-hidden="true">{{ partial "icon.html" "moon" }}</span>
@@ -140,14 +146,13 @@
         </div>
       {{ end }}
 
-      <div class="home-hub__hero-shell">
-        <div class="home-hub__hero-copy">
-          <p class="home-hub__eyebrow">Carnet perso qui reste utile</p>
-
+       <div class="home-hub__hero-shell">
+       <div class="home-hub__hero-copy">
           <div class="home-hub__tag-row" aria-label="Univers du site">
-            <span>Recettes testées</span>
-            <span>Atelier DIY</span>
-            <span>Notes utiles</span>
+            <span>Atelier documente</span>
+            <span>Recettes testees</span>
+            <span>Guides utiles</span>
+            <span>Albums photo</span>
           </div>
 
           <div class="home-hub__identity">
@@ -198,40 +203,48 @@
               <span>recettes</span>
             </li>
             <li>
-              <strong>{{ len $workshopPages }}</strong>
-              <span>pages atelier</span>
+              <strong>{{ len $photoPages }}</strong>
+              <span>albums photo</span>
+            </li>
+            <li>
+              <strong>{{ len $buildPages }}</strong>
+              <span>entrees build log</span>
             </li>
           </ul>
         </div>
 
-        <aside class="home-hub__hero-rail" aria-label="Résumé du moment">
+        <aside class="home-hub__hero-rail" aria-label="Projet et résumé du moment">
           <article class="home-hub__panel home-hub__panel--accent">
-            <p class="home-hub__eyebrow">En ce moment</p>
+            <p class="home-hub__eyebrow">Projet vivant</p>
             {{ with $grenouille }}
+              {{ $projectDescription := partial "functions/page-description.html" (dict "page" . "truncate" 150) | strings.TrimSpace }}
               <h2>{{ .Title }}</h2>
-              <p>{{ .Description | default "Le gros morceau du moment, documenté étape par étape." }}</p>
+              <p>{{ $projectDescription | default "Le chantier central du moment, documente proprement entre bois, capteurs, ecran et firmware." }}</p>
             {{ else }}
               <h2>Projet principal</h2>
-              <p>Je garde ici le chantier actif, les tests et les choix qui valent le détour.</p>
+              <p>Le chantier actif reste centralise ici avec les choix de materiel, les tests et les etapes qui comptent vraiment.</p>
             {{ end }}
 
             <ul class="home-hub__bullet-list">
               {{ with $latestBuild }}
-                <li>Dernière étape publiée : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+                <li>Derniere etape : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
               {{ end }}
-              <li>{{ $projectDocCount }} page{{ if ne $projectDocCount 1 }}s{{ end }} de doc déjà en ligne.</li>
-              <li>Chrono, photos, matos et retours terrain au même endroit.</li>
+              <li>{{ $projectDocCount }} page{{ if ne $projectDocCount 1 }}s{{ end }} de doc deja en ligne autour du projet.</li>
+              {{ with index $recentPages 0 }}
+                <li>Dernier ajout global : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+              {{ end }}
             </ul>
 
-            <a class="home-hub__button home-hub__button--primary" href="{{ $projectLink }}">Voir le dossier</a>
+            <a class="home-hub__button home-hub__button--primary" href="{{ $projectLink }}">Entrer dans le projet</a>
           </article>
 
           <article class="home-hub__panel">
-            <p class="home-hub__eyebrow">Dernier mouvement</p>
+            <p class="home-hub__eyebrow">Dernier Ajout</p>
             {{ with index $recentPages 0 }}
+              {{ $latestDescription := partial "functions/page-description.html" (dict "page" . "truncate" 130) | strings.TrimSpace }}
               <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-              <p>{{ .Date | time.Format $dateFormat }}</p>
-              <p>{{ .Description | default (.Summary | plainify | truncate 130) }}</p>
+              <p>{{ .Section | humanize }} · {{ .Date | time.Format $dateFormat }}</p>
+              <p>{{ $latestDescription }}</p>
             {{ end }}
           </article>
         </aside>
@@ -244,17 +257,18 @@
       <div class="home-hub__section-heading">
         <div>
           <p class="home-hub__eyebrow">Tableau de bord</p>
-          <h2>Ce qui bouge vraiment sur le site</h2>
-          <p>Le projet actif, le volume utile et les dernières mises à jour. Pas de remplissage, juste ce qui aide à choisir où cliquer.</p>
+          <h2>Le coeur du site, sans detour</h2>
+          <p>Le chantier actif, les gros volumes utiles et les reperes qui aident a choisir tout de suite la bonne porte d’entree.</p>
         </div>
       </div>
 
       <div class="home-hub__dashboard">
         <article class="home-hub__spotlight">
-          <p class="home-hub__eyebrow">Projet du moment</p>
+          <p class="home-hub__eyebrow">Chantier central</p>
           {{ with $grenouille }}
+            {{ $projectDescription := partial "functions/page-description.html" (dict "page" . "truncate" 150) | strings.TrimSpace }}
             <h3>{{ .Title }}</h3>
-            <p>{{ .Description | default "Un gros projet atelier tenu au propre, avec build log, doc et partie hardware." }}</p>
+            <p>{{ $projectDescription | default "Un gros projet atelier tenu au propre, avec build log, doc et partie hardware." }}</p>
           {{ else }}
             <h3>Atelier en cours</h3>
             <p>Le chantier principal reste centralisé côté atelier avec les étapes importantes et les choix de matos.</p>
@@ -288,9 +302,9 @@
             <p>des fiches que j’ai envie de refaire</p>
           </article>
           <article class="home-hub__metric">
-            <span>Atelier</span>
-            <strong>{{ len $workshopPages }}</strong>
-            <p>doc, conception, build log et tests</p>
+            <span>Photos</span>
+            <strong>{{ len $photoPages }}</strong>
+            <p>albums, concerts, voyages et series</p>
           </article>
           <article class="home-hub__metric">
             <span>Dernière mise à jour</span>
@@ -306,9 +320,9 @@
     <section class="home-hub__section" id="timeline">
       <div class="home-hub__section-heading">
         <div>
-          <p class="home-hub__eyebrow">Timeline courte</p>
-          <h2>Le fil rouge des derniers ajouts</h2>
-          <p>Une vue chronologique pour voir tout de suite si ça parle atelier, cuisine ou bidouille.</p>
+          <p class="home-hub__eyebrow">Fraichement publie</p>
+          <h2>Le fil court des derniers ajouts</h2>
+          <p>Une vue chronologique pour voir en quelques secondes si ca parle atelier, cuisine, photo ou bidouille.</p>
         </div>
       </div>
 
@@ -316,11 +330,12 @@
         <ol class="home-hub__timeline-list" aria-label="Chronologie récente">
           {{ range $recentPages }}
             <li class="home-hub__timeline-item">
+              {{ $timelineDescription := partial "functions/page-description.html" (dict "page" . "truncate" 150) | strings.TrimSpace }}
               <span class="home-hub__timeline-dot" aria-hidden="true"></span>
               <div class="home-hub__timeline-body">
                 <p class="home-hub__timeline-meta">{{ .Section | humanize }} · {{ .Date | time.Format $dateFormat }}</p>
                 <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-                <p>{{ .Description | default (.Summary | plainify | truncate 150) }}</p>
+                <p>{{ $timelineDescription }}</p>
               </div>
             </li>
           {{ end }}
@@ -328,7 +343,7 @@
 
         <aside class="home-hub__timeline-side">
           <article class="home-hub__panel">
-            <p class="home-hub__eyebrow">Pour rentrer vite</p>
+            <p class="home-hub__eyebrow">Entrer par envie</p>
             <ul class="home-hub__quick-links">
               <li><a href="{{ "/posts/" | relLangURL }}">Tous les articles</a></li>
               <li><a href="{{ "/atelier/" | relLangURL }}">L’atelier complet</a></li>
@@ -345,7 +360,6 @@
         <div>
           <p class="home-hub__eyebrow">Articles</p>
           <h2>Les billets à ouvrir en premier</h2>
-          <p>Je garde les tags en façade pour filtrer vite. Sans JavaScript, tout reste visible et cliquable.</p>
         </div>
         <p class="home-hub__counter"><strong data-filter-count>{{ len $featuredArticles }}</strong> article{{ if ne (len $featuredArticles) 1 }}s{{ end }}</p>
       </div>
@@ -378,8 +392,8 @@
       <div class="home-hub__section-heading">
         <div>
           <p class="home-hub__eyebrow">Portes d’entrée</p>
-          <h2>Trois façons de parcourir le site sans tourner en rond</h2>
-          <p>Atelier pour les gros chantiers, cuisine pour le concret immédiat, et récents si tu veux juste voir ce qui a bougé.</p>
+          <h2>Quatre façons d’entrer sans tourner en rond</h2>
+          <p>Atelier pour les gros chantiers, cuisine pour le concret, photos pour les series et recents si tu veux juste sentir le rythme.</p>
         </div>
       </div>
 
@@ -437,6 +451,24 @@
             {{ end }}
           </div>
         </section>
+
+        <section class="home-hub__stack">
+          <div class="home-hub__stack-head">
+            <h3>Photos</h3>
+            <a href="{{ "/photos/" | relLangURL }}">Tout voir</a>
+          </div>
+          <div class="home-hub__stack-grid">
+            {{ range $featuredPhotos }}
+              {{ partial "home/mini-card.html" (dict
+                "page" .
+                "variant" "compact"
+                "showMeta" true
+                "showDate" true
+                "showDescription" true
+              ) }}
+            {{ end }}
+          </div>
+        </section>
       </div>
     </section>
 
@@ -483,6 +515,6 @@
       <a href="mailto:{{ .Site.Params.Author.email }}">contact@monsieurboivin.fr</a>
     </div>
 
-    <p class="home-hub__footer-note">© {{ now.Format "2006" }} {{ $authorName }}. Hugo propre, HTML sémantique, JS léger.</p>
+    <p class="home-hub__footer-note">© 2012-{{ now.Format "2006" }} | {{ $authorName }}</p>
   </footer>
 </div>

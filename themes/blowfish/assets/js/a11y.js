@@ -47,19 +47,6 @@ window.A11yPanel = (() => {
         }
       },
     },
-
-    zenMode: {
-      default: false,
-      apply: (enabled) => {
-        const isActive = document.body?.classList.contains("zen-mode-enable");
-        if (enabled !== isActive) {
-          const checkbox = document.querySelector('[id$="zen-mode"]');
-          if (checkbox && typeof _toggleZenMode === "function") {
-            _toggleZenMode(checkbox, { scrollToHeader: false });
-          }
-        }
-      },
-    },
   };
 
   let settings = null;

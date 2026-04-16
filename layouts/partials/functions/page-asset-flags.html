@@ -6,10 +6,17 @@
 
 {{- $hasCodeFence := and $page.IsPage (gt (len (findRE "(?m)^```+" $rawContent)) 0) -}}
 {{- $hasHighlightShortcode := and $page.IsPage (or ($page.HasShortcode "highlight") ($page.HasShortcode "codeimporter")) -}}
+{{- $hasMarkdownImage := and $page.IsPage (gt (len (findRE `!\[[^\]]*\]\([^)]*\)` $rawContent)) 0) -}}
+{{- $hasMarkdownReferenceImage := and $page.IsPage (gt (len (findRE `!\[[^\]]*\]\[[^\]]*\]` $rawContent)) 0) -}}
+{{- $hasHtmlImage := and $page.IsPage (gt (len (findRE `(?is)<img[\s>][^>]*>` $rawContent)) 0) -}}
+{{- $hasGalleryShortcode := and $page.IsPage ($page.HasShortcode "gallery") -}}
+{{- $hasFigureShortcode := and $page.IsPage ($page.HasShortcode "figure") -}}
 {{- $needsCodeCopy := and ($page.Site.Params.enableCodeCopy | default false) (or $hasCodeFence $hasHighlightShortcode) -}}
 {{- $needsKatexRender := and $page.IsPage ($page.HasShortcode "katex") -}}
+{{- $needsImageZoom := and (not ($page.Site.Params.disableImageZoom | default true)) $page.IsPage (or $hasMarkdownImage $hasMarkdownReferenceImage $hasHtmlImage $hasGalleryShortcode $hasFigureShortcode) -}}
 
 {{- return (dict
   "needsCodeCopy" $needsCodeCopy
   "needsKatexRender" $needsKatexRender
+  "needsImageZoom" $needsImageZoom
 ) -}}

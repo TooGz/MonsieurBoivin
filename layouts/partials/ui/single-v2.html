@@ -21,7 +21,6 @@
 {{ $showDate := index $single "showDate" }}
 {{ $showDateUpdated := index $single "showDateUpdated" }}
 {{ $showReadingTime := index $single "showReadingTime" }}
-{{ $showZenMode := index $single "showZenMode" }}
 {{ $description := "" }}
 {{ if not $isRecipePage }}
   {{ $description = partial "functions/page-description.html" (dict "page" . "truncate" 220) | strings.TrimSpace }}
@@ -36,9 +35,6 @@
 {{ end }}
 {{ if $showReadingTime }}
   {{ $metaParts = $metaParts | append (partial "meta/reading-time.html" .) }}
-{{ end }}
-{{ if $showZenMode }}
-  {{ $metaParts = $metaParts | append (partial "meta/zen-mode.html" .) }}
 {{ end }}
 
 {{ partial "ui/page-script.html" . }}

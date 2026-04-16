@@ -1,6 +1,6 @@
 ---
 title: "Projet Grenouille 3.0"
-description: "Documentation sur la création d'un jeu de la grenouille électronique"
+description: "Documentation sur la création d’un jeu de la grenouille électronique."
 categories: ["Atelier de Michel"]
 tags: [
   "Jeu de la grenouille",
