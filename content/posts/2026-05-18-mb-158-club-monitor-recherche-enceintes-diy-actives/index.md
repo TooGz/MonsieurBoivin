@@ -145,13 +145,13 @@ L’architecture de départ serait la suivante, par enceinte :
 
 Ce qui donnerait pour la paire :
 
-| Élément | Quantité | Rôle |
-|---|---:|---|
-| Grave 15” | 2 | Grave / sub-grave / impact |
-| Médium 8” | 2 | Bas-médium / voix / kick |
-| Compression aigu | 2 | Aigu / dynamique / projection contrôlée |
-| Pavillon 1” | 2 | Directivité de l’aigu |
-| Module actif 3 voies avec DSP | 2 | Filtrage + amplification par enceinte |
+| Élément                       | Quantité | Rôle                                    |
+| ----------------------------- | -------: | --------------------------------------- |
+| Grave 15”                     |        2 | Grave / sub-grave / impact              |
+| Médium 8”                     |        2 | Bas-médium / voix / kick                |
+| Compression aigu              |        2 | Aigu / dynamique / projection contrôlée |
+| Pavillon 1”                   |        2 | Directivité de l’aigu                   |
+| Module actif 3 voies avec DSP |        2 | Filtrage + amplification par enceinte   |
 
 Cette structure me plaît parce qu’elle sépare clairement les rôles.
 
@@ -176,20 +176,20 @@ Une première sélection tourne autour de composants **B&C Speakers**, très uti
 
 Ce n’est pas forcément le choix définitif, mais c’est une base sérieuse pour réfléchir.
 
-| Élément | Quantité | Rôle |
-|---|---:|---|
-| **B&C 15TBX100 8Ω** | 2 | Grave / sub-grave |
-| **B&C 8PE21 8Ω** | 2 | Médium / kick / voix |
-| **B&C DE250 8Ω** | 2 | Compression aigu |
-| **B&C ME45** ou pavillon équivalent 1” | 2 | Pavillon 90° × 40° |
+| Élément                                | Quantité | Rôle                 |
+| -------------------------------------- | -------: | -------------------- |
+| **B&C 15TBX100 8Ω**                    |        2 | Grave / sub-grave    |
+| **B&C 8PE21 8Ω**                       |        2 | Médium / kick / voix |
+| **B&C DE250 8Ω**                       |        2 | Compression aigu     |
+| **B&C ME45** ou pavillon équivalent 1” |        2 | Pavillon 90° × 40°   |
 
 La répartition envisagée serait :
 
-| Voie | Haut-parleur | Charge envisagée | Bande de travail estimée |
-|---|---|---|---|
-| Grave | B&C 15TBX100 | Bass-reflex | environ 30/35 Hz à 120 Hz |
-| Médium | B&C 8PE21 | Clos amorti | environ 120 Hz à 1,6 kHz |
-| Aigu | B&C DE250 + ME45 | Pavillon | environ 1,6 kHz à 18 kHz |
+| Voie   | Haut-parleur     | Charge envisagée | Bande de travail estimée  |
+| ------ | ---------------- | ---------------- | ------------------------- |
+| Grave  | B&C 15TBX100     | Bass-reflex      | environ 30/35 Hz à 120 Hz |
+| Médium | B&C 8PE21        | Clos amorti      | environ 120 Hz à 1,6 kHz  |
+| Aigu   | B&C DE250 + ME45 | Pavillon         | environ 1,6 kHz à 18 kHz  |
 
 À ce stade, ce sont des hypothèses de travail.
 
@@ -238,11 +238,11 @@ Pour l’instant, mon intuition penche vers le **15 pouces**, mais je dois encor
 
 Une des pistes les plus propres serait d’utiliser deux modules **Hypex FusionAmp FA503**, un par enceinte.
 
-| Élément | Quantité | Rôle |
-|---|---:|---|
-| **Hypex FusionAmp FA503** | 2 | DSP + amplification 3 voies par enceinte |
-| Câble USB / interface de programmation Hypex | 1 | Configuration des modules |
-| Logiciel **Hypex Filter Design** | 1 | Filtres, égalisation, délais, presets, limiteurs |
+| Élément                                      | Quantité | Rôle                                             |
+| -------------------------------------------- | -------: | ------------------------------------------------ |
+| **Hypex FusionAmp FA503**                    |        2 | DSP + amplification 3 voies par enceinte         |
+| Câble USB / interface de programmation Hypex |        1 | Configuration des modules                        |
+| Logiciel **Hypex Filter Design**             |        1 | Filtres, égalisation, délais, presets, limiteurs |
 
 L’intérêt est évident : chaque enceinte devient autonome.
 
@@ -309,10 +309,10 @@ Sortie droite → enceinte droite active
 
 La question du **RCA ou XLR** se pose.
 
-| Liaison | Avantages | Limites |
-|---|---|---|
-| RCA | Simple, courant, moins cher | Plus sensible aux parasites |
-| XLR | Symétrique, robuste, plus propre sur longues distances | Demande une source compatible |
+| Liaison | Avantages                                              | Limites                       |
+| ------- | ------------------------------------------------------ | ----------------------------- |
+| RCA     | Simple, courant, moins cher                            | Plus sensible aux parasites   |
+| XLR     | Symétrique, robuste, plus propre sur longues distances | Demande une source compatible |
 
 Le XLR n’est pas obligatoire, mais il semble logique sur un projet d’enceintes actives ambitieuses, surtout si les câbles sont un peu longs ou passent près d’autres appareils.
 
@@ -340,10 +340,10 @@ Enceintes actives
 
 À prévoir éventuellement :
 
-| Élément | Rôle |
-|---|---|
-| Préampli phono MM | Pour cellule MM classique |
-| Préampli phono MC | Si cellule MC |
+| Élément                                | Rôle                                |
+| -------------------------------------- | ----------------------------------- |
+| Préampli phono MM                      | Pour cellule MM classique           |
+| Préampli phono MC                      | Si cellule MC                       |
 | Entrée ligne sur le préampli principal | Pour intégrer la platine au système |
 
 C’est un point à intégrer dès le départ, car il influence le choix de l’appareil central.
@@ -367,13 +367,13 @@ Avec un 15 pouces, on ne parle pas d’une petite enceinte discrète. Il faut ac
 
 Premières dimensions envisagées par enceinte :
 
-| Cote | Valeur approximative |
-|---|---:|
-| Hauteur | 1150 mm |
-| Largeur | 500 mm |
-| Profondeur | 560 mm |
-| Épaisseur panneaux | 24 mm |
-| Façade | Double épaisseur recommandée : 42 à 48 mm |
+| Cote               |                      Valeur approximative |
+| ------------------ | ----------------------------------------: |
+| Hauteur            |                                   1150 mm |
+| Largeur            |                                    500 mm |
+| Profondeur         |                                    560 mm |
+| Épaisseur panneaux |                                     24 mm |
+| Façade             | Double épaisseur recommandée : 42 à 48 mm |
 
 Ce sont des valeurs de départ, pas encore un plan définitif.
 
@@ -388,10 +388,10 @@ L’objectif serait d’obtenir :
 
 La question du matériau reste ouverte :
 
-| Matériau | Avantages | Limites |
-|---|---|---|
-| MDF 25 mm | Stable, facile à peindre, dense | Lourd, moins agréable aux vissages répétés |
-| CP bouleau 24 mm | Rigide, durable, solide, beau | Plus cher, demande une finition soignée |
+| Matériau         | Avantages                       | Limites                                    |
+| ---------------- | ------------------------------- | ------------------------------------------ |
+| MDF 25 mm        | Stable, facile à peindre, dense | Lourd, moins agréable aux vissages répétés |
+| CP bouleau 24 mm | Rigide, durable, solide, beau   | Plus cher, demande une finition soignée    |
 
 Mon intuition va plutôt vers le **contreplaqué bouleau 24 mm**, surtout pour un projet durable et démontable. Mais le MDF reste une option valable pour une finition peinte très propre.
 
@@ -401,12 +401,12 @@ Mon intuition va plutôt vers le **contreplaqué bouleau 24 mm**, surtout pour u
 
 Une première cible serait :
 
-| Zone | Volume cible par enceinte |
-|---|---:|
-| Chambre grave 15” bass-reflex | environ **114 L nets** |
-| Chambre 8” close | **8 à 12 L nets** |
-| Compartiment électronique | séparé, non compté dans le volume grave |
-| Chambre pavillon / compression | séparée, sans fuite vers le grave |
+| Zone                           |               Volume cible par enceinte |
+| ------------------------------ | --------------------------------------: |
+| Chambre grave 15” bass-reflex  |                  environ **114 L nets** |
+| Chambre 8” close               |                       **8 à 12 L nets** |
+| Compartiment électronique      | séparé, non compté dans le volume grave |
+| Chambre pavillon / compression |       séparée, sans fuite vers le grave |
 
 Le mot important ici est **net**.
 
@@ -430,14 +430,14 @@ Si le grave est en bass-reflex, l’évent devient un élément majeur du projet
 
 Première hypothèse par enceinte :
 
-| Élément | Valeur de départ |
-|---|---:|
-| Type | Évent en fente frontal |
-| Largeur | environ 452 mm |
-| Hauteur | environ 55 mm |
-| Surface | environ 248 cm² |
-| Longueur | 400 à 420 mm |
-| Accord cible | autour de 35 Hz |
+| Élément      |       Valeur de départ |
+| ------------ | ---------------------: |
+| Type         | Évent en fente frontal |
+| Largeur      |         environ 452 mm |
+| Hauteur      |          environ 55 mm |
+| Surface      |        environ 248 cm² |
+| Longueur     |           400 à 420 mm |
+| Accord cible |        autour de 35 Hz |
 
 Ce n’est pas un détail esthétique. L’évent doit être assez grand pour éviter les bruits d’écoulement, assez rigide pour ne pas vibrer, et correctement accordé.
 
@@ -470,13 +470,13 @@ Ventilation passive vers l’extérieur uniquement
 
 À prévoir :
 
-| Élément | Rôle |
-|---|---|
-| Ouïe basse | Entrée d’air frais |
-| Ouïe haute | Sortie d’air chaud |
-| Grilles | Protection des ouvertures |
-| Cloison étanche | Séparation avec le volume grave |
-| Joint autour du module | Étanchéité mécanique |
+| Élément                | Rôle                            |
+| ---------------------- | ------------------------------- |
+| Ouïe basse             | Entrée d’air frais              |
+| Ouïe haute             | Sortie d’air chaud              |
+| Grilles                | Protection des ouvertures       |
+| Cloison étanche        | Séparation avec le volume grave |
+| Joint autour du module | Étanchéité mécanique            |
 
 Question ouverte : faut-il une ventilation active ?
 
@@ -490,14 +490,14 @@ Une caisse bass-reflex doit être étanche partout, sauf au niveau de l’évent
 
 À prévoir :
 
-| Élément | Rôle |
-|---|---|
-| Joint mousse 15” | Étanchéité du grave |
-| Joint mousse 8” | Étanchéité du médium |
-| Joint pavillon | Étanchéité façade |
-| Joint module Hypex | Étanchéité arrière |
-| Mastic interne | Angles et assemblages |
-| Inserts filetés | Démontage propre des haut-parleurs |
+| Élément            | Rôle                               |
+| ------------------ | ---------------------------------- |
+| Joint mousse 15”   | Étanchéité du grave                |
+| Joint mousse 8”    | Étanchéité du médium               |
+| Joint pavillon     | Étanchéité façade                  |
+| Joint module Hypex | Étanchéité arrière                 |
+| Mastic interne     | Angles et assemblages              |
+| Inserts filetés    | Démontage propre des haut-parleurs |
 
 Règle de conception provisoire :
 
@@ -516,11 +516,11 @@ Même avec un DSP, il semble prudent d’ajouter une protection passive minimale
 
 Hypothèse :
 
-| Élément | Valeur envisagée |
-|---|---:|
-| Condensateur série non polarisé | 33 à 47 µF |
-| Tension | 100 V minimum, idéalement plus |
-| Quantité | 1 par enceinte |
+| Élément                         |               Valeur envisagée |
+| ------------------------------- | -----------------------------: |
+| Condensateur série non polarisé |                     33 à 47 µF |
+| Tension                         | 100 V minimum, idéalement plus |
+| Quantité                        |                 1 par enceinte |
 
 Ce condensateur ne sert pas à faire le filtre principal. Le filtrage serait fait dans le DSP.
 
@@ -540,26 +540,26 @@ C’est une petite sécurité qui semble logique sur un projet actif.
 
 Les valeurs ci-dessous ne sont pas des réglages définitifs. Ce sont des points de départ à tester.
 
-| Réglage | Hypothèse de départ |
-|---|---:|
-| Passe-haut 15” | 28–30 Hz |
-| Coupure 15” / 8” | 120 Hz LR24 ou LR48 |
-| Coupure 8” / compression | 1,6 kHz LR48 |
-| Gain 15” | 0 dB |
-| Gain 8” | environ -2 dB |
-| Gain compression | environ -10 à -13 dB |
-| Limiteur 15” | à calculer selon HP et ampli |
-| Limiteur 8” | à calculer selon HP et ampli |
-| Limiteur compression | à calculer prudemment |
+| Réglage                  |          Hypothèse de départ |
+| ------------------------ | ---------------------------: |
+| Passe-haut 15”           |                     28–30 Hz |
+| Coupure 15” / 8”         |          120 Hz LR24 ou LR48 |
+| Coupure 8” / compression |                 1,6 kHz LR48 |
+| Gain 15”                 |                         0 dB |
+| Gain 8”                  |                environ -2 dB |
+| Gain compression         |         environ -10 à -13 dB |
+| Limiteur 15”             | à calculer selon HP et ampli |
+| Limiteur 8”              | à calculer selon HP et ampli |
+| Limiteur compression     |        à calculer prudemment |
 
 Le DSP permettrait aussi de créer plusieurs profils :
 
-| Preset | Idée |
-|---|---|
-| Neutre | Réponse équilibrée |
-| Fun / urbain | Grave légèrement renforcé |
-| Nuit | Grave contenu, niveau plus doux |
-| Mesure | Voies isolées pour réglages |
+| Preset       | Idée                            |
+| ------------ | ------------------------------- |
+| Neutre       | Réponse équilibrée              |
+| Fun / urbain | Grave légèrement renforcé       |
+| Nuit         | Grave contenu, niveau plus doux |
+| Mesure       | Voies isolées pour réglages     |
 
 Mais tout cela reste théorique tant que l’enceinte n’est pas mesurée.
 
@@ -571,14 +571,14 @@ C’est un point qui ressort assez vite : sur une enceinte active 3 voies, il se
 
 À prévoir :
 
-| Élément | Rôle |
-|---|---|
-| Micro type UMIK-1 | Mesure acoustique |
-| Pied micro | Placement fiable |
-| REW | Logiciel de mesure |
-| Ordinateur | Mesure et réglage DSP |
-| Câble USB Hypex | Configuration des modules |
-| Multimètre | Contrôle câblage |
+| Élément           | Rôle                      |
+| ----------------- | ------------------------- |
+| Micro type UMIK-1 | Mesure acoustique         |
+| Pied micro        | Placement fiable          |
+| REW               | Logiciel de mesure        |
+| Ordinateur        | Mesure et réglage DSP     |
+| Câble USB Hypex   | Configuration des modules |
+| Multimètre        | Contrôle câblage          |
 
 Les mesures serviront à vérifier :
 
@@ -660,42 +660,42 @@ Pour ça, il faudra prévoir dès la conception :
 
 ### Audio principal
 
-| Élément | Quantité | Statut |
-|---|---:|---|
-| B&C 15TBX100 8Ω | 2 | Piste principale |
-| B&C 8PE21 8Ω | 2 | Piste principale |
-| B&C DE250 8Ω | 2 | Piste principale |
-| B&C ME45 ou équivalent | 2 | À confirmer |
-| Hypex FA503 | 2 | Piste principale |
-| Condensateurs 33–47 µF | 2 | Protection recommandée |
-| Source / préampli / streamer | 1 | À choisir |
-| Câbles RCA ou XLR | 1 paire | Selon source choisie |
+| Élément                      | Quantité | Statut                 |
+| ---------------------------- | -------: | ---------------------- |
+| B&C 15TBX100 8Ω              |        2 | Piste principale       |
+| B&C 8PE21 8Ω                 |        2 | Piste principale       |
+| B&C DE250 8Ω                 |        2 | Piste principale       |
+| B&C ME45 ou équivalent       |        2 | À confirmer            |
+| Hypex FA503                  |        2 | Piste principale       |
+| Condensateurs 33–47 µF       |        2 | Protection recommandée |
+| Source / préampli / streamer |        1 | À choisir              |
+| Câbles RCA ou XLR            |  1 paire | Selon source choisie   |
 
 ### Caisse et construction
 
-| Élément | Quantité approximative | Statut |
-|---|---:|---|
-| CP bouleau 24 mm ou MDF 25 mm | 2 à 3 panneaux | À trancher |
-| Façade doublée | 2 | Recommandé |
-| Renforts internes | plusieurs | Obligatoire |
-| Évent en fente | 1 par enceinte | À dimensionner |
-| Colle à bois | 1 à 2 bouteilles | Obligatoire |
-| Inserts filetés | assortiment | Recommandé |
-| Joints mousse | plusieurs mètres | Obligatoire |
-| Mastic interne | 1 cartouche | Recommandé |
-| Amortissant interne | 2 à 4 m² | À doser |
-| Grilles de ventilation | 4 | Si modules intégrés |
+| Élément                       | Quantité approximative | Statut              |
+| ----------------------------- | ---------------------: | ------------------- |
+| CP bouleau 24 mm ou MDF 25 mm |         2 à 3 panneaux | À trancher          |
+| Façade doublée                |                      2 | Recommandé          |
+| Renforts internes             |              plusieurs | Obligatoire         |
+| Évent en fente                |         1 par enceinte | À dimensionner      |
+| Colle à bois                  |       1 à 2 bouteilles | Obligatoire         |
+| Inserts filetés               |            assortiment | Recommandé          |
+| Joints mousse                 |       plusieurs mètres | Obligatoire         |
+| Mastic interne                |            1 cartouche | Recommandé          |
+| Amortissant interne           |               2 à 4 m² | À doser             |
+| Grilles de ventilation        |                      4 | Si modules intégrés |
 
 ### Mesure et réglage
 
-| Élément | Quantité | Statut |
-|---|---:|---|
-| Micro UMIK-1 ou équivalent | 1 | Fortement recommandé |
-| Pied micro | 1 | Recommandé |
-| REW | 1 | Gratuit / nécessaire |
-| PC | 1 | Nécessaire |
-| Multimètre | 1 | Nécessaire |
-| Câble USB Hypex | 1 | Nécessaire |
+| Élément                    | Quantité | Statut               |
+| -------------------------- | -------: | -------------------- |
+| Micro UMIK-1 ou équivalent |        1 | Fortement recommandé |
+| Pied micro                 |        1 | Recommandé           |
+| REW                        |        1 | Gratuit / nécessaire |
+| PC                         |        1 | Nécessaire           |
+| Multimètre                 |        1 | Nécessaire           |
+| Câble USB Hypex            |        1 | Nécessaire           |
 
 ---
 
