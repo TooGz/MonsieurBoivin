@@ -94,8 +94,8 @@
        <div class="home-hub__hero-shell">
        <div class="home-hub__hero-copy">
           <div class="home-hub__tag-row" aria-label="Univers du site">
-            <span>Atelier documente</span>
-            <span>Recettes testees</span>
+            <span>Atelier documenté</span>
+            <span>Recettes testées</span>
             <span>Guides utiles</span>
             <span>Albums photo</span>
           </div>
@@ -164,17 +164,17 @@
             {{ with $grenouille }}
               {{ $projectDescription := partial "functions/page-description.html" (dict "page" . "truncate" 150) | strings.TrimSpace }}
               <h2>{{ .Title }}</h2>
-              <p>{{ $projectDescription | default "Le chantier central du moment, documente proprement entre bois, capteurs, ecran et firmware." }}</p>
+              <p>{{ $projectDescription | default "Le chantier central du moment, documenté proprement entre bois, capteurs, écran et firmware." }}</p>
             {{ else }}
               <h2>Projet principal</h2>
-              <p>Le chantier actif reste centralise ici avec les choix de materiel, les tests et les etapes qui comptent vraiment.</p>
+              <p>Le chantier actif reste centralisé ici avec les choix de matériel, les tests et les étapes qui comptent vraiment.</p>
             {{ end }}
 
             <ul class="home-hub__bullet-list">
               {{ with $latestBuild }}
-                <li>Derniere etape : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-              {{ end }}
-              <li>{{ $projectDocCount }} page{{ if ne $projectDocCount 1 }}s{{ end }} de doc deja en ligne autour du projet.</li>
+              <li>Dernière étape : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+            {{ end }}
+            <li>{{ $projectDocCount }} page{{ if ne $projectDocCount 1 }}s{{ end }} de doc déjà en ligne autour du projet.</li>
               {{ with index $recentPages 0 }}
                 <li>Dernier ajout global : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
               {{ end }}
@@ -202,27 +202,23 @@
       <div class="home-hub__section-heading">
         <div>
           <p class="home-hub__eyebrow">Tableau de bord</p>
-          <h2>Le coeur du site, sans detour</h2>
-        </div>
-      </div>
-
-      <div class="home-hub__dashboard">
+          <h2>Le cœur du site, sans détour</h2>
         <article class="home-hub__spotlight">
           <p class="home-hub__eyebrow">Chantier central</p>
           {{ with $grenouille }}
             {{ $projectDescription := partial "functions/page-description.html" (dict "page" . "truncate" 150) | strings.TrimSpace }}
             <h3>{{ .Title }}</h3>
-            <p>{{ $projectDescription | default "Un gros projet atelier tenu au propre, avec build log, doc et partie hardware." }}</p>
+            <p>{{ $projectDescription | default "Un gros projet atelier tenu au propre, avec carnet de construction, doc et partie hardware." }}</p>
           {{ else }}
             <h3>Atelier en cours</h3>
-            <p>Le chantier principal reste centralisé côté atelier avec les étapes importantes et les choix de matos.</p>
+            <p>Le chantier principal reste centralisé côté atelier avec les étapes importantes et les choix de matériel.</p>
           {{ end }}
 
           <ul class="home-hub__bullet-list">
             {{ with $latestBuild }}
               <li>Dernière étape : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
             {{ end }}
-            <li>{{ len $buildPages }} entrées chronologiques déjà publiées dans le build log.</li>
+            <li>{{ len $buildPages }} entrées chronologiques déjà publiées dans le carnet de construction.</li>
             <li>Les ressources longues restent séparées des notes rapides pour retrouver un truc sans perdre du temps.</li>
           </ul>
 
@@ -248,7 +244,7 @@
           <article class="home-hub__metric">
             <span>Photos</span>
             <strong>{{ len $photoPages }}</strong>
-            <p>albums, concerts, voyages et series</p>
+            <p>albums, concerts, voyages et séries</p>
           </article>
           <article class="home-hub__metric">
             <span>Dernière mise à jour</span>

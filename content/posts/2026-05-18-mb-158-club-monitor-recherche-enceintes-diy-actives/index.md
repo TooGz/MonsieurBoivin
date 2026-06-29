@@ -18,7 +18,7 @@ tags:
   - DSP
   - bass-reflex
   - fabrication bois
-image: "/images/atelier/mb-158-club-monitor/cover.jpg"
+image: "featured.png"
 featured: false
 toc: true
 ---
