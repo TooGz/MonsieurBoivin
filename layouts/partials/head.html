@@ -108,15 +108,13 @@
     rel="stylesheet"
     href="{{ $bundleCSS.RelPermalink }}"
     integrity="{{ $bundleCSS.Data.Integrity }}">
-  {{ if not .IsHome }}
-    {{ with resources.Get "css/site-v2.css" }}
-      {{ $siteV2CSS := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
-      <link
-        type="text/css"
-        rel="stylesheet"
-        href="{{ $siteV2CSS.RelPermalink }}"
-        integrity="{{ $siteV2CSS.Data.Integrity }}">
-    {{ end }}
+  {{ with resources.Get "css/site-v2.css" }}
+    {{ $siteV2CSS := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{{ $siteV2CSS.RelPermalink }}"
+      integrity="{{ $siteV2CSS.Data.Integrity }}">
   {{ end }}
   {{ if .IsHome }}
     {{ with resources.Get "css/home.css" }}
@@ -152,7 +150,7 @@
     <script src="{{ $jsA11y.RelPermalink }}" integrity="{{ $jsA11y.Data.Integrity }}"></script>
   {{ end }}
 
-  {{ if and (not .IsHome) (.Site.Params.enableSearch | default false) }}
+  {{ if .Site.Params.enableSearch | default false }}
     {{ $jsFuse := resources.Get "lib/fuse/fuse.min.js" }}
     {{ $jsSearch := resources.Get "js/search.js" }}
     {{ $assets.Add "js" (slice $jsFuse $jsSearch) }}
@@ -165,10 +163,8 @@
     {{ $jsRTL := resources.Get "js/rtl.js" }}
     {{ $assets.Add "js" (slice $jsRTL) }}
   {{ end }}
-  {{ if not .IsHome }}
-    {{ $jsMobileMenu := resources.Get "js/mobilemenu.js" }}
-    {{ $assets.Add "js" (slice $jsMobileMenu) }}
-  {{ end }}
+  {{ $jsMobileMenu := resources.Get "js/mobilemenu.js" }}
+  {{ $assets.Add "js" (slice $jsMobileMenu) }}
   {{ if $shouldLoadLikesButton }}
     {{ $buttonLikes := resources.Get "js/button-likes.js" }}
     {{ $assets.Add "js" (slice $buttonLikes) }}

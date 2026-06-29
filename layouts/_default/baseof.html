@@ -32,13 +32,11 @@
       </a>
     </div>
 
-    {{ if not .IsHome }}
-      {{ $header := print "header/" site.Params.header.layout ".html" }}
-      {{ if templates.Exists (printf "partials/%s" $header) }}
-        {{ partial $header . }}
-      {{ else }}
-        {{ partial "header/basic.html" . }}
-      {{ end }}
+    {{ $header := print "header/" site.Params.header.layout ".html" }}
+    {{ if templates.Exists (printf "partials/%s" $header) }}
+      {{ partial $header . }}
+    {{ else }}
+      {{ partial "header/basic.html" . }}
     {{ end }}
 
     <div class="relative flex flex-col grow">
@@ -50,7 +48,7 @@
       </main>
 
       {{- partial "footer.html" . -}}
-      {{ if and (not .IsHome) (site.Params.enableSearch | default false) }}
+      {{ if site.Params.enableSearch | default false }}
         {{- partial "search.html" . -}}
       {{ end }}
     </div>

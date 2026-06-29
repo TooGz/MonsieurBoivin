@@ -78,61 +78,6 @@
 
 <div class="home-hub" data-home-hub>
   <header class="home-hub__page-header" aria-label="En-tête de la page d'accueil">
-    <nav class="home-hub__nav" data-sticky-shell aria-label="Navigation principale">
-      <a class="home-hub__brand" href="{{ "/" | relLangURL }}">
-        {{ with $authorImage }}
-          <img
-            src="{{ .RelPermalink }}"
-            alt="Portrait de {{ $authorName }}"
-            width="{{ .Width }}"
-            height="{{ .Height }}"
-            fetchpriority="high"
-            decoding="async">
-        {{ end }}
-        <span>
-          <strong>{{ $authorName }}</strong>
-          <small>Atelier, cuisine, notes</small>
-        </span>
-      </a>
-
-      <div class="home-hub__nav-links" aria-label="Liens rapides">
-        <a href="#maintenant">Projet</a>
-        <a href="#articles">Articles</a>
-        <a href="{{ "/atelier/" | relLangURL }}">Atelier</a>
-        <a href="{{ "/recettes/" | relLangURL }}">Cuisine</a>
-        <a href="{{ "/photos/" | relLangURL }}">Photos</a>
-        <!-- <a href="#contact">Contact</a> -->
-      </div>
-
-      <div class="home-hub__nav-actions">
-        <button class="home-hub__theme-toggle" type="button" data-theme-toggle aria-pressed="false">
-          <span class="home-hub__theme-icon home-hub__theme-icon--moon" aria-hidden="true">{{ partial "icon.html" "moon" }}</span>
-          <span class="home-hub__theme-icon home-hub__theme-icon--sun" aria-hidden="true">{{ partial "icon.html" "sun" }}</span>
-          <span data-theme-label>Mode sombre</span>
-        </button>
-
-        <details class="home-hub__nav-disclosure" data-nav-disclosure>
-          <summary aria-label="Ouvrir le menu mobile">
-            <span>{{ partial "icon.html" "bars" }}</span>
-            <span>Menu</span>
-          </summary>
-          <div class="home-hub__nav-panel">
-            <a href="#maintenant">Projet</a>
-            <a href="#articles">Articles</a>
-            <a href="{{ "/atelier/" | relLangURL }}">Atelier</a>
-            <a href="{{ "/recettes/" | relLangURL }}">Cuisine</a>
-            <a href="{{ "/photos/" | relLangURL }}">Photos</a>
-            <!-- <a href="#contact">Contact</a> -->
-            <button class="home-hub__theme-toggle home-hub__theme-toggle--panel" type="button" data-theme-toggle aria-pressed="false">
-              <span class="home-hub__theme-icon home-hub__theme-icon--moon" aria-hidden="true">{{ partial "icon.html" "moon" }}</span>
-              <span class="home-hub__theme-icon home-hub__theme-icon--sun" aria-hidden="true">{{ partial "icon.html" "sun" }}</span>
-              <span data-theme-label>Mode sombre</span>
-            </button>
-          </div>
-        </details>
-      </div>
-    </nav>
-
     <section class="home-hub__hero" aria-labelledby="home-hero-title">
       {{ with $heroImage }}
         <div class="home-hub__hero-backdrop" aria-hidden="true">
@@ -258,7 +203,6 @@
         <div>
           <p class="home-hub__eyebrow">Tableau de bord</p>
           <h2>Le coeur du site, sans detour</h2>
-          <p>Le chantier actif, les gros volumes utiles et les reperes qui aident a choisir tout de suite la bonne porte d’entree.</p>
         </div>
       </div>
 
@@ -321,8 +265,7 @@
       <div class="home-hub__section-heading">
         <div>
           <p class="home-hub__eyebrow">Fraichement publie</p>
-          <h2>Le fil court des derniers ajouts</h2>
-          <p>Une vue chronologique pour voir en quelques secondes si ca parle atelier, cuisine, photo ou bidouille.</p>
+          <h2>Derniers ajouts</h2>
         </div>
       </div>
 
@@ -392,8 +335,7 @@
       <div class="home-hub__section-heading">
         <div>
           <p class="home-hub__eyebrow">Portes d’entrée</p>
-          <h2>Quatre façons d’entrer sans tourner en rond</h2>
-          <p>Atelier pour les gros chantiers, cuisine pour le concret, photos pour les series et recents si tu veux juste sentir le rythme.</p>
+          <h2>Les quatres univers de mon site</h2>
         </div>
       </div>
 

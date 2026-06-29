@@ -42,6 +42,23 @@
   }
 
   body.site-shell--home {
+    --site-v2-header-offset: 5.8rem;
+    --site-v2-bg: var(--home-bg);
+    --site-v2-ink: var(--home-ink);
+    --site-v2-muted: var(--home-muted);
+    --site-v2-subtle: var(--home-subtle);
+    --site-v2-border: var(--home-border);
+    --site-v2-panel: var(--home-panel);
+    --site-v2-panel-strong: var(--home-panel-strong);
+    --site-v2-panel-dark: var(--home-panel-dark);
+    --site-v2-accent: var(--home-accent);
+    --site-v2-accent-strong: var(--home-accent-strong);
+    --site-v2-accent-soft: var(--home-accent-soft);
+    --site-v2-shadow: var(--home-shadow);
+    --site-v2-shadow-strong: var(--home-shadow-strong);
+    --site-v2-radius: var(--home-radius);
+    --site-v2-radius-lg: var(--home-radius-lg);
+    --site-v2-max: var(--home-max);
     max-width: none;
     padding: 0;
     margin: 0;
