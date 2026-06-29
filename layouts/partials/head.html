@@ -7,6 +7,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="theme-color" content="#0f172a">
 
+  <!-- Performance optimization hints -->
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//www.google-analytics.com">
+
   {{ partial "seo.html" . }}
 
   {{ if .IsHome }}
@@ -104,6 +108,11 @@
   {{ end }}
   {{ $bundleCSS := $assets.Get "css" | resources.Concat $bundleCSSPath | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
   <link
+    rel="preload"
+    as="style"
+    href="{{ $bundleCSS.RelPermalink }}"
+    integrity="{{ $bundleCSS.Data.Integrity }}">
+  <link
     type="text/css"
     rel="stylesheet"
     href="{{ $bundleCSS.RelPermalink }}"
@@ -119,6 +128,11 @@
   {{ if .IsHome }}
     {{ with resources.Get "css/home.css" }}
       {{ $homeCSS := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+      <link
+        rel="preload"
+        as="style"
+        href="{{ $homeCSS.RelPermalink }}"
+        integrity="{{ $homeCSS.Data.Integrity }}">
       <link
         type="text/css"
         rel="stylesheet"

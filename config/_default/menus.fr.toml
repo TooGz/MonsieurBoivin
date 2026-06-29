@@ -25,6 +25,11 @@
   pageRef = "atelier"
   weight = 10
 
+[[main]]
+  name = "Photos"
+  pageRef = "photos"
+  weight = 50
+
 # [[main]]
 #   identifier = "instagram"
 #   pre = "instagram"
@@ -43,10 +48,30 @@
 # The footer menu is displayed at the bottom of the page, just before
 # the copyright notice. Configure as per the main menu above.
 
- # [[footer]]
- #   name = "Tags"
- #   pageRef = "tags"
- #   weight = 10
+[[footer]]
+  name = "Articles"
+  pageRef = "posts"
+  weight = 10
+
+[[footer]]
+  name = "Photos"
+  pageRef = "photos"
+  weight = 20
+
+[[footer]]
+  name = "Recettes"
+  pageRef = "recettes"
+  weight = 30
+
+[[footer]]
+  name = "L'Atelier"
+  pageRef = "atelier"
+  weight = 40
+
+[[footer]]
+  name = "Tags"
+  pageRef = "tags"
+  weight = 50
 
  # [[footer]]
  #   name = "Authors"

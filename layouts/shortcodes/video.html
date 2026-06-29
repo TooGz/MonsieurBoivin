@@ -1,36 +1,42 @@
-{{/* Shortcode vidéo avec accessibilité
-     Usage :
-       {{< video src="medias/teaser.mp4" poster="/img/poster.jpg" title="Description de la vidéo" >}}
-       {{< video src="medias/teaser.webm" autoplay="true" >}}
-*/}}
+{{/* Shortcode vidéo avec accessibilité Usage : {{< video src="medias/teaser.mp4"
+poster="/img/poster.jpg" title="Description de la vidéo" >}} {{< video src="medias/teaser.webm"
+autoplay="true" >}} */}} {{ $src := .Get "src" }} {{ $poster := .Get "poster" }} {{ $title := .Get
+"title" }} {{ $autoplay := eq (.Get "autoplay") "true" }} {{ $mimeType := "" }} {{ $ext := path.Ext
+$src | strings.TrimPrefix "." }} {{ if eq $ext "mp4" }} {{ $mimeType = "video/mp4" }} {{ else if eq
+$ext "webm" }} {{ $mimeType = "video/webm" }} {{ else if eq $ext "ogv" }} {{ $mimeType = "video/ogg"
+}} {{ else }} {{ $mimeType = printf "video/%s" $ext }} {{ end }}
 
-{{ $src := .Get "src" }}
-{{ $poster := .Get "poster" }}
-{{ $title := .Get "title" }}
-{{ $autoplay := eq (.Get "autoplay") "true" }}
-
-{{ $mimeType := "" }}
-{{ $ext := path.Ext $src | strings.TrimPrefix "." }}
-{{ if eq $ext "mp4" }}
-  {{ $mimeType = "video/mp4" }}
-{{ else if eq $ext "webm" }}
-  {{ $mimeType = "video/webm" }}
-{{ else if eq $ext "ogv" }}
-  {{ $mimeType = "video/ogg" }}
-{{ else }}
-  {{ $mimeType = printf "video/%s" $ext }}
-{{ end }}
-
-<video 
+<video
   controls
-  {{ if $autoplay }}autoplay{{ end }}
-  loop 
-  muted 
-  playsinline 
+  {{
+  if
+  $autoplay
+  }}autoplay{{
+  end
+  }}
+  loop
+  muted
+  playsinline
   preload="auto"
-  {{ if $poster }}poster="{{ $poster }}"{{ end }}
-  {{ if $title }}aria-label="{{ $title }}" title="{{ $title }}"{{ end }}
-  style="width:100%;height:auto;display:block;border-radius:12px;object-fit:cover;">
-  <source src="{{ $src }}" type="{{ $mimeType }}">
-  <p>Votre navigateur ne supporte pas la vidéo HTML5. <a href="{{ $src }}">Télécharger la vidéo</a></p>
+  {{
+  if
+  $poster
+  }}poster="{{ $poster }}"
+  {{
+  end
+  }}
+  {{
+  if
+  $title
+  }}aria-label="{{ $title }}"
+  title="{{ $title }}"
+  {{
+  end
+  }}
+  style="width: 100%; height: auto; display: block; border-radius: 12px; object-fit: cover"
+>
+  <source src="{{ $src }}" type="{{ $mimeType }}" />
+  <p>
+    Votre navigateur ne supporte pas la vidéo HTML5. <a href="{{ $src }}">Télécharger la vidéo</a>
+  </p>
 </video>
