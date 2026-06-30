@@ -153,7 +153,7 @@
             </li>
             <li>
               <strong>{{ len $buildPages }}</strong>
-              <span>entrees build log</span>
+              <span>entrées build log</span>
             </li>
           </ul>
         </div>
@@ -203,64 +203,66 @@
         <div>
           <p class="home-hub__eyebrow">Tableau de bord</p>
           <h2>Le cœur du site, sans détour</h2>
-        <article class="home-hub__spotlight">
-          <p class="home-hub__eyebrow">Chantier central</p>
-          {{ with $grenouille }}
-            {{ $projectDescription := partial "functions/page-description.html" (dict "page" . "truncate" 150) | strings.TrimSpace }}
-            <h3>{{ .Title }}</h3>
-            <p>{{ $projectDescription | default "Un gros projet atelier tenu au propre, avec carnet de construction, doc et partie hardware." }}</p>
-          {{ else }}
-            <h3>Atelier en cours</h3>
-            <p>Le chantier principal reste centralisé côté atelier avec les étapes importantes et les choix de matériel.</p>
-          {{ end }}
-
-          <ul class="home-hub__bullet-list">
-            {{ with $latestBuild }}
-              <li>Dernière étape : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-            {{ end }}
-            <li>{{ len $buildPages }} entrées chronologiques déjà publiées dans le carnet de construction.</li>
-            <li>Les ressources longues restent séparées des notes rapides pour retrouver un truc sans perdre du temps.</li>
-          </ul>
-
-          <div class="home-hub__inline-actions">
-            <a class="home-hub__button home-hub__button--primary" href="{{ $projectLink }}">Voir le projet</a>
-            {{ with $grenouilleBuild }}
-              <a class="home-hub__button" href="{{ .RelPermalink }}">Ouvrir le journal</a>
-            {{ end }}
-          </div>
-        </article>
-
-        <div class="home-hub__metric-grid" aria-label="Statistiques du site">
-          <article class="home-hub__metric">
-            <span>Articles</span>
-            <strong>{{ len $posts }}</strong>
-            <p>guides, recherches et billets techniques</p>
-          </article>
-          <article class="home-hub__metric">
-            <span>Recettes</span>
-            <strong>{{ len $recipes }}</strong>
-            <p>des fiches que j’ai envie de refaire</p>
-          </article>
-          <article class="home-hub__metric">
-            <span>Photos</span>
-            <strong>{{ len $photoPages }}</strong>
-            <p>albums, concerts, voyages et séries</p>
-          </article>
-          <article class="home-hub__metric">
-            <span>Dernière mise à jour</span>
-            {{ with index $recentPages 0 }}
-              <strong class="home-hub__metric-copy">{{ .Date | time.Format $dateFormat }}</strong>
-              <p><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
-            {{ end }}
-          </article>
         </div>
+      </div>
+
+      <article class="home-hub__spotlight">
+        <p class="home-hub__eyebrow">Chantier central</p>
+        {{ with $grenouille }}
+          {{ $projectDescription := partial "functions/page-description.html" (dict "page" . "truncate" 150) | strings.TrimSpace }}
+          <h3>{{ .Title }}</h3>
+          <p>{{ $projectDescription | default "Un gros projet atelier tenu au propre, avec carnet de construction, doc et partie hardware." }}</p>
+        {{ else }}
+          <h3>Atelier en cours</h3>
+          <p>Le chantier principal reste centralisé côté atelier avec les étapes importantes et les choix de matériel.</p>
+        {{ end }}
+
+        <ul class="home-hub__bullet-list">
+          {{ with $latestBuild }}
+            <li>Dernière étape : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          {{ end }}
+          <li>{{ len $buildPages }} entrées chronologiques déjà publiées dans le carnet de construction.</li>
+          <li>Les ressources longues restent séparées des notes rapides pour retrouver un truc sans perdre du temps.</li>
+        </ul>
+
+        <div class="home-hub__inline-actions">
+          <a class="home-hub__button home-hub__button--primary" href="{{ $projectLink }}">Voir le projet</a>
+          {{ with $grenouilleBuild }}
+            <a class="home-hub__button" href="{{ .RelPermalink }}">Ouvrir le journal</a>
+          {{ end }}
+        </div>
+      </article>
+
+      <div class="home-hub__metric-grid" aria-label="Statistiques du site">
+        <article class="home-hub__metric">
+          <span>Articles</span>
+          <strong>{{ len $posts }}</strong>
+          <p>guides, recherches et billets techniques</p>
+        </article>
+        <article class="home-hub__metric">
+          <span>Recettes</span>
+          <strong>{{ len $recipes }}</strong>
+          <p>des fiches que j’ai envie de refaire</p>
+        </article>
+        <article class="home-hub__metric">
+          <span>Photos</span>
+          <strong>{{ len $photoPages }}</strong>
+          <p>albums, concerts, voyages et séries</p>
+        </article>
+        <article class="home-hub__metric">
+          <span>Dernière mise à jour</span>
+          {{ with index $recentPages 0 }}
+            <strong class="home-hub__metric-copy">{{ .Date | time.Format $dateFormat }}</strong>
+            <p><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+          {{ end }}
+        </article>
       </div>
     </section>
 
     <section class="home-hub__section" id="timeline">
       <div class="home-hub__section-heading">
         <div>
-          <p class="home-hub__eyebrow">Fraichement publie</p>
+          <p class="home-hub__eyebrow">Fraîchement publié</p>
           <h2>Derniers ajouts</h2>
         </div>
       </div>
@@ -331,7 +333,7 @@
       <div class="home-hub__section-heading">
         <div>
           <p class="home-hub__eyebrow">Portes d’entrée</p>
-          <h2>Les quatres univers de mon site</h2>
+          <h2>Les quatre univers de mon site</h2>
         </div>
       </div>
 
@@ -391,7 +393,7 @@
         </section>
         <section class="home-hub__stack">
           <div class="home-hub__stack-head">
-            <h3>Recents</h3>
+            <h3>Récents</h3>
             <a href="{{ "/" | relLangURL }}#timeline">Voir le fil</a>
           </div>
           <div class="home-hub__stack-grid">
