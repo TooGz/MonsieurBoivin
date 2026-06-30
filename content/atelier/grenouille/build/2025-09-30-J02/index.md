@@ -58,17 +58,17 @@ Idem pour la longueur des tenons.
 ## Étapes
 
 ### 1) Traçage
-{{< video src="./medias/trusquin.mp4" >}}
+{{< video src="./medias/trusquin.mp4" title="Traçage des pièces au trusquin" >}}
 
 Je reporte les mesure vu au dessus avec le **trusquin**. Je me base toujours sur la **même face** pour mes tracages, pour etre sur des **alignements**. 
 
 ### 2) Mortaises
-{{< video src="./medias/mortaise.mp4" >}}
+{{< video src="./medias/mortaise.mp4" title="Usinage des mortaises à la défonceuse" >}}
 
 Réalisées à la **défonceuse** avec le guide parallèle, **plusieurs passes** jusqu’à la profondeur visée.  
 
 ### 3) Nettoyage au **ciseau**  
-{{< video src="./medias/mortaise-ciseau.mp4" >}}
+{{< video src="./medias/mortaise-ciseau.mp4" title="Nettoyage des mortaises au ciseau à bois" >}}
 
 Je finalise les mortaise au ciseau à bois.
 

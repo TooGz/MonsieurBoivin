@@ -18,7 +18,7 @@ tags:
   - MB-158
 ---
 
-# Simulation WinISD du 15 pouces B&C 15TBX100 pour le projet MB-158 Club Monitor
+## Contexte de la simulation
 
 Dans le cadre de mon projet d’enceinte active **MB-158 Club Monitor**, j’ai commencé par valider la partie grave à l’aide de **WinISD**.
 
@@ -155,7 +155,7 @@ Filtre passe-haut : aucun
 
 ### Résultat SPL
 
-![](../img/B&C15BTX100_500W_SPL.png)
+![Simulation WinISD du niveau SPL du B&C 15TBX100 à 500 W sans filtre](../img/B&C15BTX100_500W_SPL.png)
 
 La réponse simulée montre un niveau important, situé autour de :
 
@@ -169,7 +169,7 @@ La réponse monte fortement jusqu’à la zone d’accord, puis reste relativeme
 
 ### Excursion du haut-parleur
 
-![](../img/B&C15BTX100_500W_CONE_EXCURSION.png)
+![Simulation WinISD de l'excursion du B&C 15TBX100 à 500 W sans filtre](../img/B&C15BTX100_500W_CONE_EXCURSION.png)
 
 Sans filtre passe-haut, le résultat montre un problème classique en bass-reflex : sous la fréquence d’accord, l’excursion augmente très fortement.
 
@@ -191,7 +191,7 @@ Ce comportement est normal : sous l’accord de la caisse, le haut-parleur n’e
 
 ### Vitesse d’air dans l’évent
 
-![](../img/B&C15BTX100_500W_AIR_VELOCITY.png)
+![Simulation WinISD de la vitesse d'air dans l'évent à 500 W sans filtre](../img/B&C15BTX100_500W_AIR_VELOCITY.png)
 
 À 500 W sans filtre passe-haut, la vitesse d’air maximale dans l’évent atteint environ :
 
@@ -233,7 +233,7 @@ Avec le filtre activé, le comportement devient beaucoup plus sain.
 
 ### Excursion avec filtre
 
-![](../img/B&C15BTX100_500W_CONE_EXCURSION_FILTERED.png)
+![Simulation WinISD de l'excursion du B&C 15TBX100 à 500 W avec filtre passe-haut](../img/B&C15BTX100_500W_CONE_EXCURSION_FILTERED.png)
 
 À 500 W, l’excursion reste sous la limite de 9 mm.
 
@@ -250,7 +250,7 @@ Ce point valide l’utilisation du 15TBX100 dans cette caisse à forte puissance
 
 ### Vitesse d’air dans l’évent avec filtre
 
-![](../img/B&C15BTX100_500W_AIR_VELOCITY_FILTERED.png)
+![Simulation WinISD de la vitesse d'air dans l'évent à 500 W avec filtre passe-haut](../img/B&C15BTX100_500W_AIR_VELOCITY_FILTERED.png)
 
 Avec le passe-haut actif, la vitesse d’air dans l’évent baisse légèrement.
 
@@ -266,7 +266,7 @@ L’évent de **450 x 55 mm** est donc validé pour cette simulation.
 
 ### SPL avec filtre
 
-![](../img/B&C15BTX100_500W_SPL_FILTERED.png)
+![Simulation WinISD du niveau SPL du B&C 15TBX100 à 500 W avec filtre passe-haut](../img/B&C15BTX100_500W_SPL_FILTERED.png)
 
 Le filtre passe-haut réduit logiquement le niveau sous 30 Hz, mais il conserve toute l’énergie utile au-dessus de 35/40 Hz.
 

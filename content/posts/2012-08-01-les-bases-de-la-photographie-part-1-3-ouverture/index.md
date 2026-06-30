@@ -71,7 +71,7 @@ En résumé :
 > Plus tu ouvres, plus tu isoles ton sujet.  
 > Plus tu fermes, plus tu rends l’image nette dans son ensemble.
 
-![](./img/example-ouverture.jpg)
+![Comparaison de profondeur de champ selon l'ouverture du diaphragme](./img/example-ouverture.jpg)
 
  Pour aller plus loin, découvre mon article dédié au [**bokeh et à la profondeur de champ**][bokeh] : tu comprendras comment obtenir un flou d’arrière-plan maîtrisé et artistique.
 

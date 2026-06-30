@@ -24,7 +24,7 @@ Après avoir posé les bases dans l’[introduction du projet][introduction], on
 la **vue d’ensemble** de la *Grenouille 3.0*.
 
 ---
-![](./grenouille-eclate-2.png "Plan 3D de la première version")
+![Vue éclatée SketchUp de la Grenouille 3.0 en bois massif](./grenouille-eclate-2.png "Plan 3D de la première version")
 
 ## 2.1. Dimensions globales et ergonomie
 
@@ -80,7 +80,7 @@ En façade, 4 étages de rampes récupèrent tous les palets tombés dans le pla
 Avant de sortir la scie, j’ai modélisé tout le projet sur **SketchUp**.  
 La vue éclatée permet de comprendre la logique générale : comment chaque pièce s’emboîte.
 
-![](./grenouille-eclate-1.png)
+![Vue éclatée des pièces principales du jeu Grenouille 3.0](./grenouille-eclate-1.png)
 
 ### Vue éclatée
 - Numérotation des pièces principales  

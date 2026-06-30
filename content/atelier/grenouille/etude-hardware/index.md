@@ -44,7 +44,7 @@ Parce que un MCP3008 peut gérer 8 entrées analogiques et ayant 14 capteurs, il
 
 ## Le son : DFPlayer Mini
 
-![](dfplayermini.webp)
+![Module audio DFPlayer Mini utilisé pour les bruitages de la Grenouille 3.0](dfplayermini.webp)
 
 Pour le son : bruitages, jingles, intro…, j'ai choisi un DFPlayer Mini.
 
@@ -69,7 +69,7 @@ Entre les 4 panneaux HUB75, les animations, le son, les MCP3008, les LEDs, les e
 
 ### ESP32‑S3 DevKitC‑1 N16R8
 
-![](esp32-s3.jpg)
+![Carte ESP32-S3 DevKitC-1 N16R8 retenue pour piloter la Grenouille 3.0](esp32-s3.jpg)
 
 - **16 Mo de flash** → stocker sprites, polices, assets  
 - **8 Mo de PSRAM** → buffers HUB75 + assets lourds  

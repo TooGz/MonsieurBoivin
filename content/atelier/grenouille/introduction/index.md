@@ -19,7 +19,7 @@ Cette **introduction** pose les **bases du projet**, les **objectifs techniques*
 
 ## 1.1. Genèse du projet
 
-![](grenouille.jpg)
+![Jeu de la grenouille traditionnel avec meuble en bois et grenouille en fonte](grenouille.jpg)
 
 Le **[jeu de la grenouille][grenouille]**, c’est un de ces objets qu’on croise souvent sans trop y penser dans une guinguette, un vieux café ou une fête de village.  
 

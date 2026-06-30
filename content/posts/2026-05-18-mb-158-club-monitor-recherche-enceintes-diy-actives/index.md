@@ -23,7 +23,7 @@ featured: false
 toc: true
 ---
 
-# MB-158 Club Monitor : carnet de recherche pour une paire d’enceintes DIY actives
+## Point de départ
 
 Je pose ici mes recherches, mes hypothèses et mes premières pistes autour d’un projet un peu déraisonnable : concevoir une paire d’enceintes DIY actives, puissantes, modernes, avec au moins un haut-parleur de 12 pouces — et probablement plutôt un 15 pouces.
 

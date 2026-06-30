@@ -38,7 +38,7 @@ Elle agit directement sur **le rendu du mouvement** — qu’il s’agisse du su
 
 ## Comprendre les effets
 
-![](./img/vitesse-obturation.png)
+![Schéma des effets de la vitesse d'obturation sur le mouvement](./img/vitesse-obturation.png)
 
 ### Vitesse rapide
 

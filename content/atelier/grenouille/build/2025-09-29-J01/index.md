@@ -10,7 +10,7 @@ series: ["Journal Grenouille"]
 series_order: 1
 ---
 
-{{< video src="./medias/teaser.mp4" >}}
+{{< video src="./medias/teaser.mp4" title="Découpe du bois pour la Grenouille 3.0" >}}
 
 
 
