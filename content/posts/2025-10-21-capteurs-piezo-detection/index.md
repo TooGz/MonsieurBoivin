@@ -10,8 +10,8 @@ showTableOfContents: true
 draft: false
 
 seo:
-  meta_title: "Capteur piezo sur ESP32 : detection de choc, schema et filtrage"
-  meta_description: "Comment detecter un impact avec un capteur piezo, un MCP3008 et un ESP32 : principe, schema de cablage, composants et seuils."
+  meta_title: "Capteur piézo sur ESP32 : détection de choc, schéma et filtrage"
+  meta_description: "Comment détecter un impact avec un capteur piézo, un MCP3008 et un ESP32 : principe, schéma de câblage, composants et seuils."
 ---
 
 ## Contexte du projet

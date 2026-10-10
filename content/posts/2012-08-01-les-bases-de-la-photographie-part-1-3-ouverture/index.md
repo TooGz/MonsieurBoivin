@@ -1,11 +1,10 @@
 ---
 title: "Les bases de la photographie (1/3) : l’ouverture"
 date: 2012-08-01
-updated: 2025-10-10
+lastmod: 2025-10-10
 authors: ["monsieur-boivin"]
 slug: "bases-photo-ouverture"
-categories:
-  - Photo
+categories: ["Photographie"]
 tags:
   - ouverture
   - exposition

@@ -3,16 +3,7 @@ title: "Grenouille 3.0 – Vue d’ensemble"
 description: "Vue d’ensemble du projet Grenouille 3.0 : proportions, ergonomie, structure bois, électronique et conception globale du jeu de la grenouille."
 date: 2025-10-07
 authors: ["toogz"]
-tags: [
-  "Grenouille 3.0",
-  "Jeu de la grenouille",
-  "Fabrication artisanale",
-  "Design bois",
-  "Électronique",
-  "ESP32",
-  "LED adressables",
-  "Plans 3D"
-]
+tags: ["Jeu de la grenouille", "Artisanat", "Menuiserie", "ESP32", "LED adressables", "Conception 3D"]
 categories: ["Atelier de Michel"]
 image: "featured.png"
 image_alt: "Vue 3D du jeu de la grenouille artisanale avec grenouille en fonte et plateau en bois massif"

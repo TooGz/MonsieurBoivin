@@ -5,19 +5,10 @@ date: 2026-05-18
 lastmod: 2026-05-18
 draft: false
 slug: "mb-158-club-monitor-recherche-enceintes-diy-actives"
-categories:
-  - Atelier
-  - Audio
-  - DIY
-tags:
-  - enceintes DIY
-  - audio
-  - hi-fi
-  - Hypex
-  - B&C Speakers
-  - DSP
-  - bass-reflex
-  - fabrication bois
+categories: ["Atelier de Michel", "Audio"]
+tags: ["enceintes DIY", "audio", "hi-fi", "Hypex", "B&C Speakers", "DSP", "bass-reflex", "Menuiserie"]
+series: ["MB158 Club Monitor"]
+series_order: 1
 image: "featured.png"
 featured: false
 toc: true

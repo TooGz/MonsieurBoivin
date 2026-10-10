@@ -4,8 +4,8 @@ description: "Comment connecter un Macintosh Plus (1986) à Internet en 2026 : �
 authors: ["monsieur-boivin"]
 slug: "mac-plus-internet"
 date: 2026-01-26
-categories: ["Informatique", "Rétro-computing"]
-tags: ["Macintosh Plus", "rétro", "Internet", "Vintage", "ChatGPT", "BlueSCSI", "Pico W" ]
+categories: ["Rétro et jeux vidéo"]
+tags: ["Macintosh Plus", "rétro-informatique", "Internet", "ChatGPT", "BlueSCSI", "Pico W"]
 showTableOfContents: true
 draft: false
 

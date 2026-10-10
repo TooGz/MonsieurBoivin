@@ -2,10 +2,9 @@
 title: "Brochettes de poulet à la sauce aux cacahuètes et achards maison"
 description: "Préparez des brochettes de poulet au Kamado avec une délicieuse sauce aux cacahuètes et des achards maison pour un plat exotique et savoureux."
 slug: "brochettes-poulet-sauce-cacahuetes"
-layout: "recette-single"
 date: 2025-02-28
 categories: ["Kamado et cuisson au feu"]
-tags: ["poulet", "brochettes", "kamado", "grill", "facile", "été"]
+tags: ["poulet", "brochettes", "kamado", "grillade", "facile", "été"]
 difficulty: "Moyen"
 servings: "4-8"
 prep_time: "55 min"

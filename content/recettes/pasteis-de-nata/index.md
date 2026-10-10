@@ -2,7 +2,6 @@
 title: "Pastéis de nata au Kamado"
 description: "Préparez des pastéis de nata maison sur le Big Green Egg, avec une pâte feuilletée croustillante et une crème pâtissière délicatement parfumée."
 slug: "pasteis-de-nata-kamado"
-layout: "recette-single"
 date: 2025-02-28
 categories: ["Desserts et goûter"]
 tags: ["pastéis de nata", "pâtisserie", "kamado", "cuisson indirecte", "portugal", "fait-maison", "four"]

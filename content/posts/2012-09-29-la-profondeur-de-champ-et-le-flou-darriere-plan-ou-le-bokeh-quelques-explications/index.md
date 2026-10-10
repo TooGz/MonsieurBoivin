@@ -1,11 +1,10 @@
 ---
 title: "Profondeur de champ et bokeh : comprendre (enfin) le flou d’arrière-plan"
 date: 2012-09-23
-updated: 2025-10-10
+lastmod: 2025-10-10
 authors: ["monsieur-boivin"]
 slug: "profondeur-de-champ-et-bokeh"
-categories:
-  - Photo
+categories: ["Photographie"]
 series: ["Les bases de la photo"]
 series_order: 4
 tags:
@@ -16,7 +15,7 @@ description: "Comprendre simplement la profondeur de champ et le bokeh pour obte
 
 seo:
   meta_title: "Profondeur de champ et bokeh : comment obtenir un beau flou"
-  meta_description: "Comprendre la profondeur de champ et le bokeh pour creer un flou d’arriere-plan propre : ouverture, distance, focale et exemples simples."
+  meta_description: "Comprendre la profondeur de champ et le bokeh pour créer un flou d’arrière-plan propre : ouverture, distance, focale et exemples simples."
 ---
 
 La **profondeur de champ (PDC)** détermine la zone de netteté d’une photo.  

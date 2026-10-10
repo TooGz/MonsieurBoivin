@@ -5,8 +5,8 @@ slug: "grenouille-proto-detection"
 date: 2025-09-06T22:51:00+02:00
 lastmod: 2025-09-06T22:51:00+02:00
 authors: ["toogz"]
-tags: ["Grenouille 3.0", "Détection", "MCP3008", "Capteurs piézo", "ESP32"]
-categories: ["DIY", "Électronique"]
+tags: ["Jeu de la grenouille", "détection", "MCP3008", "piézo", "ESP32"]
+categories: ["Électronique"]
 cover:
   image: "img/cover.png"
   alt: "Schéma de montage MCP3008 et capteurs piézo pour la Grenouille 3.0"

@@ -3,14 +3,12 @@ title: "Prise en main du Samyang 8mm f/3.5 UMC Fish-Eye CS II"
 date: 2013-03-05
 authors: ["monsieur-boivin"]
 description: "Retour d’usage sur le Samyang 8mm fish-eye f/3.5 : prise en main, rendu, limites et premières impressions sur APS-C."
-categories:
-  - Photo
+categories: ["Photographie"]
 tags:
   - fish-eye
   - objectif
   - test matériel
-layout: post
-permalink: /prise-en-main-du-samyang-8mm-f3-5-umc-fish-eye-cs-ii/
+aliases: ["/prise-en-main-du-samyang-8mm-f3-5-umc-fish-eye-cs-ii/"]
 showTableOfContents: false
 draft: true
 

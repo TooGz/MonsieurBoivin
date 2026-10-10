@@ -3,9 +3,8 @@
 title: "Tenders de poulet façon KFC"
 description: "Des tenders ultra croustillants et juteux inspirés du KFC, avec une technique de double cuisson pour un résultat parfait."
 slug: "tenders-poulet-facon-kfc"
-layout: "recette-single"
 date: 2026-03-17
-categories: ["Street food maison"]
+categories: ["Plats et accompagnements"]
 tags: ["poulet", "tenders", "kfc", "croustillant", "bbq", "batch", "week-end"]
 difficulty: "Intermédiaire"
 servings: "6"
@@ -139,6 +138,6 @@ serving:
 - "Idéal avec frites, potatoes ou salade."
 
 seo:
-meta_title: "Tenders de Poulet Ultra Croustillants façon KFC - Recette Signature Boivin"
-meta_description: "Recette de tenders de poulet croustillants avec technique de double cuisson comme en restaurant. Résultat ultra juteux et croustillant garanti."
+  meta_title: "Tenders de poulet ultra croustillants façon KFC"
+  meta_description: "Recette de tenders de poulet croustillants avec technique de double cuisson comme en restaurant. Résultat ultra juteux et croustillant garanti."
 ---

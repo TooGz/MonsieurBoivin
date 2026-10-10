@@ -2,7 +2,6 @@
 title: "Pâte à Crêpes"
 description: "Une pâte à crêpes simple et savoureuse, idéale pour les goûters et les desserts gourmands."
 slug: "pate-a-crepes"
-layout: "recette-single"
 date: 2025-02-28
 categories: ["Desserts et goûter"]
 tags: ["crêpes", "pâte à crêpes", "facile", "rapide", "goûter", "fait-maison"]
@@ -70,6 +69,6 @@ serving:
   - "Servir chaud avec du sucre, du Nutella, du miel, du caramel au beurre salé ou simplement beurre-sucre."
 
 seo:
-  meta_title: "Recette de Pâte à Crêpes Maison Facile et Rapide"
+  meta_title: "Pâte à crêpes maison facile et rapide"
   meta_description: "Découvrez la recette parfaite de pâte à crêpes maison : facile, rapide et idéale pour un goûter ou un dessert réussi. À agrémenter selon vos envies !"
 ---

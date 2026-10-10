@@ -24,7 +24,7 @@ cover:
   relative: true
 
 # Taxonomies principales
-categories: ["Atelier de Michel", "Grenouille"]
+categories: ["Atelier de Michel"]
 tags:
   - Jeu de la grenouille
   - Artisanat

@@ -2,7 +2,6 @@
 title: "Vinaigrette « Tupperware »"
 description: "Une vinaigrette maison rapide, équilibrée et savoureuse, parfaite pour toutes tes salades. La recette culte transmise dans les familles."
 slug: "vinaigrette-tupperware"
-layout: "recette-single"
 date: 2025-02-28
 categories: ["Sauces, pâtes et marinades"]
 tags: ["vinaigrette", "sauce", "rapide", "facile", "classique", "fait-maison"]
@@ -67,6 +66,6 @@ serving:
   - "Bien agiter avant chaque utilisation."
 
 seo:
-  meta_title: "Vinaigrette Maison Facile et Rapide - Recette Familiale"
+  meta_title: "Vinaigrette maison facile et rapide : la recette familiale"
   meta_description: "Prépare une vinaigrette maison inratable façon Tupperware. Pratique, économique et savoureuse : une recette culte pour toutes tes salades."
 ---

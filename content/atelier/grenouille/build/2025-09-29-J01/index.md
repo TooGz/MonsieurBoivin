@@ -43,7 +43,7 @@ Vous pourrez trouver des informations complémentaires dans la section [Concepti
 ## Découpes (dans l’ordre)
 
 ### Délignage
-![Délignage avec la scie sous table](./medias/delignage.gif)
+{{< video src="./medias/delignage.mp4" title="Délignage avec la scie sous table" animation="true" >}}
 
 On part de la poutre brute pour obtenir les pièces nécessaires :  
 pieds × 4, traverses longues × 4, traverse courte × 1, traverses « points » × 4.
@@ -57,14 +57,14 @@ pieds × 4, traverses longues × 4, traverse courte × 1, traverses « points »
 | Traverse « points » | 70×20        | 4   |
 
 ### Tronçonnage
-![Tronçonnage avec 5cm de marge](./medias/tronconnage.gif)
+{{< video src="./medias/tronconnage.mp4" title="Tronçonnage avec 5cm de marge" animation="true" >}}
 Découpes à +50 mm de la cote finale.
 
 ### Recoupe finale
 Pour la coupe definitive,j'ulitise la **scie à onglet** avec une butée positionnée a la côte finale, tenue par un serre-joint et je fais les lots de pieces de la meme longeur d'une traite, si possible toutes ensemble, pour s'assurer qu'elles fasse exactement la même longueur.
 
 ### Mini-ponçage
-![Ponçage rapide à la ponceuse orbitale au grain 120](./medias/poncage.gif)
+{{< video src="./medias/poncage.mp4" title="Ponçage rapide à la ponceuse orbitale au grain 120" animation="true" >}}
 
 Ponçage rapide au grain 120 et à la main sur les chants pour casser légèrement l’arête.
 Je referais de toute facon un pocage definitif une fois l'assemblage terminé avant de passer à la finition.

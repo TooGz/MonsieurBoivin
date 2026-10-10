@@ -2,7 +2,6 @@
 title: "Galettes de Blé Noir"
 description: "Des galettes bretonnes authentiques, à base de farine de sarrasin, idéales pour des repas salés à garnir à l’infini."
 slug: "galettes-ble-noir"
-layout: "recette-single"
 date: 2025-02-28
 categories: ["Plats et accompagnements"]
 tags: ["galette", "blé noir", "sarrasin", "facile", "traditionnel", "fait-maison"]
@@ -72,6 +71,6 @@ serving:
   - "Servir bien chaud avec une bolée de cidre brut pour rester en Bretagne !"
 
 seo:
-  meta_title: "Galettes de Blé Noir Bretonnes - Recette Authentique"
+  meta_title: "Galettes de blé noir bretonnes : la recette authentique"
   meta_description: "Préparez de vraies galettes de blé noir maison comme en Bretagne : une pâte simple et savoureuse, parfaite pour toutes vos garnitures salées."
 ---

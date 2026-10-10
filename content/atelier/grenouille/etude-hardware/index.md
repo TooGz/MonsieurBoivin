@@ -4,8 +4,8 @@ description: "Analyse complète des besoins matériels : écrans HUB75, capteurs
 authors: ["monsieur-boivin"]
 slug: "etude-hardware"
 date: 2025-11-17
-categories: ["Grenouille", "Électronique", "Arcade"]
-tags: ["Grenouille 3.0", "ESP32-S3", "HUB75", "MCP3008", "DFPlayer", "LED", "Arcade", "Bois"]
+categories: ["Atelier de Michel", "Électronique"]
+tags: ["Jeu de la grenouille", "ESP32", "HUB75", "MCP3008", "DFPlayer", "LED adressables", "Arcade", "Menuiserie"]
 showTableOfContents: true
 draft: false
 series: ["Grenouille 3.0"]

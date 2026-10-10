@@ -1,21 +1,18 @@
 ---
 title: "5 conseils pour réussir vos photos de concert !"
 date: 2012-10-07
-updated: 2025-04-01
+lastmod: 2025-04-01
 authors: ["monsieur-boivin"]
 slug: "photos-de-concert-conseils"
-categories:
-  - Photo
-tags:
-  - conseil
-  - concert
+categories: ["Photographie"]
+tags: ["concert"]
 
 image: "img/photos-concert.jpg"
 description: "5 conseils de terrain pour réussir ses photos de concert en basse lumière : ouverture, ISO, vitesse, placement et gestion des éclairages de scène."
 
 seo:
-  meta_title: "Photos de concert : 5 conseils pour shooter en basse lumiere"
-  meta_description: "5 conseils concrets pour reussir ses photos de concert : ouverture, ISO, vitesse, placement et gestion de la lumiere de scene."
+  meta_title: "Photos de concert : 5 conseils pour shooter en basse lumière"
+  meta_description: "5 conseils concrets pour réussir ses photos de concert : ouverture, ISO, vitesse, placement et gestion de la lumière de scène."
 ---
 
 La **photo de concert**, c’est un vrai défi. On se retrouve souvent dans une salle plongée dans la pénombre, avec des spots qui clignotent dans tous les sens, et des artistes qui bougent sans arrêt. Bref, c’est pas franchement l’environnement le plus simple pour faire des images nettes, bien exposées et percutantes.

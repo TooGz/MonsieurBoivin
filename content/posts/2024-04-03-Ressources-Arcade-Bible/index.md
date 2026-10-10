@@ -5,7 +5,7 @@ slug: "ressources-arcade"
 date: 2024-04-03T10:51:58+02:00
 authors: ["monsieur-boivin"]
 tags: ["ressources", "retrogaming", "DIY"]
-categories: ["Arcade"]
+categories: ["Rétro et jeux vidéo"]
 showTableOfContents: true
 draft: true
 ---

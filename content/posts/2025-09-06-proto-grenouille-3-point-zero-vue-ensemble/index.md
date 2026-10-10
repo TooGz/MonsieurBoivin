@@ -5,8 +5,8 @@ slug: "grenouille-proto"
 date: 2025-09-06T00:04:58+02:00
 lastmod: 2025-09-06T00:00:00+02:00
 authors: ["toogz"]
-tags: ["Grenouille 3.0", "Jeux en Bois", "DIY Électronique", "ESP32", "Arcade"]
-categories: ["DIY", "Électronique"]
+tags: ["Jeu de la grenouille", "ESP32", "Arcade"]
+categories: ["Électronique"]
 cover:
   image: "featured.png"
   alt: "Prototype de la Grenouille 3.0 avec ESP32 et LEDs"

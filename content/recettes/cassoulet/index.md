@@ -2,8 +2,6 @@
 title: "Cassoulet au Kamado Big Green Egg"
 description: "Un cassoulet traditionnel revisité pour le Kamado Big Green Egg, avec des haricots blancs, de la viande confite et une cuisson lente pour un plat gourmand et réconfortant."
 slug: "cassoulet-kamado"
-layout: "recette-single"
-type: "recette-single"
 date: 2025-02-28
 categories: ["Kamado et cuisson au feu"]
 tags: ["kamado", "cassoulet", "cuisson indirecte", "fumage", "poulet", "hiver"]
@@ -164,6 +162,6 @@ serving:
   - "Accompagnez de moutarde à l’ancienne pour plus de saveur."
 
 seo:
-  meta_title: "Recette Cassoulet au Kamado Big Green Egg - Cuisson Indirecte"
+  meta_title: "Cassoulet au Kamado Big Green Egg en cuisson indirecte"
   meta_description: "Préparez un délicieux cassoulet au Kamado Big Green Egg, une version légère mais savoureuse du plat traditionnel avec des haricots, viande confite et fumée."
 ---

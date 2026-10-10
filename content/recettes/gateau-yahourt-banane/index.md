@@ -2,7 +2,6 @@
 title: "Gâteau au Yahourt & Bananes"
 description: "Un gâteau au yahourt revisité avec des morceaux de bananes fondants pour une texture moelleuse et fruitée."
 slug: "gateau-yahourt-banane"
-type: "recette"
 date: 2025-04-02
 categories: ["Desserts et goûter"]
 tags: ["gâteau", "banane", "yahourt", "four", "facile", "goûter"]
@@ -77,6 +76,6 @@ serving:
   - "Les morceaux de banane apportent du fondant à chaque bouchée."
 
 seo:
-  meta_title: "Gâteau au Yahourt et Bananes en Morceaux - Recette Moelleuse"
+  meta_title: "Gâteau au yaourt et à la banane : la recette moelleuse"
   meta_description: "Ce gâteau au yahourt est enrichi de zestes de citron et de morceaux de bananes fondants pour un résultat fruité, gourmand et ultra moelleux."
 ---

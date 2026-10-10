@@ -2,7 +2,6 @@
 title: "Spaghettis All’assassina"
 description: "Une recette italienne audacieuse où les spaghettis sont cuits comme un risotto, fumés au bois de cerisier et poêlés jusqu’à caramélisation. À tester absolument !"
 slug: "spaghettis-allassassina"
-layout: "recette-single"
 date: 2025-02-12
 categories: ["Kamado et cuisson au feu"]
 tags: ["pâtes", "spaghettis", "italie", "kamado", "fumage", "fait-maison"]
@@ -85,6 +84,6 @@ serving:
   - "Idéal accompagné d’un verre de vin rouge italien."
 
 seo:
-  meta_title: "Spaghettis All’assassina au Kamado Big Green Egg"
+  meta_title: "Spaghettis all’assassina au Kamado Big Green Egg"
   meta_description: "Recette originale de spaghettis All’assassina au Kamado Big Green Egg : fumage, cuisson directe et caramélisation pour un plat italien intense et savoureux."
 ---

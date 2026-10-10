@@ -4,18 +4,10 @@ description: "Archive technique de la simulation WinISD du haut-parleur B&C 15TB
 summary: "Validation en simulation du 15 pouces B&C 15TBX100 : volume de caisse, accord bass-reflex, évent, excursion, vitesse d’air et filtre passe-haut."
 date: 2026-05-21
 draft: false
-categories:
-  - Atelier
-  - Audio DIY
-tags:
-  - enceinte DIY
-  - WinISD
-  - B&C Speakers
-  - 15TBX100
-  - bass-reflex
-  - subwoofer
-  - audio
-  - MB-158
+categories: ["Atelier de Michel", "Audio"]
+tags: ["enceintes DIY", "WinISD", "B&C Speakers", "15TBX100", "bass-reflex", "subwoofer", "audio", "MB-158"]
+series: ["MB158 Club Monitor"]
+series_order: 2
 seo:
   meta_title: "Simulation WinISD du B&C 15TBX100 – MB-158 Club Monitor"
 ---

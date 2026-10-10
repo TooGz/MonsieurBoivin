@@ -2,7 +2,6 @@
 title: "Pâte à Pizza Maison (Style Napolitain)"
 description: "Une pâte à pizza maison réalisée facilement au robot patissier. Résultat digne des meilleures pizzerias : texture légère, fermentation lente et goût authentique."
 slug: "pate-a-pizza"
-layout: "recette-single"
 date: 2025-04-02
 categories: ["Sauces, pâtes et marinades"]
 tags: ["pizza", "pâte à pizza", "italie", "kitchenaid", "fait-maison", "longue fermentation"]
@@ -55,6 +54,6 @@ preparation:
   - "Fermer les bacs et laisser reposer au frais 18 à 24 h."
 
 seo:
-  meta_title: "Pâte à Pizza - Recette Napolitaine"
+  meta_title: "Pâte à pizza napolitaine : la recette"
   meta_description: "Prépare une pâte à pizza napolitaine au robot KitchenAid et fais-la cuire sur pierre dans ton Big Green Egg pour une vraie pizza artisanale à la maison !"
 ---

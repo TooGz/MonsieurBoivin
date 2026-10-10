@@ -2,7 +2,6 @@
 title: "Gaufres Boivin Family Edition"
 description: "Des gaufres croustillantes à l’extérieur et moelleuses à l’intérieur, une recette familiale testée et approuvée depuis des années."
 slug: "gaufres-boivin-family-edition"
-layout: "recette-single"
 date: 2025-02-28
 categories: ["Desserts et goûter"]
 tags: ["gaufres", "four", "rapide", "facile", "famille", "goûter"]
@@ -71,6 +70,6 @@ serving:
   - "Parfaites pour un goûter, un brunch ou un petit-déjeuner en famille."
 
 seo:
-  meta_title: "Recette Gaufres Maison Facile - Boivin Family Edition"
+  meta_title: "Gaufres maison faciles : la recette Boivin Family Edition"
   meta_description: "Découvrez la recette des gaufres maison croustillantes et moelleuses de la Boivin Family. Faciles à faire, parfaites pour un goûter ou un brunch réussi !"
 ---

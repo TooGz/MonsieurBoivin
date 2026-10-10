@@ -2,10 +2,9 @@
 title: "Côte de Bœuf au Kamado"
 description: "Une côte de bœuf juteuse, parfaitement saisie sur le Kamado Big Green Egg avec une croûte croustillante et un cœur tendre."
 slug: "cote-de-boeuf-kamado"
-layout: "recette-single"
 date: 2025-02-28
 categories: ["Kamado et cuisson au feu"]
-tags: ["bœuf", "côte de bœuf", "kamado", "grill", "week-end", "facile"]
+tags: ["bœuf", "côte de bœuf", "kamado", "grillade", "week-end", "facile"]
 difficulty: "Intermédiaire"
 servings: 2
 prep_time: "15 min"
@@ -73,6 +72,6 @@ serving:
   - "Accompagner de pommes de terre grenailles rôties."
 
 seo:
-  meta_title: "Recette Côte de Bœuf au Kamado Big Green Egg"
+  meta_title: "Côte de bœuf au Kamado Big Green Egg : la recette"
   meta_description: "Découvrez comment cuire une côte de bœuf parfaite sur un Kamado Big Green Egg avec cette recette détaillée."
 ---

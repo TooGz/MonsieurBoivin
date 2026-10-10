@@ -3,10 +3,9 @@ title: "Atelier – Projets Maker, Bois & Électronique"
 description: "Journaux de build, prototypes et tests autour du bois, des capteurs, de l’ESP32 et du jeu de la grenouille."
 summary: "Projets maker, bois et électronique documentés au fil des builds."
 slug: "atelier"
-layout: "list"
 
 seo:
-  meta_title: "Atelier DIY : projets maker, ESP32, bois et electronique"
+  meta_title: "Atelier DIY : projets maker, ESP32, bois et électronique"
   meta_description: "Journaux de build, prototypes et tests autour du bois, des capteurs, de l’ESP32 et du jeu de la grenouille."
 ---
 

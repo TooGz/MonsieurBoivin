@@ -77,7 +77,9 @@ Je finalise les mortaise au ciseau à bois.
 - Dresser les **joues** pour viser **12,0 mm** puis **finir à 11,8–11,9 mm** (ponçage fin).  
 - Si vous laissez les mortaises **arrondies**, **arrondir les angles du tenon** (rayon 6 mm) au ciseau/rappe pour un emboîtement propre.
 
+<!-- Image à ajouter dans medias/ puis décommenter (fichier absent du dépôt) :
 ![Découpe des joues du tenon à la scie sur table](./medias/j02-tenon-scie-table.jpg)
+-->
 
 ### 5) Essai à blanc & corrections
 - Le tenon doit entrer **au pouce**, sans forcer.  
@@ -88,5 +90,6 @@ Je finalise les mortaise au ciseau à bois.
 ---
 
 ## Prochaine étape
-[Assemblage **à blanc**, contrôle des diagonales, puis collage des éléments de la structure.](../j03-assemblage-collage)
+Assemblage **à blanc**, contrôle des diagonales, puis collage des éléments de la structure (J03, à venir).
+<!-- Remettre le lien vers ../j03-assemblage-collage quand J03 sera publié (draft: false) -->
 Topette !
