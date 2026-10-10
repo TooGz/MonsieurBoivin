@@ -1,7 +1,7 @@
 {{- $page := .page | default . -}}
 {{- $siteName := $page.Site.Title -}}
 {{- $section := $page.Section -}}
-{{- $siteDescription := $page.Site.Params.description | default $page.Site.Language.Params.description | default "Cuisine maison, atelier DIY, recettes testees et notes utiles a garder sous la main." -}}
+{{- $siteDescription := $page.Site.Params.description | default $page.Site.Language.Params.description | default "Cuisine maison, atelier DIY, recettes testées et notes utiles à garder sous la main." -}}
 {{- $pageDescription := partial "functions/page-description.html" (dict "page" $page) | strings.TrimSpace -}}
 {{- $taxonomySEO := partial "functions/taxonomy-seo.html" $page -}}
 {{- $isTaxonomyRoot := eq $page.Kind "taxonomy" -}}
@@ -38,16 +38,21 @@
       {{- $metaDescription = $pageDescription -}}
     {{- else -}}
       {{- $contentLabel := partial "functions/count-label.html" (dict "count" $taxonomyItemCount "singular" "contenu" "plural" "contenus") | strings.TrimSpace -}}
+      {{- /* Accord du participe : « 1 contenu lié », « 3 contenus liés » */ -}}
+      {{- $pluralMark := "" -}}
+      {{- if gt $taxonomyItemCount 1 -}}
+        {{- $pluralMark = "s" -}}
+      {{- end -}}
       {{- if eq $taxonomyKey "tags" -}}
-        {{- $metaDescription = printf "%d %s lies au tag %s sur %s : articles, recettes et projets a parcourir." $taxonomyItemCount $contentLabel $page.Title $siteName -}}
+        {{- $metaDescription = printf "%d %s lié%s au tag %s sur %s : articles, recettes et projets à parcourir." $taxonomyItemCount $contentLabel $pluralMark $page.Title $siteName -}}
       {{- else if eq $taxonomyKey "categories" -}}
-        {{- $metaDescription = printf "%d %s dans la categorie %s sur %s : billets, recettes et projets associes." $taxonomyItemCount $contentLabel $page.Title $siteName -}}
+        {{- $metaDescription = printf "%d %s dans la catégorie %s sur %s : billets, recettes et projets associés." $taxonomyItemCount $contentLabel $page.Title $siteName -}}
       {{- else if eq $taxonomyKey "authors" -}}
-        {{- $metaDescription = printf "%d %s signes par %s sur %s." $taxonomyItemCount $contentLabel $page.Title $siteName -}}
+        {{- $metaDescription = printf "%d %s signé%s par %s sur %s." $taxonomyItemCount $contentLabel $pluralMark $page.Title $siteName -}}
       {{- else if eq $taxonomyKey "series" -}}
-        {{- $metaDescription = printf "%d %s regroupes dans la serie %s sur %s." $taxonomyItemCount $contentLabel $page.Title $siteName -}}
+        {{- $metaDescription = printf "%d %s regroupé%s dans la série %s sur %s." $taxonomyItemCount $contentLabel $pluralMark $page.Title $siteName -}}
       {{- else -}}
-        {{- $metaDescription = printf "%d %s regroupes dans %s sur %s." $taxonomyItemCount $contentLabel $page.Title $siteName -}}
+        {{- $metaDescription = printf "%d %s regroupé%s dans %s sur %s." $taxonomyItemCount $contentLabel $pluralMark $page.Title $siteName -}}
       {{- end -}}
     {{- end -}}
   {{- else if eq $section "photos" -}}
@@ -57,7 +62,7 @@
       {{- $imageCount := len ($page.Resources.ByType "image") -}}
       {{- $imageLabel := partial "functions/count-label.html" (dict "count" $imageCount "singular" "photo" "plural" "photos") | strings.TrimSpace -}}
       {{- if gt $imageCount 0 -}}
-        {{- $metaDescription = printf "Album photo %s sur %s : %d %s a parcourir." $page.Title $siteName $imageCount $imageLabel -}}
+        {{- $metaDescription = printf "Album photo %s sur %s : %d %s à parcourir." $page.Title $siteName $imageCount $imageLabel -}}
       {{- else -}}
         {{- $metaDescription = printf "Album photo %s sur %s." $page.Title $siteName -}}
       {{- end -}}
