@@ -21,6 +21,8 @@ tags:
 image: "featured.png"
 featured: false
 toc: true
+seo:
+  meta_title: "MB-158 Club Monitor : recherche pour des enceintes DIY actives"
 ---
 
 ## Point de départ

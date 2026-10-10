@@ -1,6 +1,6 @@
 ---
 title: "Projet Grenouille 3.0"
-description: "Documentation sur la création d’un jeu de la grenouille électronique."
+description: "Projet Grenouille 3.0 : fabrication d’un jeu de la grenouille électronique, de la menuiserie à la détection des palets par ESP32."
 categories: ["Atelier de Michel"]
 tags: [
   "Jeu de la grenouille",

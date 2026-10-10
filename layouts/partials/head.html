@@ -37,6 +37,10 @@
         {{ end }}
       {{ end }}
     {{ end }}
+    {{/* Même traitement que home/custom.html, sinon le navigateur télécharge l'original en plus de la version affichée */}}
+    {{ if and $homeImage (not .Site.Params.disableImageOptimization) (ne $homeImage.MediaType.SubType "svg") }}
+      {{ $homeImage = $homeImage.Fill "1600x900 center q92" }}
+    {{ end }}
     {{ with $homeImage }}
       <link rel="preload" as="image" href="{{ .RelPermalink }}">
     {{ end }}

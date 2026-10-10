@@ -7,6 +7,8 @@ tags: ["Jeu de la grenouille", "Conception"]
 categories: ["Atelier de Michel"]
 series: ["Grenouille 3.0"]
 series_order: 3
+seo:
+  meta_title: "Grenouille 3.0 : conception bois, matériaux et fabrication"
 ---
 {{< lead >}}
 Avant de sortir les outils, il fallait d’abord poser le projet à plat.  

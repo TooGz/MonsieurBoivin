@@ -149,6 +149,6 @@ serving:
   - "Servez avec les achards et le reste de la sauce."
 
 seo:
-  meta_title: "Recette Brochettes de Poulet Sauce Cacahuètes - Kamado Big Green Egg"
+  meta_title: "Brochettes de poulet sauce cacahuètes au Kamado Big Green Egg"
   meta_description: "Préparez de savoureuses brochettes de poulet au Kamado Big Green Egg avec une sauce aux cacahuètes et des achards maison."
 ---

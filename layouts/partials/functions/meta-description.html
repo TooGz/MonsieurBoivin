@@ -82,7 +82,10 @@
       {{- end -}}
     {{- end -}}
 
-    {{- if ne ($patternDescription | strings.TrimSpace) "" -}}
+    {{- /* La description écrite dans la page prime ; le gabarit générique ne sert que si elle manque */ -}}
+    {{- if ne ($page.Description | plainify | strings.TrimSpace) "" -}}
+      {{- $metaDescription = $pageDescription -}}
+    {{- else if ne ($patternDescription | strings.TrimSpace) "" -}}
       {{- $metaDescription = $patternDescription -}}
     {{- else if ne $pageDescription "" -}}
       {{- $metaDescription = $pageDescription -}}
@@ -90,4 +93,4 @@
   {{- end -}}
 {{- end -}}
 
-{{- partial "functions/normalize-text.html" $metaDescription -}}
+{{- return partial "functions/normalize-text.html" $metaDescription -}}

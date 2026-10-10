@@ -16,4 +16,4 @@
   {{- $abstract = partial "functions/meta-description.html" (dict "page" $page) | strings.TrimSpace -}}
 {{- end -}}
 
-{{- partial "functions/normalize-text.html" $abstract -}}
+{{- return partial "functions/normalize-text.html" $abstract -}}

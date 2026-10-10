@@ -11,8 +11,8 @@ showTableOfContents: true
 draft: false
 
 seo:
-  meta_title: "ESP32 pinout complet (DevKit V1) : GPIO utiles et broches a eviter"
-  meta_description: "Guide clair du pinout ESP32 DevKit V1 : GPIO surs, broches de boot, ADC, SPI, I2C et schema complet pour vos projets."
+  meta_title: "ESP32 DevKit V1 : pinout complet, GPIO utiles et à éviter"
+  meta_description: "Guide clair du pinout ESP32 DevKit V1 : GPIO sûrs, broches de boot, ADC, SPI, I2C et schéma complet pour vos projets."
 ---
 
 Tu cherches le **pinout complet de l’ESP32 WROOM DevKit V1** avec un schéma clair et des explications simples, directement utilisables dans tes projets ?

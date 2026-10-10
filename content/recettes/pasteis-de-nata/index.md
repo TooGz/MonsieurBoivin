@@ -104,6 +104,6 @@ serving:
   - "Dégustez avec un café portugais pour une expérience authentique."
 
 seo:
-  meta_title: "Recette Pastéis de Nata au Kamado Big Green Egg - Pâtisserie Portugaise"
+  meta_title: "Pastéis de nata au Kamado Big Green Egg : la recette"
   meta_description: "Apprenez à préparer des pastéis de nata maison sur le Big Green Egg, une pâtisserie portugaise croustillante et fondante, cuite sur pierre de cuisson."
 ---

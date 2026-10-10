@@ -1,6 +1,6 @@
 ---
 title: "Cookies Boivin Family Edition"
-description: "La recette des fameux cookies de la famille Boivin !"
+description: "Recette des cookies de la famille Boivin : pâte au beurre, cassonade et miel, chunks de chocolat, 15 min de préparation et 10 min de cuisson."
 slug: "cookies-boivin-family-edition"
 date: 2025-02-28
 categories: ["Desserts et goûter"]

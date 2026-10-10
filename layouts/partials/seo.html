@@ -40,10 +40,18 @@
       {{ end }}
     {{ end }}
 
+    {{/* Google tronque vers 60-65 caractères : on n'ajoute le suffixe de section, puis le nom du site, que s'il reste de la place */}}
+    {{ $maxTitle := 65 }}
+    {{ $metaTitle = $title }}
+    {{ $withSite := printf "%s | %s" $title $siteName }}
+    {{ if le (strings.RuneCount $withSite) $maxTitle }}
+      {{ $metaTitle = $withSite }}
+    {{ end }}
     {{ if $pattern }}
-      {{ $metaTitle = printf "%s | %s" (printf $pattern $title) $siteName }}
-    {{ else }}
-      {{ $metaTitle = printf "%s | %s" $title $siteName }}
+      {{ $withPattern := printf "%s | %s" (printf $pattern $title) $siteName }}
+      {{ if le (strings.RuneCount $withPattern) $maxTitle }}
+        {{ $metaTitle = $withPattern }}
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

@@ -16,6 +16,8 @@ tags:
   - subwoofer
   - audio
   - MB-158
+seo:
+  meta_title: "Simulation WinISD du B&C 15TBX100 – MB-158 Club Monitor"
 ---
 
 ## Contexte de la simulation

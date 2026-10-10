@@ -10,8 +10,8 @@ showTableOfContents: true
 draft: false
 
 seo:
-  meta_title: "Macintosh Plus sur Internet : outils, materiel et web retro en 2026"
-  meta_description: "Comment connecter un Macintosh Plus a Internet en 2026 : BlueSCSI, Pico W, emulation, proxies web et ressources utiles."
+  meta_title: "Macintosh Plus sur Internet : outils, matériel et web rétro"
+  meta_description: "Comment connecter un Macintosh Plus à Internet en 2026 : BlueSCSI, Pico W, émulation, proxies web et ressources utiles."
 ---
 
 ## But
