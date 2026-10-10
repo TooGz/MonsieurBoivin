@@ -12,7 +12,7 @@
     </div>
 
     {{ with $description }}
-      <p class="site-v2-term-card__description">{{ . }}</p>
+      <p class="site-v2-term-card__description">{{ partial "functions/typo-fr.html" (. | htmlEscape) }}</p>
     {{ end }}
   </a>
 </article>

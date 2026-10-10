@@ -46,7 +46,7 @@
     {{ $recipeDescription := partial "functions/page-description.html" (dict "page" $p) | strings.TrimSpace }}
     {{ with $recipeDescription }}
       <section class="recette-single__section">
-        <p class="recette-single__description">{{ . }}</p>
+        <p class="recette-single__description">{{ partial "functions/typo-fr.html" (. | htmlEscape) }}</p>
       </section>
     {{ end }}
 
@@ -128,7 +128,7 @@
           <ul>
             {{ range . }}
               {{ if and . (ne (trim . " ") "") }}
-                <li>{{ . }}</li>
+                <li>{{ partial "functions/typo-fr.html" (. | htmlEscape) }}</li>
               {{ end }}
             {{ end }}
           </ul>
@@ -235,7 +235,7 @@
           <ol>
             {{ range . }}
               {{ if and . (ne (trim . " ") "") }}
-                <li>{{ . }}</li>
+                <li>{{ partial "functions/typo-fr.html" (. | htmlEscape) }}</li>
               {{ end }}
             {{ end }}
           </ol>
@@ -260,7 +260,7 @@
           <ol class="recette-single__steps">
             {{ range . }}
               {{ if and . (ne (trim . " ") "") }}
-                <li class="recette-single__step">{{ . }}</li>
+                <li class="recette-single__step">{{ partial "functions/typo-fr.html" (. | htmlEscape) }}</li>
               {{ end }}
             {{ end }}
           </ol>
@@ -330,7 +330,7 @@
               <ol class="recette-single__steps">
                 {{ range . }}
                   {{ if and . (ne (trim . " ") "") }}
-                    <li class="recette-single__step">{{ . }}</li>
+                    <li class="recette-single__step">{{ partial "functions/typo-fr.html" (. | htmlEscape) }}</li>
                   {{ end }}
                 {{ end }}
               </ol>
@@ -357,7 +357,7 @@
           <ul>
             {{ range . }}
               {{ if and . (ne (trim . " ") "") }}
-                <li>{{ . }}</li>
+                <li>{{ partial "functions/typo-fr.html" (. | htmlEscape) }}</li>
               {{ end }}
             {{ end }}
           </ul>
@@ -371,7 +371,7 @@
     {{ with $p.Content }}
       {{ if ne (trim . " \n\r\t") "" }}
         <section class="recette-single__section recette-single__content">
-          {{ . }}
+          {{ partial "functions/typo-fr.html" . }}
         </section>
       {{ end }}
     {{ end }}

@@ -68,10 +68,10 @@
         </p>
       {{ end }}
 
-      <h3 class="home-hub-card__title">{{ $page.Title }}</h3>
+      <h3 class="home-hub-card__title">{{ partial "functions/typo-fr.html" ($page.Title | htmlEscape) }}</h3>
 
       {{ if and $showDescription $description }}
-        <p class="home-hub-card__description">{{ $description }}</p>
+        <p class="home-hub-card__description">{{ partial "functions/typo-fr.html" ($description | htmlEscape) }}</p>
       {{ end }}
 
       {{ if and $showTags (gt (len $tags) 0) }}

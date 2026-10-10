@@ -1,0 +1,39 @@
+{{- /*
+  Espaces insécables de la typographie française, appliquées au rendu (les fichiers Markdown ne changent pas).
+  Entrée : du HTML (contenu rendu) ou du texte déjà échappé. Sortie : template.HTML.
+
+  - espace fine insécable (U+202F) avant ; ! ?
+  - espace insécable (U+00A0) avant : et », après «
+  Seules les espaces déjà présentes sont converties : rien n'est ajouté là où l'auteur n'a pas mis d'espace,
+  ce qui laisse intacts les URL, les heures (10:30) et le texte en anglais.
+
+  Le code (pre, code, kbd, samp), les scripts, les styles et l'intérieur des balises HTML sont protégés :
+  une espace insécable copiée dans un bloc de code le casserait.
+*/ -}}
+{{- $html := printf "%v" . -}}
+
+{{- /* 1. Blocs entiers à ne pas toucher, mis de côté en premier */ -}}
+{{- $blocks := findRE `(?is)<(pre|code|kbd|samp|script|style|textarea)\b.*?</(?:pre|code|kbd|samp|script|style|textarea)>` $html | uniq -}}
+{{- range $i, $chunk := $blocks -}}
+  {{- $html = replace $html $chunk (printf "\x02b%d\x03" $i) -}}
+{{- end -}}
+{{- /* 2. Balises restantes (attributs compris) */ -}}
+{{- $tags := findRE `<[^>]+>` $html | uniq -}}
+{{- range $i, $chunk := $tags -}}
+  {{- $html = replace $html $chunk (printf "\x02t%d\x03" $i) -}}
+{{- end -}}
+
+{{- /* Espaces (normales, insécables, ou entités) avant ; ! ? → fine insécable */ -}}
+{{- $html = replaceRE `(\S)(?: |&nbsp;|&#160;|\x{00A0})+([;!?])` "$1 $2" $html -}}
+{{- /* … avant : et » → insécable */ -}}
+{{- $html = replaceRE `(\S)(?: |&nbsp;|&#160;|\x{202F})+(:|»|&raquo;)` "$1 $2" $html -}}
+{{- /* … après « → insécable */ -}}
+{{- $html = replaceRE `(«|&laquo;)(?: |&nbsp;|&#160;|\x{202F})+(\S)` "$1 $2" $html -}}
+
+{{- range $i, $chunk := $tags -}}
+  {{- $html = replace $html (printf "\x02t%d\x03" $i) $chunk -}}
+{{- end -}}
+{{- range $i, $chunk := $blocks -}}
+  {{- $html = replace $html (printf "\x02b%d\x03" $i) $chunk -}}
+{{- end -}}
+{{- return ($html | safeHTML) -}}

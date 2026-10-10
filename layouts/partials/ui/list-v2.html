@@ -28,9 +28,9 @@
       {{ partial "ui/breadcrumbs.html" . }}
     {{ end }}
     <p class="site-v2-eyebrow">{{ $eyebrow }}</p>
-    <h1 class="site-v2-title">{{ .Title | emojify }}</h1>
+    <h1 class="site-v2-title">{{ partial "functions/typo-fr.html" (.Title | htmlEscape | emojify) }}</h1>
     {{ if and (not $hasIntroContent) $description }}
-      <p class="site-v2-description">{{ $description }}</p>
+      <p class="site-v2-description">{{ partial "functions/typo-fr.html" ($description | htmlEscape) }}</p>
     {{ end }}
     <div class="site-v2-meta">
       <span>{{ $entryCount }} {{ $entryLabel }}</span>
@@ -45,7 +45,7 @@
   {{ if $hasIntroContent }}
     <section class="site-v2-intro">
       <div class="prose max-w-none dark:prose-invert">
-        {{ .Content }}
+        {{ partial "functions/typo-fr.html" .Content }}
       </div>
     </section>
   {{ end }}

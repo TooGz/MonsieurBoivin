@@ -173,7 +173,7 @@
 
             <ul class="home-hub__bullet-list">
               {{ with $latestBuild }}
-              <li>Dernière étape : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+              <li>Dernière étape : <a href="{{ .RelPermalink }}">{{ partial "functions/typo-fr.html" (.Title | htmlEscape) }}</a></li>
             {{ end }}
             <li>{{ $projectDocCount }} page{{ if ne $projectDocCount 1 }}s{{ end }} de doc déjà en ligne autour du projet.</li>
             <li>{{ len $buildPages }} entrée{{ if ne (len $buildPages) 1 }}s{{ end }} dans le carnet de construction.</li>
@@ -208,8 +208,8 @@
               <span class="home-hub__timeline-dot" aria-hidden="true"></span>
               <div class="home-hub__timeline-body">
                 <p class="home-hub__timeline-meta">{{ .Section | humanize }} · {{ .Date | time.Format $dateFormat }}</p>
-                <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-                <p>{{ $timelineDescription }}</p>
+                <h3><a href="{{ .RelPermalink }}">{{ partial "functions/typo-fr.html" (.Title | htmlEscape) }}</a></h3>
+                <p>{{ partial "functions/typo-fr.html" ($timelineDescription | htmlEscape) }}</p>
               </div>
             </li>
           {{ end }}

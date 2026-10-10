@@ -27,7 +27,7 @@
     <p class="site-v2-eyebrow">{{ $eyebrow }}</p>
     <h1 class="site-v2-title">{{ $pageTitle | emojify }}</h1>
     {{ with $showHeroDescription }}
-      <p class="site-v2-description">{{ . }}</p>
+      <p class="site-v2-description">{{ partial "functions/typo-fr.html" (. | htmlEscape) }}</p>
     {{ end }}
     <div class="site-v2-meta">
       <span>{{ $termCount }} {{ $termLabel }}</span>
@@ -38,7 +38,7 @@
   {{ with .Content }}
     <section class="site-v2-intro">
       <div class="prose max-w-none dark:prose-invert">
-        {{ . }}
+        {{ partial "functions/typo-fr.html" . }}
       </div>
     </section>
   {{ end }}

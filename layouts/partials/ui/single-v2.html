@@ -48,10 +48,10 @@
     <div class="site-v2-single__hero-grid{{ if not (index $featured "src") }} is-simple{{ end }}">
       <div class="site-v2-single__hero-copy">
         <p class="site-v2-eyebrow">{{ $eyebrow }}</p>
-        <h1 class="site-v2-title">{{ .Title | emojify }}</h1>
+        <h1 class="site-v2-title">{{ partial "functions/typo-fr.html" (.Title | htmlEscape | emojify) }}</h1>
 
         {{ with $description }}
-          <p class="site-v2-description">{{ . }}</p>
+          <p class="site-v2-description">{{ partial "functions/typo-fr.html" (. | htmlEscape) }}</p>
         {{ end }}
 
         {{ with $metaParts }}
@@ -129,7 +129,7 @@
 
         <section class="site-v2-single__panel site-v2-single__content">
           <div class="article-content prose max-w-none dark:prose-invert">
-            {{ .Content }}
+            {{ partial "functions/typo-fr.html" .Content }}
             {{ partial "ui/single-reply.html" (dict "page" . "variant" "v2") }}
           </div>
         </section>
