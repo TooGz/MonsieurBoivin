@@ -1,11 +1,10 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "{{ replace .Name "-" " " | strings.FirstUpper }}"
 description: ""
 slug: "{{ .Name }}"
-type: "recette"
-layout: "recette-single"
 date: {{ .Date }}
 authors: ["monsieur-boivin"]
+# Catégories cuisine : Desserts et goûter, Kamado et cuisson au feu, Sauces, pâtes et marinades, Plats et accompagnements
 categories: []
 tags: []
 difficulty: ""
@@ -14,7 +13,9 @@ prep_time: ""
 cook_time: ""
 rest_time: ""
 total_time: ""
+# Image principale : nommer le fichier « …featured.jpg » dans le dossier de la recette suffit
 image: ""
+# Lien YouTube (affiché en fin de recette, lecteur chargé au clic)
 video: ""
 showTableOfContents: false
 draft: true

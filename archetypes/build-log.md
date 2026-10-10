@@ -1,12 +1,13 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "{{ replace .Name "-" " " | strings.FirstUpper }}"
 description: ""
 slug: "{{ .Name }}"
 date: {{ .Date }}
 authors: ["monsieur-boivin"]
 categories: ["Atelier de Michel"]
 tags: []
-series: ["Journal Projet"]
+# Série du projet (ex. « Journal Grenouille ») et position dans la série
+series: []
 series_order: 0
 showTableOfContents: true
 draft: true
@@ -20,7 +21,7 @@ draft: true
 
 -
 
-## Etapes
+## Étapes
 
 ### 1)
 

@@ -7,7 +7,12 @@ baseURL = "https://monsieurboivin.fr"
 defaultContentLanguage = "fr"
 disableLanguages = [] #to allow translation work requiring shipping to production
 
-# pluralizeListTitles = "true" # hugo function useful for non-english languages, find out more in  https://gohugo.io/getting-started/configuration/#pluralizelisttitles
+# Dates du front matter sans fuseau interprétées à l'heure de Paris (et non en UTC)
+timeZone = "Europe/Paris"
+
+# URL sans accents : /categories/electronique/ plutôt que /categories/%C3%A9lectronique/
+# (les anciennes adresses accentuées redirigent via les « aliases » de content/categories et content/tags)
+removePathAccents = true
 
 enableRobotsTXT = true
 # Typographie française : seule la première lettre des titres de tags/catégories prend une capitale
@@ -34,11 +39,6 @@ googleAnalytics = "G-GPMJSYNKQK"
   category = "categories"
   author = "authors"
   series = "series"
-
-[sitemap]
-  changefreq = 'always'
-  filename = 'sitemap.xml'
-  priority = 0.5
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]

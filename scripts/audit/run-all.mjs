@@ -1,4 +1,3 @@
-import path from "node:path";
 import { repoRoot } from "./utils/site-data.mjs";
 import { runCommand } from "./utils/process.mjs";
 
@@ -11,7 +10,7 @@ const steps = [
   ["audit:seo", ["run", "audit:seo"]],
   ["audit:html", ["run", "audit:html"]],
   ["audit:lighthouse", ["run", "audit:lighthouse"]],
-  ["audit:axe", ["run", "audit:axe"]]
+  ["audit:axe", ["run", "audit:axe"]],
 ];
 
 const main = async () => {

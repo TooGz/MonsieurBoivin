@@ -1,11 +1,6 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import {
-  buildSiteInventory,
-  docsDir,
-  ensureDir,
-  reportsDir
-} from "../audit/utils/site-data.mjs";
+import { buildSiteInventory, docsDir, ensureDir, reportsDir } from "../audit/utils/site-data.mjs";
 
 const writeMarkdownReport = (inventory) => {
   const pageTypeRows = inventory.pageTypes
@@ -68,9 +63,15 @@ const main = async () => {
     `${JSON.stringify(inventory, null, 2)}\n`,
     "utf8"
   );
-  await fs.writeFile(path.join(docsDir, "site-inventory.md"), writeMarkdownReport(inventory), "utf8");
+  await fs.writeFile(
+    path.join(docsDir, "site-inventory.md"),
+    writeMarkdownReport(inventory),
+    "utf8"
+  );
 
-  console.log(`Inventory generated with ${inventory.pages.length} source pages and ${inventory.pageTypes.length} page types.`);
+  console.log(
+    `Inventory generated with ${inventory.pages.length} source pages and ${inventory.pageTypes.length} page types.`
+  );
 };
 
 main().catch((error) => {

@@ -1,5 +1,4 @@
-languageCode = "fr"
-languageName = "Français"
+# languageCode / languageName retirés : dépréciés depuis Hugo 0.158 (le code « fr » vient du nom du fichier)
 weight = 1
 title = "MonsieurBoivin.fr"
 

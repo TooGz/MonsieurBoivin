@@ -18,22 +18,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      DART_SASS_VERSION: 1.93.2
-      GO_VERSION: 1.25.1
+      # Hugo reste en 0.150 : le thème Blowfish 2.90 déclare max = 0.150, et --panicOnWarning
+      # transformerait l'avertissement de compatibilité en échec. Voir README (« Mettre à jour Hugo »).
       HUGO_VERSION: 0.150.0
       NODE_VERSION: 22.18.0
-      TZ: Europe/Oslo
+      TZ: Europe/Paris
     steps:
       - name: Checkout
         uses: actions/checkout@v5
         with:
           submodules: recursive
           fetch-depth: 0
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: ${{ env.GO_VERSION }}
-          cache: false
+      # Ni Go ni Dart Sass : le site n'a ni module Hugo ni fichier SCSS
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
@@ -44,12 +40,6 @@ jobs:
       - name: Create directory for user-specific executable files
         run: |
           mkdir -p "${HOME}/.local"
-      - name: Install Dart Sass
-        run: |
-          curl -sLJO "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
-          tar -C "${HOME}/.local" -xf "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
-          rm "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
-          echo "${HOME}/.local/dart-sass" >> "${GITHUB_PATH}"
       - name: Install Hugo
         run: |
           curl -sLJO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
@@ -59,13 +49,9 @@ jobs:
           echo "${HOME}/.local/hugo" >> "${GITHUB_PATH}"
       - name: Verify installations
         run: |
-          echo "Dart Sass: $(sass --version)"
-          echo "Go: $(go version)"
           echo "Hugo: $(hugo version)"
           echo "Node.js: $(node --version)"
-      - name: Install Node.js dependencies
-        run: |
-          [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true
+      # Pas de « npm ci » ici : le build Hugo n'utilise aucun paquet Node (outillage qualité seulement)
       - name: Configure Git
         run: |
           git config core.quotepath false
@@ -165,12 +151,22 @@ jobs:
 
           walk(publicDir);
 
-          const linkPattern = /\b(?:href|src)=["']([^"'#][^"']*)["']/gi;
+          // --minify retire les guillemets autour des attributs : on accepte "…", '…' et les valeurs nues,
+          // et on vérifie aussi chaque URL des srcset (images responsives)
+          const linkPattern = /\b(href|src|srcset|poster)=(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi;
 
           for (const htmlFile of htmlFiles) {
-            const html = fs.readFileSync(htmlFile, "utf8");
+            const html = fs.readFileSync(htmlFile, "utf8").replace(/<script\b[\s\S]*?<\/script>/gi, "");
+            const targets = [];
             for (const match of html.matchAll(linkPattern)) {
-              const rawTarget = match[1].trim();
+              const value = (match[2] ?? match[3] ?? match[4] ?? "").trim().replace(/&amp;/g, "&");
+              if (match[1].toLowerCase() === "srcset") {
+                value.split(",").forEach((candidate) => targets.push(candidate.trim().split(/\s+/)[0]));
+              } else {
+                targets.push(value);
+              }
+            }
+            for (const rawTarget of targets) {
               const normalized = normalizeTarget(rawTarget, htmlFile);
 
               if (!normalized) continue;

@@ -15,7 +15,11 @@ const scalarKeys = ["title", "slug", "type", "layout", "description"];
 export const normalizeSlash = (value) => value.replace(/\\/g, "/");
 
 export const slugify = (value) =>
-  normalizeSlash(String(value).trim().replace(/^["']|["']$/g, "")).replace(/^\/+|\/+$/g, "");
+  normalizeSlash(
+    String(value)
+      .trim()
+      .replace(/^["']|["']$/g, "")
+  ).replace(/^\/+|\/+$/g, "");
 
 export const ensureDir = async (dirPath) => {
   await fs.mkdir(dirPath, { recursive: true });
@@ -44,7 +48,9 @@ const parseScalar = (block, key) => {
   const pattern = new RegExp(`^${key}\\s*[:=]\\s*(.+)$`, "m");
   const match = block.match(pattern);
   if (!match) return "";
-  return String(match[1]).trim().replace(/^["']|["']$/g, "");
+  return String(match[1])
+    .trim()
+    .replace(/^["']|["']$/g, "");
 };
 
 export const parseFrontMatter = (source) => {
@@ -76,7 +82,20 @@ export const parseFrontMatter = (source) => {
   return data;
 };
 
-const deriveUrl = (relativeFilePath, frontMatter = {}) => {
+// Reproduit l'urlize de Hugo (minuscules, espaces → tirets, accents retirés car removePathAccents = true,
+// caractères spéciaux supprimés) pour que les routes d'échantillon existent vraiment dans public/
+const urlizePath = (urlPath) =>
+  urlPath
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9/._~-]/g, "");
+
+const deriveUrl = (relativeFilePath, frontMatter = {}) =>
+  urlizePath(deriveRawUrl(relativeFilePath, frontMatter));
+
+const deriveRawUrl = (relativeFilePath, frontMatter = {}) => {
   const parts = normalizeSlash(relativeFilePath).split("/");
   const fileName = parts.at(-1);
   const directoryParts = parts.slice(0, -1);
@@ -98,7 +117,7 @@ const deriveUrl = (relativeFilePath, frontMatter = {}) => {
   return `/${[...directoryParts, slugify(frontMatter.slug || stem)].join("/")}/`;
 };
 
-const classifyPageType = ({ section, fileName, urlPath, relativePath }) => {
+const classifyPageType = ({ section, urlPath, relativePath }) => {
   if (urlPath === "/") return "home";
   if (relativePath === "posts/_index.md") return "listing:articles";
   if (relativePath === "recettes/_index.md") return "listing:recipes";
@@ -140,34 +159,39 @@ const countMojibakeFiles = async () => {
 const buildComponentInventory = () => [
   {
     id: "global-header",
-    role: "Header + navigation legacy Blowfish",
-    source: "themes/blowfish/layouts/partials/header/basic.html"
+    role: "Header fixe + menu mobile en <dialog>",
+    source: "layouts/partials/header/fixed.html",
   },
   {
     id: "global-footer",
-    role: "Footer global legacy Blowfish",
-    source: "themes/blowfish/layouts/partials/footer.html"
+    role: "Pied de page (navigation, contact, mentions légales)",
+    source: "layouts/partials/footer/site-footer.html",
+  },
+  {
+    id: "search",
+    role: "Recherche (fenêtre accessible, insensible aux accents)",
+    source: "layouts/partials/search.html + assets/js/search.js",
+  },
+  {
+    id: "media",
+    role: "Galerie + visionneuse, vidéo locale, façade YouTube",
+    source: "layouts/shortcodes/{gallery,video,youtube}.html",
   },
   {
     id: "home-shell-v2",
     role: "Homepage custom shell with hero, timeline, filters, CTA",
-    source: "layouts/partials/home/custom.html"
+    source: "layouts/partials/home/custom.html",
   },
   {
     id: "mini-card",
     role: "Reusable cards for article / recipe / project highlights",
-    source: "layouts/partials/home/mini-card.html"
+    source: "layouts/partials/home/mini-card.html",
   },
   {
     id: "recipe-single",
     role: "Dedicated recipe detail layout",
-    source: "layouts/partials/recipes/single.html"
+    source: "layouts/partials/recipes/single.html",
   },
-  {
-    id: "design-system-patterns",
-    role: "Reference component patterns and tokens for migration",
-    source: "design-system/components/*.html"
-  }
 ];
 
 const buildDebtList = async (pages) => {
@@ -176,46 +200,39 @@ const buildDebtList = async (pages) => {
   return [
     {
       level: "high",
-      area: "layout-shell",
-      summary: "Home custom v2 et pages legacy Blowfish n'utilisent pas encore le meme shell visuel.",
-      impact: "Header, footer, densite de contenu et cartes changent trop d'un type de page a l'autre."
+      area: "theme-version",
+      summary:
+        "Thème Blowfish 2.90 copié dans themes/ (max Hugo 0.150) ; la version publiée est la 3.x.",
+      impact:
+        "Hugo reste figé en 0.150 : le déploiement compile avec --panicOnWarning, l'avertissement de compatibilité du thème le ferait échouer.",
     },
     {
       level: "high",
-      area: "css-architecture",
-      summary: "Le repo melange classes utilitaires Blowfish/Tailwind compilees et CSS custom maison.",
-      impact: "Collision de conventions, duplication de tokens et maintenance plus lente."
+      area: "privacy",
+      summary: "Google Analytics est chargé sans recueil de consentement.",
+      impact:
+        "Non conforme aux recommandations de la CNIL tant qu'un bandeau ou un outil sans cookies n'est pas en place.",
     },
     {
       level: "medium",
-      area: "component-consistency",
-      summary: "Les cartes articles, listings sections et recette-single n'ont pas encore la meme grille, ni les memes rayons, ni la meme hierarchie de meta.",
-      impact: "Le site ne lit pas comme un systeme unique."
-    },
-    {
-      level: "medium",
-      area: "js-behaviour",
-      summary: "Le theme legacy, la home v2 et les futurs scripts d'audit introduisent trois zones de JS distinctes.",
-      impact: "Il faut unifier les conventions `data-js`, theme toggle et menu mobile."
+      area: "css-weight",
+      summary:
+        "La feuille compilée du thème (≈106 Ko) est en grande partie inutilisée par les gabarits du site.",
+      impact: "CSS bloquant le rendu plus lourd que nécessaire.",
     },
     {
       level: mojibakeFiles > 0 ? "medium" : "low",
       area: "content-encoding",
       summary: `${mojibakeFiles} fichier(s) montrent des traces d'encodage bancal ou de texte mojibake.`,
-      impact: "SEO, lisibilite et microcopy peuvent se degrader sur certaines pages."
+      impact: "SEO, lisibilité et microcopy peuvent se dégrader sur certaines pages.",
     },
     {
       level: "low",
-      area: "tooling",
-      summary: "Le repo n'avait pas de package root ni de quality gate front avant cette passe.",
-      impact: "Les regressions HTML/SEO/a11y/perf passaient facilement sous le radar."
+      area: "drafts",
+      summary: `${pages.filter((page) => page.draft).length} brouillon(s) dans content/ (non publiés, mais présents dans le dépôt).`,
+      impact:
+        "Leurs médias alourdissent le dépôt ; liens vers eux à rétablir lors de la publication.",
     },
-    {
-      level: "low",
-      area: "coverage",
-      summary: `${pages.filter((page) => page.section === "photos").length} pages photo restent surtout documentaires et n'utilisent pas encore de pattern v2 dedie.`,
-      impact: "Le design system doit prevoir un pattern galerie / album dans une deuxieme vague."
-    }
   ];
 };
 
@@ -227,7 +244,7 @@ const pickSampleRoutes = (pages) => {
     "detail:article",
     "detail:recipe",
     "detail:project",
-    "detail:photo-album"
+    "detail:photo-album",
   ];
 
   const samples = [];
@@ -237,7 +254,7 @@ const pickSampleRoutes = (pages) => {
       samples.push({
         label: page.title,
         route: page.url,
-        pageType: page.pageType
+        pageType: page.pageType,
       });
     }
   }
@@ -265,12 +282,12 @@ export const buildSiteInventory = async () => {
         section,
         fileName,
         urlPath: url,
-        relativePath: normalizeSlash(relativePath)
+        relativePath: normalizeSlash(relativePath),
       }),
       section,
       layout: frontMatter.layout || "",
       contentType: frontMatter.type || "",
-      draft: Boolean(frontMatter.draft)
+      draft: Boolean(frontMatter.draft),
     });
   }
 
@@ -295,20 +312,20 @@ export const buildSiteInventory = async () => {
         "themes/blowfish/assets/css/compiled/main.css",
         "assets/css/design-system/*.css",
         "assets/css/home.css",
-        "assets/css/custom.css"
+        "assets/css/custom.css",
       ],
       javascript: [
         "themes/blowfish/assets/js/*.js",
         "assets/js/main.js",
-        "assets/js/components/*.js"
+        "assets/js/components/*.js",
       ],
-      ci: [".github/workflows/hugo.yaml", ".github/workflows/quality.yml"]
+      ci: [".github/workflows/hugo.yaml", ".github/workflows/quality.yml"],
     },
     pages,
     pageTypes: typeCounts,
     components: buildComponentInventory(),
     sampleRoutes: pickSampleRoutes(pages),
-    debts: await buildDebtList(pages)
+    debts: await buildDebtList(pages),
   };
 };
 
@@ -329,7 +346,7 @@ export const getAuditSampleRoutes = async () => {
     : [
         { label: "Home", route: "/", pageType: "home" },
         { label: "Articles", route: "/posts/", pageType: "listing:articles" },
-        { label: "Recettes", route: "/recettes/", pageType: "listing:recipes" }
+        { label: "Recettes", route: "/recettes/", pageType: "listing:recipes" },
       ];
 };
 

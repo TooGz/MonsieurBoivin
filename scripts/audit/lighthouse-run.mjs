@@ -2,12 +2,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import lighthouse from "lighthouse";
 import { launch } from "chrome-launcher";
-import {
-  ensureDir,
-  getAuditSampleRoutes,
-  publicDir,
-  repoRoot
-} from "./utils/site-data.mjs";
+import { ensureDir, getAuditSampleRoutes, publicDir, repoRoot } from "./utils/site-data.mjs";
 import { startStaticServer } from "./utils/static-server.mjs";
 
 const reportDir = path.join(repoRoot, "reports", "lighthouse");
@@ -15,17 +10,20 @@ const thresholds = {
   performance: 0.75,
   accessibility: 0.9,
   "best-practices": 0.85,
-  seo: 0.9
+  seo: 0.9,
 };
 
 const slugFromRoute = (route) =>
-  route.replace(/^\/+|\/+$/g, "").replace(/[^\w/-]+/g, "-").replace(/\//g, "__") || "home";
+  route
+    .replace(/^\/+|\/+$/g, "")
+    .replace(/[^\w/-]+/g, "-")
+    .replace(/\//g, "__") || "home";
 
 const main = async () => {
   const routes = await getAuditSampleRoutes();
   const server = await startStaticServer({ rootDir: publicDir, port: 4173 });
   const chrome = await launch({
-    chromeFlags: ["--headless=new", "--no-sandbox", "--disable-dev-shm-usage"]
+    chromeFlags: ["--headless=new", "--no-sandbox", "--disable-dev-shm-usage"],
   });
 
   await ensureDir(reportDir);
@@ -38,7 +36,7 @@ const main = async () => {
         port: chrome.port,
         output: ["html", "json"],
         logLevel: "error",
-        onlyCategories: Object.keys(thresholds)
+        onlyCategories: Object.keys(thresholds),
       });
 
       const reportName = slugFromRoute(route.route);

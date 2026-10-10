@@ -1,7 +1,27 @@
+# Générés / dépendances
 node_modules/
 public/
 resources/
 .hugo_cache/
 playwright-report/
 test-results/
-reports/lighthouse/
+.lighthouseci/
+reports/
+package-lock.json
+
+# Thème tiers : jamais reformaté (mises à jour plus simples)
+themes/
+
+# Gabarits Go (Hugo) : Prettier ne sait pas les lire et les casse
+# (ex. le shortcode video.html découpé en « {{ / if / $autoplay / }} »)
+layouts/**/*.html
+layouts/**/*.xml
+layouts/**/*.json
+layouts/**/*.txt
+archetypes/
+
+# Contenu éditorial : Markdown avec shortcodes Hugo, mis en forme à la main
+content/
+
+# Fichiers statiques servis tels quels
+static/

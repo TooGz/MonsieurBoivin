@@ -1,0 +1,17 @@
+# Fins de ligne LF partout (le dépôt est déjà en LF ; évite les conversions CRLF sous Windows
+# qui font échouer Prettier en local alors que la CI passe)
+* text=auto eol=lf
+
+# Binaires : jamais de conversion
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.mp4 binary
+*.webm binary
+*.mov binary
+*.pdf binary
+*.woff2 binary

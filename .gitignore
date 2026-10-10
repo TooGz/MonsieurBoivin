@@ -9,3 +9,7 @@
 /test-results/
 /.lighthouseci/
 /reports/lighthouse/
+
+# Rapports générés par npm run audit:inventory (recréés à chaque exécution)
+/reports/site-inventory.json
+/docs/site-inventory.md

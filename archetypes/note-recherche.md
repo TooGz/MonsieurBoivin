@@ -1,10 +1,10 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "{{ replace .Name "-" " " | strings.FirstUpper }}"
 description: ""
 slug: "{{ .Name }}"
 date: {{ .Date }}
 authors: ["monsieur-boivin"]
-categories: ["Recherche"]
+categories: ["Atelier de Michel"]
 tags: []
 showTableOfContents: true
 draft: true

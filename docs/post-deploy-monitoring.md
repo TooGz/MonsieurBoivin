@@ -24,7 +24,7 @@ const send = (metric) => {
     rating: metric.rating,
     id: metric.id,
     url: location.pathname,
-    ts: Date.now()
+    ts: Date.now(),
   });
 
   navigator.sendBeacon("/api/web-vitals", body);

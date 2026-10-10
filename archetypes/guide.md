@@ -1,10 +1,12 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "{{ replace .Name "-" " " | strings.FirstUpper }}"
 description: ""
 slug: "{{ .Name }}"
 date: {{ .Date }}
 authors: ["monsieur-boivin"]
-categories: ["Informatique"]
+# Catégories existantes : Atelier de Michel, Électronique, Audio, Rétro et jeux vidéo, Photographie, Photos, Jardin,
+# Desserts et goûter, Kamado et cuisson au feu, Sauces, pâtes et marinades, Plats et accompagnements
+categories: []
 tags: []
 showTableOfContents: true
 draft: true
@@ -18,7 +20,7 @@ seo:
 
 -
 
-## A retenir
+## À retenir
 
 -
 

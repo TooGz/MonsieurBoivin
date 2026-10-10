@@ -2,12 +2,7 @@
   "ci": {
     "collect": {
       "staticDistDir": "./public",
-      "url": [
-        "/",
-        "/posts/",
-        "/recettes/",
-        "/atelier/grenouille/"
-      ],
+      "url": ["/", "/posts/", "/recettes/", "/atelier/grenouille/"],
       "numberOfRuns": 1,
       "settings": {
         "chromeFlags": "--headless=new"

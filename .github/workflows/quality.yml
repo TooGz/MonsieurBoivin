@@ -2,9 +2,10 @@ name: Quality Gate
 
 on:
   pull_request:
+  # Toutes les branches : les problèmes apparaissent avant la fusion dans main (qui déclenche le déploiement)
   push:
     branches:
-      - main
+      - "**"
 
 jobs:
   quality:
@@ -25,6 +26,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: npm
 
       - name: Setup Java
         uses: actions/setup-java@v5
@@ -41,7 +43,8 @@ jobs:
           echo "${HOME}/.local/hugo" >> "${GITHUB_PATH}"
 
       - name: Install dependencies
-        run: npm install
+        # npm ci : installation reproductible depuis package-lock.json
+        run: npm ci
 
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
@@ -57,6 +60,10 @@ jobs:
 
       - name: Lint CSS
         run: npm run lint:css
+
+      - name: Strict build (same flags as deploy)
+        # Le déploiement échoue au moindre avertissement Hugo : on le vérifie ici, avec la même version de Hugo
+        run: hugo --gc --minify --panicOnWarning --printPathWarnings --destination "${{ runner.temp }}/strict-build"
 
       - name: Build static site
         run: npm run build:site:ci

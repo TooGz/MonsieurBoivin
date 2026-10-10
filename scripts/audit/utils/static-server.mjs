@@ -15,7 +15,7 @@ const MIME_TYPES = {
   ".txt": "text/plain; charset=utf-8",
   ".webmanifest": "application/manifest+json; charset=utf-8",
   ".webp": "image/webp",
-  ".xml": "application/xml; charset=utf-8"
+  ".xml": "application/xml; charset=utf-8",
 };
 
 const safeResolve = (rootDir, requestPath) => {
@@ -71,7 +71,7 @@ export const startStaticServer = ({ rootDir, port = 4173, host = "127.0.0.1" }) 
         close: () =>
           new Promise((closeResolve, closeReject) => {
             server.close((error) => (error ? closeReject(error) : closeResolve()));
-          })
+          }),
       });
     });
   });
