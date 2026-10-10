@@ -38,6 +38,9 @@
     }
   </script>
 
+  {{/* Police du texte préchargée : affichée dès le premier rendu, sans saut de police visible */}}
+  <link rel="preload" href="{{ "fonts/atkinson-hyperlegible-next/atkinson-hyperlegible-next-latin-wght-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+
   <!-- Performance optimization hints -->
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
   <link rel="dns-prefetch" href="//www.google-analytics.com">
