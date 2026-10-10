@@ -144,20 +144,29 @@
         "resource" $img
         "index" (add $index 1)
       ) | strings.TrimSpace -}}
+      {{- /* Même version WebP ≤ 2048 px que la visionneuse (shortcode gallery) : l'original n'a pas à être publié */ -}}
+      {{- $mediaImg := $img -}}
+      {{- if ne $img.MediaType.SubType "svg" -}}
+        {{- if gt $img.Width 2048 -}}
+          {{- $mediaImg = $img.Resize "2048x webp q82" -}}
+        {{- else -}}
+          {{- $mediaImg = $img.Process "webp q82" -}}
+        {{- end -}}
+      {{- end -}}
       {{- $mediaObject := dict
         "@type" "ImageObject"
-        "contentUrl" ($img.RelPermalink | absURL)
-        "url" ($img.RelPermalink | absURL)
+        "contentUrl" ($mediaImg.RelPermalink | absURL)
+        "url" ($mediaImg.RelPermalink | absURL)
       -}}
       {{- with $caption -}}
         {{- $mediaObject = merge $mediaObject (dict "caption" . "name" .) -}}
       {{- end -}}
-      {{- with $img.Width -}}
+      {{- with $mediaImg.Width -}}
         {{- if gt (int .) 0 -}}
           {{- $mediaObject = merge $mediaObject (dict "width" (int .)) -}}
         {{- end -}}
       {{- end -}}
-      {{- with $img.Height -}}
+      {{- with $mediaImg.Height -}}
         {{- if gt (int .) 0 -}}
           {{- $mediaObject = merge $mediaObject (dict "height" (int .)) -}}
         {{- end -}}

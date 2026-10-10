@@ -10,6 +10,9 @@ disableLanguages = [] #to allow translation work requiring shipping to productio
 # pluralizeListTitles = "true" # hugo function useful for non-english languages, find out more in  https://gohugo.io/getting-started/configuration/#pluralizelisttitles
 
 enableRobotsTXT = true
+# Typographie française : seule la première lettre des titres de tags/catégories prend une capitale
+# (« Desserts et goûter » et non « Desserts Et Goûter »)
+titleCaseStyle = "firstupper"
 summaryLength = 30
 hasCJKLanguage = false
 

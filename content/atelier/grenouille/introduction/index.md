@@ -1,5 +1,5 @@
 ---
-title: "[Grenouille 3.0] - Introduction"
+title: "Grenouille 3.0 – Introduction"
 description: "Redonner vie au jeu de la grenouille : un projet entre tradition, artisanat et technologie moderne."
 date: 2025-10-06
 authors: ["monsieur-boivin"]

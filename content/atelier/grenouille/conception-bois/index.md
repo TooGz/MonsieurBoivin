@@ -1,5 +1,5 @@
 ---
-title: "[Grenouille 3.0] - Conception bois - Étude, matériaux et fabrication"
+title: "Grenouille 3.0 – Conception bois : étude, matériaux et fabrication"
 description: "Redonner vie au jeu de la grenouille : un projet entre tradition, artisanat et technologie moderne."
 date: 2025-10-06
 authors: ["monsieur-boivin"]

@@ -5,7 +5,38 @@
   {{ end }}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="theme-color" content="#0f172a">
+  {{/* Valeurs par défaut selon le système ; appearance.js les remplace ensuite selon le thème réellement appliqué */}}
+  <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#172033" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+
+  {{/* Flux RSS déclaré pour que les lecteurs de flux le détectent automatiquement */}}
+  {{ with .Site.Home.OutputFormats.Get "rss" }}
+    <link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}">
+  {{ end }}
+  {{ if and (not .IsHome) (not .IsPage) }}
+    {{ with .OutputFormats.Get "rss" }}
+      <link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Title }} – {{ site.Title }}">
+    {{ end }}
+  {{ end }}
+
+  {{/* Speculation Rules : les pages internes sont préchargées au survol / début de toucher, navigation quasi instantanée (Chrome, Edge) */}}
+  <script type="speculationrules">
+    {
+      "prerender": [
+        {
+          "where": {
+            "and": [
+              { "href_matches": "/*" },
+              { "not": { "href_matches": ["/*.xml", "/*.json", "/*.jpg", "/*.jpeg", "/*.png", "/*.webp", "/*.mp4", "/*.pdf"] } },
+              { "not": { "selector_matches": "[target=_blank], [download], [rel~=nofollow]" } }
+            ]
+          },
+          "eagerness": "moderate"
+        }
+      ]
+    }
+  </script>
 
   <!-- Performance optimization hints -->
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
@@ -129,6 +160,14 @@
       href="{{ $siteV2CSS.RelPermalink }}"
       integrity="{{ $siteV2CSS.Data.Integrity }}">
   {{ end }}
+  {{ with resources.Get "css/modern-2026.css" }}
+    {{ $modernCSS := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{{ $modernCSS.RelPermalink }}"
+      integrity="{{ $modernCSS.Data.Integrity }}">
+  {{ end }}
   {{ if .IsHome }}
     {{ with resources.Get "css/home.css" }}
       {{ $homeCSS := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
@@ -152,6 +191,10 @@
         rel="stylesheet"
         href="{{ $recipeCSS.RelPermalink }}"
         integrity="{{ $recipeCSS.Data.Integrity }}">
+    {{ end }}
+    {{ with resources.Get "js/recipe-tools.js" }}
+      {{ $recipeJS := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+      <script defer src="{{ $recipeJS.RelPermalink }}" integrity="{{ $recipeJS.Data.Integrity }}"></script>
     {{ end }}
   {{ end }}
 

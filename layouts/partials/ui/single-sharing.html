@@ -6,6 +6,17 @@
       <p>Envoyer cette page en un clic.</p>
     </div> -->
     <div class="site-v2-single__sharing-links">
+      {{/* Partage natif (feuille de partage du téléphone / de l'OS), affiché seulement si le navigateur le permet */}}
+      <button
+        type="button"
+        class="site-v2-single__share-link site-v2-single__share-link--native"
+        data-native-share
+        data-share-title="{{ $.Title }}"
+        data-share-url="{{ $.Permalink }}"
+        hidden>
+        {{ partial "icon.html" "link" }}
+        <span>Partager…</span>
+      </button>
       {{ range . }}
         {{ $shareKey := . }}
         {{ with index $links . }}
@@ -23,5 +34,19 @@
         {{ end }}
       {{ end }}
     </div>
+    <script>
+      (function () {
+        var button = document.querySelector("[data-native-share]");
+        if (!button || typeof navigator.share !== "function") return;
+        button.hidden = false;
+        button.addEventListener("click", function () {
+          navigator
+            .share({ title: button.dataset.shareTitle, url: button.dataset.shareUrl })
+            .catch(function () {
+              /* partage annulé par le visiteur */
+            });
+        });
+      })();
+    </script>
   </section>
 {{ end }}

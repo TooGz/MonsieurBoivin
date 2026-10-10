@@ -94,16 +94,17 @@
           type="button"
           class="site-v2-menu-button site-v2-mobile-only"
           aria-label="Ouvrir le menu"
+          aria-haspopup="dialog"
+          aria-controls="menu-wrapper"
           aria-expanded="false"
           title="Ouvrir le menu">
           {{ partial "icon.html" "bars" }}
         </button>
-        <div
-          id="menu-wrapper"
-          class="site-v2-mobile-overlay invisible opacity-0 transition-opacity">
+        {{/* <dialog> natif : focus piégé dans le panneau, fermeture par Échap, page inerte en arrière-plan */}}
+        <dialog id="menu-wrapper" class="site-v2-mobile-dialog" aria-labelledby="menu-title">
           <div class="site-v2-mobile-panel">
             <div class="site-v2-mobile-top">
-              <p class="site-v2-mobile-title">Navigation</p>
+              <p class="site-v2-mobile-title" id="menu-title">Navigation</p>
               <button
                 id="menu-close-button"
                 type="button"
@@ -116,17 +117,22 @@
             <nav class="site-v2-mobile-nav" aria-label="Navigation mobile">
               {{ range .Site.Menus.main }}
                 {{ $isCurrent := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}
+                {{/* Sous-titre affiché seulement s'il apporte une info (évite « Articles / Articles ») */}}
+                {{ $subtitle := .Title | default "" }}
                 <a
                   href="{{ .URL }}"
                   {{ if or (strings.HasPrefix .URL "http:") (strings.HasPrefix .URL "https:") }}target="_blank" rel="noopener noreferrer"{{ end }}
+                  {{ if $isCurrent }}aria-current="page"{{ end }}
                   class="site-v2-mobile-link{{ if $isCurrent }} is-current{{ end }}">
                   <span>{{ .Name | markdownify }}</span>
-                  <small>{{ .Identifier | default .Title | default "section" }}</small>
+                  {{ if and $subtitle (ne (lower $subtitle) (lower (.Name | plainify))) }}
+                    <small>{{ $subtitle }}</small>
+                  {{ end }}
                 </a>
               {{ end }}
             </nav>
           </div>
-        </div>
+        </dialog>
       {{ end }}
     </div>
   </div>

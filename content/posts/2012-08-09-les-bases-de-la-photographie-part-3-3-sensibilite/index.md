@@ -1,5 +1,5 @@
 ---
-title: "Les bases de la photographie [PART 3/3] : la sensibilité ISO"
+title: "Les bases de la photographie (3/3) : la sensibilité ISO"
 date: 2012-08-09
 updated: 2025-10-10
 authors: ["monsieur-boivin"]

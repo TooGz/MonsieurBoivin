@@ -4,10 +4,11 @@
 {{ $photoPages := where $allPages "Section" "photos" }}
 {{ $workshopPages := where $allPages "Section" "atelier" }}
 {{ $recentPages := first 5 $allPages }}
-{{ $featuredArticles := first 8 $posts }}
-{{ $featuredRecipes := first 3 $recipes }}
-{{ $featuredPhotos := first 4 $photoPages }}
-{{ $featuredWorkshop := first 3 $workshopPages }}
+{{/* Chaque contenu n'apparaît qu'une fois sur l'accueil : les blocs suivants excluent ce que la chronologie affiche déjà */}}
+{{ $featuredArticles := first 8 (complement $recentPages $posts) }}
+{{ $featuredRecipes := first 3 (complement $recentPages $recipes) }}
+{{ $featuredPhotos := first 4 (complement $recentPages $photoPages) }}
+{{ $featuredWorkshop := first 3 (complement $recentPages $workshopPages) }}
 {{ $dateFormat := .Site.Language.Params.dateFormat | default ":date_long" }}
 
 {{ $grenouille := site.GetPage "/atelier/grenouille" }}
@@ -175,22 +176,15 @@
               <li>Dernière étape : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
             {{ end }}
             <li>{{ $projectDocCount }} page{{ if ne $projectDocCount 1 }}s{{ end }} de doc déjà en ligne autour du projet.</li>
-              {{ with index $recentPages 0 }}
-                <li>Dernier ajout global : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-              {{ end }}
+            <li>{{ len $buildPages }} entrée{{ if ne (len $buildPages) 1 }}s{{ end }} dans le carnet de construction.</li>
             </ul>
 
-            <a class="home-hub__button home-hub__button--primary" href="{{ $projectLink }}">Entrer dans le projet</a>
-          </article>
-
-          <article class="home-hub__panel">
-            <p class="home-hub__eyebrow">Dernier Ajout</p>
-            {{ with index $recentPages 0 }}
-              {{ $latestDescription := partial "functions/page-description.html" (dict "page" . "truncate" 130) | strings.TrimSpace }}
-              <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-              <p>{{ .Section | humanize }} · {{ .Date | time.Format $dateFormat }}</p>
-              <p>{{ $latestDescription }}</p>
-            {{ end }}
+            <div class="home-hub__inline-actions">
+              <a class="home-hub__button home-hub__button--primary" href="{{ $projectLink }}">Entrer dans le projet</a>
+              {{ with $grenouilleBuild }}
+                <a class="home-hub__button" href="{{ .RelPermalink }}">Ouvrir le journal</a>
+              {{ end }}
+            </div>
           </article>
         </aside>
       </div>
@@ -198,67 +192,6 @@
   </header>
 
   <div class="home-hub__main" id="home-hub-main">
-    <section class="home-hub__section" id="maintenant">
-      <div class="home-hub__section-heading">
-        <div>
-          <p class="home-hub__eyebrow">Tableau de bord</p>
-          <h2>Le cœur du site, sans détour</h2>
-        </div>
-      </div>
-
-      <article class="home-hub__spotlight">
-        <p class="home-hub__eyebrow">Chantier central</p>
-        {{ with $grenouille }}
-          {{ $projectDescription := partial "functions/page-description.html" (dict "page" . "truncate" 150) | strings.TrimSpace }}
-          <h3>{{ .Title }}</h3>
-          <p>{{ $projectDescription | default "Un gros projet atelier tenu au propre, avec carnet de construction, doc et partie hardware." }}</p>
-        {{ else }}
-          <h3>Atelier en cours</h3>
-          <p>Le chantier principal reste centralisé côté atelier avec les étapes importantes et les choix de matériel.</p>
-        {{ end }}
-
-        <ul class="home-hub__bullet-list">
-          {{ with $latestBuild }}
-            <li>Dernière étape : <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-          {{ end }}
-          <li>{{ len $buildPages }} entrées chronologiques déjà publiées dans le carnet de construction.</li>
-          <li>Les ressources longues restent séparées des notes rapides pour retrouver un truc sans perdre du temps.</li>
-        </ul>
-
-        <div class="home-hub__inline-actions">
-          <a class="home-hub__button home-hub__button--primary" href="{{ $projectLink }}">Voir le projet</a>
-          {{ with $grenouilleBuild }}
-            <a class="home-hub__button" href="{{ .RelPermalink }}">Ouvrir le journal</a>
-          {{ end }}
-        </div>
-      </article>
-
-      <div class="home-hub__metric-grid" aria-label="Statistiques du site">
-        <article class="home-hub__metric">
-          <span>Articles</span>
-          <strong>{{ len $posts }}</strong>
-          <p>guides, recherches et billets techniques</p>
-        </article>
-        <article class="home-hub__metric">
-          <span>Recettes</span>
-          <strong>{{ len $recipes }}</strong>
-          <p>des fiches que j’ai envie de refaire</p>
-        </article>
-        <article class="home-hub__metric">
-          <span>Photos</span>
-          <strong>{{ len $photoPages }}</strong>
-          <p>albums, concerts, voyages et séries</p>
-        </article>
-        <article class="home-hub__metric">
-          <span>Dernière mise à jour</span>
-          {{ with index $recentPages 0 }}
-            <strong class="home-hub__metric-copy">{{ .Date | time.Format $dateFormat }}</strong>
-            <p><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
-          {{ end }}
-        </article>
-      </div>
-    </section>
-
     <section class="home-hub__section" id="timeline">
       <div class="home-hub__section-heading">
         <div>
@@ -333,7 +266,7 @@
       <div class="home-hub__section-heading">
         <div>
           <p class="home-hub__eyebrow">Portes d’entrée</p>
-          <h2>Les quatre univers de mon site</h2>
+          <h2>Atelier, cuisine et photos</h2>
         </div>
       </div>
 
@@ -391,23 +324,7 @@
             {{ end }}
           </div>
         </section>
-        <section class="home-hub__stack">
-          <div class="home-hub__stack-head">
-            <h3>Récents</h3>
-            <a href="{{ "/" | relLangURL }}#timeline">Voir le fil</a>
-          </div>
-          <div class="home-hub__stack-grid">
-            {{ range first 3 $recentPages }}
-              {{ partial "home/mini-card.html" (dict
-                "page" .
-                "variant" "compact"
-                "showMeta" true
-                "showDate" true
-                "showDescription" true
-              ) }}
-            {{ end }}
-          </div>
-        </section>
+
 
 
       </div>

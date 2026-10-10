@@ -13,7 +13,8 @@
 {{- if eq $alt "" -}}
   {{- $name := "" -}}
   {{- if $resource -}}
-    {{- $name = $resource.Name | default (path.Base $resource.RelPermalink) -}}
+    {{- /* Pas de « default (… .RelPermalink) » : l'argument serait évalué quand même et forcerait la publication de l'original */ -}}
+    {{- $name = path.Base $resource.Name -}}
   {{- else if ne $src "" -}}
     {{- $name = path.Base $src -}}
   {{- end -}}

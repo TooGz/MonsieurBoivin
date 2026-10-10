@@ -21,7 +21,6 @@
 }}
 
 {{ $shortcutLinks := slice
-  (dict "label" "Projet du moment" "url" (printf "%s#maintenant" $homeURL))
   (dict "label" "Derniers ajouts" "url" (printf "%s#timeline" $homeURL))
   (dict "label" "Projet Grenouille" "url" ("/atelier/grenouille/" | relLangURL))
 }}

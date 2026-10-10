@@ -2,8 +2,9 @@ body.site-shell--v2 {
   --site-v2-header-offset: 5.8rem;
   --site-v2-bg: #f3efe6;
   --site-v2-ink: #182131;
-  --site-v2-muted: #526076;
-  --site-v2-subtle: #75829a;
+  /* Gris assombris pour tenir 4,5:1 sur le fond crème (WCAG 2.2 AA) ; #75829a plafonnait à 3,1:1 */
+  --site-v2-muted: #46536a;
+  --site-v2-subtle: #56637a;
   --site-v2-border: rgba(24, 33, 49, 0.14);
   --site-v2-panel: rgba(255, 255, 255, 0.78);
   --site-v2-panel-strong: rgba(255, 255, 255, 0.9);
@@ -226,29 +227,63 @@ html.dark .site-v2-menu-button {
   display: none;
 }
 
-#menu-wrapper.site-v2-mobile-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 75;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 1rem;
-  visibility: hidden;
-  opacity: 0;
-  background: rgba(12, 18, 30, 0.34);
-  backdrop-filter: blur(14px);
-  transition: opacity 180ms ease;
+/* Menu mobile : <dialog> natif. Couleurs autonomes (les variables --site-v2-* n'existent pas sur l'accueil) */
+.site-v2-mobile-dialog {
+  --menu-bg: #fbf8f2;
+  --menu-ink: #182131;
+  --menu-muted: #4a5568;
+  --menu-border: rgba(24, 33, 49, 0.14);
+  --menu-hover: rgba(240, 109, 42, 0.14);
+  width: min(100% - 2rem, 30rem);
+  max-width: none;
+  max-height: calc(100dvh - 2rem);
+  margin: 1rem auto auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--menu-ink);
+  overflow: visible;
+}
+
+html.dark .site-v2-mobile-dialog {
+  --menu-bg: #111a2b;
+  --menu-ink: #f4f6fb;
+  --menu-muted: #b2bfd5;
+  --menu-border: rgba(180, 191, 212, 0.18);
+  --menu-hover: rgba(255, 141, 69, 0.16);
+}
+
+.site-v2-mobile-dialog::backdrop {
+  background: rgba(8, 12, 22, 0.62);
+  backdrop-filter: blur(6px);
+}
+
+.site-v2-mobile-dialog[open] {
+  animation: site-v2-dialog-in 180ms ease-out;
+}
+
+@keyframes site-v2-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
 }
 
 .site-v2-mobile-panel {
-  width: min(100%, 34rem);
-  margin-top: 0.5rem;
+  width: 100%;
   padding: 1rem;
-  border: 1px solid var(--site-v2-border);
-  border-radius: var(--site-v2-radius-lg);
-  background: var(--site-v2-panel-strong);
-  box-shadow: var(--site-v2-shadow-strong);
+  border: 1px solid var(--menu-border, var(--site-v2-border));
+  border-radius: var(--site-v2-radius-lg, 1.75rem);
+  /* Fond opaque : le texte de la page ne doit plus se lire à travers le menu */
+  background: var(--menu-bg, var(--site-v2-panel-strong));
+  color: var(--menu-ink, var(--site-v2-ink));
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+}
+
+.site-v2-mobile-panel .site-v2-icon-button {
+  border-color: var(--menu-border);
+  background: transparent;
+  color: var(--menu-ink);
 }
 
 .site-v2-mobile-top {
@@ -279,18 +314,20 @@ html.dark .site-v2-menu-button {
   border-radius: 1rem;
   text-decoration: none;
   background: transparent;
-  color: var(--site-v2-ink);
+  color: var(--menu-ink, var(--site-v2-ink));
+  font-weight: 600;
 }
 
 .site-v2-mobile-link:hover,
 .site-v2-mobile-link:focus-visible,
 .site-v2-mobile-link.is-current {
-  background: var(--site-v2-accent-soft);
+  background: var(--menu-hover, var(--site-v2-accent-soft));
 }
 
 .site-v2-mobile-link small {
-  color: var(--site-v2-subtle);
-  font-size: 0.78rem;
+  color: var(--menu-muted, var(--site-v2-muted));
+  font-size: 0.85rem;
+  font-weight: 400;
 }
 
 .site-v2-page {
@@ -958,7 +995,7 @@ body.site-shell--v2 #search-results a:focus-visible {
   }
 
   .site-v2-mobile-only,
-  .site-v2-mobile-overlay {
+  .site-v2-mobile-dialog {
     display: none;
   }
 
@@ -1049,8 +1086,7 @@ body.site-shell--v2 #search-results a:focus-visible {
   }
 
   .site-v2-mobile-panel {
-    width: min(100%, 30rem);
-    max-height: calc(100dvh - 1.5rem);
+    max-height: calc(100dvh - 2rem);
     overflow-y: auto;
     overscroll-behavior: contain;
   }

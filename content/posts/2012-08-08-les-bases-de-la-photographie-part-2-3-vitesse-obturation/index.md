@@ -1,5 +1,5 @@
 ---
-title: "Les bases de la photographie [PART 2/3] : la vitesse d’obturation"
+title: "Les bases de la photographie (2/3) : la vitesse d’obturation"
 date: 2012-08-08
 updated: 2025-10-20
 authors: ["monsieur-boivin"]

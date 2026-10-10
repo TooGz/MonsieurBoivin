@@ -56,6 +56,29 @@
     {{ partial "recipes/info-box.html" $p }}
 
     {{/* =========================
+        OUTILS : portions, mode cuisine (écran allumé), impression
+        Les boutons dépendants du JS restent masqués tant que js/recipe-tools.js ne les a pas activés.
+    ========================== */}}
+    {{ $servings := printf "%v" ($p.Params.servings | default "") }}
+    <div class="recipe-tools not-prose" data-recipe-tools data-servings="{{ $servings }}">
+      {{ if findRE `\d` $servings }}
+        <div class="recipe-tools__servings" data-servings-control hidden>
+          <span class="recipe-tools__label" id="recipe-servings-label">Portions</span>
+          <button type="button" class="recipe-tools__button" data-servings-step="-1" aria-label="Une portion de moins">−</button>
+          <output class="recipe-tools__count" aria-labelledby="recipe-servings-label" aria-live="polite" data-servings-count>{{ $servings }}</output>
+          <button type="button" class="recipe-tools__button" data-servings-step="1" aria-label="Une portion de plus">+</button>
+        </div>
+      {{ end }}
+      <button type="button" class="recipe-tools__button recipe-tools__button--wide" data-cook-mode aria-pressed="false" hidden>
+        <span aria-hidden="true">☀</span> Mode cuisine
+      </button>
+      <button type="button" class="recipe-tools__button recipe-tools__button--wide" data-print hidden>
+        <span aria-hidden="true">⎙</span> Imprimer
+      </button>
+      <p class="recipe-tools__status" data-cook-mode-status aria-live="polite"></p>
+    </div>
+
+    {{/* =========================
         TEMPÉRATURES INTERNES
     ========================== */}}
     {{ with $p.Params.internal_temps }}
@@ -152,9 +175,12 @@
                     {{ $unit := .unit | default "" }}
 
                     {{ if and $name (ne (trim $name " ") "") }}
-                      <li>
+                      <li class="recette-single__ingredient">
+                        <label>
+                        <input type="checkbox" class="recette-single__check">
+                        <span>
                         {{ if and $quantity (ne (printf "%v" $quantity) "") }}
-                          <strong>{{ $quantity }}</strong>
+                          <strong data-qty="{{ $quantity }}">{{ $quantity }}</strong>
                         {{ end }}
 
                         {{ if and $unit (ne (trim $unit " ") "") }}
@@ -176,7 +202,11 @@
                           {{ end }}
                         {{ end }}
 
-                        <strong>{{ title $name }}</strong>
+                        {{/* Majuscule sur la première lettre seulement (title mettait « Chunk 3 Chocolat ») */}}
+                        {{ $cleanName := trim $name " " }}
+                        <strong>{{ upper (substr $cleanName 0 1) }}{{ substr $cleanName 1 }}</strong>
+                        </span>
+                        </label>
                       </li>
                     {{ end }}
                   {{ end }}

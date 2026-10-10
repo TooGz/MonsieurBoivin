@@ -1,6 +1,6 @@
 ---
 
-title: "Tenders de Poulet Facon KFC"
+title: "Tenders de poulet façon KFC"
 description: "Des tenders ultra croustillants et juteux inspirés du KFC, avec une technique de double cuisson pour un résultat parfait."
 slug: "tenders-poulet-facon-kfc"
 layout: "recette-single"

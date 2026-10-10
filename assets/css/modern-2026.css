@@ -1,0 +1,331 @@
+/* =========================================================
+   Couche « 2026 » : fonctionnalités CSS modernes, chargées sur toutes les pages
+   après site-v2.css. Tout est en amélioration progressive : un navigateur qui ne
+   connaît pas une propriété l'ignore sans rien casser.
+   ========================================================= */
+
+/* ---------- Thème : le navigateur adapte ses propres contrôles (barres de défilement, formulaires) ---------- */
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* ---------- Orange accessible ----------
+   L'orange de marque (#f06d2a / #ff8d45) avec du texte blanc plafonnait à 2,4–3:1.
+   Clair : orange plus profond + texte blanc (≥ 4,6:1). Sombre : orange vif + texte foncé (≈ 8:1). */
+:root {
+  --accent-text: #b8460f;
+  --accent-fill: linear-gradient(135deg, #c94c12, #a83d0c);
+  --on-accent: #fff;
+}
+
+html.dark {
+  --accent-text: #ffb27b;
+  --accent-fill: linear-gradient(135deg, #ff8d45, #ffb27b);
+  --on-accent: #1a1206;
+}
+
+.home-hub__button--primary,
+.home-hub__filters button.is-active,
+.home-hub__filters button[aria-pressed="true"] {
+  background: var(--accent-fill);
+  color: var(--on-accent);
+}
+
+.recette-single__step::before {
+  background: var(--accent-fill);
+  color: var(--on-accent);
+}
+
+.site-footer__list a[aria-current="page"],
+.site-footer__meta-links a:hover,
+.site-footer__meta-links a:focus-visible {
+  color: var(--accent-text);
+}
+
+/* Panneaux de l'accueil hors du hero : sombres et translucides par design (posés sur la photo),
+   ils devenaient gris sur fond crème en mode clair (texte à 1,5:1) */
+.home-hub__main .home-hub__panel {
+  background: var(--home-panel-strong);
+  color: var(--home-ink);
+  backdrop-filter: none;
+}
+
+.home-hub__main .home-hub__panel a {
+  color: var(--home-ink);
+}
+
+.home-hub__main .home-hub__quick-links,
+.home-hub__main .home-hub__bullet-list {
+  color: var(--home-muted);
+}
+
+/* Libellés de la fiche recette (Temps total, Cuisson…) : 0,7rem gris clair → lisibles */
+.recette-single dt {
+  color: var(--ds-color-muted, #46536a);
+  font-size: 0.75rem;
+}
+
+/* ---------- Transitions fluides entre les pages (View Transitions, sans JS) ---------- */
+@view-transition {
+  navigation: auto;
+}
+
+.site-v2-header-shell {
+  view-transition-name: site-header;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
+/* ---------- Typographie ---------- */
+:where(h1, h2, h3, h4, .site-v2-title, .home-hub-card__title) {
+  text-wrap: balance;
+}
+
+:where(p, li, figcaption, blockquote) {
+  text-wrap: pretty;
+  hyphens: auto;
+}
+
+/* Longueur de ligne confortable (~68 caractères) pour le texte des articles ;
+   les images, tableaux et blocs de code gardent toute la largeur */
+.site-v2-single__content .prose > :where(p, ul, ol, dl, blockquote, h2, h3, h4, h5, h6),
+.recette-single__content > :where(p, ul, ol, dl, blockquote, h2, h3, h4) {
+  max-inline-size: 68ch;
+}
+
+/* Mention « Auteur » du thème en 0,6rem (9,6 px) : illisible */
+.author [class~="text-[0.6rem]"] {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+}
+
+/* ---------- Cibles tactiles ≥ 24 px (WCAG 2.2 – 2.5.8) ---------- */
+.site-footer__meta-links a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  padding-inline: 0.25rem;
+}
+
+/* ---------- Requêtes de conteneur : les cartes s'adaptent à leur colonne, pas à l'écran ---------- */
+.site-v2-card-grid,
+.home-hub__card-grid,
+.home-hub__stack-grid {
+  container-type: inline-size;
+}
+
+@container (max-width: 22rem) {
+  .home-hub-card__title,
+  .site-v2-term-card__title {
+    font-size: 1.05rem;
+  }
+
+  .home-hub-card__tags {
+    display: none;
+  }
+}
+
+/* ---------- Galerie photo : vignettes légères + agrandissement ---------- */
+.gallery__item {
+  display: block;
+  cursor: zoom-in;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.gallery__item img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  margin: 0;
+  transition: transform 240ms ease;
+}
+
+.gallery__item:hover img,
+.gallery__item:focus-visible img {
+  transform: scale(1.03);
+}
+
+.lightbox {
+  inline-size: 100vw;
+  block-size: 100dvh;
+  max-inline-size: none;
+  max-block-size: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f4f6fb;
+}
+
+.lightbox::backdrop {
+  background: rgba(5, 8, 15, 0.92);
+}
+
+.lightbox[open] {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  animation: lightbox-in 160ms ease-out;
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.lightbox__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+}
+
+.lightbox__counter {
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
+}
+
+.lightbox__figure {
+  display: grid;
+  place-items: center;
+  min-block-size: 0;
+  margin: 0;
+  padding: 0 0.75rem;
+}
+
+.lightbox__figure img {
+  max-inline-size: 100%;
+  max-block-size: calc(100dvh - 9rem);
+  inline-size: auto;
+  block-size: auto;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.lightbox__caption {
+  padding: 0.75rem 1rem 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.lightbox__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  border: 1px solid rgba(244, 246, 251, 0.25);
+  border-radius: 999px;
+  background: rgba(244, 246, 251, 0.08);
+  color: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lightbox__button:hover,
+.lightbox__button:focus-visible {
+  background: rgba(244, 246, 251, 0.18);
+}
+
+.lightbox__nav {
+  position: fixed;
+  inset-block-start: 50%;
+  translate: 0 -50%;
+  min-inline-size: 3rem;
+  min-block-size: 3rem;
+  background: rgba(5, 8, 15, 0.7);
+  font-size: 1.75rem;
+}
+
+.lightbox__nav--prev {
+  inset-inline-start: 0.75rem;
+}
+
+.lightbox__nav--next {
+  inset-inline-end: 0.75rem;
+}
+
+html.has-open-dialog {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery__item img,
+  .lightbox[open],
+  .site-v2-mobile-dialog[open] {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* ---------- Impression : on garde le contenu, on retire la navigation ---------- */
+@media print {
+  html,
+  html.dark {
+    color-scheme: light;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .site-v2-header-wrap,
+  .site-v2-header-spacer,
+  #site-footer,
+  .site-footer,
+  #top-scroller,
+  #search-wrapper,
+  .site-v2-single__toc,
+  .site-v2-single__sharing,
+  .site-v2-single__related,
+  .site-v2-single__pagination,
+  .site-v2-single__author,
+  .site-v2-single__reply,
+  .recette-single__toc,
+  .recipe-tools,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .site-v2-hero,
+  .site-v2-single__panel,
+  .recette-single__section,
+  .recette-single__step {
+    border: 0 !important;
+    box-shadow: none !important;
+    background: none !important;
+    padding-inline: 0 !important;
+  }
+
+  .recette-single__section,
+  .recette-single__step,
+  figure,
+  img {
+    break-inside: avoid;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    word-break: break-all;
+  }
+}

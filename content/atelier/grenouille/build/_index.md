@@ -1,5 +1,5 @@
 ---
-title: "[Grenouille 3.0] - Carnet de construction"
+title: "Grenouille 3.0 – Carnet de construction"
 description: "Pas-à-pas chronologique de la fabrication d’un jeu de la grenouille électronique : bois, capteurs, LEDs, firmware."
 slug: "carnet-de-construction"
 date: 2025-10-08
