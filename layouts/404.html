@@ -1,0 +1,41 @@
+{{ define "main" }}
+  {{/* Page 404 : propose des portes de sortie (recherche, sections, derniers contenus) au lieu d'une impasse */}}
+  <section class="site-v2-page">
+    <header class="site-v2-hero">
+      <p class="site-v2-eyebrow">Erreur 404</p>
+      <h1 class="site-v2-title">Cette page n’existe pas (ou plus)</h1>
+      <p class="site-v2-description">
+        Le lien est peut-être ancien, ou l’adresse contient une faute de frappe. Voici de quoi retomber sur vos pieds.
+      </p>
+      {{ if site.Params.enableSearch }}
+        <p class="site-v2-404__actions">
+          <button type="button" class="site-v2-single__reply-link" data-open-search>Rechercher sur le site</button>
+          <a class="site-v2-single__reply-link" href="{{ "" | relLangURL }}">Revenir à l’accueil</a>
+        </p>
+      {{ end }}
+    </header>
+
+    <section class="site-v2-intro" aria-labelledby="not-found-sections">
+      <h2 id="not-found-sections">Les grandes sections</h2>
+      <ul class="site-v2-404__list">
+        {{ range site.Menus.main }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </section>
+
+    <section class="site-v2-intro" aria-labelledby="not-found-recent">
+      <h2 id="not-found-recent">Derniers ajouts</h2>
+      <ul class="site-v2-404__list">
+        {{ range first 5 site.RegularPages.ByDate.Reverse }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      </ul>
+    </section>
+  </section>
+  <script>
+    document.querySelector("[data-open-search]")?.addEventListener("click", function () {
+      (document.getElementById("search-button") || document.getElementById("search-button-mobile"))?.click();
+    });
+  </script>
+{{ end }}

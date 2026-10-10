@@ -1,9 +1,10 @@
 @layer ds-base {
   :root {
     color-scheme: light dark;
+
     --ds-color-bg: #f4efe5;
     --ds-color-bg-elevated: rgba(255, 255, 255, 0.84);
-    --ds-color-bg-strong: #ffffff;
+    --ds-color-bg-strong: #fff;
     --ds-color-ink: #182131;
     --ds-color-muted: #46536a;
     --ds-color-subtle: #56637a;

@@ -1,0 +1,9 @@
+{{- /* Surcharge du shortcode youtube intégré à Hugo : façade légère (voir partials/youtube-facade.html).
+     Usages acceptés : {{< youtube ID >}}, {{< youtube id="ID" title="…" start="30" >}} */ -}}
+{{- partial "youtube-facade.html" (dict
+  "id" (.Get "id" | default (.Get 0))
+  "title" (.Get "title" | default "")
+  "fallbackTitle" (printf "Vidéo YouTube liée à « %s »" .Page.Title)
+  "start" (.Get "start" | default 0)
+  "page" .Page
+) -}}

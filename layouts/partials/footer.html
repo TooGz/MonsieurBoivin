@@ -1,13 +1,36 @@
 {{ partial "footer/site-footer.html" . }}
 
+<script>
+  // Blocs de code et tableaux qui défilent horizontalement : focusables au clavier (WCAG 2.1.1),
+  // sinon leur contenu masqué n'est accessible qu'à la souris ou au doigt
+  document.addEventListener("DOMContentLoaded", function () {
+    var counts = { PRE: 0, TABLE: 0 };
+    document.querySelectorAll("main pre, main table").forEach(function (region) {
+      if (region.scrollWidth > region.clientWidth + 1 && !region.hasAttribute("tabindex")) {
+        counts[region.tagName] += 1;
+        // Libellés numérotés : chaque zone de repère doit être unique
+        var label = region.tagName === "PRE" ? "Bloc de code défilant " : "Tableau défilant ";
+        region.setAttribute("tabindex", "0");
+        region.setAttribute("role", "region");
+        region.setAttribute("aria-label", label + counts[region.tagName]);
+      }
+    });
+  });
+</script>
+
 {{ $pageAssetFlags := partial "functions/page-asset-flags.html" (dict "page" .) }}
 {{ $shouldEnableImageZoom := index $pageAssetFlags "needsImageZoom" }}
 {{ if $shouldEnableImageZoom }}
   <script>
-    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
-      margin: 24,
-      background: "rgba(0,0,0,0.5)",
-      scrollOffset: 0,
+    // Le script medium-zoom est chargé en defer : il est prêt au DOMContentLoaded
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof mediumZoom !== "function") return;
+      // Les vignettes de galerie ont leur propre visionneuse (lightbox.js)
+      mediumZoom(document.querySelectorAll("img:not(.nozoom):not(.gallery img)"), {
+        margin: 24,
+        background: "rgba(0,0,0,0.5)",
+        scrollOffset: 0,
+      });
     });
   </script>
 {{ end }}

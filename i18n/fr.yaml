@@ -1,3 +1,9 @@
 # Surcharges des traductions du thème Blowfish (themes/blowfish/i18n/fr.yaml)
 nav:
   scroll_to_top_title: "Revenir en haut de la page"
+
+sharing:
+  bluesky: "Partager sur Bluesky"
+  mastodon: "Partager sur Mastodon"
+  telegram: "Partager sur Telegram"
+  whatsapp: "Partager sur WhatsApp"

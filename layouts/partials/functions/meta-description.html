@@ -3,7 +3,7 @@
 {{- $section := $page.Section -}}
 {{- $siteDescription := $page.Site.Params.description | default $page.Site.Language.Params.description | default "Cuisine maison, atelier DIY, recettes testées et notes utiles à garder sous la main." -}}
 {{- $pageDescription := partial "functions/page-description.html" (dict "page" $page) | strings.TrimSpace -}}
-{{- $taxonomySEO := partial "functions/taxonomy-seo.html" $page -}}
+{{- $taxonomySEO := partialCached "functions/taxonomy-seo.html" $page $page.Kind $page.RelPermalink -}}
 {{- $isTaxonomyRoot := eq $page.Kind "taxonomy" -}}
 {{- $isTermPage := eq $page.Kind "term" -}}
 {{- $taxonomyKey := "" -}}

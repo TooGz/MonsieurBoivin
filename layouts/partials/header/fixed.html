@@ -15,7 +15,7 @@
           width="{{ .Width }}"
           height="{{ .Height }}"
           class="site-v2-brand__logo logo nozoom"
-          alt="{{ site.Title }}">
+          alt="">
       {{ end }}
       <span class="site-v2-brand__copy">
         <span class="site-v2-brand__title">{{ .Site.Title | plainify }}</span>
@@ -64,8 +64,8 @@
           id="appearance-switcher"
           type="button"
           class="site-v2-icon-button site-v2-desktop-only"
-          aria-label="Basculer le theme"
-          title="Basculer le theme">
+          aria-label="Basculer entre thème clair et sombre"
+          title="Thème clair / sombre">
           <span class="flex items-center justify-center dark:hidden">
             {{ partial "icon.html" "moon" }}
           </span>
@@ -77,8 +77,8 @@
           id="appearance-switcher-mobile"
           type="button"
           class="site-v2-icon-button site-v2-mobile-only"
-          aria-label="Basculer le theme"
-          title="Basculer le theme">
+          aria-label="Basculer entre thème clair et sombre"
+          title="Thème clair / sombre">
           <span class="flex items-center justify-center dark:hidden">
             {{ partial "icon.html" "moon" }}
           </span>

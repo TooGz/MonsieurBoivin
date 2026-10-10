@@ -24,7 +24,7 @@
       "@type": "Person",
       "@id": "{{ printf "%s#person" $home.Permalink | safeURL }}",
       "name": "{{ $authorName | safeJS }}",
-      {{ with $authorEmail }}"email": "{{ . | safeJS }}",{{ end }}
+      {{- /* Pas d'e-mail dans les données structurées : il y est lisible par tous les robots collecteurs */ -}}
       {{ with $authorHeadline }}"description": "{{ . | safeJS }}",{{ end }}
       {{ with $authorImage }}"image": "{{ . | absURL | safeURL }}",{{ end }}
       {{ with $sameAs }}"sameAs": {{ . }},{{ end }}
@@ -38,7 +38,7 @@
       "name": "{{ site.Title | safeJS }}",
       {{ with $siteDescription }}"description": "{{ . | safeJS }}",{{ end }}
       {{ with site.Params.keywords }}"keywords": {{ . }},{{ end }}
-      "inLanguage": "{{ site.LanguageCode | default "fr" }}",
+      "inLanguage": "{{ site.Params.isoCode | default "fr" }}",
       "publisher": { "@id": "{{ printf "%s#person" $home.Permalink | safeURL }}" }
     },
     {
@@ -50,7 +50,7 @@
       {{ with $homeDescription }}"description": "{{ . | safeJS }}",{{ end }}
       "isPartOf": { "@id": "{{ printf "%s#website" $home.Permalink | safeURL }}" },
       "about": { "@id": "{{ printf "%s#person" $home.Permalink | safeURL }}" },
-      "inLanguage": "{{ site.LanguageCode | default "fr" }}"
+      "inLanguage": "{{ site.Params.isoCode | default "fr" }}"
     }
   ]
   </script>
@@ -63,7 +63,7 @@
     {{- $authors := index .Params "authors" -}}
     {{- if gt (len $authors) 0 -}}
       {{- $authorKey := index $authors 0 -}}
-      {{- with index site.Data.authors $authorKey -}}
+      {{- with index (index (partialCached "functions/site-data.html" "site-data") "authors") $authorKey -}}
         {{- $schemaAuthor = .name | default $authorKey -}}
       {{- else -}}
         {{- $schemaAuthor = $authorKey -}}
@@ -84,7 +84,7 @@
     "name" .Title
     "isPartOf" (dict "@id" (printf "%s#website" $home.Permalink | safeURL))
     "about" (dict "@id" (printf "%s#person" $home.Permalink | safeURL))
-    "inLanguage" (site.LanguageCode | default "fr")
+    "inLanguage" (site.Params.isoCode | default "fr")
   -}}
   {{- with $pageMetaDescription -}}
     {{- $pageNode = merge $pageNode (dict "description" .) -}}
@@ -189,7 +189,7 @@
       "publisher" (dict "@type" "Person" "name" $authorName)
       "mainEntityOfPage" (dict "@type" "WebPage" "@id" (printf "%s#webpage" .Permalink | safeURL))
       "url" (.Permalink | safeURL)
-      "inLanguage" (site.LanguageCode | default "fr")
+      "inLanguage" (site.Params.isoCode | default "fr")
     -}}
     {{- with $pageMetaDescription -}}
       {{- $recipeNode = merge $recipeNode (dict "description" .) -}}
@@ -323,7 +323,7 @@
       "publisher" (dict "@type" "Person" "name" $authorName)
       "mainEntityOfPage" (dict "@type" "WebPage" "@id" (printf "%s#webpage" .Permalink | safeURL))
       "url" (.Permalink | safeURL)
-      "inLanguage" (site.LanguageCode | default "fr")
+      "inLanguage" (site.Params.isoCode | default "fr")
       "wordCount" (printf "%d" .WordCount)
     -}}
     {{- with $pageMetaDescription -}}
@@ -344,8 +344,29 @@
     {{- with .Params.tags -}}
       {{- $articleNode = merge $articleNode (dict "keywords" .) -}}
     {{- end -}}
+    {{- /* Image de l'article : recommandée par Google pour les résultats enrichis */ -}}
+    {{- partial "ui/single-featured-data.html" . -}}
+    {{- with index (.Scratch.Get "__uiSingleFeaturedData") "src" -}}
+      {{- $articleNode = merge $articleNode (dict "image" (slice (. | absURL))) -}}
+    {{- end -}}
     {{- $schemaNodes = $schemaNodes | append $articleNode -}}
   {{- end -}}
+  {{- /* Définitions minimales du site et de l'auteur : les @id #website et #person référencés plus haut
+         n'étaient définis que sur l'accueil */ -}}
+  {{- $schemaNodes = $schemaNodes | append (dict
+    "@context" "https://schema.org"
+    "@type" "WebSite"
+    "@id" (printf "%s#website" $home.Permalink)
+    "url" $home.Permalink
+    "name" site.Title
+  ) -}}
+  {{- $schemaNodes = $schemaNodes | append (dict
+    "@context" "https://schema.org"
+    "@type" "Person"
+    "@id" (printf "%s#person" $home.Permalink)
+    "name" $authorName
+    "url" $home.Permalink
+  ) -}}
   {{- $schemaJSON := $schemaNodes | jsonify -}}
   {{- printf "<script type=\"application/ld+json\">%s</script>" $schemaJSON | safeHTML -}}
 {{ else }}
@@ -360,7 +381,7 @@
     {{ with $nodeDescription }}"description": "{{ . | plainify | safeJS }}",{{ end }}
     "isPartOf": { "@id": "{{ printf "%s#website" $home.Permalink | safeURL }}" },
     "about": { "@id": "{{ printf "%s#person" $home.Permalink | safeURL }}" },
-    "inLanguage": "{{ site.LanguageCode | default "fr" }}"
+    "inLanguage": "{{ site.Params.isoCode | default "fr" }}"
   }
   </script>
 {{ end }}

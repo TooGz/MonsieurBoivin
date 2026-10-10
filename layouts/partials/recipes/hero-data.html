@@ -28,7 +28,7 @@
 {{- with $heroImage -}}
   {{- $img := . -}}
   {{- if ne .MediaType.SubType "svg" -}}
-    {{- $img = .Fill "1200x800 center" -}}
+    {{- $img = .Fill "1200x800 center webp q80" -}}
   {{- end -}}
   {{- $hero.Set "src" $img.RelPermalink -}}
   {{- $hero.Set "width" $img.Width -}}

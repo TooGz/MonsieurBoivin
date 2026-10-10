@@ -1,6 +1,7 @@
 {{ $id := delimit (slice "gallery" (partial "functions/uid.html" .)) "-" -}}
 {{ $content := .Inner -}}
-{{ $galleryClass := default "grid-w50 md:grid-w33 xl:grid-w25" (.Get "class") -}}
+{{/* Les classes de largeur Packery (grid-w50…) ne servent plus : la mosaïque est en colonnes CSS */ -}}
+{{ $galleryClass := .Get "class" | default "" -}}
 
 {{/* Si aucun contenu n'est passe au shortcode, on genere les <img> depuis les ressources images de la page */}}
 {{ if eq (trim $content " \n\r\t") "" -}}
@@ -162,8 +163,8 @@
 <div id="{{- $id -}}" class="gallery">
   {{ $content | safeHTML -}}
 </div>
-{{- if not ($.Page.Store.Get "lightboxLoaded") }}
-  {{- $.Page.Store.Set "lightboxLoaded" true }}
+{{- if not ($.Page.Scratch.Get "lightboxLoaded") }}
+  {{- $.Page.Scratch.Set "lightboxLoaded" true }}
   {{- with resources.Get "js/lightbox.js" }}
     {{- $lightboxJS := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
     <script defer src="{{ $lightboxJS.RelPermalink }}" integrity="{{ $lightboxJS.Data.Integrity }}"></script>

@@ -1,6 +1,7 @@
 {{ $siteName := .Site.Title }}
 {{ $section := .Section }}
-{{ $taxonomySEO := partial "functions/taxonomy-seo.html" . }}
+{{/* Mis en cache par page : appelé 3 fois par page (sitemap, SEO, description) et relit .Content */}}
+{{ $taxonomySEO := partialCached "functions/taxonomy-seo.html" . .Kind .RelPermalink }}
 {{ $isTaxonomyRoot := eq .Kind "taxonomy" }}
 {{ $isTermPage := eq .Kind "term" }}
 {{ $isTaxonomyPage := or $isTaxonomyRoot $isTermPage }}
@@ -59,27 +60,44 @@
 {{ $canonical := .Permalink | absURL }}
 {{ $hasRobotsOverride := isset .Params "robots" }}
 {{ $robots := .Params.robots | default .Site.Params.robots | default "index,follow,max-image-preview:large" }}
+{{/* Page 404 : titre français et jamais indexée */}}
+{{ if eq .Kind "404" }}
+  {{ $metaTitle = printf "Page introuvable | %s" $siteName }}
+  {{ $metaDescription = "Cette page n’existe pas ou plus. Retrouvez les articles, recettes, projets et albums du site." }}
+  {{ $robots = "noindex,follow" }}
+  {{ $hasRobotsOverride = true }}
+{{ end }}
 {{ if and $isTaxonomyPage (not $taxonomyShouldIndex) (not $hasRobotsOverride) }}
   {{ $robots = "noindex,follow,max-image-preview:large" }}
 {{ end }}
-{{ $keywords := .Params.keywords | default .Site.Params.keywords }}
 {{ $ogType := cond .IsPage "article" "website" }}
-{{ $locale := replace (.Site.LanguageCode | default "fr-fr") "-" "_" }}
+{{/* Open Graph attend le format langue_PAYS ; pas de .Site.LanguageCode (déprécié depuis Hugo 0.158) */}}
+{{ $locale := .Site.Params.ogLocale | default "fr_FR" }}
 
 <title>{{ $metaTitle }}</title>
 <meta name="description" content="{{ $metaDescription | strings.TrimSpace }}">
 <link rel="canonical" href="{{ $canonical }}">
 <meta name="robots" content="{{ $robots }}">
 
-{{ with $keywords }}
-  <meta name="keywords" content="{{ delimit . ", " }}">
-{{ end }}
-
+{{/* Plus de <meta name="keywords"> : ignoré par les moteurs, et identique sur tout le site */}}
 <meta property="og:locale" content="{{ $locale }}">
+<meta property="og:site_name" content="{{ $siteName }}">
 <meta property="og:type" content="{{ $ogType }}">
 <meta property="og:title" content="{{ $metaTitle }}">
 <meta property="og:description" content="{{ $metaDescription | strings.TrimSpace }}">
 <meta property="og:url" content="{{ $canonical }}">
+{{ if .IsPage }}
+  <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">
+  {{ if gt .Lastmod .Date }}
+    <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}">
+  {{ end }}
+  {{ with .Section }}
+    <meta property="article:section" content="{{ $.CurrentSection.Title | default (. | humanize) }}">
+  {{ end }}
+  {{ range first 6 (.Params.tags | default slice) }}
+    <meta property="article:tag" content="{{ . }}">
+  {{ end }}
+{{ end }}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ $metaTitle }}">
 <meta name="twitter:description" content="{{ $metaDescription | strings.TrimSpace }}">

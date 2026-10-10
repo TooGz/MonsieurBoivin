@@ -1,4 +1,4 @@
-{{ $authorsData := site.Data.authors }}
+{{ $authorsData := index (partialCached "functions/site-data.html" "site-data") "authors" }}
 {{ $baseURL := site.BaseURL }}
 {{ $page := . }}
 {{ $pageAuthors := slice }}

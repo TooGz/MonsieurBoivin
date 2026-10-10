@@ -1,7 +1,8 @@
 const STORAGE_KEY = "appearance";
 const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-const getAppearance = () => (document.documentElement.classList.contains("dark") ? "dark" : "light");
+const getAppearance = () =>
+  document.documentElement.classList.contains("dark") ? "dark" : "light";
 
 const updateThemeMeta = () => {
   const meta = document.querySelector('meta[name="theme-color"]');

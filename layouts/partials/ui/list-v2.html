@@ -54,7 +54,7 @@
     <section class="site-v2-intro">
       <div class="site-v2-section-head">
         <h2>Sommaire</h2>
-        <p>Acces rapide au contenu de cette page.</p>
+        <p>Accès rapide au contenu de cette page.</p>
       </div>
       <div class="prose max-w-none dark:prose-invert">
         {{ partial "toc.html" . }}
@@ -63,7 +63,9 @@
   {{ end }}
 
   {{ if gt (len $paginator.Pages) 0 }}
-    <section>
+    <section aria-labelledby="list-items-title">
+      {{/* Titre de niveau 2 pour les lecteurs d'écran : les cartes sont en h3 sous le h1 de la page */}}
+      <h2 id="list-items-title" class="visually-hidden">Contenus</h2>
       <div class="site-v2-card-grid">
         {{ range $paginator.Pages }}
           {{ partial "ui/list-card.html" (dict

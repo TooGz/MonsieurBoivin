@@ -29,6 +29,11 @@
       {{- $fallback = $resource.Process "webp q78" }}
       {{- $srcset = slice (printf "%s %dw" $fallback.RelPermalink $fallback.Width) }}
     {{- end }}
+    {{- /* Version agrandie au clic (medium-zoom) : WebP ≤ 2048 px au lieu de l'original (jusqu'à 10 Mo) */ -}}
+    {{- $zoom := $resource.Process "webp q82" }}
+    {{- if gt $resource.Width 2048 }}
+      {{- $zoom = $resource.Resize "2048x webp q82" }}
+    {{- end }}
     <img
       class="my-0 rounded-md"
       loading="lazy"
@@ -39,7 +44,7 @@
       sizes="(min-width: 960px) 52rem, calc(100vw - 3rem)"
       width="{{ $fallback.Width }}"
       height="{{ $fallback.Height }}"
-      data-zoom-src="{{ $resource.RelPermalink }}">
+      data-zoom-src="{{ $zoom.RelPermalink }}">
   {{- else if $resource }}
     <img
       class="my-0 rounded-md"

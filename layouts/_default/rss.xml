@@ -1,0 +1,63 @@
+{{- /* Flux RSS (surcharge du gabarit Blowfish/Hugo)
+     - titre en français (« … sur MonsieurBoivin.fr » et non « … on … ») ;
+     - description de repli pour les recettes, dont le contenu est dans le front matter (elles sortaient vides) ;
+     - langue sans .Site.LanguageCode (déprécié depuis Hugo 0.158). */ -}}
+{{- $authorEmail := "" -}}
+{{- with site.Params.Author.email }}{{ $authorEmail = . }}{{ end -}}
+{{- $authorName := site.Params.Author.name | default site.Title -}}
+
+{{- $pctx := . -}}
+{{- if .IsHome }}{{ $pctx = .Site }}{{ end -}}
+{{- $pages := slice -}}
+{{- if or $.IsHome $.IsSection -}}
+  {{- $pages = $pctx.RegularPages -}}
+{{- else -}}
+  {{- $pages = $pctx.Pages -}}
+{{- end -}}
+{{- $limit := .Site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 -}}
+  {{- $pages = $pages | first $limit -}}
+{{- end -}}
+
+{{- $title := site.Title -}}
+{{- if not .IsHome -}}
+  {{- $title = printf "%s sur %s" .Title site.Title -}}
+{{- end -}}
+{{- $description := partial "functions/meta-description.html" (dict "page" .) -}}
+
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ $title }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>{{ $description }}</description>
+    <generator>Hugo</generator>
+    <language>{{ site.Params.isoCode | default "fr" }}</language>
+    {{- with $authorEmail }}
+    <managingEditor>{{ . }} ({{ $authorName }})</managingEditor>
+    {{- end }}
+    {{- with .Site.Copyright }}
+    <copyright>{{ . }}</copyright>
+    {{- end }}
+    {{- if gt (len $pages) 0 }}
+    <lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{- end }}
+    {{- with .OutputFormats.Get "RSS" }}
+    {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{- end }}
+    {{- range $pages }}
+    {{- $summary := partial "functions/meta-description.html" (dict "page" .) }}
+    {{- partial "ui/single-featured-data.html" . }}
+    {{- $image := index (.Scratch.Get "__uiSingleFeaturedData") "src" }}
+    {{- $html := printf "<p>%s</p>" ($summary | htmlEscape) }}
+    {{- with $image }}{{ $html = printf "<p><img src=\"%s\" alt=\"\"></p>%s" (. | absURL) $html }}{{ end }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      <guid>{{ .Permalink }}</guid>
+      <description>{{ $html }}</description>
+    </item>
+    {{- end }}
+  </channel>
+</rss>

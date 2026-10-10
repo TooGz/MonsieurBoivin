@@ -47,7 +47,7 @@
     {{ with $featured }}
       {{ $img := . }}
       {{ if and (not $disableImageOptimization) (ne .MediaType.SubType "svg") }}
-        {{ $img = .Fill "720x480 center q90" }}
+        {{ $img = .Fill "720x480 center webp q78" }}
       {{ end }}
       <div class="home-hub-card__media">
         <img

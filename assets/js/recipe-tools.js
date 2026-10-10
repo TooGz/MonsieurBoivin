@@ -31,7 +31,11 @@
   // Valeur « Portions » de la fiche d'infos (au-dessus) : on la garde alignée sur le sélecteur
   var infoServings = null;
   Array.prototype.forEach.call(document.querySelectorAll(".recette-single dt"), function (dt) {
-    if (/portion/i.test(dt.textContent) && dt.nextElementSibling && dt.nextElementSibling.tagName === "DD") {
+    if (
+      /portion/i.test(dt.textContent) &&
+      dt.nextElementSibling &&
+      dt.nextElementSibling.tagName === "DD"
+    ) {
       infoServings = dt.nextElementSibling;
     }
   });

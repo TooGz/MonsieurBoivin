@@ -1,5 +1,5 @@
 {{ with .Params.sharingLinks | default (.Site.Params.article.sharingLinks | default false) }}
-  {{ $links := site.Data.sharing }}
+  {{ $links := index (partialCached "functions/site-data.html" "site-data") "sharing" }}
   <section class="site-v2-single__panel site-v2-single__sharing">
 <!--     <div class="site-v2-section-head">
       <h2>Partager</h2>
@@ -21,11 +21,13 @@
         {{ $shareKey := . }}
         {{ with index $links . }}
           {{ $label := i18n .title | default (.icon | humanize) }}
+          {{/* URL et titre encodés : un « & » dans le titre coupait le paramètre (subject=…&…) */}}
+          {{ $shareURL := printf .url (urlquery $.Permalink) (replace (urlquery ($.Title | plainify)) "+" "%20") }}
+          {{ $isMail := hasPrefix .url "mailto:" }}
           <a
-            target="_blank"
-            rel="noopener noreferrer"
+            {{ if not $isMail }}target="_blank" rel="noopener noreferrer"{{ end }}
             class="site-v2-single__share-link"
-            href="{{ printf .url $.Permalink $.Title }}"
+            href="{{ $shareURL | safeURL }}"
             title="{{ $label }}"
             aria-label="{{ $label }}">
             {{ partial "icon.html" .icon }}

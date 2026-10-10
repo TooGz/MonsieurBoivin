@@ -12,11 +12,11 @@
   {{ $topClass := cond (hasPrefix site.Params.header.layout "fixed") "lg:top-[140px]" "lg:top-10" }}
 
   {{ if $showToc }}
-    <aside class="recette-single__toc order-last px-0 lg:order-last lg:ml-auto lg:ps-8">
+    <div class="recette-single__toc order-last px-0 lg:order-last lg:ml-auto lg:ps-8">
       <div class="toc ps-5 print:hidden lg:sticky {{ $topClass }}">
         {{ partial "toc.html" $p }}
       </div>
-    </aside>
+    </div>
   {{ end }}
 
   <div class="recette-single__body min-h-0 min-w-0 w-full max-w-4xl flex-1">
@@ -361,6 +361,18 @@
               {{ end }}
             {{ end }}
           </ul>
+        </section>
+      {{ end }}
+    {{ end }}
+
+    {{/* =========================
+        VIDÉO (champ video: du front matter, ignoré jusqu'ici)
+    ========================== */}}
+    {{ with $p.Params.video }}
+      {{ if ne (trim (printf "%v" .) " ") "" }}
+        <section class="recette-single__section">
+          <h2 class="recette-single__subtitle">En vidéo</h2>
+          {{ partial "youtube-facade.html" (dict "id" . "fallbackTitle" (printf "Vidéo de la recette « %s »" $p.Title) "page" $p) }}
         </section>
       {{ end }}
     {{ end }}

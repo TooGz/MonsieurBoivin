@@ -1,42 +1,70 @@
-{{/* Shortcode vidéo avec accessibilité Usage : {{< video src="medias/teaser.mp4"
-poster="/img/poster.jpg" title="Description de la vidéo" >}} {{< video src="medias/teaser.webm"
-autoplay="true" >}} */}} {{ $src := .Get "src" }} {{ $poster := .Get "poster" }} {{ $title := .Get
-"title" }} {{ $autoplay := eq (.Get "autoplay") "true" }} {{ $mimeType := "" }} {{ $ext := path.Ext
-$src | strings.TrimPrefix "." }} {{ if eq $ext "mp4" }} {{ $mimeType = "video/mp4" }} {{ else if eq
-$ext "webm" }} {{ $mimeType = "video/webm" }} {{ else if eq $ext "ogv" }} {{ $mimeType = "video/ogg"
-}} {{ else }} {{ $mimeType = printf "video/%s" $ext }} {{ end }}
+{{- /*
+  Vidéo locale accessible.
+  Usage :
+    {{< video src="medias/teaser.mp4" title="Description de la vidéo" >}}
+    {{< video src="medias/delignage.mp4" title="…" animation="true" >}}   ← remplace un GIF : lecture auto, muette, en boucle
+  Paramètres : src (fichier du dossier de la page), title (description, obligatoire pour l'accessibilité),
+               poster (image d'aperçu ; par défaut « <nom>-poster.jpg » à côté de la vidéo), animation, autoplay, loop, muted.
+  - La source est résolue dans les ressources de la page (publication et chemin corrects).
+  - Les dimensions de l'affiche réservent la place de la vidéo (pas de décalage de mise en page).
+  - En mode animation, la lecture automatique est coupée si le visiteur a demandé à réduire les animations.
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- $title := .Get "title" | default "" -}}
+{{- $animation := eq (.Get "animation") "true" -}}
+{{- $autoplay := or $animation (eq (.Get "autoplay") "true") -}}
+{{- $loop := or $animation (eq (.Get "loop") "true") -}}
+{{- $muted := or $autoplay (eq (.Get "muted") "true") -}}
 
-<video
-  controls
-  {{
-  if
-  $autoplay
-  }}autoplay{{
-  end
-  }}
-  loop
-  muted
-  playsinline
-  preload="metadata"
-  {{
-  if
-  $poster
-  }}poster="{{ $poster }}"
-  {{
-  end
-  }}
-  {{
-  if
-  $title
-  }}aria-label="{{ $title }}"
-  title="{{ $title }}"
-  {{
-  end
-  }}
-  style="width: 100%; height: auto; display: block; border-radius: 12px; object-fit: cover"
->
-  <source src="{{ $src }}" type="{{ $mimeType }}" />
-  <p>
-    Votre navigateur ne supporte pas la vidéo HTML5. <a href="{{ $src }}">Télécharger la vidéo</a>
-  </p>
-</video>
+{{- $clean := strings.TrimPrefix "./" $src -}}
+{{- $videoURL := $src -}}
+{{- with .Page.Resources.Get $clean }}{{ $videoURL = .RelPermalink }}{{ end -}}
+
+{{- $ext := path.Ext $clean | strings.TrimPrefix "." | lower -}}
+{{- $mime := index (dict "mp4" "video/mp4" "m4v" "video/mp4" "webm" "video/webm" "ogv" "video/ogg" "mov" "video/quicktime") $ext | default (printf "video/%s" $ext) -}}
+
+{{- $posterURL := "" -}}
+{{- $width := 0 -}}
+{{- $height := 0 -}}
+{{- $posterName := .Get "poster" | default (printf "%s-poster.jpg" (strings.TrimSuffix (path.Ext $clean) $clean)) -}}
+{{- with .Page.Resources.Get (strings.TrimPrefix "./" $posterName) -}}
+  {{- $img := . -}}
+  {{- if gt .Width 1280 }}{{ $img = .Resize "1280x webp q78" }}{{ else }}{{ $img = .Process "webp q78" }}{{ end -}}
+  {{- $posterURL = $img.RelPermalink -}}
+  {{- $width = $img.Width -}}
+  {{- $height = $img.Height -}}
+{{- else -}}
+  {{- with .Get "poster" }}{{ $posterURL = . }}{{ end -}}
+{{- end -}}
+
+<figure class="video-embed{{ if $animation }} video-embed--animation{{ end }}{{ if and $height (gt $height $width) }} video-embed--portrait{{ end }}">
+  <video
+    controls
+    playsinline
+    preload="{{ if $autoplay }}auto{{ else }}metadata{{ end }}"
+    {{- if $autoplay }} autoplay data-autoplay{{ end }}
+    {{- if $loop }} loop{{ end }}
+    {{- if $muted }} muted{{ end }}
+    {{- with $posterURL }} poster="{{ . }}"{{ end }}
+    {{- if $width }} width="{{ $width }}" height="{{ $height }}"{{ end }}
+    {{- with $title }} aria-label="{{ . }}"{{ end }}>
+    <source src="{{ $videoURL }}" type="{{ $mime }}">
+    <p>Votre navigateur ne lit pas cette vidéo. <a href="{{ $videoURL }}">Télécharger la vidéo</a>.</p>
+  </video>
+  {{- with $title }}
+    <figcaption>{{ . }}</figcaption>
+  {{- end }}
+</figure>
+{{- /* Une seule fois par page (première vidéo) ; .Store persisterait entre deux rebuilds du serveur */ -}}
+{{- if eq .Ordinal 0 }}
+  <script>
+    // Réduire les animations : pas de lecture automatique (au DOMContentLoaded, pour toutes les vidéos de la page)
+    document.addEventListener("DOMContentLoaded", function () {
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      document.querySelectorAll("video[data-autoplay]").forEach(function (video) {
+        video.removeAttribute("autoplay");
+        video.pause();
+      });
+    });
+  </script>
+{{- end }}

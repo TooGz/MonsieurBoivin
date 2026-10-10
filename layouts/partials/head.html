@@ -1,10 +1,7 @@
 <head>
   <meta charset="utf-8">
-  {{ with .Site.Language.Params.htmlCode | default .Site.LanguageCode }}
-    <meta http-equiv="content-language" content="{{ . }}">
-  {{ end }}
+  {{/* Ni content-language (la langue est dans <html lang>) ni X-UA-Compatible (Internet Explorer) : obsolètes */}}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {{/* Valeurs par défaut selon le système ; appearance.js les remplace ensuite selon le thème réellement appliqué */}}
   <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#172033" media="(prefers-color-scheme: dark)">
@@ -73,7 +70,7 @@
     {{ end }}
     {{/* Même traitement que home/custom.html, sinon le navigateur télécharge l'original en plus de la version affichée */}}
     {{ if and $homeImage (not .Site.Params.disableImageOptimization) (ne $homeImage.MediaType.SubType "svg") }}
-      {{ $homeImage = $homeImage.Fill "1600x900 center q92" }}
+      {{ $homeImage = $homeImage.Fill "1600x900 center webp q80" }}
     {{ end }}
     {{ with $homeImage }}
       <link rel="preload" as="image" href="{{ .RelPermalink }}">
@@ -278,7 +275,8 @@
 
   {{ if $shouldEnableImageZoom }}
     {{ $zoomJS := resources.Get "lib/zoom/zoom.min.umd.js" | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
-    <script src="{{ $zoomJS.RelPermalink }}" integrity="{{ $zoomJS.Data.Integrity }}"></script>
+    {{/* defer : ne bloque plus le rendu ; l'initialisation (footer.html) attend DOMContentLoaded */}}
+    <script defer src="{{ $zoomJS.RelPermalink }}" integrity="{{ $zoomJS.Data.Integrity }}"></script>
   {{ end }}
 
   {{ if templates.Exists "partials/favicons.html" }}
@@ -323,9 +321,22 @@
       {{- end -}}
     {{- end -}}
   {{- end -}}
+  {{- /* Image de partage : 1200×630 en JPEG (format le mieux accepté par Facebook, LinkedIn, messageries).
+         L'original pouvait dépasser 10 Mo, au-delà de la limite de 8 Mo de Facebook. */ -}}
   {{- with $socialImage -}}
-    <meta name="twitter:image" content="{{ .RelPermalink | absURL }}">
-    <meta property="og:image" content="{{ .RelPermalink | absURL }}">
+    {{- $og := . -}}
+    {{- if and (ne .MediaType.SubType "svg") (ne .MediaType.SubType "gif") -}}
+      {{- $og = .Fill "1200x630 center q82 jpg" -}}
+    {{- end -}}
+    {{- $ogAlt := $.Params.image_alt | default $.Title | default site.Title -}}
+    <meta property="og:image" content="{{ $og.Permalink }}">
+    {{- if ne .MediaType.SubType "svg" }}
+    <meta property="og:image:width" content="{{ $og.Width }}">
+    <meta property="og:image:height" content="{{ $og.Height }}">
+    {{- end }}
+    <meta property="og:image:alt" content="{{ $ogAlt }}">
+    <meta name="twitter:image" content="{{ $og.Permalink }}">
+    <meta name="twitter:image:alt" content="{{ $ogAlt }}">
   {{- end -}}
 
   {{ partial "schema.html" . }}

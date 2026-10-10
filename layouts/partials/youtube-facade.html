@@ -1,0 +1,64 @@
+{{- /*
+  Vidéo YouTube en « façade » : une vignette cliquable, le lecteur n'est chargé qu'au clic.
+  - Aucun script ni cookie YouTube au chargement de la page (le lecteur pèse ~1 Mo et dépose des cookies).
+  - Lecteur en mode confidentialité renforcée (youtube-nocookie.com).
+  - Vignette rapatriée au build et servie depuis le site quand c'est possible.
+  - Sans JavaScript, le lien ouvre la vidéo sur YouTube.
+  Paramètres (dict) : id (identifiant ou URL YouTube), title, start (secondes), page (pour mémoriser le chargement du script)
+*/ -}}
+{{- $raw := printf "%v" (.id | default "") | strings.TrimSpace -}}
+{{- $id := $raw -}}
+{{- with findRESubmatch `(?:youtu\.be/|youtube(?:-nocookie)?\.com/(?:watch\?(?:.*&)?v=|embed/|shorts/|live/))([A-Za-z0-9_-]{11})` $raw 1 -}}
+  {{- $id = index (index . 0) 1 -}}
+{{- end -}}
+{{- if $id -}}
+  {{- /* Titre réel de la vidéo via oEmbed (au build, mis en cache) pour un libellé accessible distinct */ -}}
+  {{- $title := .title | default "" -}}
+  {{- if not $title -}}
+    {{- with try (resources.GetRemote (printf "https://www.youtube.com/oembed?format=json&url=https://www.youtube.com/watch?v=%s" $id)) -}}
+      {{- with .Value -}}
+        {{- with try (transform.Unmarshal .) -}}
+          {{- with .Value -}}{{- $title = .title | default "" -}}{{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $title = $title | default .fallbackTitle | default "Vidéo YouTube" -}}
+  {{- $start := int (.start | default 0) -}}
+  {{- $watchURL := printf "https://www.youtube.com/watch?v=%s" $id -}}
+  {{- if gt $start 0 }}{{ $watchURL = printf "%s&t=%ds" $watchURL $start }}{{ end -}}
+
+  {{- $thumbRemote := printf "https://i.ytimg.com/vi/%s/hqdefault.jpg" $id -}}
+  {{- $thumb := dict "src" $thumbRemote "width" 480 "height" 360 -}}
+  {{- with try (resources.GetRemote $thumbRemote) -}}
+    {{- with .Value -}}
+      {{- $img := .Resize "640x webp q75" -}}
+      {{- $thumb = dict "src" $img.RelPermalink "width" $img.Width "height" $img.Height -}}
+    {{- end -}}
+  {{- end -}}
+
+  <div class="yt-facade" data-yt-id="{{ $id }}" data-yt-title="{{ $title }}"{{ if gt $start 0 }} data-yt-start="{{ $start }}"{{ end }}>
+    <a class="yt-facade__link" href="{{ $watchURL }}" target="_blank" rel="noopener noreferrer">
+      <img
+        class="yt-facade__thumb nozoom"
+        src="{{ index $thumb "src" }}"
+        width="{{ index $thumb "width" }}"
+        height="{{ index $thumb "height" }}"
+        alt=""
+        loading="lazy"
+        decoding="async">
+      <span class="yt-facade__play" aria-hidden="true"></span>
+      <span class="yt-facade__label">Lire la vidéo : {{ $title }}</span>
+    </a>
+  </div>
+
+  {{- with .page -}}
+    {{- if not (.Scratch.Get "youtubeFacadeLoaded") -}}
+      {{- .Scratch.Set "youtubeFacadeLoaded" true -}}
+      {{- with resources.Get "js/youtube-facade.js" -}}
+        {{- $js := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+        <script defer src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

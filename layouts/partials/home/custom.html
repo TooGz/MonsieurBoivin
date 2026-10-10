@@ -50,7 +50,7 @@
   {{ end }}
 {{ end }}
 {{ if and $authorImage (not $disableImageOptimization) }}
-  {{ $authorImage = $authorImage.Fill "220x220 center q96" }}
+  {{ $authorImage = $authorImage.Fill "220x220 center webp q85" }}
 {{ end }}
 
 {{ $heroImage := "" }}
@@ -62,7 +62,7 @@
   {{ end }}
 {{ end }}
 {{ if and $heroImage (not $disableImageOptimization) }}
-  {{ $heroImage = $heroImage.Fill "1600x900 center q92" }}
+  {{ $heroImage = $heroImage.Fill "1600x900 center webp q80" }}
 {{ end }}
 
 {{ $tagScratch := newScratch }}
@@ -159,7 +159,7 @@
           </ul>
         </div>
 
-        <aside class="home-hub__hero-rail" aria-label="Projet et résumé du moment">
+        <section class="home-hub__hero-rail" aria-label="Projet du moment">
           <article class="home-hub__panel home-hub__panel--accent">
             <p class="home-hub__eyebrow">Projet vivant</p>
             {{ with $grenouille }}
@@ -186,7 +186,7 @@
               {{ end }}
             </div>
           </article>
-        </aside>
+        </section>
       </div>
     </section>
   </header>
@@ -215,7 +215,7 @@
           {{ end }}
         </ol>
 
-        <aside class="home-hub__timeline-side">
+        <div class="home-hub__timeline-side">
           <article class="home-hub__panel">
             <p class="home-hub__eyebrow">Entrer par envie</p>
             <ul class="home-hub__quick-links">
@@ -225,7 +225,7 @@
               <li><a href="{{ "/photos/" | relLangURL }}">Les albums photo</a></li>
             </ul>
           </article>
-        </aside>
+        </div>
       </div>
     </section>
 

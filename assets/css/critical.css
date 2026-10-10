@@ -2,6 +2,7 @@
    Full styling lives in assets/css/home.css. */
 :root {
   color-scheme: light dark;
+
   --home-bg: #f3efe6;
   --home-ink: #182131;
   --home-border: rgba(24, 33, 49, 0.14);
@@ -30,7 +31,12 @@ body.site-shell--home {
   background:
     radial-gradient(circle at top left, rgba(240, 109, 42, 0.16), transparent 24rem),
     radial-gradient(circle at top right, rgba(67, 97, 238, 0.18), transparent 28rem),
-    linear-gradient(180deg, rgba(24, 32, 51, 0.96), rgba(24, 32, 51, 0.9) 22rem, var(--home-bg) 22rem);
+    linear-gradient(
+      180deg,
+      rgba(24, 32, 51, 0.96),
+      rgba(24, 32, 51, 0.9) 22rem,
+      var(--home-bg) 22rem
+    );
 }
 
 body.site-shell--home #main-content {
@@ -177,7 +183,12 @@ html.dark .home-hub__theme-icon--sun {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(110deg, rgba(8, 13, 24, 0.82), rgba(8, 13, 24, 0.48) 48%, rgba(8, 13, 24, 0.78)),
+    linear-gradient(
+      110deg,
+      rgba(8, 13, 24, 0.82),
+      rgba(8, 13, 24, 0.48) 48%,
+      rgba(8, 13, 24, 0.78)
+    ),
     linear-gradient(180deg, rgba(24, 32, 51, 0.1), rgba(24, 32, 51, 0.72));
 }
 
@@ -361,7 +372,7 @@ html.dark .home-hub__theme-icon--sun {
   padding-left: 1.1rem;
 }
 
-@media (min-width: 960px) {
+@media (width >= 960px) {
   .home-hub {
     padding: 1.5rem 1.5rem 4rem;
   }
@@ -387,7 +398,7 @@ html.dark .home-hub__theme-icon--sun {
   }
 }
 
-@media (max-width: 959px) {
+@media (width <= 959px) {
   .home-hub__theme-toggle > span[data-theme-label] {
     display: none;
   }
@@ -397,7 +408,7 @@ html.dark .home-hub__theme-icon--sun {
   }
 }
 
-@media (max-width: 699px) {
+@media (width <= 699px) {
   .home-hub__nav {
     gap: 0.55rem;
     padding: 0.75rem 0.85rem;
@@ -415,7 +426,7 @@ html.dark .home-hub__theme-icon--sun {
   }
 }
 
-@media (max-width: 479px) {
+@media (width <= 479px) {
   .home-hub {
     padding-inline: 0.85rem;
   }

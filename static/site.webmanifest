@@ -1,12 +1,17 @@
 {
-  "name": "Monsieur Boivin",
-  "short_name": "MonsieurBoivin",
-  "icons": [
-    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
-  ],
-  "theme_color": "#0f172a",
-  "background_color": "#f3efe6",
+  "id": "/",
+  "name": "MonsieurBoivin.fr",
+  "short_name": "M. Boivin",
+  "description": "Cuisine maison, atelier DIY, recettes testées et notes utiles à garder sous la main.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "start_url": "/"
+  "theme_color": "#172033",
+  "background_color": "#172033",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
 }

@@ -166,10 +166,14 @@
           </p>
         {{ end }}
 
-        {{ if or $showThemeAttribution $showBackToTop }}
+        {{ if or $showThemeAttribution $showBackToTop (site.GetPage "/mentions-legales") }}
           <div class="site-footer__meta-links">
             {{ if $showBackToTop }}
               <a href="#page-top">Haut de page</a>
+            {{ end }}
+            {{ with site.GetPage "/mentions-legales" }}
+              <span class="site-footer__meta-separator" aria-hidden="true">•</span>
+              <a href="{{ .RelPermalink }}">Mentions légales</a>
             {{ end }}
             {{ if $showThemeAttribution }}
               {{ if $showBackToTop }}

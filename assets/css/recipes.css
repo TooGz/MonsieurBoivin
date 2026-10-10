@@ -141,6 +141,51 @@
   margin-inline: 0;
 }
 
+/* ---------- Fiche d'infos (temps, portions, difficulté) ---------- */
+.recipe-info__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--ds-color-border, rgba(24, 33, 49, 0.14));
+  border-radius: 1rem;
+  background: var(--ds-color-bg-elevated, rgba(255, 255, 255, 0.7));
+}
+
+.recipe-info__item {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background: var(--ds-color-accent-soft, rgba(240, 109, 42, 0.08));
+}
+
+.recipe-info__label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--ds-color-muted, #46536a);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.recipe-info__icon {
+  flex: none;
+  inline-size: 1.15rem;
+  block-size: 1.15rem;
+  color: var(--ds-color-ink, #182131);
+}
+
+.recipe-info__value {
+  margin: 0;
+  color: var(--ds-color-ink, #182131);
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
 /* ---------- Outils : portions, mode cuisine, impression ---------- */
 .recipe-tools {
   display: flex;
@@ -258,13 +303,13 @@ html.dark .recette-single__description {
   color: var(--ds-color-muted, #b4bfd4);
 }
 
-@media (min-width: 40rem) {
+@media (width >= 40rem) {
   .recette-single__section {
     padding: 1.5rem;
   }
 }
 
-@media (min-width: 64rem) {
+@media (width >= 64rem) {
   .recette-single__toc {
     max-width: 18rem;
     flex: 0 0 18rem;

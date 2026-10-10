@@ -9,7 +9,7 @@
     {{ end }}
     {{ if $authorImage }}
       {{ if not $disableImageOptimization }}
-        {{ $authorImage = $authorImage.Fill "192x192" }}
+        {{ $authorImage = $authorImage.Fill "192x192 webp q85" }}
       {{ end }}
       <img
         class="!mt-0 !mb-0 h-24 w-24 rounded-full me-4"

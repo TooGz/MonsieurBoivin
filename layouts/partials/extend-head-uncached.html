@@ -3,7 +3,7 @@
   {{ $siteAuthor := site.Params.Author.name | default "" }}
   {{ if isset .Params "authors" }}
     {{ range index .Params "authors" }}
-      {{ with index site.Data.authors . }}
+      {{ with index (index (partialCached "functions/site-data.html" "site-data") "authors") . }}
         {{ $metaAuthors = $metaAuthors | append (.name | default "") }}
       {{ else }}
         {{ $metaAuthors = $metaAuthors | append . }}

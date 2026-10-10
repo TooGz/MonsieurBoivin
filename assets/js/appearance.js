@@ -5,13 +5,15 @@
 const root = document.documentElement;
 const sitePreference = root.getAttribute("data-default-appearance");
 const autoAppearance = root.getAttribute("data-auto-appearance") === "true";
-const colorSchemeQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+const colorSchemeQuery = window.matchMedia
+  ? window.matchMedia("(prefers-color-scheme: dark)")
+  : null;
 const themeColors = { light: "#f3efe6", dark: "#172033" };
 
 const readStoredPreference = () => {
   try {
     return localStorage.getItem("appearance");
-  } catch (error) {
+  } catch {
     return null;
   }
 };
@@ -23,7 +25,7 @@ const storePreference = (value) => {
     } else {
       localStorage.setItem("appearance", value);
     }
-  } catch (error) {
+  } catch {
     // Stockage indisponible (navigation privée, cookies bloqués) : le choix vaut pour la page en cours.
   }
 };
@@ -68,7 +70,6 @@ const toggleAppearance = () => {
   const target = getTargetAppearance() === "dark" ? "light" : "dark";
   storePreference(target);
   applyAppearance(target);
-  this.updateLogo?.(target);
 };
 
 const resetAppearance = (event) => {
@@ -80,7 +81,6 @@ const resetAppearance = (event) => {
 
 window.addEventListener("DOMContentLoaded", () => {
   updateMeta();
-  this.updateLogo?.(getTargetAppearance());
 
   ["appearance-switcher", "appearance-switcher-mobile"].forEach((id) => {
     const switcher = document.getElementById(id);
@@ -91,37 +91,16 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-{{ if and (.Site.Params.Logo) (.Site.Params.SecondaryLogo) }}
-{{ $primaryLogo := resources.Get .Site.Params.Logo }}
-{{ $secondaryLogo := resources.Get .Site.Params.SecondaryLogo }}
-{{ if and ($primaryLogo) ($secondaryLogo) }}
-var updateLogo = (targetAppearance) => {
-  var imgElems = document.querySelectorAll("img.logo");
-  var logoContainers = document.querySelectorAll("span.logo");
-
-  var targetLogoPath =
-    targetAppearance == "{{ .Site.Params.DefaultAppearance }}" ?
-    "{{ $primaryLogo.RelPermalink }}" : "{{ $secondaryLogo.RelPermalink }}"
-  for (const elem of imgElems) {
-    elem.setAttribute("src", targetLogoPath)
-  }
-
-  {{ if eq $primaryLogo.MediaType.SubType "svg" }}
-  var targetContent =
-    targetAppearance == "{{ .Site.Params.DefaultAppearance }}" ?
-    `{{ $primaryLogo.Content | safeHTML }}` : `{{ $secondaryLogo.Content | safeHTML }}`
-  for (const container of logoContainers) {
-    container.innerHTML = targetContent;
-  }
-  {{ end }}
-}
-{{ end }}
-{{- end }}
+// (Le changement de logo clair/sombre du thème n'est pas utilisé : pas de « SecondaryLogo » configuré)
 
 window.addEventListener("DOMContentLoaded", () => {
   const scroller = document.getElementById("top-scroller");
   const footer = document.getElementById("site-footer");
-  if (scroller && footer && scroller.getBoundingClientRect().top > footer.getBoundingClientRect().top) {
+  if (
+    scroller &&
+    footer &&
+    scroller.getBoundingClientRect().top > footer.getBoundingClientRect().top
+  ) {
     scroller.hidden = true;
   }
 });

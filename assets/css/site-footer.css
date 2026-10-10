@@ -115,7 +115,7 @@ body.site-shell--v2 .site-footer {
 .site-footer__list a[aria-current="page"] {
   color: var(--site-footer-accent);
   text-decoration: underline;
-  text-decoration-color: currentColor;
+  text-decoration-color: currentcolor;
 }
 
 .site-footer__list a:hover,
@@ -203,10 +203,12 @@ body.site-shell--v2 .site-footer {
   inset: 50% auto auto 50%;
   width: 0.9rem;
   height: 2px;
-  background: currentColor;
+  background: currentcolor;
   border-radius: 999px;
   transform: translate(-50%, -50%);
-  transition: transform 180ms ease, opacity 180ms ease;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
 }
 
 .site-footer__accordion-icon::after {
@@ -258,7 +260,7 @@ body.site-shell--v2 .site-footer {
   color: var(--site-footer-subtle);
 }
 
-@media (min-width: 720px) {
+@media (width >= 720px) {
   .site-footer__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -289,7 +291,7 @@ body.site-shell--v2 .site-footer {
   }
 }
 
-@media (min-width: 1080px) {
+@media (width >= 1080px) {
   .site-footer__grid {
     grid-template-columns: minmax(0, 1.35fr) repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
@@ -300,7 +302,7 @@ body.site-shell--v2 .site-footer {
   }
 }
 
-@media (max-width: 719px) {
+@media (width <= 719px) {
   .site-footer {
     padding: 0 0.75rem 1rem;
   }

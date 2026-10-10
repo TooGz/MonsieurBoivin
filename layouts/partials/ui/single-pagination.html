@@ -10,7 +10,7 @@
       <div class="site-v2-single__pager">
         {{ if $prev }}
           <a class="site-v2-single__pager-card" href="{{ $prev.RelPermalink }}">
-            <small>Precedent</small>
+            <small>Précédent</small>
             <strong>{{ $prev.Title | emojify }}</strong>
             {{ if .Params.showDate | default (.Site.Params.article.showDate | default true) }}
               <span>{{ partial "functions/date.html" $prev.Date }}</span>

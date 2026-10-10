@@ -3,7 +3,7 @@
   {{- $pages := where site.Pages "Kind" "in" (slice "home" "section" "page" "taxonomy" "term") -}}
 
   {{- range $pages -}}
-    {{- $taxonomySEO := partial "functions/taxonomy-seo.html" . -}}
+    {{- $taxonomySEO := partialCached "functions/taxonomy-seo.html" . .Kind .RelPermalink -}}
     {{- $shouldSitemap := true -}}
     {{- if or (eq .Kind "taxonomy") (eq .Kind "term") -}}
       {{- $shouldSitemap = index $taxonomySEO "shouldIndex" -}}

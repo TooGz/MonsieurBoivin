@@ -1,6 +1,6 @@
 <!doctype html>
 <html
-  lang="{{ with site.Params.isoCode | default (site.LanguageCode | default "fr") }}{{- . -}}{{ end }}"
+  lang="{{ site.Params.isoCode | default "fr" }}"
   dir="{{ if site.Params.rtl | default false }}rtl{{ else }}ltr{{ end }}"
   class="scroll-smooth"
   data-ui="v2"

@@ -4,23 +4,20 @@
 {{ $replyByEmail := default $defaultReplyByEmail $page.Params.replyByEmail }}
 
 {{ if $replyByEmail }}
-  {{ $subject := replace (printf "Reply to %s" $page.Title) "\"" "'" }}
+  {{/* Objet en français ; pas de target="_blank" : un lien mailto ouvre le client de messagerie, pas un onglet */}}
+  {{ $subject := replace (printf "Re : %s" ($page.Title | plainify)) "\"" "'" }}
+  {{/* urlquery encode les espaces en « + », que les clients mail n'interprètent pas : on les remplace par %20 (RFC 6068) */}}
+  {{ $href := printf "mailto:%s?subject=%s" site.Params.Author.email (replace (urlquery $subject) "+" "%20") }}
   {{ if eq $variant "v2" }}
     <p class="site-v2-single__reply">
-      <a
-        target="_blank"
-        class="site-v2-single__reply-link"
-        href="mailto:{{ site.Params.Author.email }}?subject={{ $subject }}">
-        Me contacter par mail
-      </a>
+      <a class="site-v2-single__reply-link" href="{{ $href | safeURL }}">Me contacter par mail</a>
     </p>
   {{ else }}
     <strong class="block mt-8">
       <a
-        target="_blank"
         class="button m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
-        href="mailto:{{ site.Params.Author.email }}?subject={{ $subject }}">
-        Me contacter par Mail !
+        href="{{ $href | safeURL }}">
+        Me contacter par mail
       </a>
     </strong>
   {{ end }}

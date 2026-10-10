@@ -59,7 +59,8 @@
 {{- with $featured -}}
   {{- $img := . -}}
   {{- if ne .MediaType.SubType "svg" -}}
-    {{- $img = .Fill "1200x900 center" -}}
+    {{- /* WebP : un PNG redimensionné restait en PNG (1,2 à 1,8 Mo) */ -}}
+    {{- $img = .Fill "1200x900 center webp q80" -}}
   {{- end -}}
   {{- $hero.Set "src" $img.RelPermalink -}}
   {{- $hero.Set "width" $img.Width -}}
