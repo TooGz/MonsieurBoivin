@@ -3,10 +3,13 @@
   .Site.Data est déprécié depuis Hugo 0.156 (remplacé par hugo.Data, absent avant 0.156).
   Le déploiement compile avec --panicOnWarning : un avertissement de dépréciation ferait échouer la mise en ligne
   le jour où Hugo sera mis à jour. Seule la branche adaptée à la version en cours est exécutée.
-  Usage : {{ $data := partialCached "functions/site-data.html" . }} puis index $data "authors"
+  Un seul « return », en fin de partial : Hugo 0.150 refuse un return placé dans un bloc if/else.
+  Usage : {{ $data := partialCached "functions/site-data.html" "site-data" }} puis index $data "authors"
 */ -}}
+{{- $data := dict -}}
 {{- if ge hugo.Version "0.156.0" -}}
-  {{- return hugo.Data -}}
+  {{- $data = hugo.Data -}}
 {{- else -}}
-  {{- return site.Data -}}
+  {{- $data = site.Data -}}
 {{- end -}}
+{{- return $data -}}
