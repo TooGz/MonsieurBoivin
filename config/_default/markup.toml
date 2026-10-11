@@ -2,6 +2,9 @@
 # These settings are required for the theme to function.
 
 [goldmark]
+  # Image seule sur sa ligne : rendue en bloc (<figure>) et non dans un <p> (HTML invalide sinon)
+  [goldmark.parser]
+    wrapStandAloneImageWithinParagraph = false
   [goldmark.renderer]
     unsafe = true
 

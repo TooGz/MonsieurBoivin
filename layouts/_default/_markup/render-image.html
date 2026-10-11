@@ -1,7 +1,9 @@
 {{/* Surcharge de themes/blowfish/layouts/_default/_markup/render-image.html
      - versions WebP 480/800/1280 px au lieu du JPEG/PNG d'origine ;
      - attribut sizes : sans lui, le navigateur suppose 100 % de l'écran et prend la plus grosse ;
-     - width/height pour réserver la place et éviter les décalages de mise en page. */}}
+     - width/height pour réserver la place et éviter les décalages de mise en page ;
+     - <figure> seulement pour une image seule sur sa ligne (.IsBlock) : un <figure> dans un <p> est invalide.
+       Requiert markup.goldmark.parser.wrapStandAloneImageWithinParagraph = false (config/_default/markup.toml). */}}
 {{- $disableImageOptimizationMD := .Page.Site.Params.disableImageOptimizationMD | default false }}
 {{- $urlStr := .Destination | safeURL -}}
 {{- $url := urls.Parse $urlStr -}}
@@ -13,7 +15,9 @@
   {{- $resource = or ($.Page.Resources.GetMatch $urlStr) (resources.Get $urlStr) }}
 {{- end }}
 
+{{- if .IsBlock }}
 <figure>
+{{- end }}
   {{- if and $resource (not $disableImageOptimizationMD) (not (in (slice "svg" "gif") $resource.MediaType.SubType)) }}
     {{- $widths := slice 480 800 1280 }}
     {{- $srcset := slice }}
@@ -59,7 +63,9 @@
   {{- else }}
     <img class="my-0 rounded-md" loading="lazy" decoding="async" alt="{{ $altText }}" src="{{ $urlStr }}">
   {{- end }}
+{{- if .IsBlock }}
   {{- with $caption }}
     <figcaption>{{ . | markdownify }}</figcaption>
   {{- end }}
 </figure>
+{{- end }}

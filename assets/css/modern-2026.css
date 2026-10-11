@@ -145,6 +145,12 @@ html.dark {
   letter-spacing: 0.08em;
 }
 
+/* Titres ciblés par une ancre (#…) : arrêt sous le header fixe au lieu de passer dessous */
+.heading-anchor,
+[id^="fn"] {
+  scroll-margin-top: 7rem;
+}
+
 /* Texte réservé aux lecteurs d'écran */
 .visually-hidden {
   position: absolute !important;

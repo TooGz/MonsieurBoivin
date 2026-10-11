@@ -58,6 +58,7 @@ pieds × 4, traverses longues × 4, traverse courte × 1, traverses « points »
 
 ### Tronçonnage
 {{< video src="./medias/tronconnage.mp4" title="Tronçonnage avec 5cm de marge" animation="true" >}}
+
 Découpes à +50 mm de la cote finale.
 
 ### Recoupe finale

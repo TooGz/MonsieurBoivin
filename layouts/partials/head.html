@@ -17,21 +17,23 @@
     {{ end }}
   {{ end }}
 
-  {{/* Speculation Rules : les pages internes sont préchargées au survol / début de toucher, navigation quasi instantanée (Chrome, Edge) */}}
-  <script type="speculationrules">
-    {
-      "prerender": [
-        {
-          "where": {
-            "and": [
-              { "href_matches": "/*" },
-              { "not": { "href_matches": ["/*.xml", "/*.json", "/*.jpg", "/*.jpeg", "/*.png", "/*.webp", "/*.mp4", "/*.pdf"] } },
-              { "not": { "selector_matches": "[target=_blank], [download], [rel~=nofollow]" } }
-            ]
-          },
-          "eagerness": "moderate"
-        }
-      ]
+  {{/* Speculation Rules : les pages internes sont préchargées au survol / début de toucher, navigation quasi instantanée (Chrome, Edge).
+       Injectées en JS (seulement si le navigateur les gère) : le validateur HTML ne connaît pas encore type="speculationrules". */}}
+  <script>
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports("speculationrules")) {
+      var rules = document.createElement("script");
+      rules.type = "speculationrules";
+      rules.textContent = JSON.stringify({
+        prerender: [{
+          where: { and: [
+            { href_matches: "/*" },
+            { not: { href_matches: ["/*.xml", "/*.json", "/*.jpg", "/*.jpeg", "/*.png", "/*.webp", "/*.mp4", "/*.pdf"] } },
+            { not: { selector_matches: "[target=_blank], [download], [rel~=nofollow]" } }
+          ] },
+          eagerness: "moderate"
+        }]
+      });
+      document.head.appendChild(rules);
     }
   </script>
 
@@ -265,8 +267,8 @@
   {{ if .IsHome }}
     {{ with resources.Get "js/main.js" }}
       {{ $jsMain := . | js.Build (dict "targetPath" "js/home-ui.js" "minify" hugo.IsProduction) | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+      {{/* Pas de defer : un script module est déjà différé (et defer y est invalide) */}}
       <script
-        defer
         type="module"
         src="{{ $jsMain.RelPermalink }}"
         integrity="{{ $jsMain.Data.Integrity }}"></script>
